@@ -1,11 +1,11 @@
 # mausritter-sheet
-
 **Mausritter Character Sheet** is a web application to create **Mausritter** mice.
+
+![Exemple Sheet 0.1.1](./public/img/mausritter-01.png)
 
 ## Installation
 
-
-
+To soon to have one ;-)
 
 ## For developpers
 This application is made with [Vue.js 3](https://v3.vuejs.org/) and [wave-ui](https://antoniandre.github.io/wave-ui/).
