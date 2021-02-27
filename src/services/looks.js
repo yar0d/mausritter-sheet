@@ -1,0 +1,42 @@
+export const looks = [
+  { dice: 11, label: 'Scarred body' },
+  { dice: 12, label: 'Corpulent body' },
+  { dice: 13, label: 'Skeletal body' },
+  { dice: 14, label: 'Willowy body' },
+  { dice: 15, label: 'Tiny body' },
+  { dice: 16, label: 'Massive body' },
+  { dice: 21, label: 'War paint' },
+  { dice: 22, label: 'Foreign clothes' },
+  { dice: 23, label: 'Elegant clothes' },
+  { dice: 24, label: 'Patched clothes' },
+  { dice: 25, label: 'Fashionable clothes' },
+  { dice: 26, label: 'Unwashed clothes' },
+  { dice: 31, label: 'Missing ear' },
+  { dice: 32, label: 'Lumpy face' },
+  { dice: 33, label: 'Beautiful face' },
+  { dice: 34, label: 'Round face' },
+  { dice: 35, label: 'Delicate face' },
+  { dice: 36, label: 'Elongated face' },
+  { dice: 41, label: 'Groomed fur' },
+  { dice: 42, label: 'Dreadlocks' },
+  { dice: 43, label: 'Dyed fur' },
+  { dice: 44, label: 'Shaved fur' },
+  { dice: 45, label: 'Frizzy fur' },
+  { dice: 46, label: 'Silky fur' },
+  { dice: 51, label: 'Night black eyes' },
+  { dice: 52, label: 'Eye patch' },
+  { dice: 53, label: 'Blood red eyes' },
+  { dice: 54, label: 'Wise eyes' },
+  { dice: 55, label: 'Sharp eyes' },
+  { dice: 56, label: 'Luminous eyes' },
+  { dice: 61, label: 'Cropped tail' },
+  { dice: 62, label: 'Whip-like tail' },
+  { dice: 63, label: 'Tufted tail' },
+  { dice: 64, label: 'Stubby tail' },
+  { dice: 65, label: 'Prehensile tail' },
+  { dice: 66, label: 'Curly tail' }
+]
+
+export default {
+  looks
+}

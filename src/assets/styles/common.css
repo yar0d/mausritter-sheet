@@ -1,0 +1,274 @@
+html, body, #app {
+  font-family: 'brokenscript-bold' !important;
+  background-image: url('../img/mouse-hole.png');
+  background-repeat: no-repeat;
+  margin: 0;
+}
+
+.mouse-sheet {
+  width: 800px !important;
+  max-width: 800px !important;
+  border: 0;
+}
+
+.opacity-50 {
+  opacity: 0.50;
+}
+
+.opacity-75 {
+  opacity: 0.75;
+}
+
+.opacity-100 {
+  opacity: 1.0;
+}
+
+.form-gray, .form-gray--bg {
+  background-color: #ccc;
+}
+
+.text-secondary {
+  color: #8499a4;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.draggable {
+  cursor: grab;
+}
+
+.pips {
+  height: 32px;
+}
+
+.pips-img {
+  background-image: url('../img/pips.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left;
+}
+
+.w-card {
+  border-radius: 5px;
+  border-width: 2px;
+  border-color: #000;
+}
+
+.w-card__content {
+  padding: 0
+}
+
+.divider-v {
+  border-left: 2px solid #000;
+  width: 2px;
+}
+
+.divider-h {
+  border-top: 2px solid #000;
+  height: 2px;
+  width: 100%;
+}
+
+.input-name {
+  padding: 4px;
+}
+
+.input-value {
+  color: #2c85b4;
+  font-weight: bold;
+}
+
+input {
+  color: #2c85b4 !important;
+  font-family: unset;
+}
+
+.w-25 {
+  width: 25px;
+  max-width: 25px;
+}
+
+.w-50 {
+  width: 50px;
+  max-width: 50px;
+}
+
+.w-100 {
+  width: 100px !important;
+  max-width: 100px;
+}
+
+.w-150 {
+  width: 150px;
+  max-width: 150px;
+}
+
+.w-200 {
+  width: 200px;
+  width: 200px;
+}
+
+.w-250 {
+  width: 250px;
+  width: 250px;
+}
+
+.w-auto {
+  width: min-content;
+}
+
+.w-half {
+  width: 50%;
+}
+
+.w-max {
+  width: 100%;
+}
+
+.h-max {
+  height: 100%;
+}
+
+.condition, .item, .item-1x1 {
+  display: inline-block;
+  font-size: 0.5em;
+  height: 128px;
+  width: 128px;
+  padding: 2px;
+}
+
+.condition:hover, .item:hover {
+  opacity: 0.75;
+}
+
+.item-2x1 {
+  width: 276px;
+}
+
+.item-1x2 {
+  height: 276px;
+}
+
+.condition-title, .item-title {
+  font-size: 12px;
+}
+
+.condition-title-lg, .item-title-lg {
+  font-size: 14px;
+}
+
+.condition-title-xl, .item-title-xl {
+  font-size: 16px;
+}
+
+.condition-label, .item-label {
+  font-size: 16px;
+  color: #ffFF00;
+}
+
+.drawer .condition-label,.drawer  .item-label {
+  font-size: 12px;
+}
+
+.item-damage, .item-use {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.item-input {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+.item-damage {
+  font-size: 16px;
+  color: #000;
+  border: 1px solid;
+  padding: 2px;
+}
+
+.drawer .item-damage {
+  font-size: 12px;
+}
+
+.condition-desc, .item-desc {
+  font-size: 16px;
+  color: #fff;
+}
+
+.drawer .condition-desc,.drawer  .drawer.item-desc {
+  font-size: 10px;
+}
+
+.condition-clear {
+  font-size: 14px;
+  color: #000;
+}
+
+.drawer .condition-clear {
+  font-size: 10px;
+  color: #000;
+}
+
+.condition-background {
+  background-image: url('../img/condition.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left;
+}
+
+.item-background {
+  background-image: url('../img/item.png');
+  /* background-repeat: no-repeat; */
+  /* background-size: contain; */
+  background-position: left;
+}
+
+.condition-size-xs, .item-size-xs {
+  max-height: 64px;
+  max-width: 64px;
+}
+
+.condition-size-sm, .item-size-sm {
+  max-height: 80px;
+  max-width: 80px;
+}
+
+.condition-size-md, .item-size-md {
+  max-height: 96px;
+  max-width: 96px;
+}
+
+.condition-size-lg, .item-size-lg {
+  max-height: 112px;
+  max-width: 112px;
+}
+
+.condition-size-xl, .item-size-xl {
+  max-height: 128px;
+  max-width: 128px;
+  font-size: 200%;
+}
+
+.inventory-cell {
+  border: 1px dashed #aaa;
+  height: 148px;
+  width: 132px;
+  /* height: 128px;
+  width: 128px; */
+  display: inline-block;
+  color: #888;
+  text-align: center;
+}
+
+.inventory-cell-label {
+  font-size: 80%
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.flat {
+  border: 0;
+}

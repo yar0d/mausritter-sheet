@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'brokenscript-bold';
+  src: url('../fonts/brokenscript-bold.woff2') format('woff2'),
+       url('../fonts/brokenscript-bold.woff') format('woff'),
+       url('../fonts/brokenscript-bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
