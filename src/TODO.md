@@ -1,6 +1,7 @@
 # TODO
 
 - implement all rules.
+- manage hirelings. 
 - drag'n'drop in bank.
 - auto arrange inventory.
 - add empty item to allow custom.
