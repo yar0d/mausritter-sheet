@@ -1,56 +1,78 @@
 <template>
-  <div class="item item-background" :class="geometry ? `item-${geometry}` : `item-size-${size}`">
-    <w-flex column align-start justify-start class="h-max" :class="className(label)">
-      <div class="item-title">
-        <w-icon v-if="canDelete" class="clickable mr2" @click="onDelete">
-          mdi mdi-close-circle
-        </w-icon>
-        <span class="item-label">{{ $t(label) }}</span>
-      </div>
-      <div v-if="family === 'SP'">
-        <w-input class="item-input input-value" v-model="spell" />
-      </div>
-      <w-flex v-if="desc" align-center justify-center class="w-max">
-        <span class="item-desc">{{ $t(desc) }}</span>
-      </w-flex>
-      <w-flex row align-end justify-space-between class="h-max">
-        <span v-if="use !== undefined">
-          <div v-if="use > 6" class="body">
-            <span class="xs2">
-              <w-input class="title3 item-input input-value" v-model.number="count"/>
-            </span>
-            /{{ use }}
+  <div class="item item-background shadow" :class="size ? `item-size-${size}` : `item-${currentItem.geometry}`">
+    <w-flex column align-start justify-start class="h-max" :class="className(currentItem.label)">
+      <w-flex row class="h-max">
+        <w-flex column justify-end class="w-auto text-center">
+          <w-icon v-if="canDelete" class="clickable" color="red" md @click="onDelete">
+            mdi mdi-close-circle
+          </w-icon>
+          <div class="spacer" />
+          <div v-if="!readonly && currentItem.use !== undefined && currentItem.use <= 6">
+            <w-checkbox v-for="u in currentItem.use" :key="u" class="item-use" />
           </div>
-          <w-checkbox v-else v-for="u in use" :key="u" class="item-use" />
-        </span>
-        <span v-if="damage" class="text-right">
-          <span class="item-damage">{{ damage }}</span>
-        </span>
+        </w-flex>
+        <w-flex column justify-space-between>
+          <div class="item-label">{{ $t(currentItem.label) }}</div>
+          <div class="h-max" v-if="!readonly && (currentItem.family === ITEM_FAMILY_SPELL || currentItem.family === ITEM_FAMILY_CUSTOM)">
+            <w-textarea class="body item-input input-value" v-model="currentItem.customLabel" rows="1" />
+          </div>
+          <w-flex v-else-if="currentItem.desc" align-center justify-center class="w-max">
+            <span class="item-desc">{{ $t(currentItem.desc) }}</span>
+          </w-flex>
+          <div v-if="!readonly && currentItem.use !== undefined && currentItem.use > 6">
+            <span class="xs2">
+              <w-input class="title1 item-input input-value" v-model.number="count" />
+            </span>
+            <span class="title1 primary">
+              /{{ currentItem.use }}
+            </span>
+          </div>
+          <div row v-if="currentItem.damage">
+            <span class="item-damage">{{ currentItem.damage }}</span>
+          </div>
+          <div v-if="currentItem.def">
+            <span class="item-def">{{ $t('Def')}} {{ currentItem.def }}</span>
+          </div>
+        </w-flex>
       </w-flex>
     </w-flex>
   </div>
 </template>
 
 <script>
+  import { ITEM_FAMILY_CUSTOM, ITEM_FAMILY_SPELL } from '@/services/items-conditions'
+
 export default {
-  name: 'Conditions',
+  name: 'Items',
   props: {
     canDelete: { type: Boolean, default: false },
-    damage: { type: String, default: '' },
-    desc: { type: String, default: '' },
-    family: { type: String, default: '' },
-    geometry: { type: String, default: null },
-    id: { type: String, required: true },
-    img: { type: String, default: '' },
-    label: { type: String, required: true },
-    size: { type: String, default: 'md' },
-    use: { type: Number, default: 0 }
+    item: { type: Object, required: true },
+    readonly: { type: Boolean, default: false },
+    size: { type: String, default: null }
+    // damage: { type: String, default: '' },
+    // desc: { type: String, default: '' },
+    // family: { type: String, default: '' },
+    // geometry: { type: String, default: null },
+    // id: { type: String, required: true },
+    // img: { type: String, default: '' },
+    // label: { type: String, required: true },
+    // use: { type: Number, default: 0 }
   },
   emits: [ 'delete' ],
   data () {
     return {
+      ITEM_FAMILY_CUSTOM,
+      ITEM_FAMILY_SPELL,
       count: 0,
-      spell: this.$t('Spell')
+      currentItem: {}
+    }
+  },
+  watch: {
+    item: {
+      immediate: true,
+      handler (newVal, oldVal) {
+        if (newVal && !oldVal && newVal !== oldVal) this.currentItem = newVal // Just init label
+      }
     }
   },
   methods: {

@@ -55,6 +55,7 @@
   "Axe": "Axe",
   "Sword": "Sword",
   "Mace": "Mace",
+  "Hammer": "Hammer",
   "Warhammer": "Warhammer",
   "Spear": "Spear",
   "Hookarm": "Hookarm",
@@ -70,10 +71,17 @@
   "Pip Purse": "Pip Purse",
   "Rations": "Rations",
   "Spell": "Spell",
+  "Item": "Item",
+  "A custom item.": "A custom item.",
   "This sheet will be erased. Do you confirm?": "This sheet will be erased. Do you confirm?",
   "Confirm": "Confirm",
   "Yes": "Yes",
   "No": "No",
+  "OK": "OK",
+  "Def": "Def",
   "Items and conditions drawer.": "Items and conditions drawer.",
-  "Roll {dice}": "Roll {dice}"
+  "Roll {dice}": "Roll {dice}",
+  "{name} is ready for adventure!": "{name} is ready for adventure!",
+  "You may then swap any two attributes.": "You may then swap any two attributes.",
+  "You may choose a weapon from the items drawer": "You may choose a weapon from the items drawer"
 }

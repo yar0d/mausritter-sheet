@@ -1,12 +1,20 @@
 # mausritter-sheet
 **Mausritter Character Sheet** is a web application to create **Mausritter** mice.
 
-**State**: Not usable for playing, some rules are not yet implemented.
+> Mausritter is about small-scale adventurers in a huge world. Mouse adventurers who take on big challanges and face down grave danger.
+
+Have a look at [Mausritter website](https://mausritter.com/).
+
+```
+IMPORTANT!
+----------
+This version is not yet suitable for playing, some rules are not yet implemented. Stay tuned!
+```
 
 ## Features
 
 - Translations: English, Français,
-- Create a random mouse (not yet finised),
+- Create a random mouse (not yet finished),
 - Roll dices with/without advantage or disadvantage,
 - Drag'n'drop items or conditions on inventory slots
 

@@ -55,6 +55,7 @@
   "Axe": "Hache",
   "Sword": "Épée",
   "Mace": "Masse",
+  "Hammer": "Marteau",
   "Warhammer": "Marteau de guerre",
   "Spear": "Lance",
   "Hookarm": "Lance-Crochet",
@@ -70,10 +71,17 @@
   "Pip Purse": "Bourse",
   "Rations": "Rations",
   "Spell": "Sort",
+  "Item": "Objet",
+  "A custom item.": "Un objet personnalisé.",
   "This sheet will be erased. Do you confirm?": "Confirmez-vous l'effacement de la fiche ?",
   "Confirm": "Confirmation",
   "Yes": "Oui",
   "No": "Non",
+  "OK": "OK",
+  "Def": "Def",
   "Items and conditions drawer.": "Tiroir à objets et conditions",
-  "Roll {dice}": "Lancer {dice}"
+  "Roll {dice}": "Lancer {dice}",
+  "{name} is ready for adventure!": "{name} est paré pour l'aventure !",
+  "You may then swap any two attributes.": "Vous pouvez intervertir deux des attributs.",
+  "You may choose a weapon from the items drawer": "Choisissez une arme dans le tiroir à objets"
 }

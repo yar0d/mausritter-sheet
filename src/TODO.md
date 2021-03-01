@@ -1,6 +1,8 @@
 # TODO
 
-- implement rule 3. Starting equipment.
+- implement all rules.
+- drag'n'drop in bank.
+- auto arrange inventory.
 - add empty item to allow custom.
 - add empty condition to allow custom.
 - Fix inventory dropping collision with card geometry.

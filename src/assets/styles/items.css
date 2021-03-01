@@ -40,6 +40,13 @@
   background-position: center;
 }
 
+.item-hammer {
+  background-image: url('../img/items/hammer.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
 .item-warhammer {
   background-image: url('../img/items/warhammer.png');
   background-repeat: no-repeat;

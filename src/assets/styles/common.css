@@ -1,4 +1,6 @@
-html, body, #app {
+html,
+body,
+#app {
   font-family: 'brokenscript-bold' !important;
   background-image: url('../img/mouse-hole.png');
   background-repeat: no-repeat;
@@ -23,7 +25,8 @@ html, body, #app {
   opacity: 1.0;
 }
 
-.form-gray, .form-gray--bg {
+.form-gray,
+.form-gray--bg {
   background-color: #ccc;
 }
 
@@ -48,6 +51,19 @@ html, body, #app {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: left;
+}
+
+.drawer-background {
+  background-image: url('../img/drawer.jpg');
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
+.shadow {
+  /* box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .15), 0 1px 5px 0 rgba(0, 0, 0, .15); */
+  box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
 .w-card {
@@ -131,7 +147,9 @@ input {
   height: 100%;
 }
 
-.condition, .item, .item-1x1 {
+.condition,
+.item,
+.item-1x1 {
   display: inline-block;
   font-size: 0.5em;
   height: 128px;
@@ -139,8 +157,12 @@ input {
   padding: 2px;
 }
 
-.condition:hover, .item:hover {
-  opacity: 0.75;
+.condition:hover,
+.item:hover {
+  box-shadow: 4px 4px 15px 8px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 4px 4px 15px 8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 4px 4px 15px 8px rgba(0, 0, 0, 0.75);
+  margin-top: -8px;
 }
 
 .item-2x1 {
@@ -151,28 +173,35 @@ input {
   height: 276px;
 }
 
-.condition-title, .item-title {
+.condition-title,
+.item-title {
   font-size: 12px;
 }
 
-.condition-title-lg, .item-title-lg {
+.condition-title-lg,
+.item-title-lg {
   font-size: 14px;
 }
 
-.condition-title-xl, .item-title-xl {
+.condition-title-xl,
+.item-title-xl {
   font-size: 16px;
 }
 
-.condition-label, .item-label {
+.condition-label,
+.item-label {
   font-size: 16px;
   color: #ffFF00;
 }
 
-.drawer .condition-label,.drawer  .item-label {
+.drawer .condition-label,
+.drawer .item-label {
   font-size: 12px;
 }
 
-.item-damage, .item-use {
+.item-damage,
+.item-def,
+.item-use {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
@@ -180,23 +209,27 @@ input {
   background-color: rgba(255, 255, 255, 0.75);
 }
 
-.item-damage {
-  font-size: 16px;
+.item-damage,
+.item-def {
+  font-size: 20px;
   color: #000;
   border: 1px solid;
   padding: 2px;
 }
 
-.drawer .item-damage {
-  font-size: 12px;
+.drawer .item-damage, .drawer .item-def {
+  font-size: 14px;
+  padding: 0px;
 }
 
-.condition-desc, .item-desc {
+.condition-desc,
+.item-desc {
   font-size: 16px;
   color: #fff;
 }
 
-.drawer .condition-desc,.drawer  .drawer.item-desc {
+.drawer .condition-desc,
+.drawer .item-desc {
   font-size: 10px;
 }
 
@@ -224,27 +257,32 @@ input {
   background-position: left;
 }
 
-.condition-size-xs, .item-size-xs {
+.condition-size-xs,
+.item-size-xs {
   max-height: 64px;
   max-width: 64px;
 }
 
-.condition-size-sm, .item-size-sm {
+.condition-size-sm,
+.item-size-sm {
   max-height: 80px;
   max-width: 80px;
 }
 
-.condition-size-md, .item-size-md {
+.condition-size-md,
+.item-size-md {
   max-height: 96px;
   max-width: 96px;
 }
 
-.condition-size-lg, .item-size-lg {
+.condition-size-lg,
+.item-size-lg {
   max-height: 112px;
   max-width: 112px;
 }
 
-.condition-size-xl, .item-size-xl {
+.condition-size-xl,
+.item-size-xl {
   max-height: 128px;
   max-width: 128px;
   font-size: 200%;

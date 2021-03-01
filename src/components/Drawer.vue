@@ -1,14 +1,14 @@
 <template>
   <!-- eslint-disable vue/valid-v-slot -->
   <w-drawer :value="value" top no-overlay>
-    <w-tabs :items="2" fill-bar class="w-max">
+    <w-tabs :items="2" fill-bar class="w-max drawer-background">
       <template #item-title.1>
         {{ $t('Items') }}
       </template>
       <template #item-content.1>
         <draggable v-model="itemsList" :group="{ name: 'items', pull: 'clone', put: false }" :sort="false" item-key="id" @change="log" :move="move" :clone="clone">
           <template #item="{ element }">
-            <items :id="element.id" :clear="element.clear" :desc="element.desc" :damage="element.damage" :label="element.label" class="ma1 draggable drawer" :img="element.img" hide-use />
+            <items :item="element" size="sm" class="ma1 draggable drawer" readonly />
           </template>
         </draggable>
       </template>
@@ -30,7 +30,7 @@
 import draggable from 'vuedraggable'
 import { conditionsList, itemsList } from '@/services/items-conditions'
 import Conditions from '@/components/Conditions.vue'
-import Items from '@/components//Items.vue'
+import Items from '@/components/Items.vue'
 
 export default {
   name: 'Drawer',
