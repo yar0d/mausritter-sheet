@@ -19,6 +19,8 @@ export const ITEM_FAMILY_WEAPON_IMPROVISED = 'WI'
 export const ITEM_FAMILY_WEAPON_LIGHT = 'WL'
 export const ITEM_FAMILY_WEAPON_MEDIUM = 'WM'
 
+export const ITEM_FAMILY_WEAPONS = [ITEM_FAMILY_WEAPON_HEAVY, ITEM_FAMILY_WEAPON_IMPROVISED, ITEM_FAMILY_WEAPON_LIGHT, ITEM_FAMILY_WEAPON_MEDIUM, ITEM_FAMILY_RANGED_LIGHT, ITEM_FAMILY_RANGED_HEAVY]
+
 export const conditionsList = []
 for (let i = 0; i < conditions.length; i++) {
   conditions[i].id = TYPE_CONDITION + (i + 1)
@@ -35,13 +37,42 @@ for (let i = 0; i < items.length; i++) {
   itemsList.push(items[i])
 }
 
-export function getItem (id) {
+/**
+ * Return items if they are from giden families.
+ * @param {String|Array} families A single family or an array of family to filter items.
+ * @return {Array} a list a copy of items.
+ */
+export function getItemsForFamilies (families) {
+  let f
+  if (!Array.isArray(families)) f = [families]
+  else f = families
+
+  const result = []
+  for (let i = 0; i < items.length; i++) {
+    if (f.includes(items[i].family)) result.push({ ...items[i] })
+  }
+
+  return result
+}
+
+/**
+ * Return an item according to its id.
+ * @param {String} Identifier of the item. See items.json for the list of items.
+ * @param {Object} { customLabel, desc }  This is use for a custom item (id: "I-item").
+ * @return {Object} a copy of an item.
+ */
+export function getItem (id, { customLabel, desc } = {}) {
   let found
   let i = 0
   while (!found && i < itemsList.length) {
-    if (itemsList[i].id === id) found = itemsList[i]
+    if (itemsList[i].id === id) found = { ...itemsList[i] }
     i++
   }
+  if (found) {
+    if (customLabel) found.customLabel = customLabel
+    if (desc) found.desc = desc
+  }
+
   return found
 }
 
@@ -51,6 +82,7 @@ export default {
   conditions,
   conditionsList,
   getItem,
+  getItemsForFamilies,
   ITEM_FAMILY_ARMOR_HEAVY,
   ITEM_FAMILY_ARMOR_LIGHT,
   ITEM_FAMILY_AMMUNITION,
@@ -66,6 +98,7 @@ export default {
   ITEM_FAMILY_WEAPON_IMPROVISED,
   ITEM_FAMILY_WEAPON_LIGHT,
   ITEM_FAMILY_WEAPON_MEDIUM,
+  ITEM_FAMILY_WEAPONS,
   items,
   itemsList,
   TYPE_CONDITION,

@@ -200,10 +200,25 @@
     <confirm-dialog ref="confirm-dialog" />
     <prompt-dialog ref="prompt-dialog">
       <template #content>
-        <ol class="py4 pl8">
-          <li>{{ $t('You may then swap any two attributes.') }}</li>
-          <li>{{ $t('You may choose a weapon from the items drawer') }} <w-icon>mdi mdi-dots-grid</w-icon></li>
-        </ol>
+        <w-flex column align-center class="h-max w-max drawer-background">
+          <div class="white title3 mb2">
+            {{ $t('You may then swap any two attributes.') }}
+          </div>
+          <div class="white title3 mb1">{{ $t('You may choose a weapon below:') }}</div>
+          <w-radios v-model="choosenWeapon" :items="weaponsItems" inline>
+            <template #item="{ item }">
+              <items :item="item.item" readonly class="mr4 mb4" size="sm" />
+            </template>
+          </w-radios>
+          <div v-if="chooseItem.length">
+            <div class="white title3 mb1">{{ $t('You can take one item below:') }}</div>
+            <w-radios v-model="choosenItem" :items="chooseItem" inline>
+              <template #item="{ item }">
+                <items :item="item.item" readonly class="mr8" />
+              </template>
+            </w-radios>
+          </div>
+        </w-flex>
       </template>
     </prompt-dialog>
   </w-card>
@@ -212,7 +227,7 @@
 <script>
 import { d6, d66, rollFromTable, rollExplode } from '@/services/dice-roller'
 import { extract as getBackground } from '@/services/backgrounds'
-import { TYPE_ITEM } from '@/services/items-conditions'
+import { TYPE_ITEM, getItem, getItemsForFamilies, ITEM_FAMILY_WEAPONS } from '@/services/items-conditions'
 import Checker from '@/components/Checker.vue'
 import Birthsign from './Birthsign.vue'
 import CoatColor from './CoatColor.vue'
@@ -222,15 +237,18 @@ import Look from './Look.vue'
 import Grit from './Grit.vue'
 import ConfirmDialog from '../ConfirmDialog.vue'
 import PromptDialog from '../PromptDialog.vue'
+import Items from '../Items.vue'
 
 export default {
-  components: { Birthsign, CoatColor, CoatPattern, Inventory, Checker, Look, Grit, ConfirmDialog, PromptDialog },
+  components: { Birthsign, CoatColor, CoatPattern, Inventory, Checker, Look, Grit, ConfirmDialog, PromptDialog, Items },
   data() {
     return {
-      name: '',
       background: '',
       bankedPips: 0,
       birthsign: 0,
+      chooseItem: [],
+      choosenItem: null,
+      choosenWeapon: 0,
       coatColor: 0,
       coatPattern: 0,
       currentDex: 0,
@@ -244,11 +262,21 @@ export default {
       maxHP: 0,
       maxStr: 0,
       maxWil: 0,
+      name: '',
       pips: 0,
       validators: {
         required: (value) => !!value || "This field is required",
       },
       xp: 0
+    }
+  },
+  computed: {
+    weaponsItems () {
+      const list = getItemsForFamilies(ITEM_FAMILY_WEAPONS)
+      for (let i = 0; i < list.length; i++) {
+        list[i] = { id: i, item: list[i] } // use un internal id for choice
+      }
+      return list
     }
   },
   methods: {
@@ -267,6 +295,9 @@ export default {
       this.background = ''
       this.bankedPips = 0
       this.birthsign = 0
+      this.chooseItem = []
+      this.choosenItem = -1
+      this.choosenWeapon = 0
       this.coatColor = 0
       this.coatPattern = 0
       this.currentDex = 0
@@ -299,8 +330,7 @@ export default {
       this.$refs['coat-pattern'].setValue(d6())
       this.$refs['look'].setValue(d66())
       const b = getBackground(this.maxHP, this.pips)
-      console.log('## background:', b)
-      this.background = b.label // + ' (' + b.items.join(' + ') + ')'
+      this.background = this.$t(b.label)
       this.isNew = false
       this.$refs['inventory'].reset()
       this.$refs['inventory'].putItem(TYPE_ITEM + '-torches', 'pack1')
@@ -320,10 +350,24 @@ export default {
           }
         } else {
           // Choose one
+          for (let i = 0; i < b1.items.length; i++) {
+            this.chooseItem.push({ id: i, item: getItem(b1.items[i].id, { customLabel: b1.items[i].customLabel, desc: b1.items[i].desc }) })
+          }
+          this.choosenItem = 0
         }
       }
 
       this.$refs['prompt-dialog'].open(this.$t('{name} is ready for adventure!', { name: this.name }))
+        .then (() => {
+          console.log('##[mouse] Add choosen weapon:', this.weaponsItems[this.choosenWeapon].item)
+          this.$refs['inventory'].putItem(this.weaponsItems[this.choosenWeapon].item.id, 'body1', this.weaponsItems[this.choosenWeapon].item)
+
+          if (this.choosenItem >= 0) {
+            console.log('##[mouse] Add choosen item:', this.chooseItem[this.choosenItem].item)
+            let location = this.chooseItem[this.choosenItem].item.geometry === '1x2' ? 'mainPaw' : 'offPaw'
+            this.$refs['inventory'].putItem(this.chooseItem[this.choosenItem].item.id, location, this.chooseItem[this.choosenItem].item)
+          }
+        })
     },
     setBirthsign (value) {
       this.birthsign = value

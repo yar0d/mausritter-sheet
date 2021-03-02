@@ -26,7 +26,7 @@ export const store = createStore({
   actions: {
     changeLocale (context, locale) {
       context.commit('setLocale', locale)
-      const module = require(`../locales/mouse.${locale}.js`)
+      const module = require(`../locales/mouse-names.${locale}.js`)
       context.commit('setMatrinames', module.matrinames )
       context.commit('setNames', module.names )
     }

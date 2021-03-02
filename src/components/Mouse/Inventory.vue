@@ -213,18 +213,27 @@ export default {
       this.pack5 = []
       this.pack6 = []
     },
-    putItem (itemId, inventoryId, { label, desc } = {}) {
+    putItem (itemId, inventoryId, { customLabel, desc } = {}) {
       if (!itemId || !inventoryId) return false
-      console.log('##[inventory] putItem:', itemId, inventoryId, label, desc)
+      console.log('##[inventory] putItem:', itemId, inventoryId, customLabel, desc)
 
       const item = getItem(itemId)
-      console.log('##[inventory] putItem:', item)
-      if (INVENTORY_ID.includes(inventoryId) && item && this.canDrop(item, this.$data[inventoryId])) {
-        this.$data[inventoryId].push({ ...item, customLabel: (label ? this.$t(label) : ''), desc: (desc ? this.$t(desc) : '') }) // Clone item in inventory
-        console.log('##[inventory] putItem: added!')
-        return true
+      if (!INVENTORY_ID.includes(inventoryId)) {
+        console.error('[error] inventory putItem, unknown slot:', inventoryId)
+        return false
       }
-      return false
+      if (!item && this.canDrop(item, this.$data[inventoryId])) {
+        console.error('[error] inventory putItem, item not found:', itemId)
+        return false
+      }
+      if (!this.canDrop(item, this.$data[inventoryId])) {
+        console.error('[error] inventory putItem, cannot drop in:', inventoryId, item, this.$data[inventoryId])
+        return false
+      }
+
+      console.log('##[inventory] add to:', inventoryId, { ...item, customLabel: customLabel || '', desc: desc || '' })
+      this.$data[inventoryId].push({ ...item, customLabel: customLabel || '', desc: desc || '' }) // Clone item in inventory
+      return true
     }
   }
 }

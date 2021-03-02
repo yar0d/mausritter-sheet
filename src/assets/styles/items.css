@@ -26,6 +26,13 @@
   background-position: center;
 }
 
+.item-pickaxe {
+  background-image: url('../img/items/pickaxe.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
 .item-sword {
   background-image: url('../img/items/sword.png');
   background-repeat: no-repeat;

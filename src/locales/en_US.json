@@ -35,6 +35,7 @@
   "This application is an independent production by Daniel Coquette and is not affiliated with Losing Games. It is published under the Mausritter Third Party Licence.": "This application is an independent production by Daniel Coquette and is not affiliated with Losing Games. It is published under the Mausritter Third Party Licence.",
   "Mausritter is copyright Losing Games.": "Mausritter is copyright Losing Games.",
   "This application is copyright Daniel Coquette.": "This application is copyright Daniel Coquette.",
+  "Sheet and drawer backgrounds from DevianArt under license": "Sheet and drawer backgrounds from DevianArt under license",
   "Close": "Close",
   "Neutral": "Neutral",
   "With advantage": "With advantage",
@@ -83,5 +84,6 @@
   "Roll {dice}": "Roll {dice}",
   "{name} is ready for adventure!": "{name} is ready for adventure!",
   "You may then swap any two attributes.": "You may then swap any two attributes.",
-  "You may choose a weapon from the items drawer": "You may choose a weapon from the items drawer"
+  "You may choose a weapon below:": "You may choose a weapon below:",
+  "You can take one item below:": "You can take one item below:"
 }

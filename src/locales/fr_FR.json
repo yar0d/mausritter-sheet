@@ -35,6 +35,7 @@
   "This application is an independent production by Daniel Coquette and is not affiliated with Losing Games. It is published under the Mausritter Third Party Licence.": "Cette application est une production indépendante écrite par Daniel Coquette et n'est pas affiliée avec « Losing Games ». Elle est publiée sous la license « Mausritter Third Party Licence ».",
   "Mausritter is copyright Losing Games.": "Mausritter est copyright Losing Games.",
   "This application is copyright Daniel Coquette.": "Cette application est copyright Daniel Coquette.",
+  "Sheet and drawer backgrounds from DevianArt under license": "Images de fond de fiche et tiroir par DevianArt sous licence",
   "Close": "Fermer",
   "Neutral": "Neutre",
   "With advantage": "Avec avantage",
@@ -83,5 +84,6 @@
   "Roll {dice}": "Lancer {dice}",
   "{name} is ready for adventure!": "{name} est paré pour l'aventure !",
   "You may then swap any two attributes.": "Vous pouvez intervertir deux des attributs.",
-  "You may choose a weapon from the items drawer": "Choisissez une arme dans le tiroir à objets"
+  "You may choose a weapon below:": "Choisissez une arme ci-dessous :",
+  "You can take one item below:": "Vous pouvez prendre un des objet ci-dessous :"
 }

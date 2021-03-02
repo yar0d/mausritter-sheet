@@ -8,7 +8,7 @@
       <template #item-content.1>
         <draggable v-model="itemsList" :group="{ name: 'items', pull: 'clone', put: false }" :sort="false" item-key="id" @change="log" :move="move" :clone="clone">
           <template #item="{ element }">
-            <items :item="element" size="sm" class="ma1 draggable drawer" readonly />
+            <items :item="element" size="sm" class="ma1 draggable drawer" readonly></items>
           </template>
         </draggable>
       </template>

@@ -12,6 +12,7 @@
     </div>
     <div class="mt4">{{ $t('Mausritter is copyright Losing Games.') }}</div>
     <div class="mt4">{{ $t('This application is copyright Daniel Coquette.') }}</div>
+    <div class="mt4">{{ $t('Sheet and drawer backgrounds from DevianArt under license') }} <a href="https://creativecommons.org/licenses/by/3.0/">CC Attribution 3.0 License</a>.</div>
     <div class="w-max text-right">
       <w-button class="mt6" @click="showDialog = false" bg-color="error" dark>{{ $t('Close') }}</w-button>
     </div>

@@ -2,6 +2,7 @@
   { "label": "Improvised", "geometry": "1x1", "family": "WI", "damage": "d6", "desc": "Weapon", "use": 3, "price": 1 },
   { "label": "Needle", "geometry": "1x1", "family": "WL", "damage": "d6", "desc": "", "use": 3, "price": 10 },
   { "label": "Dagger", "geometry": "1x1", "family": "WL", "damage": "d6", "desc": "", "use": 3, "price": 10 },
+  { "label": "Pickaxe", "geometry": "1x1", "family": "WM", "damage": "[d6,d8]", "desc": "", "use": 3, "price": 20 },
   { "label": "Axe", "geometry": "1x1", "family": "WM", "damage": "[d6,d8]", "desc": "", "use": 3, "price": 20 },
   { "label": "Sword", "geometry": "1x1", "family": "WM", "damage": "[d6,d8]", "desc": "", "use": 3, "price": 20 },
   { "label": "Mace", "geometry": "1x1", "family": "WM", "damage": "[d6,d8]", "desc": "", "use": 3, "price": 20 },

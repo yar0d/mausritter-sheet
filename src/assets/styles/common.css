@@ -61,9 +61,9 @@ body,
 
 .shadow {
   /* box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .15), 0 1px 5px 0 rgba(0, 0, 0, .15); */
-  box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 3px 3px 5px 2px rgba(0, 0, 0, 0.75);
+  /* -webkit-box-shadow: 88px 88px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 88px 88px 5px 0px rgba(0, 0, 0, 0.75); */
 }
 
 .w-card {
@@ -155,14 +155,6 @@ input {
   height: 128px;
   width: 128px;
   padding: 2px;
-}
-
-.condition:hover,
-.item:hover {
-  box-shadow: 4px 4px 15px 8px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 4px 4px 15px 8px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 4px 4px 15px 8px rgba(0, 0, 0, 0.75);
-  margin-top: -8px;
 }
 
 .item-2x1 {

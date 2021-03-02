@@ -13,8 +13,9 @@
         </w-flex>
         <w-flex column justify-space-between>
           <div class="item-label">{{ $t(currentItem.label) }}</div>
-          <div class="h-max" v-if="!readonly && (currentItem.family === ITEM_FAMILY_SPELL || currentItem.family === ITEM_FAMILY_CUSTOM)">
-            <w-textarea class="body item-input input-value" v-model="currentItem.customLabel" rows="1" />
+          <div class="h-max" v-if="(currentItem.family === ITEM_FAMILY_SPELL || currentItem.family === ITEM_FAMILY_CUSTOM)">
+            <w-textarea v-if="canInputCustomLabel" class="body item-input input-value" v-model="currentItem.customLabel" rows="1" />
+            <span v-else-if="currentItem.customLabel" class="title4 item-input input-value">{{ $t(currentItem.customLabel) }}</span>
           </div>
           <w-flex v-else-if="currentItem.desc" align-center justify-center class="w-max">
             <span class="item-desc">{{ $t(currentItem.desc) }}</span>
@@ -49,14 +50,6 @@ export default {
     item: { type: Object, required: true },
     readonly: { type: Boolean, default: false },
     size: { type: String, default: null }
-    // damage: { type: String, default: '' },
-    // desc: { type: String, default: '' },
-    // family: { type: String, default: '' },
-    // geometry: { type: String, default: null },
-    // id: { type: String, required: true },
-    // img: { type: String, default: '' },
-    // label: { type: String, required: true },
-    // use: { type: Number, default: 0 }
   },
   emits: [ 'delete' ],
   data () {
@@ -73,6 +66,11 @@ export default {
       handler (newVal, oldVal) {
         if (newVal && !oldVal && newVal !== oldVal) this.currentItem = newVal // Just init label
       }
+    }
+  },
+  computed: {
+    canInputCustomLabel () {
+      return !this.currentItem.customLabel && !this.readonly
     }
   },
   methods: {
