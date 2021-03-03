@@ -1,21 +1,21 @@
 <template>
-  <w-card v-show="grit" bg-color="white" class="mr4" :class="getWidth">
+  <w-card v-show="grit" bg-color="white" class="w-auto mr4">
     <w-flex column>
       <w-flex row>
-        <div class="w-100 form-gray input-name body">
-          {{ $t('Grit') }}
-        </div>
+        <!-- <div class="w-100 form-gray input-name body">
+          {{ $t('Bank') }}
+        </div> -->
         <div class="mx2">
           <span class="title2" readonly>{{ grit }}</span>
         </div>
       </w-flex>
       <w-flex row justify-center>
-        <div class="w-max pt2">
-          <draggable :list="grits" group="items" item-key="id" class="h-max" @change="log" :move="move">
+        <div class="inventory-cell">
+          <draggable :list="bank" group="items" item-key="id" class="h-max" @change="log" :move="move">
             <template #item="{ element }">
-              <conditions v-if="element.type === TYPE_CONDITION" size="md" :id="element.id" :clear="element.clear" :desc="element.desc" :label="element.label" can-delete @delete="deleteItem(grits, element.id)" class="inline-block mx2" />
+              <conditions v-if="element.type === TYPE_CONDITION" size="xl" :id="element.id" :clear="element.clear" :desc="element.desc" :label="element.label" can-delete @delete="deleteItem(grits, element.id)" class="inline-block" />
             </template>
-            <template #footer><div class="px4 caption">{{ $t('Ignore a number of conditions equal to your Grit.') }}</div></template>
+            <template #footer><span class="caption">{{ $t('Ignore a number of conditions equal to your Grit.') }}</span></template>
           </draggable>
         </div>
       </w-flex>
@@ -38,18 +38,10 @@ export default {
   data () {
     return {
       TYPE_CONDITION,
-      grits: []
+      bank: []
     }
   },
   computed: {
-    getWidth () {
-      switch (this.grit) {
-        case 1: return 'grit-1'
-        case 2: return 'grit-2'
-        case 3: return 'grit-3'
-        default: return ''
-      }
-    },
     grit () {
       if (this.level <= 1) return 0
       if (this.level <= 2) return 1
@@ -62,15 +54,11 @@ export default {
       // Rules:
       // - Only conditions are accepted
       // - maximum is this.grit number of conditions
-      console.log('##[grit] canDrop:', element.type)
-      console.log('##[grit] canDrop:', list.length, this.grit)
+      console.log('##[bank] canDrop:', element.type)
+      console.log('##[bank] canDrop:', list.length, this.bank)
       let result = true
-      if (element.type !== TYPE_CONDITION) result = false // item is refused
-      if (list.length === this.grit) result = false // list is full
-      for (let i = 0; i < list.length; i++) {
-        if (list[i].id === element.id) result = false // condition already in list
-      }
-      console.log('##[grit] result:', result)
+      if (element.type === TYPE_CONDITION) result = false // condition is refused
+      console.log('##[bank] result:', result)
       return result
     },
     deleteItem(list, id) {
@@ -78,12 +66,6 @@ export default {
       if (i >= 0) {
         list.splice(i, 1) // Remove item from list
       }
-    },
-    getGrit (level) {
-      if (level || this.level <= 1) return 0
-      if (level || this.level <= 2) return 1
-      if (level || this.level <= 4) return 2
-      return 3
     },
     getIndex(list, id) {
       let i = 0
@@ -98,7 +80,7 @@ export default {
       return this.canDrop(e.draggedContext.element, e.relatedContext.list)
     },
     log(e) {
-      console.log("##[grit]", e)
+      console.log("##[bank]", e)
     }
   },
   created () {

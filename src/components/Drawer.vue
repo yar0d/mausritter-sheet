@@ -18,7 +18,7 @@
       <template #item-content.2>
         <draggable v-model="conditionsList" :group="{ name: 'items', pull: 'clone', put: false }" :sort="false" item-key="id" @change="log" :move="move" :clone="clone">
           <template #item="{ element }">
-            <conditions :id="element.id" :clear="element.clear" :desc="element.desc" :label="element.label" class="ma1 draggable drawer" />
+            <conditions :id="element.id" :clear="element.clear" :desc="element.desc" :label="element.label" class="ma1 draggable drawer" size="lgkl" />
           </template>
         </draggable>
       </template>

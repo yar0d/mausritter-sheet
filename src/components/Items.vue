@@ -1,8 +1,8 @@
 <template>
-  <div class="item item-background shadow" :class="size ? `item-size-${size}` : `item-${currentItem.geometry}`">
+  <div class="item item-background shadow draggable" :class="size ? `item-size-${size}` : `item-${currentItem.geometry}`">
     <w-flex column align-start justify-start class="h-max" :class="className(currentItem.label)">
-      <w-flex row class="h-max">
-        <w-flex column justify-end class="w-auto text-center">
+      <w-flex row class="h-max w-max">
+        <w-flex column justify-end class="w-25 text-center">
           <w-icon v-if="canDelete" class="clickable" color="red" md @click="onDelete">
             mdi mdi-close-circle
           </w-icon>
@@ -14,8 +14,8 @@
         <w-flex column justify-space-between>
           <div class="item-label">{{ $t(currentItem.label) }}</div>
           <div class="h-max" v-if="(currentItem.family === ITEM_FAMILY_SPELL || currentItem.family === ITEM_FAMILY_CUSTOM)">
-            <w-textarea v-if="canInputCustomLabel" class="body item-input input-value" v-model="currentItem.customLabel" rows="1" />
-            <span v-else-if="currentItem.customLabel" class="title4 item-input input-value">{{ $t(currentItem.customLabel) }}</span>
+            <w-textarea v-if="canInputCustomLabel" class="item-input item-custom-label input-value" v-model="currentItem.customLabel" rows="3" />
+            <span v-else-if="currentItem.customLabel" class="item-desc">{{ currentItem.customLabel }}</span>
           </div>
           <w-flex v-else-if="currentItem.desc" align-center justify-center class="w-max">
             <span class="item-desc">{{ $t(currentItem.desc) }}</span>
@@ -70,7 +70,7 @@ export default {
   },
   computed: {
     canInputCustomLabel () {
-      return !this.currentItem.customLabel && !this.readonly
+      return !this.readonly
     }
   },
   methods: {

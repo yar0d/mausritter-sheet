@@ -231,8 +231,10 @@ export default {
         return false
       }
 
-      console.log('##[inventory] add to:', inventoryId, { ...item, customLabel: customLabel || '', desc: desc || '' })
-      this.$data[inventoryId].push({ ...item, customLabel: customLabel || '', desc: desc || '' }) // Clone item in inventory
+      if (customLabel) item.customLabel = this.$t(customLabel)
+      if (desc) item.desc = desc
+      console.log('##[inventory] add to:', inventoryId, item)
+      this.$data[inventoryId].push({ ...item }) // Clone item in inventory
       return true
     }
   }

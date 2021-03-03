@@ -1,10 +1,13 @@
+# DONE
+- implement Mouse creation rules from Mausritter Rules book.
+- add empty item to allow custom.
+
 # TODO
 
-- implement all rules.
-- manage hirelings. 
+- manage hirelings.
 - drag'n'drop in bank.
+- drag'n'drop in grit.
 - auto arrange inventory.
-- add empty item to allow custom.
 - add empty condition to allow custom.
 - Fix inventory dropping collision with card geometry.
 - Load/save whole sheet from local storage.

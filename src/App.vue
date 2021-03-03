@@ -4,7 +4,7 @@
       <sheet ref="sheet"/>
     </main>
     <footer>
-      <sheet-toolbar>
+      <sheet-toolbar ref="sheet-toolbar">
         <template #actions-append>
           <w-tooltip transition="fade" bg-color="yellow-light2" color="black" top>
             <template #activator="{ on }">
@@ -26,6 +26,7 @@ export default {
   components: { Sheet, SheetToolbar },
   methods: {
     createRandomSheet () {
+      if (this.$refs['sheet-toolbar']) this.$refs['sheet-toolbar'].displayDrawer(false)
       if (this.$refs['sheet']) this.$refs['sheet'].createRandomSheet()
     }
   }

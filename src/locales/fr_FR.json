@@ -74,7 +74,7 @@
   "Spell": "Sort",
   "Item": "Objet",
   "A custom item.": "Un objet personnalisé.",
-  "This sheet will be erased. Do you confirm?": "Confirmez-vous l'effacement de la fiche ?",
+  "The sheet of {name} will be erased. Do you confirm?": "Confirmez-vous l'effacement de la fiche de {name} ?",
   "Confirm": "Confirmation",
   "Yes": "Oui",
   "No": "Non",
@@ -82,8 +82,9 @@
   "Def": "Def",
   "Items and conditions drawer.": "Tiroir à objets et conditions",
   "Roll {dice}": "Lancer {dice}",
-  "{name} is ready for adventure!": "{name} est paré pour l'aventure !",
+  "“{name}” prepares for adventure...": "« {name} » se prépare pour l'aventure…",
   "You may then swap any two attributes.": "Vous pouvez intervertir deux des attributs.",
   "You may choose a weapon below:": "Choisissez une arme ci-dessous :",
-  "You can take one item below:": "Vous pouvez prendre un des objet ci-dessous :"
+  "You can take one item below:": "Vous pouvez prendre un des objet ci-dessous :",
+  "Item from inherited your background of “{background}”": "Objets hérités de votre passé de « {background} »"
 }

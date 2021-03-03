@@ -74,6 +74,9 @@ export default {
   methods: {
     rollDice (args) {
       console.log('##rollDice', args)
+    },
+    displayDrawer (show = false) {
+      this.showDrawer = show
     }
   }
 }

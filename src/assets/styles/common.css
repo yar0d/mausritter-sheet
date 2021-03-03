@@ -59,11 +59,12 @@ body,
   background-position: left;
 }
 
+.mouse-creation-dialog-background {
+  background-image: url('../img/drawer.jpg');
+}
+
 .shadow {
-  /* box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .15), 0 1px 5px 0 rgba(0, 0, 0, .15); */
-  box-shadow: 3px 3px 5px 2px rgba(0, 0, 0, 0.75);
-  /* -webkit-box-shadow: 88px 88px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 88px 88px 5px 0px rgba(0, 0, 0, 0.75); */
+  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.75);
 }
 
 .w-card {
@@ -96,7 +97,7 @@ body,
   font-weight: bold;
 }
 
-input {
+input, textarea {
   color: #2c85b4 !important;
   font-family: unset;
 }
@@ -123,12 +124,37 @@ input {
 
 .w-200 {
   width: 200px;
-  width: 200px;
+  max-width: 200px;
 }
 
 .w-250 {
   width: 250px;
-  width: 250px;
+  max-width: 250px;
+}
+
+.w-300 {
+  width: 300px;
+  max-width: 300px;
+}
+
+.w-350 {
+  width: 350px;
+  max-width: 350px;
+}
+
+.grit-1 {
+  width: 118px;
+  max-width: 118px;
+}
+
+.grit-2 {
+  width: 230px;
+  max-width: 230px;
+}
+
+.grit-3 {
+  width: 340px;
+  max-width: 340px;
 }
 
 .w-auto {
@@ -151,10 +177,11 @@ input {
 .item,
 .item-1x1 {
   display: inline-block;
-  font-size: 0.5em;
+  font-size: 16px;
   height: 128px;
   width: 128px;
   padding: 2px;
+  overflow: hidden;
 }
 
 .item-2x1 {
@@ -167,28 +194,31 @@ input {
 
 .condition-title,
 .item-title {
-  font-size: 12px;
-}
-
-.condition-title-lg,
-.item-title-lg {
-  font-size: 14px;
-}
-
-.condition-title-xl,
-.item-title-xl {
   font-size: 16px;
 }
 
 .condition-label,
 .item-label {
-  font-size: 16px;
+  font-size: 100%;
   color: #ffFF00;
 }
 
-.drawer .condition-label,
-.drawer .item-label {
-  font-size: 12px;
+.condition-desc,
+.item-desc {
+  font-size: 100%;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.25);
+  padding: 4px;
+  color: #fff;
+}
+
+.condition-desc {
+  font-size: 80%;
+}
+
+.condition-item-custom-label,
+.item-item-custom-label {
+  font-size: 80%;
 }
 
 .item-damage,
@@ -203,35 +233,14 @@ input {
 
 .item-damage,
 .item-def {
-  font-size: 20px;
+  font-size: 125%;
   color: #000;
   border: 1px solid;
   padding: 2px;
 }
 
-.drawer .item-damage, .drawer .item-def {
-  font-size: 14px;
-  padding: 0px;
-}
-
-.condition-desc,
-.item-desc {
-  font-size: 16px;
-  color: #fff;
-}
-
-.drawer .condition-desc,
-.drawer .item-desc {
-  font-size: 10px;
-}
-
 .condition-clear {
-  font-size: 14px;
-  color: #000;
-}
-
-.drawer .condition-clear {
-  font-size: 10px;
+  font-size: 80%;
   color: #000;
 }
 
@@ -253,31 +262,55 @@ input {
 .item-size-xs {
   max-height: 64px;
   max-width: 64px;
+  font-size: 8px;
 }
 
 .condition-size-sm,
 .item-size-sm {
   max-height: 80px;
   max-width: 80px;
+  font-size: 10px;
 }
 
 .condition-size-md,
 .item-size-md {
   max-height: 96px;
   max-width: 96px;
+  font-size: 12px;
 }
 
 .condition-size-lg,
 .item-size-lg {
   max-height: 112px;
   max-width: 112px;
+  font-size: 14px;
 }
 
 .condition-size-xl,
 .item-size-xl {
   max-height: 128px;
   max-width: 128px;
-  font-size: 200%;
+  font-size: 16px;
+}
+
+.drawer .condition-label,
+.drawer .item-label {
+  font-size: 12px;
+}
+
+.drawer .item-damage, .drawer .item-def {
+  font-size: 14px;
+  padding: 0px;
+}
+
+.drawer .condition-desc,
+.drawer .item-desc {
+  font-size: 10px;
+}
+
+.drawer .condition-clear {
+  font-size: 10px;
+  color: #000;
 }
 
 .inventory-cell {

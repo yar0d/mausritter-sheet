@@ -198,27 +198,38 @@
       </w-flex>
     </w-flex>
     <confirm-dialog ref="confirm-dialog" />
-    <prompt-dialog ref="prompt-dialog">
+    <prompt-dialog ref="mouse-creation-dialog">
       <template #content>
-        <w-flex column align-center class="h-max w-max drawer-background">
-          <div class="white title3 mb2">
+        <div class="pa4 mouse-creation-dialog-background">
+          <w-divider color="white" class="title3 w-max">
             {{ $t('You may then swap any two attributes.') }}
+          </w-divider>
+
+          <div v-if="backgroundItems" class="mt8 w-max">
+            <w-divider color="white" class="title3">
+              {{ $t('Item from inherited your background of “{background}”', { background }) }}
+            </w-divider>
+            <items v-for="(item, index) in backgroundItems" :key="index" :item="item" readonly class="mx4" size="md" />
           </div>
-          <div class="white title3 mb1">{{ $t('You may choose a weapon below:') }}</div>
-          <w-radios v-model="choosenWeapon" :items="weaponsItems" inline>
-            <template #item="{ item }">
-              <items :item="item.item" readonly class="mr4 mb4" size="sm" />
-            </template>
-          </w-radios>
-          <div v-if="chooseItem.length">
-            <div class="white title3 mb1">{{ $t('You can take one item below:') }}</div>
-            <w-radios v-model="choosenItem" :items="chooseItem" inline>
+
+          <div v-if="weaponsItems" class="mt8 w-max">
+            <w-divider color="white" class="title3">{{ $t('You may choose a weapon below:') }}</w-divider>
+            <w-radios v-model="choosenWeapon" :items="weaponsItems" inline>
+              <template #item="{ item }">
+                <items :item="item.item" readonly class="mr4 mb4" size="sm" />
+              </template>
+            </w-radios>
+          </div>
+
+          <div v-if="chooseItems.length" class="mt8 w-max">
+            <w-divider color="white" class="title3">{{ $t('You can take one item below:') }}</w-divider>
+            <w-radios v-model="choosenItem" :items="chooseItems" inline>
               <template #item="{ item }">
                 <items :item="item.item" readonly class="mr8" />
               </template>
             </w-radios>
           </div>
-        </w-flex>
+        </div>
       </template>
     </prompt-dialog>
   </w-card>
@@ -246,7 +257,8 @@ export default {
       background: '',
       bankedPips: 0,
       birthsign: 0,
-      chooseItem: [],
+      backgroundItems: [],
+      chooseItems: [],
       choosenItem: null,
       choosenWeapon: 0,
       coatColor: 0,
@@ -282,7 +294,7 @@ export default {
   methods: {
     createRandomSheet () {
       if (this.isNew) this.rollRandomMouse()
-      else this.$refs['confirm-dialog'].open(this.$t('Create a new character'), this.$t('This sheet will be erased. Do you confirm?'))
+      else this.$refs['confirm-dialog'].open(this.$t('Create a new character'), this.$t('The sheet of {name} will be erased. Do you confirm?', { name: this.name } ))
         .then(confirmed => {
           if (confirmed) this.rollRandomMouse()
         })
@@ -295,7 +307,7 @@ export default {
       this.background = ''
       this.bankedPips = 0
       this.birthsign = 0
-      this.chooseItem = []
+      this.chooseItems = []
       this.choosenItem = -1
       this.choosenWeapon = 0
       this.coatColor = 0
@@ -316,13 +328,18 @@ export default {
     rollRandomMouse () {
       this.reset()
       this.maxStr = rollExplode(3, 6, 2).total // Keep two highest D6 from the rollingof 3d6.
-      this.currentStr = this.maxStr
       this.maxDex = rollExplode(3, 6, 2).total // Keep two highest D6 from the rollingof 3d6.
-      this.currentDex = this.maxDex
       this.maxWil = rollExplode(3, 6, 2).total // Keep two highest D6 from the rollingof 3d6.
+      this.currentStr = this.maxStr
+      this.currentDex = this.maxDex
       this.currentWil = this.maxWil
       this.maxHP = d6()
       this.pips = d6()
+
+      // DEBUG
+      this.maxHP = 1
+      this.pips = 2
+
       this.currentHP = this.maxHP
       this.name = rollFromTable(this.$store.getters.names) + ' ' + rollFromTable(this.$store.getters.matrinames)
       this.$refs['birthsign'].setValue(d6())
@@ -331,16 +348,25 @@ export default {
       this.$refs['look'].setValue(d66())
       const b = getBackground(this.maxHP, this.pips)
       this.background = this.$t(b.label)
+      this.backgroundItems = []
       this.isNew = false
+
       this.$refs['inventory'].reset()
       this.$refs['inventory'].putItem(TYPE_ITEM + '-torches', 'pack1')
       this.$refs['inventory'].putItem(TYPE_ITEM + '-rations', 'pack4')
       if (b.items && b.items.length > 0) {
         this.$refs['inventory'].putItem(b.items[0].id, 'pack2', b.items[0])
         if (b.items.length > 1) this.$refs['inventory'].putItem(b.items[1].id, 'pack5', b.items[1])
+
+        // Display what background give us
+        this.backgroundItems.push(getItem(TYPE_ITEM + '-torches'))
+        this.backgroundItems.push(getItem(TYPE_ITEM + '-rations'))
+        for (let i = 0; i < b.items.length; i++) {
+          this.backgroundItems.push(getItem(b.items[i].id, { customLabel: this.$t(b.items[i].customLabel || ''), desc: b.items[i].desc }))
+        }
       }
 
-      // Rule: If your mouse’s highest attribute is 9 or less, roll on the Background table again and take either Item A or B. If your highest is 9 or less, take both.
+      // Rule: If your mouse’s highest attribute is 9 or less, roll on the Background table again and take either Item A or B. If your highest is 7 or less, take both.
       if (this.maxStr <= 9 && this.maxDex <= 9 && this.currentWil <= 9) {
         const b1 = getBackground(d6(), d6())
         if (this.maxStr <= 7 && this.maxDex <= 7 && this.currentWil <= 7) {
@@ -351,21 +377,20 @@ export default {
         } else {
           // Choose one
           for (let i = 0; i < b1.items.length; i++) {
-            this.chooseItem.push({ id: i, item: getItem(b1.items[i].id, { customLabel: b1.items[i].customLabel, desc: b1.items[i].desc }) })
+            this.chooseItems.push({ id: i, item: getItem(b1.items[i].id, { customLabel: this.$t(b1.items[i].customLabel || ''), desc: b1.items[i].desc }) })
           }
           this.choosenItem = 0
         }
       }
 
-      this.$refs['prompt-dialog'].open(this.$t('{name} is ready for adventure!', { name: this.name }))
+      this.$refs['mouse-creation-dialog'].open(this.$t('“{name}” prepares for adventure...', { name: this.name }))
         .then (() => {
-          console.log('##[mouse] Add choosen weapon:', this.weaponsItems[this.choosenWeapon].item)
           this.$refs['inventory'].putItem(this.weaponsItems[this.choosenWeapon].item.id, 'body1', this.weaponsItems[this.choosenWeapon].item)
 
           if (this.choosenItem >= 0) {
-            console.log('##[mouse] Add choosen item:', this.chooseItem[this.choosenItem].item)
-            let location = this.chooseItem[this.choosenItem].item.geometry === '1x2' ? 'mainPaw' : 'offPaw'
-            this.$refs['inventory'].putItem(this.chooseItem[this.choosenItem].item.id, location, this.chooseItem[this.choosenItem].item)
+            console.log('##[mouse] Add choosen item:', this.chooseItems[this.choosenItem].item)
+            let location = this.chooseItems[this.choosenItem].item.geometry === '1x2' ? 'mainPaw' : 'offPaw'
+            this.$refs['inventory'].putItem(this.chooseItems[this.choosenItem].item.id, location, this.chooseItems[this.choosenItem].item)
           }
         })
     },
