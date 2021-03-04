@@ -337,8 +337,8 @@ export default {
       this.pips = d6()
 
       // DEBUG
-      this.maxHP = 1
-      this.pips = 2
+      // this.maxHP = 1
+      // this.pips = 2
 
       this.currentHP = this.maxHP
       this.name = rollFromTable(this.$store.getters.names) + ' ' + rollFromTable(this.$store.getters.matrinames)
