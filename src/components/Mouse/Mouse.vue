@@ -15,8 +15,8 @@
             <div class="input-name body mr10">
               {{ $t('Background') }}
             </div>
-            <div>
-              <w-textarea v-model="background" class="body input-value" rows="1" no-autogrow />
+            <div class="w-max">
+              <w-input v-model="background" class="body input-value" />
             </div>
           </w-flex>
         </w-card>
@@ -138,8 +138,24 @@
         <div class="title1">
           {{ $t('Inventory') }}
         </div>
+
+        <w-card bg-color="white" class="xs4 opacity-75">
+          <w-flex row align-center>
+            <div class="input-name">
+              {{ $t('Level') }}
+            </div>
+            <div class="ml2 xs6">
+              <w-input v-model.number="level" class="title2" />
+            </div>
+            <div class="ml4">{{ $t('XP') }}</div>
+            <div class="mx1 w-max text-right">
+              <w-input v-model.number="xp" />
+            </div>
+          </w-flex>
+        </w-card>
+
         <div class="w-250 pips-img">
-          <div class="ml6 opacity-50">
+          <div class="ml6 opacity-75">
             <w-card bg-color="white" class="py0 pr2 pips opacity-100">
               <w-flex row justify-end align-center>
                 <div class="input-name">
@@ -160,50 +176,36 @@
       <inventory ref="inventory" />
 
       <w-flex row justify-center class="mx4 mt2">
-        <w-card bg-color="white" class="xs2 mr4">
-          <w-flex column justify-space-between class="h-max">
-            <w-flex row>
-              <div class="w-100 form-gray input-name body">
-                {{ $t('Level') }}
-              </div>
-              <div class="ml2">
-                <w-input v-model.number="level" class="title2" />
-              </div>
-            </w-flex>
-            <w-flex class="h-max text-center">
-              <w-input v-model.number="xp" class="title3" />
-            </w-flex>
-            <div>
-              {{ $t('XP') }}
-            </div>
-          </w-flex>
-        </w-card>
-
         <grit ref="grit" :level="level" />
-
-        <w-card bg-color="white" class="w-auto">
-          <w-flex column justify-center>
-            {{ $t('Bank') }}
-            <div class="inventory-cell" />
-            <w-flex row auto>
-              <div class="form-gray input-name body">
-                {{ $t('Pips') }}
-              </div>
-              <div class="ml2">
-                <w-input v-model="bankedPips" class="title3" />
-              </div>
-            </w-flex>
-          </w-flex>
-        </w-card>
+        <bank ref="bank" />
       </w-flex>
     </w-flex>
+
     <confirm-dialog ref="confirm-dialog" />
+
     <prompt-dialog ref="mouse-creation-dialog">
       <template #content>
         <div class="pa4 mouse-creation-dialog-background">
-          <w-divider color="white" class="title3 w-max">
-            {{ $t('You may then swap any two attributes.') }}
-          </w-divider>
+          <div v-if="maxStr !== maxDex || maxStr !== maxWil">
+            <w-divider color="white" class="title3 w-max">
+              {{ $t('You may then swap any two attributes.') }}
+            </w-divider>
+            <div class="w-max text-center title1 my1">
+              {{ $t("STR") }} {{ maxStr }} | {{ $t("DEX") }} {{ maxDex }} | {{ $t("WIL") }} {{ maxWil }}
+            </div>
+            <w-radio v-model="swapAttributes" :return-value="SWAP_NONE" class="mr2">
+              {{ $t("No swap.") }}
+            </w-radio>
+            <w-radio v-model="swapAttributes" :return-value="SWAP_STR_DEX" class="mr2">
+              {{ $t("STR ⇄ DEX") }}
+            </w-radio>
+            <w-radio v-model="swapAttributes" :return-value="SWAP_STR_WIL" class="mr2">
+              {{ $t("STR ⇄ WIL") }}
+            </w-radio>
+            <w-radio v-model="swapAttributes" :return-value="SWAP_DEX_WIL">
+              {{ $t("DEX ⇄ WIL") }}
+            </w-radio>
+          </div>
 
           <div v-if="backgroundItems" class="mt8 w-max">
             <w-divider color="white" class="title3">
@@ -249,11 +251,21 @@ import Grit from './Grit.vue'
 import ConfirmDialog from '../ConfirmDialog.vue'
 import PromptDialog from '../PromptDialog.vue'
 import Items from '../Items.vue'
+import Bank from './Bank.vue'
+
+const SWAP_NONE = 0
+const SWAP_STR_DEX = 1
+const SWAP_STR_WIL = 2
+const SWAP_DEX_WIL = 3
 
 export default {
-  components: { Birthsign, CoatColor, CoatPattern, Inventory, Checker, Look, Grit, ConfirmDialog, PromptDialog, Items },
+  components: { Birthsign, CoatColor, CoatPattern, Inventory, Checker, Look, Grit, ConfirmDialog, PromptDialog, Items, Bank },
   data() {
     return {
+      SWAP_NONE,
+      SWAP_STR_DEX,
+      SWAP_STR_WIL,
+      SWAP_DEX_WIL,
       background: '',
       bankedPips: 0,
       birthsign: 0,
@@ -276,9 +288,7 @@ export default {
       maxWil: 0,
       name: '',
       pips: 0,
-      validators: {
-        required: (value) => !!value || "This field is required",
-      },
+      swapAttributes: 0,
       xp: 0
     }
   },
@@ -324,6 +334,7 @@ export default {
       this.maxStr = 0
       this.maxWil = 0
       this.pips = 0
+      this.swapAttributes = 0
     },
     rollRandomMouse () {
       this.reset()
@@ -335,25 +346,26 @@ export default {
       this.currentWil = this.maxWil
       this.maxHP = d6()
       this.pips = d6()
-
-      // DEBUG
-      // this.maxHP = 1
-      // this.pips = 2
-
       this.currentHP = this.maxHP
       this.name = rollFromTable(this.$store.getters.names) + ' ' + rollFromTable(this.$store.getters.matrinames)
+
       this.$refs['birthsign'].setValue(d6())
       this.$refs['coat-color'].setValue(d6())
       this.$refs['coat-pattern'].setValue(d6())
       this.$refs['look'].setValue(d66())
+
       const b = getBackground(this.maxHP, this.pips)
       this.background = this.$t(b.label)
       this.backgroundItems = []
-      this.isNew = false
 
+      this.$refs['bank'].reset()
+      this.$refs['grit'].reset()
       this.$refs['inventory'].reset()
       this.$refs['inventory'].putItem(TYPE_ITEM + '-torches', 'pack1')
       this.$refs['inventory'].putItem(TYPE_ITEM + '-rations', 'pack4')
+
+      this.isNew = false
+
       if (b.items && b.items.length > 0) {
         this.$refs['inventory'].putItem(b.items[0].id, 'pack2', b.items[0])
         if (b.items.length > 1) this.$refs['inventory'].putItem(b.items[1].id, 'pack5', b.items[1])
@@ -385,6 +397,21 @@ export default {
 
       this.$refs['mouse-creation-dialog'].open(this.$t('“{name}” prepares for adventure...', { name: this.name }))
         .then (() => {
+          switch (this.swapAttributes) {
+            case SWAP_STR_DEX:
+              [this.maxStr, this.maxDex] = [this.maxDex, this.maxStr]
+              break;
+            case SWAP_STR_WIL:
+              [this.maxStr, this.maxWil] = [this.maxWil, this.maxStr]
+              break;
+            case SWAP_DEX_WIL:
+              [this.maxDex, this.maxWil] = [this.maxWil, this.maxDex]
+              break;
+          }
+          this.currentStr = this.maxStr
+          this.currentDex = this.maxDex
+          this.currentWil = this.maxWil
+
           this.$refs['inventory'].putItem(this.weaponsItems[this.choosenWeapon].item.id, 'body1', this.weaponsItems[this.choosenWeapon].item)
 
           if (this.choosenItem >= 0) {

@@ -2,10 +2,11 @@
 - implement Mouse creation rules from Mausritter Rules book.
 - add empty item to allow custom.
 - drag'n'drop in grit.
+- drag'n'drop in bank.
 
 # TODO
 
-- drag'n'drop in bank.
+- manage retrieving from bank (cost 1% price).
 - manage hirelings.
 - add empty condition to allow custom.
 - Load/save whole sheet from local storage.

@@ -1,64 +1,95 @@
 <template>
-  <w-card v-show="grit" bg-color="white" class="w-auto mr4">
-    <w-flex column>
-      <w-flex row>
-        <!-- <div class="w-100 form-gray input-name body">
+  <w-card bg-color="white" class="w-auto">
+    <w-flex column justify-center>
+      <w-flex row justify-space-between>
+        <w-badge v-model="items.length" class="mt1">
           {{ $t('Bank') }}
-        </div> -->
-        <div class="mx2">
-          <span class="title2" readonly>{{ grit }}</span>
-        </div>
+        </w-badge>
+        <w-button v-show="items.length" @click="showBank = true">
+          <w-icon>
+            mdi mdi-archive
+          </w-icon>
+        </w-button>
       </w-flex>
       <w-flex row justify-center>
         <div class="inventory-cell">
-          <draggable :list="bank" group="items" item-key="id" class="h-max" @change="log" :move="move">
-            <template #item="{ element }">
-              <conditions v-if="element.type === TYPE_CONDITION" size="xl" :id="element.id" :clear="element.clear" :desc="element.desc" :label="element.label" can-delete @delete="deleteItem(grits, element.id)" class="inline-block" />
+          <draggable :list="items" group="items" item-key="id" class="h-max" @change="log" :move="move" @add="add">
+            <template #item="{ element, index }">
+              <items v-if="index === items.length - 1" size="lg" can-delete readonly :item="element" @delete="deleteItem(items, element.id)" />
+              <div v-else-if="index < 4" class="stack-slice" />
             </template>
-            <template #footer><span class="caption">{{ $t('Ignore a number of conditions equal to your Grit.') }}</span></template>
           </draggable>
+        </div>
+      </w-flex>
+      <w-flex row>
+        <div class="form-gray input-name">
+          {{ $t('Pips') }}
+        </div>
+        <div class="mx1 text-right">
+          <w-input v-model="pips" class="title3" />
         </div>
       </w-flex>
     </w-flex>
   </w-card>
+
+  <w-drawer v-model="showBank" bottom no-overlay>
+    <div class="w-max pa4 bank-dialog-background">
+      <w-flex row justify-space-between>
+        <span class="title1">
+          <w-badge v-model="items.length" class="mt1">
+            {{ $t('Bank') }}
+          </w-badge>
+        </span>
+
+        <div class="w-250 pips-img">
+          <div class="ml6 opacity-75">
+            <w-card bg-color="white" class="py0 pr2 pips opacity-100">
+              <w-flex row justify-end align-center>
+                <div class="input-name">
+                  {{ $t('Pips') }}
+                </div>
+                <div class="ml4 mr1 text-right">
+                  <w-input v-model.number="pips" class="title2" />
+                </div>
+              </w-flex>
+            </w-card>
+          </div>
+        </div>
+
+        <w-button @click="showBank = false">
+          {{ $t('Close') }}
+        </w-button>
+      </w-flex>
+      {{ $t('Your mouse must pay a fee of 1% of the value when retrieving the stored pips or items.') }}
+      <div v-if="items" class="mt2 h-max w-max bank-drawer-items">
+        <items v-for="(item, index) in items" :key="index" :item="item" can-delete show-price class="mx2 mb1" />
+      </div>
+    </div>
+  </w-drawer>
 </template>
 
 <script>
 import draggable from "vuedraggable"
-import { TYPE_CONDITION } from "@/services/items-conditions"
-import Conditions from "../Conditions.vue"
+import { TYPE_ITEM } from "@/services/items-conditions"
+import Items from "../Items.vue"
 
 export default {
   name: 'Grit',
-  components: { Conditions, draggable },
-  emits: [ 'input' ],
-  props: {
-    level: { type: Number, required: true }
-  },
+  components: { draggable, Items },
   data () {
     return {
-      TYPE_CONDITION,
-      bank: []
-    }
-  },
-  computed: {
-    grit () {
-      if (this.level <= 1) return 0
-      if (this.level <= 2) return 1
-      if (this.level <= 4) return 2
-      return 3
+      TYPE_ITEM,
+      items: [],
+      pips: 0,
+      showBank: false
     }
   },
   methods: {
-    canDrop (element, list) {
+    canDrop (element) {
       // Rules:
-      // - Only conditions are accepted
-      // - maximum is this.grit number of conditions
-      console.log('##[bank] canDrop:', element.type)
-      console.log('##[bank] canDrop:', list.length, this.bank)
+      // - Only items are accepted
       let result = true
-      if (element.type === TYPE_CONDITION) result = false // condition is refused
-      console.log('##[bank] result:', result)
+      if (element.type !== TYPE_ITEM) result = false // Condition is refused
       return result
     },
     deleteItem(list, id) {
@@ -76,15 +107,26 @@ export default {
       }
       return found
     },
+    add (e) {
+      console.log('##[bank] add', e.item)
+      console.log('##[bank] add', e.newIndex)
+      if (this.items.length > 0) {
+        e.newIndex = 0 // Force top of stack
+      }
+    },
     move(e) {
       return this.canDrop(e.draggedContext.element, e.relatedContext.list)
     },
+    reset () {
+      this.items = []
+    },
     log(e) {
-      console.log("##[bank]", e)
+      console.log('##[bank] log', e)
+      return false
     }
   },
   created () {
-    this.grits.canDrop = this.canDrop
+    this.items.canDrop = this.canDrop // Export drop testing method
   }
 }
 </script>

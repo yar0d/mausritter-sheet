@@ -7,6 +7,23 @@ body,
   margin: 0;
 }
 
+.debug-box {
+  border: 2px dashed red;
+}
+
+.stack-slice {
+  border-color: #000;
+  border-style: solid;
+  border-top: 2px solid;
+  border-left: 2px solid;
+  border-right: 2px solid;
+  border-bottom: none;
+  margin: 0 8px;
+  padding: 0 0 3px 0;
+  background-color: #ccc;
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
 .mouse-sheet {
   width: 800px !important;
   max-width: 800px !important;
@@ -60,7 +77,11 @@ body,
 }
 
 .mouse-creation-dialog-background {
-  background-image: url('../img/drawer.jpg');
+  background-image: url('../img/mouse-creation.jpg');
+}
+
+.bank-dialog-background {
+  background-image: url('../img/bank.jpg');
 }
 
 .shadow {
@@ -207,8 +228,6 @@ input, textarea {
 .item-desc {
   font-size: 100%;
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.25);
-  padding: 4px;
   color: #fff;
 }
 
@@ -223,7 +242,8 @@ input, textarea {
 
 .item-damage,
 .item-def,
-.item-use {
+.item-use,
+.item-price {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
@@ -237,6 +257,11 @@ input, textarea {
   color: #000;
   border: 1px solid;
   padding: 2px;
+}
+
+.item-price {
+  font-size: 100%;
+  color: #000;
 }
 
 .condition-clear {
@@ -334,4 +359,9 @@ input, textarea {
 
 .flat {
   border: 0;
+}
+
+.bank-drawer-items {
+  overflow-y: auto;
+  height: 300px;
 }

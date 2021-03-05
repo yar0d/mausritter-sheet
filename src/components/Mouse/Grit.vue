@@ -31,7 +31,6 @@ import Conditions from "../Conditions.vue"
 export default {
   name: 'Grit',
   components: { Conditions, draggable },
-  emits: [ 'input' ],
   props: {
     level: { type: Number, required: true }
   },
@@ -61,14 +60,14 @@ export default {
     canDrop (element, list) {
       // Rules:
       // - Only conditions are accepted
-      // - maximum is this.grit number of conditions
+      // - No duplicated condition
       console.log('##[grit] canDrop:', element.type)
       console.log('##[grit] canDrop:', list.length, this.grit)
       let result = true
       if (element.type !== TYPE_CONDITION) result = false // item is refused
       if (list.length === this.grit) result = false // list is full
       for (let i = 0; i < list.length; i++) {
-        if (list[i].id === element.id) result = false // condition already in list
+        if (list[i].id === element.id) result = false // Already in list
       }
       console.log('##[grit] result:', result)
       return result
@@ -97,12 +96,15 @@ export default {
     move(e) {
       return this.canDrop(e.draggedContext.element, e.relatedContext.list)
     },
+    reset () {
+      this.grits = []
+    },
     log(e) {
-      console.log("##[grit]", e)
+      console.log('##[grit]', e)
     }
   },
   created () {
-    this.grits.canDrop = this.canDrop
+    this.grits.canDrop = this.canDrop // Export drop testing method
   }
 }
 </script>

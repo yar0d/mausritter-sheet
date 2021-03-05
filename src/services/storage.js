@@ -1,3 +1,6 @@
+
+import uuencode from'uuencode'
+
 const storage = window.localStorage
 
 /**
@@ -52,6 +55,15 @@ export function store (key, value) {
   } else {
     set(key, value)
   }
+}
+
+export function loadJson (key) {
+  const data = uuencode.decode(get(key, ''))
+  return JSON.parse(data)
+}
+
+export function saveJson (key, object) {
+  set(key, uuencode.encode(JSON.stringify(object)))
 }
 
 export default {

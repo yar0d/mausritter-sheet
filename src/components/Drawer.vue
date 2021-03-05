@@ -8,7 +8,7 @@
       <template #item-content.1>
         <draggable v-model="itemsList" :group="{ name: 'items', pull: 'clone', put: false }" :sort="false" item-key="id" @change="log" :move="move" :clone="clone">
           <template #item="{ element }">
-            <items :item="element" size="sm" class="ma1 draggable drawer" readonly></items>
+            <items :item="element" size="sm" class="ma1 draggable drawer" readonly show-damage></items>
           </template>
         </draggable>
       </template>
@@ -46,7 +46,10 @@ export default {
   },
   methods: {
     canDrop (element, list) {
-      if (list.canDrop) {
+      console.log('##[drawer] canDrop element:', element)
+      console.log('##[drawer] canDrop on list:', list)
+
+      if (list && list.canDrop) {
         return list.canDrop(element, list)
       }
 
