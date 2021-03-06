@@ -6,6 +6,7 @@
 
 # TODO
 
+Must have before 1.0:
 - manage retrieving from bank (cost 1% price).
 - manage hirelings.
 - add empty condition to allow custom.
