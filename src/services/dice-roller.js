@@ -97,17 +97,61 @@ export function rollCustom (formula) {
 /*
 * Single dice roll. Return the Result as Number.
 */
-export function d2 () { return Math.trunc(Math.random() * 2 + 1) }
-export function d3 () { return Math.trunc(Math.random() * 3 + 1) }
-export function d4 () { return Math.trunc(Math.random() * 4 + 1) }
-export function d6 () { return Math.trunc(Math.random() * 6 + 1) }
-export function d8 () { return Math.trunc(Math.random() * 8 + 1) }
-export function d10 () { return Math.trunc(Math.random() * 10 + 1) }
-export function d12 () { return Math.trunc(Math.random() * 12 + 1) }
-export function d20 () { return Math.trunc(Math.random() * 20 + 1) }
-export function d30 () { return Math.trunc(Math.random() * 30 + 1) }
-export function d66 () { return d6() * 10 + d6() }
-export function d100 () { return Math.trunc(Math.random() * 100 + 1) }
+export function d2 (callback) {
+  let r = Math.trunc(Math.random() * 2 + 1)
+  if (callback) callback('d2', r)
+  return r
+}
+export function d3 (callback) {
+  let r = Math.trunc(Math.random() * 3 + 1)
+  if (callback) callback('d3', r)
+  return r
+}
+export function d4 (callback) {
+  let r = Math.trunc(Math.random() * 4 + 1)
+  if (callback) callback('d4', r)
+  return r
+}
+export function d6 (callback) {
+  let r = Math.trunc(Math.random() * 6 + 1)
+  if (callback) callback('d6', r)
+  return r
+}
+export function d8 (callback) {
+  let r = Math.trunc(Math.random() * 8 + 1)
+  if (callback) callback('d8', r)
+  return r
+}
+export function d10 (callback) {
+  let r = Math.trunc(Math.random() * 10 + 1)
+  if (callback) callback('d10', r)
+  return r
+}
+export function d12 (callback) {
+  let r = Math.trunc(Math.random() * 12 + 1)
+  if (callback) callback('d12', r)
+  return r
+}
+export function d20 (callback) {
+  let r = Math.trunc(Math.random() * 20 + 1)
+  if (callback) callback('d20', r)
+  return r
+}
+export function d30 (callback) {
+  let r = Math.trunc(Math.random() * 30 + 1)
+  if (callback) callback('d30', r)
+  return r
+}
+export function d66 (callback) {
+  let r = d6() * 10 + d6()
+  if (callback) callback('d66', r)
+  return r
+}
+export function d100 (callback) {
+  let r = Math.trunc(Math.random() * 100 + 1)
+  if (callback) callback('d100', r)
+  return r
+}
 
 /**
  * This method return one random item from the given array.
@@ -125,9 +169,10 @@ export function rollFromTable (table) {
  * @param {Number} faces The number of caes for the dices.
  * @param {Number} keep The number of highest result to keep.
  * @returns {Object} The total and the array of dices.
- */export function rollExplode (number = 2, faces = 6, keep = 1) {
+ */export function rollExplode (number = 2, faces = 6, keep = 1, callback) {
   let roll = rollCustom(`${number}d${faces}`).dices
   roll.sort((a, b) => { return b - a })
+  if (callback) callback('explode', roll, sum(roll.slice(0, keep)))
   return { total: sum(roll.slice(0, keep)), dices: roll }
 }
 
@@ -138,20 +183,22 @@ export function rollFromTable (table) {
  * @param {Number} keep The number of lowest result to keep.
  * @returns {Object} The total and the array of dices.
  */
-export function rollImplode (number = 2, faces = 6, keep = 1) {
+export function rollImplode (number = 2, faces = 6, keep = 1, callback) {
   let roll = rollCustom(`${number}d${faces}`).dices
   roll = roll.sort((a, b) => { return a - b })
+  if (callback) callback('explode', roll, sum(roll.slice(0, keep)))
   return { total: sum(roll.slice(0, keep)), dices: roll }
 }
 
 /*
 * By default roll() is for «2d6» dices.
 */
-export function roll ({ number = 2, faces = 6, modifier = 0 } = {}) {
+export function roll ({ number = 2, faces = 6, modifier = 0 } = {}, callback) {
   let result = 0
   for (let i = 0; i < number; i++) {
     result += Math.trunc(Math.random() * faces + 1)
   }
+  if (callback) callback(`${number}d${faces}` + (modifier === 0 ? '' : (modifier >= 0 ? '+' + modifier : modifier)), result + modifier)
   return result + modifier
 }
 

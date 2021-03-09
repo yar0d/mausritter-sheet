@@ -15,7 +15,7 @@
         <div class="inventory-cell">
           <draggable :list="items" group="items" item-key="id" class="h-max" @change="log" :move="move" @add="add">
             <template #item="{ element, index }">
-              <items v-if="index === items.length - 1" size="lg" can-delete readonly :item="element" @delete="deleteItem(items, element.id)" />
+              <items v-if="index === items.length - 1" size="lg" readonly :item="element" />
               <div v-else-if="index < 4" class="stack-slice" />
             </template>
           </draggable>
@@ -62,9 +62,12 @@
       </w-flex>
       {{ $t('Your mouse must pay a fee of 1% of the value when retrieving the stored pips or items.') }}
       <div v-if="items" class="mt2 h-max w-max bank-drawer-items">
-        <items v-for="(item, index) in items" :key="index" :item="item" can-delete show-price class="mx2 mb1" />
+        <items v-for="(item, index) in items" :key="index" :item="item" can-delete show-price class="mx2 mb1" @delete="retrieveItem(index, item)" />
       </div>
     </div>
+
+    <confirm-dialog ref="confirm-retrieval" />
+    <prompt-dialog ref="prompt-retrieval" />
   </w-drawer>
 </template>
 
@@ -72,10 +75,15 @@
 import draggable from "vuedraggable"
 import { TYPE_ITEM } from "@/services/items-conditions"
 import Items from "../Items.vue"
+import ConfirmDialog from '../ConfirmDialog.vue'
+import PromptDialog from '../PromptDialog.vue'
 
 export default {
   name: 'Grit',
-  components: { draggable, Items },
+  components: { draggable, Items, ConfirmDialog, PromptDialog },
+  props: {
+    inventory: { required: true }
+  },
   data () {
     return {
       TYPE_ITEM,
@@ -92,11 +100,22 @@ export default {
       if (element.type !== TYPE_ITEM) result = false // Condition is refused
       return result
     },
-    deleteItem(list, id) {
-      const i = this.getIndex(list, id)
-      if (i >= 0) {
-        list.splice(i, 1) // Remove item from list
+    retrieveItem(index, item) {
+      const fee = Math.max(Math.round((item.price || 0) / 100), 1)
+      if (this.pips < fee) {
+        this.$refs['prompt-retrieval'].open(this.$t('Bank'), this.$t('You do need to have {fee} pips to retrieve “{name}”!', { fee, name: this.$t(item.label) } ))
+        return
       }
+      this.$refs['confirm-retrieval'].open(this.$t('Bank'), this.$t('Retrieving “{name}” from your bank will cost you {fee} pips. Confirm?', { name: this.$t(item.label), fee } ))
+      .then(confirmed => {
+        if (confirmed) {
+          this.pips -= fee
+          if (index >= 0) {
+            this.inventory.putItem(item.id, '?', item) // Push item in inventory
+            this.items.splice(index, 1) // Remove item from bank
+          }
+        }
+      })
     },
     getIndex(list, id) {
       let i = 0

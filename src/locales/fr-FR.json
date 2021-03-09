@@ -1,7 +1,7 @@
 {
   "Languages": "Langues",
-  "en_US": "English US",
-  "fr_FR": "Français",
+  "en-US": "English US",
+  "fr-FR": "Français",
   "Items": "Objets",
   "Conditions": "Conditions",
   "Birthsign": "Signe de naissance",
@@ -90,5 +90,11 @@
   "You may then swap any two attributes.": "Vous pouvez intervertir deux des attributs.",
   "You may choose a weapon below:": "Choisissez une arme ci-dessous :",
   "You can take one item below:": "Vous pouvez prendre un des objet ci-dessous :",
-  "Item from inherited your background of “{background}”": "Objets hérités de votre passé de « {background} »"
+  "Item from inherited your background of “{background}”": "Objets hérités de votre passé de « {background} »",
+  "Your mouse must pay a fee of 1% of the value when retrieving the stored pips or items.": "À chaque retrait, ta souris doit payer des frais à hauteur de 1 % de la valeur des pépins ou objets retirés.",
+  "Retrieving “{name}” from your bank will cost you {fee} pips. Confirm?": "Retirer « {name} » de votre banque vous coutera {fee} pépins. Confirmez-vous votre retrait ?",
+  "You do need to have {fee} pips to retrieve “{name}”!": "Vous avez besoin de {fee} pépins pour retirer « {name} » !",
+  "One paw": "Une patte",
+  "Both paws": "Deux pattes",
+  "History": "Historique"
 }

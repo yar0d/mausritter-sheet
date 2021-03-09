@@ -1,5 +1,5 @@
 <template>
-  <div class="item item-background shadow draggable" :class="size ? `item-size-${size}` : `item-${currentItem.geometry}`">
+  <div v-if="currentItem && currentItem.id" class="item item-background shadow draggable" :class="size ? `item-size-${size}` : `item-${currentItem.geometry}`">
     <w-flex column align-start justify-start class="h-max" :class="className(currentItem.label)">
       <w-flex row class="h-max w-max">
         <w-flex column justify-end class="w-25 text-center">
@@ -28,8 +28,11 @@
               /{{ currentItem.use }}
             </span>
           </div>
-          <div row v-if="showDamage && currentItem.damage">
-            <span class="item-damage">{{ currentItem.damage }}</span>
+          <div row v-if="showDamage && currentItem.damage" justify-end>
+            <span v-if="readonly" class="item-damage">{{ currentItem.damage }}</span>
+            <template v-else>
+              <dice v-for="(faces, index) in damageDices" :key="index" :faces="faces" :caption="captionDices(index)" color="black" class="ml2 dice-huge" />
+            </template>
           </div>
           <div v-if="showDamage && currentItem.def">
             <span class="item-def">{{ $t('Def')}} {{ currentItem.def }}</span>
@@ -44,9 +47,11 @@
 </template>
 
 <script>
-  import { ITEM_FAMILY_CUSTOM, ITEM_FAMILY_SPELL } from '@/services/items-conditions'
+import { ITEM_FAMILY_CUSTOM, ITEM_FAMILY_SPELL } from '@/services/items-conditions'
+import Dice from './Dice.vue'
 
 export default {
+  components: { Dice },
   name: 'Items',
   props: {
     canDelete: { type: Boolean, default: false },
@@ -77,9 +82,19 @@ export default {
   computed: {
     canInputCustomLabel () {
       return !this.readonly
+    },
+    damageDices () {
+      let result = this.currentItem.damage.split(',')
+      result.forEach((dice, index) => {
+        result[index] = Number(dice.slice(1))
+      });
+      return result
     }
   },
   methods: {
+    captionDices (index) {
+      return this.damageDices.length > 1 ? (index === 0 ? this.$t('One paw') : this.$t('Both paws')) : ''
+    },
     className (label) {
       return 'item-' + label.replace(' ', '-').toLowerCase()
     },

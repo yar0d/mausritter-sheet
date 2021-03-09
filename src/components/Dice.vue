@@ -1,7 +1,17 @@
 <template>
-  <w-icon class="clickable" color="dice" :xs="size==='xs'" :sm="size==='sm'" :md="size==='md'" :lg="size==='lg'" :xl="size==='xl'" @click="roll">
-    {{ icon }}
-  </w-icon>
+  <w-tooltip transition="fade" bg-color="yellow-light2" color="black" top detach-to=".wrapper">
+    <template #activator="{ on }">
+      <w-icon v-on="on" v-bind="$attrs" :color="color" class="clickable" :xs="size==='xs'" :sm="size==='sm'" :md="size==='md'" :lg="size==='lg'" :xl="size==='xl'" @click="roll">
+        {{ icon }}
+      </w-icon>
+    </template>
+    <div>
+      {{ 'D' + faces }}
+      <div v-if="caption" class="caption">{{ caption }}</div>
+    </div>
+  </w-tooltip>
+
+
   <w-notification v-show="result && result.total" bg-color="yellow-light3" color="black" plain shadow transition="bounce" bottom left dismiss>
     <template #default>
       <div v-if="context" class="caption">{{ context }}</div>
@@ -23,6 +33,8 @@ export default {
   name: 'Dice',
   props: {
     advantage: { type: String, default: '' },
+    color: { type: String, default: 'dice' },
+    caption: { type: String, default: '' },
     context: { type: String, default: '' },
     number: { type: Number, default: 1 },
     faces: { type: Number, default: 6 },
@@ -45,6 +57,7 @@ export default {
       let number = this.advantage ? 2 : this.number
       let type = !this.advantage ? '' : (this.advantage === 'a' ? 'w' : 'b')
       this.result = rollCustom(`${type}${number}d${this.faces}`)
+      this.$store.commit('historyAdd', { type: `${type}${number}d${this.faces}`, message: this.result.total + ' ' + this.context})
       this.$emit('rolled', { roll: this.result, context: this.context, total: this.result.total })
     }
   }

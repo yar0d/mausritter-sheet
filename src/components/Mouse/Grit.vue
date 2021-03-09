@@ -13,7 +13,7 @@
         <div class="w-max pt2">
           <draggable :list="grits" group="items" item-key="id" class="h-max" @change="log" :move="move">
             <template #item="{ element }">
-              <conditions v-if="element.type === TYPE_CONDITION" size="md" :id="element.id" :clear="element.clear" :desc="element.desc" :label="element.label" can-delete @delete="deleteItem(grits, element.id)" class="inline-block mx2" />
+              <conditions v-if="element.type === TYPE_CONDITION" size="md" :condition="element" can-delete @delete="deleteItem(grits, element.id)" class="inline-block mx2" />
             </template>
             <template #footer><div class="px4 caption">{{ $t('Ignore a number of conditions equal to your Grit.') }}</div></template>
           </draggable>

@@ -6,21 +6,25 @@
         {{ $t('Items') }}
       </template>
       <template #item-content.1>
-        <draggable v-model="itemsList" :group="{ name: 'items', pull: 'clone', put: false }" :sort="false" item-key="id" @change="log" :move="move" :clone="clone">
-          <template #item="{ element }">
-            <items :item="element" size="sm" class="ma1 draggable drawer" readonly show-damage></items>
-          </template>
-        </draggable>
+        <div class="bank-drawer-items">
+          <draggable v-model="itemsList" :group="{ name: 'items', pull: 'clone', put: false }" :sort="false" item-key="id" @change="log" :move="move" :clone="clone">
+            <template #item="{ element }">
+              <items :item="element" size="sm" class="ma1 draggable drawer" readonly show-damage></items>
+            </template>
+          </draggable>
+        </div>
       </template>
       <template #item-title.2>
         {{ $t('Conditions') }}
       </template>
       <template #item-content.2>
-        <draggable v-model="conditionsList" :group="{ name: 'items', pull: 'clone', put: false }" :sort="false" item-key="id" @change="log" :move="move" :clone="clone">
-          <template #item="{ element }">
-            <conditions :id="element.id" :clear="element.clear" :desc="element.desc" :label="element.label" class="ma1 draggable drawer" size="lgkl" />
-          </template>
-        </draggable>
+        <div class="bank-drawer-items">
+          <draggable v-model="conditionsList" :group="{ name: 'items', pull: 'clone', put: false }" :sort="false" item-key="id" @change="log" :move="move" :clone="clone">
+            <template #item="{ element }">
+              <conditions :condition="element" class="ma1 draggable drawer" readonly size="lg" />
+            </template>
+          </draggable>
+        </div>
       </template>
     </w-tabs>
   </w-drawer>

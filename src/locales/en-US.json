@@ -1,7 +1,7 @@
 {
   "Languages": "Languages",
-  "en_US": "English US",
-  "fr_FR": "Français",
+  "en-US": "English US",
+  "fr-FR": "Français",
   "Items": "Items",
   "Conditions": "Conditions",
   "Birthsign": "Birthsign",
@@ -90,5 +90,11 @@
   "You may then swap any two attributes.": "You may then swap any two attributes.",
   "You may choose a weapon below:": "You may choose a weapon below:",
   "You can take one item below:": "You can take one item below:",
-  "Item from inherited your background of “{background}”": "Item from inherited your background of “{background}”"
+  "Item from inherited your background of “{background}”": "Item from inherited your background of “{background}”",
+  "Your mouse must pay a fee of 1% of the value when retrieving the stored pips or items.": "Your mouse must pay a fee of 1% of the value when retrieving the stored pips or items.",
+  "Retrieving “{name}” from your bank will cost you {fee} pips. Confirm?": "Retrieving “{name}” from your bank will cost you {fee} pips. Confirm?",
+  "You do need to have {fee} pips to retrieve “{name}”!": "You do need to have {fee} pips to retrieve “{name}”!",
+  "One paw": "One paw",
+  "Both paws": "Both paws",
+  "History": "History"
 }

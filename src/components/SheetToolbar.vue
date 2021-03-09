@@ -8,15 +8,17 @@
         </template>{{ $t('Items and conditions drawer.') }}
       </w-tooltip>
     </div>
+    <history v-model="showHistory" />
+    <div class="ml2">
+      <w-tooltip transition="fade" bg-color="yellow-light2" color="black" right>
+        <template #activator="{ on }">
+          <w-icon v-on="on" xl class="clickable" @click="showHistory = !showHistory" :bg-color="showHistory ? 'blue' : ''" :color="showHistory ? 'white' : 'blue'">mdi mdi-history</w-icon>
+        </template>{{ $t('History') }}
+      </w-tooltip>
+    </div>
     <w-divider vertical />
     <div v-for="dice in DICE_FACES" :key="dice">
-      <w-tooltip transition="fade" bg-color="yellow-light2" color="black" top>
-        <template #activator="{ on }">
-          <div v-on="on">
-            <dice :faces="dice" :advantage="diceAdvantage" size="xl" @rolled="rollDice" />
-          </div>
-        </template>{{ $t('Roll {dice}', { dice: 'D' + dice }) }}
-      </w-tooltip>
+      <dice :faces="dice" :advantage="diceAdvantage" size="xl" color="dice" @rolled="rollDice" />
     </div>
     <w-menu v-model="showMenu" top>
       <template #activator="{ on }">
@@ -43,12 +45,13 @@
 import Drawer from '@/components/Drawer.vue'
 import Dice from '@/components/Dice.vue'
 import About from './About.vue'
+import History from './History.vue'
 
 const DICE_FACES = [4, 6, 8, 10, 12, 20]
 
 export default {
   name: 'SheetToolbar',
-  components: { Drawer, Dice, About },
+  components: { Drawer, Dice, About, History },
   data () {
     return {
       DICE_FACES,
@@ -59,6 +62,7 @@ export default {
         { value: 'd', label: 'With disadvantage', icon: 'mdi mdi-thumb-down' }
       ],
       showDrawer: false,
+      showHistory: false,
       showMenu: false
     }
   },

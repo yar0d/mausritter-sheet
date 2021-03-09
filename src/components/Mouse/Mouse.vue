@@ -149,7 +149,7 @@
             </div>
             <div class="ml4">{{ $t('XP') }}</div>
             <div class="mx1 w-max text-right">
-              <w-input v-model.number="xp" />
+              <w-input v-model.number="xp" class="title2" />
             </div>
           </w-flex>
         </w-card>
@@ -177,70 +177,21 @@
 
       <w-flex row justify-center class="mx4 mt2">
         <grit ref="grit" :level="level" />
-        <bank ref="bank" />
+        <bank ref="bank" :inventory="inventoryComponent" />
       </w-flex>
     </w-flex>
 
     <confirm-dialog ref="confirm-dialog" />
 
-    <prompt-dialog ref="mouse-creation-dialog">
-      <template #content>
-        <div class="pa4 mouse-creation-dialog-background">
-          <div v-if="maxStr !== maxDex || maxStr !== maxWil">
-            <w-divider color="white" class="title3 w-max">
-              {{ $t('You may then swap any two attributes.') }}
-            </w-divider>
-            <div class="w-max text-center title1 my1">
-              {{ $t("STR") }} {{ maxStr }} | {{ $t("DEX") }} {{ maxDex }} | {{ $t("WIL") }} {{ maxWil }}
-            </div>
-            <w-radio v-model="swapAttributes" :return-value="SWAP_NONE" class="mr2">
-              {{ $t("No swap.") }}
-            </w-radio>
-            <w-radio v-model="swapAttributes" :return-value="SWAP_STR_DEX" class="mr2">
-              {{ $t("STR ⇄ DEX") }}
-            </w-radio>
-            <w-radio v-model="swapAttributes" :return-value="SWAP_STR_WIL" class="mr2">
-              {{ $t("STR ⇄ WIL") }}
-            </w-radio>
-            <w-radio v-model="swapAttributes" :return-value="SWAP_DEX_WIL">
-              {{ $t("DEX ⇄ WIL") }}
-            </w-radio>
-          </div>
-
-          <div v-if="backgroundItems" class="mt8 w-max">
-            <w-divider color="white" class="title3">
-              {{ $t('Item from inherited your background of “{background}”', { background }) }}
-            </w-divider>
-            <items v-for="(item, index) in backgroundItems" :key="index" :item="item" readonly class="mx4" size="md" />
-          </div>
-
-          <div v-if="weaponsItems" class="mt8 w-max">
-            <w-divider color="white" class="title3">{{ $t('You may choose a weapon below:') }}</w-divider>
-            <w-radios v-model="choosenWeapon" :items="weaponsItems" inline>
-              <template #item="{ item }">
-                <items :item="item.item" readonly class="mr4 mb4" size="sm" />
-              </template>
-            </w-radios>
-          </div>
-
-          <div v-if="chooseItems.length" class="mt8 w-max">
-            <w-divider color="white" class="title3">{{ $t('You can take one item below:') }}</w-divider>
-            <w-radios v-model="choosenItem" :items="chooseItems" inline>
-              <template #item="{ item }">
-                <items :item="item.item" readonly class="mr8" />
-              </template>
-            </w-radios>
-          </div>
-        </div>
-      </template>
-    </prompt-dialog>
+    <mouse-creation-dialog ref="mouse-creation-dialog" :background="background" :background-items="backgroundItems" :choose-items="chooseItems" :max-dex="maxDex" :max-str="maxStr" :max-wil="maxWil" />
   </w-card>
 </template>
 
 <script>
+import { SWAP_NONE, SWAP_STR_DEX, SWAP_STR_WIL, SWAP_DEX_WIL } from '@/services/mouse.js'
 import { d6, d66, rollFromTable, rollExplode } from '@/services/dice-roller'
 import { extract as getBackground } from '@/services/backgrounds'
-import { TYPE_ITEM, getItem, getItemsForFamilies, ITEM_FAMILY_WEAPONS } from '@/services/items-conditions'
+import { TYPE_ITEM, getItem } from '@/services/items-conditions'
 import Checker from '@/components/Checker.vue'
 import Birthsign from './Birthsign.vue'
 import CoatColor from './CoatColor.vue'
@@ -249,17 +200,11 @@ import Inventory from './Inventory.vue'
 import Look from './Look.vue'
 import Grit from './Grit.vue'
 import ConfirmDialog from '../ConfirmDialog.vue'
-import PromptDialog from '../PromptDialog.vue'
-import Items from '../Items.vue'
 import Bank from './Bank.vue'
-
-const SWAP_NONE = 0
-const SWAP_STR_DEX = 1
-const SWAP_STR_WIL = 2
-const SWAP_DEX_WIL = 3
+import MouseCreationDialog from './MouseCreationDialog.vue'
 
 export default {
-  components: { Birthsign, CoatColor, CoatPattern, Inventory, Checker, Look, Grit, ConfirmDialog, PromptDialog, Items, Bank },
+  components: { Birthsign, CoatColor, CoatPattern, Inventory, Checker, Look, Grit, ConfirmDialog, Bank, MouseCreationDialog },
   data() {
     return {
       SWAP_NONE,
@@ -279,6 +224,7 @@ export default {
       currentHP: 0,
       currentStr: 0,
       currentWil: 0,
+      inventoryComponent: null,
       isNew: true,
       level: 1,
       look: 0,
@@ -290,15 +236,6 @@ export default {
       pips: 0,
       swapAttributes: 0,
       xp: 0
-    }
-  },
-  computed: {
-    weaponsItems () {
-      const list = getItemsForFamilies(ITEM_FAMILY_WEAPONS)
-      for (let i = 0; i < list.length; i++) {
-        list[i] = { id: i, item: list[i] } // use un internal id for choice
-      }
-      return list
     }
   },
   methods: {
@@ -338,21 +275,21 @@ export default {
     },
     rollRandomMouse () {
       this.reset()
-      this.maxStr = rollExplode(3, 6, 2).total // Keep two highest D6 from the rollingof 3d6.
-      this.maxDex = rollExplode(3, 6, 2).total // Keep two highest D6 from the rollingof 3d6.
-      this.maxWil = rollExplode(3, 6, 2).total // Keep two highest D6 from the rollingof 3d6.
+      this.maxStr = rollExplode(3, 6, 2, (context, result, total) => this.$store.commit('historyAdd', { type: this.$t('STR') + '/' + context, message: result + ' -> ' + total} )).total // Keep two highest D6 from the rollingof 3d6.
+      this.maxDex = rollExplode(3, 6, 2, (context, result, total) => this.$store.commit('historyAdd', { type: this.$t('DEX') + '/' + context, message: result + ' -> ' + total} )).total // Keep two highest D6 from the rollingof 3d6.
+      this.maxWil = rollExplode(3, 6, 2, (context, result, total) => this.$store.commit('historyAdd', { type: this.$t('WIL') + '/' + context, message: result + ' -> ' + total} )).total // Keep two highest D6 from the rollingof 3d6.
       this.currentStr = this.maxStr
       this.currentDex = this.maxDex
       this.currentWil = this.maxWil
-      this.maxHP = d6()
-      this.pips = d6()
+      this.maxHP = d6((context, total) => this.$store.commit('historyAdd', { type: this.$t('HP') + '/' + context, message: total} ))
+      this.pips = d6((context, total) => this.$store.commit('historyAdd', { type: this.$t('Pips') + '/' + context, message: total} ))
       this.currentHP = this.maxHP
       this.name = rollFromTable(this.$store.getters.names) + ' ' + rollFromTable(this.$store.getters.matrinames)
 
-      this.$refs['birthsign'].setValue(d6())
-      this.$refs['coat-color'].setValue(d6())
-      this.$refs['coat-pattern'].setValue(d6())
-      this.$refs['look'].setValue(d66())
+      this.$refs['birthsign'].setValue(d6((context, total) => this.$store.commit('historyAdd', { type: this.$t('Birthsign') + '/' + context, message: total} )))
+      this.$refs['coat-color'].setValue(d6((context, total) => this.$store.commit('historyAdd', { type: this.$t('Coat') + '/' + context, message: total} )))
+      this.$refs['coat-pattern'].setValue(d6((context, total) => this.$store.commit('historyAdd', { type: this.$t('Coat') + '/' + context, message: total} )))
+      this.$refs['look'].setValue(d66((context, total) => this.$store.commit('historyAdd', { type: this.$t('Look') + '/' + context, message: total} )))
 
       const b = getBackground(this.maxHP, this.pips)
       this.background = this.$t(b.label)
@@ -387,7 +324,7 @@ export default {
             if (b1.items.length > 1) this.$refs['inventory'].putItem(b1.items[1].id, 'pack6', b1.items[1])
           }
         } else {
-          // Choose one
+          // Choose one from
           for (let i = 0; i < b1.items.length; i++) {
             this.chooseItems.push({ id: i, item: getItem(b1.items[i].id, { customLabel: this.$t(b1.items[i].customLabel || ''), desc: b1.items[i].desc }) })
           }
@@ -395,9 +332,10 @@ export default {
         }
       }
 
-      this.$refs['mouse-creation-dialog'].open(this.$t('“{name}” prepares for adventure...', { name: this.name }))
-        .then (() => {
-          switch (this.swapAttributes) {
+      this.$refs['mouse-creation-dialog'].open(this.name)
+        .then (options => {
+          console.log('## options:', options)
+          switch (options.swapAttributes) {
             case SWAP_STR_DEX:
               [this.maxStr, this.maxDex] = [this.maxDex, this.maxStr]
               break;
@@ -412,12 +350,12 @@ export default {
           this.currentDex = this.maxDex
           this.currentWil = this.maxWil
 
-          this.$refs['inventory'].putItem(this.weaponsItems[this.choosenWeapon].item.id, 'body1', this.weaponsItems[this.choosenWeapon].item)
+          if (options.choosenWeapon) this.$refs['inventory'].putItem(options.choosenWeapon.id, 'body1', options.choosenWeapon)
 
-          if (this.choosenItem >= 0) {
-            console.log('##[mouse] Add choosen item:', this.chooseItems[this.choosenItem].item)
-            let location = this.chooseItems[this.choosenItem].item.geometry === '1x2' ? 'mainPaw' : 'offPaw'
-            this.$refs['inventory'].putItem(this.chooseItems[this.choosenItem].item.id, location, this.chooseItems[this.choosenItem].item)
+          if (options.choosenItem) {
+            console.log('##[mouse] Add choosen item:', options.choosenItem)
+            let location = options.choosenItem.geometry === '1x2' ? 'mainPaw' : 'offPaw'
+            this.$refs['inventory'].putItem(options.choosenItem.id, location, options.choosenItem)
           }
         })
     },
@@ -433,6 +371,10 @@ export default {
     setLook (value) {
       this.look = value
     }
+  },
+  mounted () {
+    this.inventoryComponent = this.$refs['inventory']
+    this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausrittes Sheet!') })
   }
 }
 </script>

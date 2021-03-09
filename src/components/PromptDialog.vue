@@ -35,10 +35,10 @@ export default {
       this.show = false
     },
     open (title, message, options) {
-      this.show = true
       this.title = title || this.$t('Confirm')
       this.message = message
       this.options = Object.assign(this.options, options)
+      this.show = true
 
       return new Promise((resolve, reject) => {
         this.resolve = resolve

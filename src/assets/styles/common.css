@@ -11,6 +11,10 @@ body,
   border: 2px dashed red;
 }
 
+.scrollable {
+  overflow-y: auto;
+}
+
 .stack-slice {
   border-color: #000;
   border-style: solid;
@@ -114,12 +118,20 @@ body,
 }
 
 .input-value {
-  color: #2c85b4;
+  color: #2498d6;
+  /* color: #2c85b4; */
   font-weight: bold;
 }
 
-input, textarea {
-  color: #2c85b4 !important;
+input,
+textarea {
+  color: #2498d6 !important;
+  font-family: unset;
+}
+
+.condition input,
+.condition textarea {
+  color: #6ec2f0 !important;
   font-family: unset;
 }
 
@@ -192,6 +204,10 @@ input, textarea {
 
 .h-max {
   height: 100%;
+}
+
+.dice-huge {
+  font-size: 32px !important;
 }
 
 .condition,
@@ -342,8 +358,6 @@ input, textarea {
   border: 1px dashed #aaa;
   height: 148px;
   width: 132px;
-  /* height: 128px;
-  width: 128px; */
   display: inline-block;
   color: #888;
   text-align: center;
@@ -364,4 +378,13 @@ input, textarea {
 .bank-drawer-items {
   overflow-y: auto;
   height: 300px;
+}
+
+.history-line {
+  display: block !important;
+  border-bottom: 1px solid #aaa;
+}
+
+.no-flex aside.w-drawer {
+  display: block;
 }

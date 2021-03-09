@@ -2,6 +2,9 @@ import conditions from './conditions.json'
 import items from './items.json'
 
 export const TYPE_CONDITION = 'C'
+export const CONDITION_FAMILY_BASE = 'BA'
+export const CONDITION_FAMILY_CUSTOM = 'CU'
+
 export const TYPE_ITEM = 'I'
 export const ITEM_FAMILY_ARMOR_HEAVY = 'AH'
 export const ITEM_FAMILY_ARMOR_LIGHT = 'AL'
@@ -25,6 +28,7 @@ export const conditionsList = []
 for (let i = 0; i < conditions.length; i++) {
   conditions[i].id = TYPE_CONDITION + (i + 1)
   conditions[i].type = TYPE_CONDITION
+  conditions[i].family = conditions[i].family || CONDITION_FAMILY_BASE
   conditionsList.push(conditions[i])
 }
 

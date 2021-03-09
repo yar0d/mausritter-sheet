@@ -1,9 +1,30 @@
 import { get, set } from '@/services/storage'
 
-export const DEFAULT_LOCALE = 'en_US'
-export const LOCALES = ['en_US', 'fr_FR']
+export const DEFAULT_LOCALE = 'en-US'
+export const LOCALES = ['en-US', 'fr-FR']
 
 const KEY_LOCALE = 'locale'
+
+export const datetimeFormats = {
+  'en-US': {
+    short: {
+      year: 'numeric', month: 'short', day: 'numeric'
+    },
+    long: {
+      year: 'numeric', month: 'short', day: 'numeric',
+      weekday: 'short', hour: 'numeric', minute: 'numeric'
+    }
+  },
+  'fr-FR': {
+    short: {
+      year: 'numeric', month: 'short', day: 'numeric'
+    },
+    long: {
+      year: 'numeric', month: 'short', day: 'numeric',
+      weekday: 'short', hour: 'numeric', minute: 'numeric'
+    }
+  }
+}
 
 export function loadLocale () {
   const locale = get(KEY_LOCALE, DEFAULT_LOCALE)
@@ -18,6 +39,7 @@ export function saveLocale (locale) {
 export default {
   DEFAULT_LOCALE,
   LOCALES,
+  datetimeFormats,
   loadLocale,
   saveLocale
 }

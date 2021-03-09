@@ -14,11 +14,14 @@ This version is not yet suitable for playing, some rules are not yet implemented
 ## Features
 
 - Translations: English, Français,
-- Create a random mouse (not yet finished),
+- Create a random mouse (implement Mouse creation rules from Mausritter Rules book),
 - Roll dices with/without advantage or disadvantage,
 - Drag'n'drop items or conditions on inventory slots
+- Drag'n'drop in grit.
+- Drag'n'drop in bank, retrieving item from bank cost 1% of its price.
+- History of dices and other actions.
 
- See [TODO.md](./src/TODO.md) for incomming features :-)
+See [TODO.md](./src/TODO.md) for incomming features :-)
 
 ![Exemple Sheet 0.1.1](./public/img/live.gif)
 
