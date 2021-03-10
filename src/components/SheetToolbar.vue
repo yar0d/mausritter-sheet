@@ -16,14 +16,15 @@
         </template>{{ $t('History') }}
       </w-tooltip>
     </div>
+    <slot name="actions-prepend" />
     <w-divider vertical />
     <div v-for="dice in DICE_FACES" :key="dice">
       <dice :faces="dice" :advantage="diceAdvantage" size="xl" color="dice" @rolled="rollDice" />
     </div>
     <w-menu v-model="showMenu" top>
       <template #activator="{ on }">
-        <w-button v-on="on">
-          {{ $t('Roll:') }} {{ diceAdvantageLabel }}
+        <w-button xs round outline v-on="on">
+          {{ diceAdvantageLabel }}
         </w-button>
       </template>
       <w-list v-model="diceAdvantage" :items="diceAdvantages" @item-select="showMenu = false">
@@ -35,6 +36,7 @@
         </template>
       </w-list>
     </w-menu>
+    <w-divider vertical />
     <slot name="actions-append" />
     <img :src="require('@/assets/compatible-with-mausritter-88x32.png')" contain class="clickable" @click="$refs['about-dialog'].show()" />
   </w-flex>

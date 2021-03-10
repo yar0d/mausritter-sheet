@@ -11,13 +11,14 @@
       </w-flex>
       <w-flex row justify-center>
         <div class="w-max pt2">
-          <draggable :list="grits" group="items" item-key="id" class="h-max" @change="log" :move="move">
+          <draggable :list="items" group="items" item-key="id" class="h-max" @change="log" :move="move">
             <template #item="{ element }">
-              <conditions v-if="element.type === TYPE_CONDITION" size="md" :condition="element" can-delete @delete="deleteItem(grits, element.id)" class="inline-block mx2" />
+              <conditions v-if="element.type === TYPE_CONDITION" size="md" :condition="element" can-delete @delete="deleteItem(items, element.id)" class="inline-block mx2" />
             </template>
             <template #footer><div class="px4 caption">{{ $t('Ignore a number of conditions equal to your Grit.') }}</div></template>
           </draggable>
         </div>
+        {{ items }}
       </w-flex>
     </w-flex>
   </w-card>
@@ -37,7 +38,7 @@ export default {
   data () {
     return {
       TYPE_CONDITION,
-      grits: []
+      items: []
     }
   },
   computed: {
@@ -96,15 +97,30 @@ export default {
     move(e) {
       return this.canDrop(e.draggedContext.element, e.relatedContext.list)
     },
-    reset () {
-      this.grits = []
+    reset (data = {}) {
+      this.items = data.items || []
+    },
+    serialize () {
+      const tmp = []
+      for (let i = 0; i < this.items; i++) {
+        if (this.canDrop(this.items[i], tmp)) {
+          tmp.push({...this.items[i]})
+        }
+      }
+      this.items = tmp
+      return {
+        items: this.items
+      }
+    },
+    setData (data) {
+      this.reset(data)
     },
     log(e) {
       console.log('##[grit]', e)
     }
   },
   created () {
-    this.grits.canDrop = this.canDrop // Export drop testing method
+    this.items.canDrop = this.canDrop // Export drop testing method
   }
 }
 </script>

@@ -249,28 +249,28 @@ export default {
     onCheck (e) {
       console.log('##onCheck:', e)
     },
-    reset () {
-      this.name = ''
-      this.background = ''
-      this.bankedPips = 0
-      this.birthsign = 0
+    reset (data = {}) {
+      this.name = data.name || ''
+      this.background = data.background || ''
+      this.bankedPips = data.bankedPips || 0
+      this.birthsign = data.birthsign || 0
       this.chooseItems = []
       this.choosenItem = -1
       this.choosenWeapon = 0
-      this.coatColor = 0
-      this.coatPattern = 0
-      this.currentDex = 0
-      this.currentHP = 0
-      this.currentStr = 0
-      this.currentWil = 0
+      this.coatColor = data.coatColor || 0
+      this.coatPattern = data.coatPattern || 0
+      this.currentDex = data.currentDex || 0
+      this.currentHP = data.currentHP || 0
+      this.currentStr = data.currentStr || 0
+      this.currentWil = data.currentWil || 0
       this.isNew = true
-      this.level = 1
-      this.look = 0
-      this.maxDex = 0
-      this.maxHP = 0
-      this.maxStr = 0
-      this.maxWil = 0
-      this.pips = 0
+      this.level = data.level || 1
+      this.look = data.look || 0
+      this.maxDex = data.maxDex || 0
+      this.maxHP = data.maxHP || 0
+      this.maxStr = data.maxStr || 0
+      this.maxWil = data.maxWil || 0
+      this.pips = data.pips || 0
       this.swapAttributes = 0
     },
     rollRandomMouse () {
@@ -358,6 +358,39 @@ export default {
             this.$refs['inventory'].putItem(options.choosenItem.id, location, options.choosenItem)
           }
         })
+    },
+    serialize () {
+      return {
+        mouse: {
+          background: this.background,
+          birthsign: this.birthsign,
+          coatColor: this.coatColor,
+          coatPattern: this.coatPattern,
+          currentDex: this.currentDex,
+          currentHP: this.currentHP,
+          currentStr: this.currentStr,
+          currentWil: this.currentWil,
+          level: this.level,
+          look: this.look,
+          maxDex: this.maxDex,
+          maxHP: this.maxHP,
+          maxStr: this.maxStr,
+          maxWil: this.maxWil,
+          name: this.name,
+          pips: this.pips,
+          xp: this.xp
+        },
+        bank: this.$refs['bank'].serialize(),
+        grit: this.$refs['grit'].serialize(),
+        inventory: this.$refs['inventory'].serialize()
+      }
+    },
+    setData (data) {
+      this.reset(data.mouse)
+      this.$refs['bank'].setData(data.bank)
+      this.$refs['grit'].setData(data.grit)
+      this.$refs['inventory'].setData(data.inventory)
+      this.isNew = false
     },
     setBirthsign (value) {
       this.birthsign = value

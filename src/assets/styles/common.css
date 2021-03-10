@@ -55,6 +55,10 @@ body,
   color: #8499a4;
 }
 
+.text-tiny {
+  font-size: 70%;
+}
+
 .clickable {
   cursor: pointer;
 }

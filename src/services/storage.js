@@ -59,15 +59,52 @@ export function store (key, value) {
 
 export function loadJson (key) {
   const data = uuencode.decode(get(key, ''))
-  return JSON.parse(data)
+  try {
+    return JSON.parse(data)
+  } catch (error) {
+    console.error('[storage] loadJson error:', error)
+  }
 }
 
-export function saveJson (key, object) {
-  set(key, uuencode.encode(JSON.stringify(object)))
+export function saveJson (key, data) {
+  set(key, uuencode.encode(JSON.stringify(data)))
+}
+
+const SLOT_KEY_ID = 'mausritter_sheet_'
+const SLOT_KEY_DATA = 'mausritter_sheet_data_'
+const MAX_SLOTS = 10
+
+export function deleteSlot (slot) {
+  del(SLOT_KEY_ID + slot)
+  del(SLOT_KEY_DATA + slot)
+}
+
+export function listSlots () {
+  const result = []
+  for (let i = 0; i < MAX_SLOTS; i++) {
+    result.push(get(SLOT_KEY_ID + i, null))
+  }
+  return result
+}
+
+export function loadSlot (slot) {
+  return loadJson(SLOT_KEY_DATA + slot)
+}
+
+export function saveSlot (slot, data, context) {
+  saveJson(SLOT_KEY_DATA + slot, data)
+  set(SLOT_KEY_ID + slot, context)
 }
 
 export default {
   del,
   get,
+  set,
+  loadJson,
+  saveJson,
+  deleteSlot,
+  listSlots,
+  loadSlot,
+  saveSlot,
   store
 }

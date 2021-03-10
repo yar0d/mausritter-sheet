@@ -129,11 +129,15 @@ export default {
       pack3: [],
       pack4: [],
       pack5: [],
-      pack6: [],
+      pack6: []
     }
   },
   methods: {
     canDrop (element, list) {
+      if (list && list.canDrop) {
+        return list.canDrop(element, list)
+      }
+
       // Rules to disallow to drop from drawer:
       // - Forbiden to drop anything if a condition already exists in target
       // - Forbiden to drop a condition if target already contains one
@@ -142,9 +146,6 @@ export default {
       let i = 0
       let abort = false
       while (!abort && i < list.length) {
-        // if (list[i].type === element.type) console.log('##canDrop REFUSED (type already in target):', element)
-        // if (list[i].type === TYPE_CONDITION) console.log('##canDrop REFUSED (condition already in target):', element)
-        // if (list[i].type === element.type || list.type === TYPE_CONDITION) abort = true
         if (list[i].type === element.type) abort = true
         i++
       }
@@ -182,6 +183,8 @@ export default {
       return found
     },
     move(e) {
+      if (e.relatedContext.list && e.relatedContext.list.canDrop) this.canDrop(e.draggedContext.element, e.relatedContext.list)
+
       // Rules for internal moves:
       // Forbiden to drop anything if a condition already exists in target
       // Forbiden to drop a condition if target already contains one
@@ -194,24 +197,39 @@ export default {
       while (!abort && i < e.relatedContext.list.length) {
         if (e.relatedContext.list[i].type === e.draggedContext.element.type || e.relatedContext.list.type === TYPE_CONDITION) abort = true
         i++
-      }
-
-      return !abort
+      }  return !abort
     },
     log(e) {
       console.log('##[inventory]', e)
     },
-    reset () {
-      this.body1 = []
-      this.body2 = []
-      this.mainPaw = []
-      this.offPaw = []
-      this.pack1 = []
-      this.pack2 = []
-      this.pack3 = []
-      this.pack4 = []
-      this.pack5 = []
-      this.pack6 = []
+    reset (data = {}) {
+      this.body1 = data.body1 || []
+      this.body2 = data.body2 || []
+      this.mainPaw = data.mainPaw || []
+      this.offPaw = data.offPaw || []
+      this.pack1 = data.pack1 || []
+      this.pack2 = data.pack2 || []
+      this.pack3 = data.pack3 || []
+      this.pack4 = data.pack4 || []
+      this.pack5 = data.pack5 || []
+      this.pack6 = data.pack6 || []
+    },
+    serialize () {
+      return {
+        body1: this.body1,
+        body2: this.body2,
+        mainPaw: this.mainPaw,
+        offPaw: this.offPaw,
+        pack1: this.pack1,
+        pack2: this.pack2,
+        pack3: this.pack3,
+        pack4: this.pack4,
+        pack5: this.pack5,
+        pack6: this.pack6
+      }
+    },
+    setData (data) {
+      this.reset(data)
     },
     putItem (itemId, inventoryId, { customLabel, desc } = {}) {
       if (inventoryId === '?') {

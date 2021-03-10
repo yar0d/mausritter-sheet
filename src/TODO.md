@@ -1,6 +1,5 @@
 # TODO
 Must have before 1.0:
-- load/save whole sheet from local storage.
 - import/export whole sheet (as UU64 ?).
 - manage hirelings.
 - manage draggable from bank panel to inventory slots.

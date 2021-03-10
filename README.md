@@ -20,6 +20,7 @@ This version is not yet suitable for playing, some rules are not yet implemented
 - Drag'n'drop in grit.
 - Drag'n'drop in bank, retrieving item from bank cost 1% of its price.
 - History of dices and other actions.
+- Save and load whole sheet from local storage. 10 slots are available.
 
 See [TODO.md](./src/TODO.md) for incomming features :-)
 

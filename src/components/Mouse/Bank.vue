@@ -136,8 +136,17 @@ export default {
     move(e) {
       return this.canDrop(e.draggedContext.element, e.relatedContext.list)
     },
-    reset () {
-      this.items = []
+    reset (data = {}) {
+      this.items = data.items || []
+    },
+    serialize () {
+      return {
+        items: this.items,
+        pips: this.pips,
+      }
+    },
+    setData (data) {
+      this.reset(data)
     },
     log(e) {
       console.log('##[bank] log', e)

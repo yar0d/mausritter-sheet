@@ -15,21 +15,21 @@
     "@mdi/font": "^5.9.55",
     "core-js": "^3.9.1",
     "uuencode": "0.0.4",
-    "vue": "^3.0.6",
+    "vue": "^3.0.7",
     "vue-i18n": "^9.0.0",
     "vuedraggable": "^4.0.1",
     "vuex": "^4.0.0",
-    "wave-ui": "^2.13.0"
+    "wave-ui": "^2.14.0"
   },
   "devDependencies": {
-    "@intlify/vue-i18n-loader": "^2.0.2",
+    "@intlify/vue-i18n-loader": "^2.0.3",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.6",
+    "@vue/compiler-sfc": "^3.0.7",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0-0",
+    "eslint-plugin-vue": "^7.7.0",
     "standard-version": "^9.1.1",
     "vue-cli-plugin-i18n": "^2.0.0"
   },
