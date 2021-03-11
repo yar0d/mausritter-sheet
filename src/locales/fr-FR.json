@@ -103,5 +103,6 @@
   "Both paws": "Deux pattes",
   "History": "Historique",
   "Manage your characters.": "Gérer vos personnages.",
-  "The sheet of “{dest}” will be overwritten by “{name}”. Do you confirm?": "Confirmez-vous le remplacement de la fiche de « {dest} » par celle de « {name} » ?"
+  "The sheet of “{dest}” will be overwritten by “{name}”. Do you confirm?": "Confirmez-vous le remplacement de la fiche de « {dest} » par celle de « {name} » ?",
+  "The current sheet will be overwritten by “{name}”. Do you confirm?": "Confirmez-vous le remplacement de la fiche en cours par “{name}” ?"
 }

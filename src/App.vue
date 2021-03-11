@@ -29,7 +29,7 @@
                   <div v-if="!slot" class="caption">
                   {{ $t('Empty') }}
                   </div>
-                  <w-button v-else :text="index !== currentSlot" @click="loadSheet(index)">
+                  <w-button v-else :text="index !== currentSlot" :disabled="index === currentSlot" @click="loadSheet(index)">
                     {{ slotName(slot)[0] }}
                     <div class="text-small">
                       — {{ slotName(slot)[1] }}
@@ -97,7 +97,7 @@ export default {
           }
         })
     },
-    loadSheet (index) {
+    load (index) {
       const data = loadSlot(index)
       if (this.$refs['sheet']) this.$refs['sheet'].setData(data)
       this.currentSlot = index
@@ -105,6 +105,19 @@ export default {
         type: this.$t('Load'),
         message: this.slots[index]
       })
+    },
+    loadSheet (index) {
+      if (!this.currentSlot) {
+        this.load(index)
+        return
+      }
+
+      this.$refs['confirm-dialog'].open(this.$t('Load'), this.$t('The current sheet will be overwritten by “{name}”. Do you confirm?', { name: this.slots[index] } ))
+        .then(confirmed => {
+          if (confirmed) {
+            this.load(index)
+          }
+        })
     },
     slotName (context) {
       return context.split('/')
