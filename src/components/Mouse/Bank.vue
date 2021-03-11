@@ -32,9 +32,9 @@
     </w-flex>
   </w-card>
 
-  <w-drawer v-model="showBank" bottom no-overlay>
+  <w-drawer id="bank" v-model="showBank" bottom no-overlay>
     <div class="w-max pa4 bank-dialog-background">
-      <w-flex row justify-space-between>
+      <w-flex row align-center justify-space-between>
         <span class="title1">
           <w-badge v-model="items.length" class="mt1">
             {{ $t('Bank') }}
@@ -56,9 +56,7 @@
           </div>
         </div>
 
-        <w-button @click="showBank = false">
-          {{ $t('Close') }}
-        </w-button>
+        <w-button icon="mdi mdi-close" @click="showBank = false" />
       </w-flex>
       {{ $t('Your mouse must pay a fee of 1% of the value when retrieving the stored pips or items.') }}
       <div v-if="items" class="mt2 h-max w-max bank-drawer-items">

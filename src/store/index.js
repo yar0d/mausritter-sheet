@@ -16,8 +16,8 @@ export const store = createStore({
     names: state => { return state.names || [] }
   },
   mutations: {
-    historyAdd (state, { type, message }) {
-      state.history.unshift({ type, message, date: new Date() })
+    historyAdd (state, { type, message, color='black', secondary = '' }) {
+      state.history.unshift({ type, message, color, secondary, date: new Date() })
     },
     historyClear (state) {
       state.history = []

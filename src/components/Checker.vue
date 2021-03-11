@@ -70,6 +70,14 @@ export default {
       let type = !advantage ? '' : (advantage === 'a' ? 'w' : 'b')
       this.result = rollCustom(`${type}${number}d${this.faces}`)
       this.success = this.result.total <= this.score
+
+      this.$store.commit('historyAdd', {
+        type: `${type}${number}d${this.faces}`,
+        message: this.context + ' -> ' + (this.success ? this.$t('SUCCESS') : this.$t('FAILED')),
+        color: this.success ? 'success' : 'failed',
+        secondary: this.$t('Need {score} or lower, roll {roll}.', { score: this.score, roll: this.result.total }) +
+          (this.result.dices.length > 1 ? ' [' + this.result.dices.join(', ') + ']' : '') })
+
       this.$emit('rolled', { roll: this.result, context: this.context, total: this.result.total, success: this.success, score: this.score })
     }
   }
