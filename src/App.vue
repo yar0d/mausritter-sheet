@@ -16,6 +16,13 @@
               </w-tooltip>
             </template>
             <w-card content-class="px1">
+               <template #title>
+                <w-toolbar>
+                  <div class="title3">{{ $t('Manage your characters.') }}</div>
+                  <div class="spacer" />
+                  <w-button icon="mdi mdi-close" @click="showSlotMenu = false" />
+                </w-toolbar>
+              </template>
               <w-flex column v-for="(slot, index) in slots" :key="index" justify-center>
                 <w-flex row align-center justify-space-between class="py2">
                   {{ index + 1 }}
@@ -24,7 +31,7 @@
                   </div>
                   <w-button v-else :text="index !== currentSlot" @click="loadSheet(index)">
                     {{ slotName(slot)[0] }}
-                    <div class="text-tiny">
+                    <div class="text-small">
                       — {{ slotName(slot)[1] }}
                     </div>
                   </w-button>
@@ -94,6 +101,10 @@ export default {
       const data = loadSlot(index)
       if (this.$refs['sheet']) this.$refs['sheet'].setData(data)
       this.currentSlot = index
+      this.$store.commit('historyAdd', {
+        type: this.$t('Load'),
+        message: this.slots[index]
+      })
     },
     slotName (context) {
       return context.split('/')
@@ -102,6 +113,10 @@ export default {
       console.log('##[main] save slot', index, data.mouse.name + '/' + data.mouse.background, data)
       saveSlot(index, data, data.mouse.name + '/' + data.mouse.background)
       this.slots = listSlots() // Refresh slot list
+      this.$store.commit('historyAdd', {
+        type: this.$t('Save'),
+        message: this.slots[index]
+      })
     },
     saveSheet (index) {
       const data = this.serialize()

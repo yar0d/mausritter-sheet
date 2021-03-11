@@ -5,6 +5,11 @@ body,
   background-image: url('../img/mouse-hole.png');
   background-repeat: no-repeat;
   margin: 0;
+}
+
+#app,
+#drawer aside,
+#bank aside {
   max-width: 800px;
 }
 
@@ -56,8 +61,8 @@ body,
   color: #8499a4;
 }
 
-.text-tiny {
-  font-size: 70%;
+.text-small {
+  font-size: 75%;
 }
 
 .clickable {

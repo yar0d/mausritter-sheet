@@ -24,7 +24,7 @@ This version is not yet suitable for playing, some rules are not yet implemented
 
 See [TODO.md](./src/TODO.md) for incomming features :-)
 
-![Exemple Sheet 0.1.1](./public/img/live.gif)
+![Exemple Sheet 0.1.1](./live.gif)
 
 ## Installation
 
