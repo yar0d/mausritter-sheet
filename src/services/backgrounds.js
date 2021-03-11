@@ -54,7 +54,7 @@ export const backgrounds = [
       { id: 'I-item', customLabel: 'Pole, 6"' }
     ],
     hirelings: [
-      { id: 'H-', desc: 'Loyal beetle' }
+      { id: 'H-beetle', desc: 'Loyal beetle' }
     ]
   },
   {
@@ -63,7 +63,7 @@ export const backgrounds = [
       { id: 'I-item', customLabel: 'Small barrel of ale' }
     ],
     hirelings: [
-      { id: 'H-', desc: 'Drunken torchbearer' }
+      { id: 'H-torchbearer', desc: 'Drunken torchbearer' }
     ]
   },
   {
@@ -128,7 +128,7 @@ export const backgrounds = [
       { id: 'I-item', customLabel: '20p IOU from a noblemouse' }
     ],
     hirelings: [
-      { id: 'H-pack-rat', desc: 'Pack rat' }
+      { id: 'H-rat', desc: 'Pack rat' }
     ]
   },
   {

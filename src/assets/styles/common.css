@@ -13,6 +13,12 @@ body,
   max-width: 800px;
 }
 
+#history aside,
+#hirelings aside {
+  width: 440px;
+  max-width: 440px;
+}
+
 .debug-box {
   border: 2px dashed red;
 }
@@ -407,11 +413,6 @@ textarea {
 .bank-drawer-items {
   overflow-y: auto;
   height: 300px;
-}
-
-.history-line {
-  display: block !important;
-  border-bottom: 1px solid #aaa;
 }
 
 .no-flex aside.w-drawer {

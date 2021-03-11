@@ -1,5 +1,5 @@
 <template>
-  <w-drawer :value="value" right class="no-flex" no-overlay persistent>
+  <w-drawer id="history" :value="value" right class="no-flex" no-overlay persistent>
     <div class="scrollable h-max">
       <w-flex v-for="(h, index) in history" :key="index" class="w-max pa2" column justify-space-between>
         <w-divider class="text-small text-secondary">{{ h.date.toLocaleTimeString(locale) }}</w-divider>

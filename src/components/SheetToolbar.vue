@@ -16,6 +16,14 @@
         </template>{{ $t('History') }}
       </w-tooltip>
     </div>
+    <hirelings v-model="showHirelings" />
+    <div class="ml2">
+      <w-tooltip transition="fade" bg-color="yellow-light2" color="black" right>
+        <template #activator="{ on }">
+          <w-icon v-on="on" xl class="clickable" @click="showHirelings = !showHirelings" :bg-color="showHirelings ? 'blue' : ''" :color="showHirelings ? 'white' : 'blue'">mdi mdi-donkey</w-icon>
+        </template>{{ $t('Hirelings') }}
+      </w-tooltip>
+    </div>
     <slot name="actions-prepend" />
     <w-divider vertical />
     <div v-for="dice in DICE_FACES" :key="dice">
@@ -48,12 +56,13 @@ import Drawer from '@/components/Drawer.vue'
 import Dice from '@/components/Dice.vue'
 import About from './About.vue'
 import History from './History.vue'
+import Hirelings from './Hirelings.vue'
 
 const DICE_FACES = [4, 6, 8, 10, 12, 20]
 
 export default {
   name: 'SheetToolbar',
-  components: { Drawer, Dice, About, History },
+  components: { Drawer, Dice, About, History, Hirelings },
   data () {
     return {
       DICE_FACES,
@@ -64,6 +73,7 @@ export default {
         { value: 'd', label: 'With disadvantage', icon: 'mdi mdi-thumb-down' }
       ],
       showDrawer: false,
+      showHirelings: false,
       showHistory: false,
       showMenu: false
     }
