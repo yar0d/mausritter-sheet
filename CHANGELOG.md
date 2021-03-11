@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/yar0d/mausritter-sheet/compare/v0.1.3...v0.1.4) (2021-03-11)
+
+
+### Features
+
+* load/save from slots. ([909b7c8](https://github.com/yar0d/mausritter-sheet/commit/909b7c860b1d989687d468d365629992423ebced))
+
+
+### Bug Fixes
+
+* UX for managing slots ([c62c72e](https://github.com/yar0d/mausritter-sheet/commit/c62c72e5f243ad379f420d49a4096c8d97124d61))
+
 ### [0.1.3](https://github.com/yar0d/mausritter-sheet/compare/v0.1.2...v0.1.3) (2021-03-09)
 
 
