@@ -2,6 +2,7 @@
   "Languages": "Languages",
   "en-US": "English US",
   "fr-FR": "Français",
+  "Welcome to Mausrittes Sheet!": "Welcome to Mausrittes Sheet!",
   "Items": "Items",
   "Conditions": "Conditions",
   "Birthsign": "Birthsign",
@@ -45,7 +46,10 @@
   "With advantage": "With advantage",
   "With disadvantage": "With disadvantage",
   "Need {score} or lower, roll {roll}.": "Need {score} or lower, roll {roll}.",
-  "Create a new character": "Create a new character",
+  "Create a new character...": "Create a new character...",
+  "Save": "Save",
+  "Delete": "Delete",
+  "Empty": "Empty",
   "SUCCESS": "SUCCESS",
   "FAILED": "FAILED",
   "Clear:": "Clear:",
@@ -78,7 +82,7 @@
   "Spell": "Spell",
   "Item": "Item",
   "A custom item.": "A custom item.",
-  "The sheet will be erased. Do you confirm?": "The sheet of {name} will be erased. Do you confirm?",
+  "The sheet will be erased. Do you confirm?": "The sheet of “{name}” will be erased. Do you confirm?",
   "Confirm": "Confirm",
   "Yes": "Yes",
   "No": "No",
@@ -97,5 +101,6 @@
   "One paw": "One paw",
   "Both paws": "Both paws",
   "History": "History",
-  "Manage your characters.": "Manage your characters."
+  "Manage your characters.": "Manage your characters.",
+  "The sheet of “{dest}” will be overwritten by “{name}”. Do you confirm?": "The sheet of “{dest}” will be overwritten by “{name}”. Do you confirm?"
 }

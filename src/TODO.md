@@ -1,6 +1,8 @@
 # TODO
 Must have before 1.0:
 - import/export whole sheet (as UU64 ?).
+- autosave ? after each update; each N minutes ?
+- save history in slots too.
 - manage hirelings.
 - manage draggable from bank panel to inventory slots.
 - manage retrieving pips from bank (cost 1% price).

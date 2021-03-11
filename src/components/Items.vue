@@ -31,7 +31,7 @@
           <div row v-if="showDamage && currentItem.damage" justify-end>
             <span v-if="readonly" class="item-damage">{{ currentItem.damage }}</span>
             <template v-else>
-              <dice v-for="(faces, index) in damageDices" :key="index" :faces="faces" :caption="captionDices(index)" color="black" class="ml2 dice-huge" />
+              <dice v-for="(faces, index) in damageDices" :key="index" :faces="faces" :caption="captionDices(index)" color="black" class="mx0 dice-huge item-damage-dice" />
             </template>
           </div>
           <div v-if="showDamage && currentItem.def">

@@ -5,6 +5,7 @@ body,
   background-image: url('../img/mouse-hole.png');
   background-repeat: no-repeat;
   margin: 0;
+  max-width: 800px;
 }
 
 .debug-box {
@@ -149,6 +150,11 @@ textarea {
   max-width: 50px;
 }
 
+.w-75 {
+  width: 75px;
+  max-width: 75px;
+}
+
 .w-100 {
   width: 100px !important;
   max-width: 100px;
@@ -210,6 +216,14 @@ textarea {
   height: 100%;
 }
 
+.attribute-cell {
+  height: 28px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin: 0;
+  border: none;
+}
+
 .dice-huge {
   font-size: 32px !important;
 }
@@ -265,6 +279,12 @@ textarea {
 .item-use,
 .item-price {
   background-color: rgba(255, 255, 255, 0.5);
+}
+
+.item-damage-dice {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 0;
+  border: 0;
 }
 
 .item-input {

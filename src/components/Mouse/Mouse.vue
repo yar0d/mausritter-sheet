@@ -52,8 +52,11 @@
       <w-flex row justify-end>
         <w-card bg-color="white" class="xs3">
           <w-flex row align-center class="text-center">
-            <div class="w-max form-gray input-name title2">
+            <div class="w-max form-gray input-name title2 attribute-cell">
               {{ $t('STR') }}
+            </div>
+            <div class="w-50">
+              <checker :faces="20" :context="$t('STR save')" :score="currentStr" size="lg" @rolled="onCheck" />
             </div>
             <div class="w-150 ml2">
               <w-input v-model.number="maxStr" class="title1" color="minor" />
@@ -61,16 +64,18 @@
             <div class="w-150 divider-v">
               <w-input v-model.number="currentStr" class="title1 primary" />
             </div>
-            <div class="w-50">
-              <checker :faces="20" :context="$t('STR save')" :score="currentStr" size="lg" @rolled="onCheck" />
-            </div>
           </w-flex>
+
           <w-flex row>
             <div class="divider-h" />
           </w-flex>
+
           <w-flex row align-center class="text-center">
-            <div class="w-max form-gray input-name title2">
+            <div class="w-max form-gray input-name title2 attribute-cell">
               {{ $t('DEX') }}
+            </div>
+            <div class="w-50">
+              <checker :faces="20" :context="$t('DEX save')" :score="currentDex" size="lg" @rolled="onCheck" />
             </div>
             <div class="w-150 ml2">
               <w-input v-model.number="maxDex" class="title1" color="minor" />
@@ -78,25 +83,24 @@
             <div class="w-150 divider-v">
               <w-input v-model.number="currentDex" class="title1 primary" />
             </div>
-            <div class="w-50">
-              <checker :faces="20" :context="$t('DEX save')" :score="currentDex" size="lg" @rolled="onCheck" />
-            </div>
           </w-flex>
+
           <w-flex row>
             <div class="divider-h" />
           </w-flex>
+
           <w-flex row align-center class="text-center">
-            <div class="w-max form-gray input-name title2">
+            <div class="w-max form-gray input-name title2 attribute-cell">
               {{ $t('WIL') }}
+            </div>
+            <div class="w-50">
+              <checker :faces="20" :context="$t('WIL save')" :score="currentWil" size="lg" @rolled="onCheck" />
             </div>
             <div class="w-150 ml2">
               <w-input v-model.number="maxWil" class="title1" color="minor" />
             </div>
             <div class="w-150 divider-v">
               <w-input v-model.number="currentWil" class="title1 primary" />
-            </div>
-            <div class="w-50">
-              <checker :faces="20" :context="$t('WIL save')" :score="currentWil" size="lg" @rolled="onCheck" />
             </div>
           </w-flex>
         </w-card>
@@ -241,7 +245,7 @@ export default {
   methods: {
     createRandomSheet () {
       if (this.isNew) this.rollRandomMouse()
-      else this.$refs['confirm-dialog'].open(this.$t('Create a new character'), this.$t('The sheet of {name} will be erased. Do you confirm?', { name: this.name } ))
+      else this.$refs['confirm-dialog'].open(this.$t('Create a new character...'), this.$t('The sheet of “{name}” will be erased. Do you confirm?', { name: this.name } ))
         .then(confirmed => {
           if (confirmed) this.rollRandomMouse()
         })

@@ -1,7 +1,14 @@
 <template>
   <w-menu v-model="showMenu" left>
-    <template #activator="{ on }">
-      <w-icon v-on="on" class="clickable" :xs="size==='xs'" :sm="size==='sm'" :md="size==='md'" :lg="size==='lg'" :xl="size==='xl'">mdi mdi-dice-multiple</w-icon>
+    <template #activator="{ on: menuOn }">
+      <w-tooltip transition="fade" bg-color="yellow-light2" color="black" left>
+        <template #activator="{ on: tooltipOn }">
+          <w-icon v-on="{ ...menuOn, ...tooltipOn }" class="clickable dice" :xs="size==='xs'" :sm="size==='sm'" :md="size==='md'" :lg="size==='lg'" :xl="size==='xl'">
+            {{ DICES_FACES.includes(faces) ? 'mdi mdi-dice-d' + faces : 'mdi mdi-dice-multiple' }}
+          </w-icon>
+        </template>
+        {{ context }}
+      </w-tooltip>
     </template>
     <div class="text-center">
       <div v-if="context" class="py1">{{ context }}</div>
@@ -31,6 +38,8 @@
 <script>
 import { rollCustom } from '@/services/dice-roller'
 
+const DICES_FACES = [4, 6, 8, 10, 12, 20]
+
 export default {
   name: 'Checker',
   emits: [ 'rolled' ],
@@ -42,9 +51,10 @@ export default {
   },
   data () {
     return {
+      DICES_FACES,
       diceAdvantage: '',
       diceAdvantages: [
-        { value: '', label: 'Neutral', icon: 'mdi mdi-slash-forward' },
+        { value: '', label: 'Neutral', icon: 'mdi mdi-tilde' },
         { value: 'a', label: 'With advantage', icon: 'mdi mdi-thumb-up' },
         { value: 'd', label: 'With disadvantage', icon: 'mdi mdi-thumb-down' }
       ],

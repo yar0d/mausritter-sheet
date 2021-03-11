@@ -59,7 +59,7 @@ export default {
       DICE_FACES,
       diceAdvantage: '',
       diceAdvantages: [
-        { value: '', label: 'Neutral', icon: 'mdi mdi-slash-forward' },
+        { value: '', label: 'Neutral', icon: 'mdi mdi-tilde' },
         { value: 'a', label: 'With advantage', icon: 'mdi mdi-thumb-up' },
         { value: 'd', label: 'With disadvantage', icon: 'mdi mdi-thumb-down' }
       ],
