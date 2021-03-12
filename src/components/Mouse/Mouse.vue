@@ -1,8 +1,8 @@
 <template>
   <w-card class="mouse-sheet">
-    <w-flex column justify-start class="ma1">
+    <w-flex column justify-start class="mx1 my0">
       <w-flex row justify-space-between align-start>
-        <w-card bg-color="white">
+        <w-card bg-color="white" class="card-sheet">
           <w-flex row align-center>
             <div class="title1 form-gray input-name pt2">
               {{ $t('Name') }}
@@ -21,7 +21,7 @@
           </w-flex>
         </w-card>
 
-        <w-card bg-color="white" class="xs4">
+        <w-card bg-color="white" class="card-sheet xs4">
           <birthsign v-model="birthsign" ref="birthsign" @input="setBirthsign" class="pl1" />
           <w-flex row align-center justify-center class="wrapper4">
             <div class="body pr1 pl2">{{ $t('Coat') }}</div>
@@ -50,7 +50,7 @@
       </w-flex>
 
       <w-flex row justify-end>
-        <w-card bg-color="white" class="xs3">
+        <w-card bg-color="white" class="card-sheet xs3">
           <w-flex row align-center class="text-center">
             <div class="w-max form-gray input-name title2 attribute-cell">
               {{ $t('STR') }}
@@ -107,7 +107,7 @@
       </w-flex>
 
       <w-flex row justify-end class="mt4">
-        <w-card bg-color="white" class="xs3">
+        <w-card bg-color="white" class="card-sheet xs3">
           <w-flex row align-center class="text-center">
             <div class="w-max form-gray input-name title2">
               {{ $t('HP') }}
@@ -143,7 +143,7 @@
           {{ $t('Inventory') }}
         </div>
 
-        <w-card bg-color="white" class="xs4 opacity-75">
+        <w-card bg-color="white" class="card-sheet xs4 opacity-75">
           <w-flex row align-center>
             <div class="input-name">
               {{ $t('Level') }}
@@ -160,7 +160,7 @@
 
         <div class="w-250 pips-img">
           <div class="ml6 opacity-75">
-            <w-card bg-color="white" class="py0 pr2 pips opacity-100">
+            <w-card bg-color="white" class="card-sheet py0 pr2 pips opacity-100">
               <w-flex row justify-end align-center>
                 <div class="input-name">
                   {{ $t('Pips') }}
@@ -319,6 +319,13 @@ export default {
         }
       }
 
+      this.$store.commit('hirelingClear')
+      if (b.hirelings && b.hirelings.length > 0) {
+        b.hirelings.forEach(hireling => {
+          this.$store.commit('hirelingCreate', hireling)
+        })
+      }
+
       // Rule: If your mouse’s highest attribute is 9 or less, roll on the Background table again and take either Item A or B. If your highest is 7 or less, take both.
       if (this.maxStr <= 9 && this.maxDex <= 9 && this.currentWil <= 9) {
         const b1 = getBackground(d6(), d6())
@@ -365,7 +372,8 @@ export default {
     },
     serialize () {
       return {
-        mouse: {
+        type: 'mouse',
+        sheet: {
           background: this.background,
           birthsign: this.birthsign,
           coatColor: this.coatColor,
@@ -390,7 +398,7 @@ export default {
       }
     },
     setData (data) {
-      this.reset(data.mouse)
+      this.reset(data.sheet)
       this.$refs['bank'].setData(data.bank)
       this.$refs['grit'].setData(data.grit)
       this.$refs['inventory'].setData(data.inventory)

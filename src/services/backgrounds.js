@@ -16,7 +16,7 @@ export const backgrounds = [
   {
     hp: 1, pips: 3, label: 'Cage dweller',
     items: [
-      { id: 'I-spell', customLabel: 'Be understood' },
+      { id: 'I-spell', customLabel: 'Be Understood' },
       { id: 'I-item', customLabel: 'Bottle of milk' }
     ]
   },

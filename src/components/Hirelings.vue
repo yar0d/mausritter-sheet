@@ -1,11 +1,14 @@
 <template>
-  <w-drawer id="hirelings" :value="value" right class="no-flex" no-overlay persistent>
-    <div class="scrollable h-max">
-      <w-card v-for="(h, index) in hirelings" :key="index" class="w-max pa2 mb1" column justify-space-between>
-        <w-input v-model="h.name" :label="$t('Name')" class="mt4 title1 input-value" />
-        <div class="w-max">
-          <w-input v-model="h.look" :label="$t('Look')" />
+  <div class="scrollable h-max">
+    <w-card v-for="(h, index) in hirelings" :key="index" class="w-max pa2 mb1" column justify-space-between>
+      <w-flex row align-end class="mt1">
+        <div class="title3">{{ $t(h.desc) }}</div>
+        <w-input v-model="h.name" :label="$t('Name')" class="mx2 title3 input-value" />
+        <w-input v-model="h.look" :label="$t('Look')" />
+      </w-flex>
 
+      <w-flex row class="w-max mt1">
+        <div>
           <w-flex row justify-center class="text-center">
             <div class="xs10">
               <w-flex row>
@@ -22,7 +25,7 @@
           </w-flex>
 
           <w-flex row justify-center>
-            <w-card bg-color="white" class="xs10">
+            <w-card bg-color="white" class="xs10 card-sheet">
               <w-flex row align-center class="text-center">
                 <div class="w-max form-gray input-name title2 attribute-cell">
                   {{ $t('STR') }}
@@ -79,7 +82,7 @@
           </w-flex>
 
           <w-flex row justify-center class="mt4">
-            <w-card bg-color="white" class="xs10">
+            <w-card bg-color="white" class="xs10 card-sheet">
               <w-flex row align-center class="text-center">
                 <div class="w-max form-gray input-name title2">
                   {{ $t('HP') }}
@@ -109,12 +112,14 @@
               </w-flex>
             </div>
           </w-flex>
+        </div>
 
+        <div>
           <hirelings-inventory ref="hirelings-indentory" />
         </div>
-      </w-card>
-    </div>
-  </w-drawer>
+      </w-flex>
+    </w-card>
+  </div>
 </template>
 
 <script>
@@ -131,34 +136,9 @@ export default {
   props: {
     value: { type: Boolean, default: false }
   },
-  data () {
-    return {
-      hirelings: [{
-        currentDex: 0,
-        currentHP: 0,
-        currentStr: 0,
-        currentWil: 0,
-        disposition: '',
-        look: 'look-1',
-        maxDex: 0,
-        maxHP: 0,
-        maxStr: 0,
-        maxWil: 0,
-        name: 'Hirelings-1'
-      }, {
-        currentDex: 0,
-        currentHP: 0,
-        currentStr: 0,
-        currentWil: 0,
-        disposition: '',
-        look: 'look-1',
-        maxDex: 0,
-        maxHP: 0,
-        maxStr: 0,
-        maxWil: 0,
-        name: 'Hirelings-1'
-      }]
-    }
+  data () { return {} },
+  computed: {
+      hirelings () { return this.$store.getters['hirelings'] }
   },
   methods: {}
 }

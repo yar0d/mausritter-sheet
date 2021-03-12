@@ -7,7 +7,7 @@ body,
   margin: 0;
 }
 
-#app,
+#sheet,
 #drawer aside,
 #bank aside {
   max-width: 800px;
@@ -17,6 +17,12 @@ body,
 #hirelings aside {
   width: 440px;
   max-width: 440px;
+}
+
+blockquote {
+  border-left: 2px solid #ccc;
+  margin-left: 2px;
+  padding-left: 2px;
 }
 
 .debug-box {
@@ -108,13 +114,13 @@ body,
   box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.75);
 }
 
-.w-card {
+.card-sheet {
   border-radius: 5px;
   border-width: 2px;
   border-color: #000;
 }
 
-.w-card__content {
+.card-sheet .w-card__content {
   padding: 0
 }
 

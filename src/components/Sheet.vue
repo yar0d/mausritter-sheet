@@ -1,5 +1,5 @@
 <template>
-  <Mouse ref="sheet-mouse" />
+  <mouse ref="sheet-mouse" />
 </template>
 
 <script>
@@ -17,7 +17,7 @@ export default {
       if (this.$refs['sheet-mouse']) return this.$refs['sheet-mouse'].serialize()
     },
     setData (data) {
-      if (this.$refs['sheet-mouse']) return this.$refs['sheet-mouse'].setData(data)
+      if (data.type === 'mouse' && this.$refs['sheet-mouse']) return this.$refs['sheet-mouse'].setData(data)
     }
   }
 }

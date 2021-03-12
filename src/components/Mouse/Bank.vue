@@ -1,5 +1,5 @@
 <template>
-  <w-card bg-color="white" class="w-auto">
+  <w-card bg-color="white" class="card-sheet w-auto">
     <w-flex column justify-center>
       <w-flex row justify-space-between>
         <w-badge v-model="items.length" class="mt1">
@@ -43,7 +43,7 @@
 
         <div class="w-250 pips-img">
           <div class="ml6 opacity-75">
-            <w-card bg-color="white" class="py0 pr2 pips opacity-100">
+            <w-card bg-color="white" class="card-sheet py0 pr2 pips opacity-100">
               <w-flex row justify-end align-center>
                 <div class="input-name">
                   {{ $t('Pips') }}

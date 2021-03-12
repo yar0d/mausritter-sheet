@@ -1,5 +1,6 @@
 # TODO
 ## Must have for 1.0
+- DEBUG : condition over item in inventory slot.
 - manage hirelings.
 - translations.
 - remove all debug message (tagged with ##).
