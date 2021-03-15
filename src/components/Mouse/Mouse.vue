@@ -326,6 +326,7 @@ export default {
       if (b.hirelings && b.hirelings.length > 0) {
         b.hirelings.forEach(hireling => {
           this.$store.commit('hirelingCreate', hireling)
+
         })
       }
 

@@ -1,5 +1,6 @@
 <template>
   <div class="scrollable h-max">
+    store: {{ hirelings }}
     <w-toolbar></w-toolbar>
     <div v-for="(h, index) in hirelings" :key="index">
       <hireling :ref="'hireling-' + index" :hireling="h" />

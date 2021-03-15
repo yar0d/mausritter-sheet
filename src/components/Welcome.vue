@@ -34,7 +34,7 @@
           <w-divider />
         </w-flex>
 
-        <w-button text @click="createRandomSheet" class="w-max mt4">
+        <w-button xl @click="createRandomSheet" class="w-max mt4">
           <w-icon>mdi mdi-plus</w-icon>
           {{ $t('Create a new character...') }}
         </w-button>

@@ -1,5 +1,6 @@
 <template>
   <div class="scrollable h-max">
+    current: {{ current }}
     <w-card class="w-max pa2 mb1" column justify-space-between>
       <w-flex row align-end class="mt1">
         <div class="title3">{{ $t(current.desc) }}</div>
@@ -153,18 +154,19 @@ export default {
       current: { ...DEFAULT }
     }
   },
-  // watch: {
-  //   hireling: {
-  //     immediate: true,
-  //     deep: true,
-  //     handler (newVal, oldVal) {
-  //       if (newVal && !oldVal && newVal !== oldVal) {
-  //         this.current = { ...this.hireling.sheet }
-  //         this.setData(this.hireling)
-  //       }
-  //     }
-  //   }
-  // },
+  watch: {
+    hireling: {
+      immediate: true,
+      deep: true,
+      handler (newVal, oldVal) {
+        console.log('##[watch] hireling', newVal, oldVal)
+        if (newVal) {
+          console.log('##[watch] hireling -> setData', newVal)
+          this.setData(newVal)
+        }
+      }
+    }
+  },
   methods: {
     reset (data = {}) {
       this.current = { ...DEFAULT, ...data }

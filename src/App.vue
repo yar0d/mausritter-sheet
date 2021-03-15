@@ -15,7 +15,7 @@
               <div class="spacer"></div>
               <w-button lg class="px8" :text="!showWelcome" @click="showPanel({ home: true, history: false, hirelings: false })">
                 <w-icon class="mr1" xl>
-                  mdi mdi-home
+                  mdi mdi-rodent
                 </w-icon>
                 {{ $t('Welcome') }}
               </w-button>
