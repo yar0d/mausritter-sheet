@@ -111,6 +111,13 @@ blockquote {
   background-position: left;
 }
 
+.welcome-background {
+  background-image: url('../img/welcome.jpg');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
+}
+
 .mouse-creation-dialog-background {
   background-image: url('../img/mouse-creation.jpg');
 }
@@ -164,6 +171,10 @@ textarea {
 .condition textarea {
   color: #6ec2f0 !important;
   font-family: unset;
+}
+
+.toolbar-pager {
+  max-height: 32px;
 }
 
 .w-25 {
@@ -313,7 +324,11 @@ textarea {
   border: 0;
 }
 
-.item-input {
+.background-white-50 {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.background-white-75 {
   background-color: rgba(255, 255, 255, 0.75);
 }
 

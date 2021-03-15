@@ -15,6 +15,7 @@ This version is not yet suitable for playing, some rules are not yet implemented
 
 - Translations: English, Français,
 - Create a random mouse (implement Mouse creation rules from Mausritter Rules book),
+- Manage hirelings,
 - Roll dices with/without advantage or disadvantage,
 - Drag'n'drop items or conditions on inventory slots
 - Drag'n'drop in grit.

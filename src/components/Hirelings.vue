@@ -1,9 +1,7 @@
 <template>
   <div class="scrollable h-max">
-    (!) Bouton pour créer effacer un employé<br/>
-    STORE[hirelings]: {{ hirelings }}
+    <w-toolbar></w-toolbar>
     <div v-for="(h, index) in hirelings" :key="index">
-      <div class="red">hireling-{{ index }}</div>
       <hireling :ref="'hireling-' + index" :hireling="h" />
     </div>
   </div>
