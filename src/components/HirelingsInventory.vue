@@ -176,6 +176,7 @@ export default {
       }
     },
     setData (data) {
+      console.log('##[hireling-inventory] setData', data)
       this.reset(data)
     },
     putItem (itemId, inventoryId, { customLabel, desc } = {}) {

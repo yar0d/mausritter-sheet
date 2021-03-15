@@ -1,7 +1,7 @@
 <template>
   <w-tooltip transition="fade" bg-color="yellow-light2" color="black" top detach-to=".wrapper">
     <template #activator="{ on }">
-      <w-icon v-on="on" v-bind="$attrs" :color="color" class="clickable" :xs="size==='xs'" :sm="size==='sm'" :md="size==='md'" :lg="size==='lg'" :xl="size==='xl'" @click="roll">
+      <w-icon v-on="on" v-bind="$attrs" :color="color" class="clickable" :class="cls" :xs="size==='xs'" :sm="size==='sm'" :md="size==='md'" :lg="size==='lg'" :xl="size==='xl'" @click="roll">
         {{ icon }}
       </w-icon>
     </template>
@@ -33,8 +33,9 @@ export default {
   name: 'Dice',
   props: {
     advantage: { type: String, default: '' },
-    color: { type: String, default: 'dice' },
     caption: { type: String, default: '' },
+    cls: { type: String, default: '' },
+    color: { type: String, default: 'dice' },
     context: { type: String, default: '' },
     number: { type: Number, default: 1 },
     faces: { type: Number, default: 6 },

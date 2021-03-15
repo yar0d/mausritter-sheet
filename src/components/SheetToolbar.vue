@@ -74,7 +74,6 @@ export default {
       ],
       showDrawer: false,
       showHirelings: false,
-      showHistory: false,
       showMenu: false
     }
   },

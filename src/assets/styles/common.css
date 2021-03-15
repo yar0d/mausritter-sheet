@@ -46,6 +46,15 @@ blockquote {
   box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
+.chip {
+  border-radius: 7px;
+  background-color: #2498d6;
+  color: #fff;
+  padding: 0 4px;
+  margin: 0 4px;
+  font-size: 80%;
+}
+
 .mouse-sheet {
   width: 800px !important;
   max-width: 800px !important;

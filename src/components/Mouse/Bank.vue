@@ -136,6 +136,7 @@ export default {
     },
     reset (data = {}) {
       this.items = data.items || []
+      this.pips = data.pips || []
     },
     serialize () {
       return {

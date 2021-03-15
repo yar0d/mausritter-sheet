@@ -32,15 +32,12 @@
                         {{ $t('Empty') }}
                         </div>
                         <w-button v-else :text="index !== currentSlot" :disabled="index === currentSlot" @click="loadSheet(index)">
-                          {{ slotName(slot)[0] }}
-                          <div class="text-small">
-                            — {{ slotName(slot)[1] }} — {{ $t('Level') }} {{ slotName(slot)[2] }}
-                          </div>
+                          {{ slotName(index) }}
                         </w-button>
                         <div>
                           <w-tooltip v-if="slot" transition="fade" bg-color="yellow-light2" color="black" left>
                             <template #activator="{ on }">
-                              <w-button v-on="on" @click="deleteSheet(index, slot)" color="red" class="ml2" icon="mdi mdi-delete" />
+                              <w-button v-on="on" @click="deleteSheet(index)" color="red" class="ml2" icon="mdi mdi-delete" />
                             </template>
                             {{ $t('Delete') }}
                           </w-tooltip>
@@ -64,42 +61,44 @@
             </sheet-toolbar>
           </w-flex>
 
+
           <w-flex column justify-space-between class="w-max">
-            <!-- eslint-disable vue/valid-v-slot -->
-            <w-tabs :items="3" fill-bar bg-color="grey-light5">
-              <template #item-title.1> <!-- HISTORY -->
+            <w-flex row>
+              <w-button lg class="px8" :text="!showHome" @click="showPanel({ home: true, history: false, hirelings: false })">
+                <w-icon class="mr1" xl>
+                  mdi mdi-home
+                </w-icon>
+                {{ $t('Welcome') }}
+              </w-button>
+
+              <w-button lg class="px8" :text="!showHistory" @click="showPanel({ home: false, history: true, hirelings: false })">
                 <w-icon class="mr1" xl>
                   mdi mdi-history
                 </w-icon>
                 {{ $t('History') }}
-              </template>
+              </w-button>
 
-              <template #item-content.1>
-                <history v-model="showHistory" />
-              </template>
-
-              <template #item-title.2> <!-- HIRELINGS -->
+              <w-button lg class="px8" :text="!showHirelings" @click="showPanel({ home: false, history: false, hirelings: true })">
                 <w-icon class="mr1" xl>
                   mdi mdi-donkey
                 </w-icon>
                 {{ $t('Hirelings') }}
-              </template>
+                <chips :value="hirelingsCount" />
+              </w-button>
+            </w-flex>
 
-              <template #item-content.2>
-                <hirelings />
-              </template>
+            <!-- eslint-disable vue/valid-v-slot -->
+            <div v-show="showHistory">
+              <history />
+            </div>
 
-              <template #item-title.3> <!-- RULES -->
-                <w-icon class="mr1">
-                  mdi mdi-book-open-page-variant
-                </w-icon>
-                {{ $t('Summary of rules') }}
-              </template>
+            <div v-show="showHirelings">
+              <hirelings ref="hirelings-list"/>
+            </div>
 
-              <template #item-content.3>
-                <rules />
-              </template>
-            </w-tabs>
+            <div v-show="showHome">
+              <rules />
+            </div>
           </w-flex>
         </w-flex>
       </w-flex>
@@ -116,25 +115,37 @@ import History from '@/components/History.vue'
 import Hirelings from '@/components/Hirelings.vue'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import Rules from './components/Rules.vue'
+import Chips from './components/Chips.vue'
 
 export default {
   name: 'App',
-  components: { Sheet, SheetToolbar, ConfirmDialog, History, Hirelings, Rules },
+  components: { Sheet, SheetToolbar, ConfirmDialog, History, Hirelings, Rules, Chips },
   data () {
     return {
       currentSlot: null,
       showSlotMenu: false,
       slots: [],
-      tab: 1
+      tabs: [],
+      showHome: true,
+      showHistory: false,
+      showHirelings: false,
     }
   },
+  computed: {
+    hirelingsCount () { return this.$store.getters['hirelings'].length }
+  },
   methods: {
+    showPanel ({ home, history, hirelings }) {
+      this.showHome = home
+      this.showHistory = history
+      this.showHirelings = hirelings
+    },
     createRandomSheet () {
       if (this.$refs['sheet-toolbar']) this.$refs['sheet-toolbar'].displayDrawer(false)
       if (this.$refs['sheet']) this.$refs['sheet'].createRandomSheet()
     },
-    deleteSheet (index, slotName) {
-      this.$refs['confirm-dialog'].open(this.$t('Delete'), this.$t('The sheet of “{name}” will be erased. Do you confirm?', { name: slotName } ))
+    deleteSheet (index) {
+      this.$refs['confirm-dialog'].open(this.$t('Delete'), this.$t('The sheet of “{name}” will be erased. Do you confirm?', { name: this.slotName(index) } ))
         .then(confirmed => {
           if (confirmed) {
             deleteSlot(index)
@@ -146,9 +157,17 @@ export default {
     dataSignature (data) {
       return data.sheet.name + '/' + data.sheet.background + '/' + data.sheet.level
     },
-    load (index) {
+    async load (index) {
       const data = loadSlot(index)
+      console.log('## load:', data)
       if (this.$refs['sheet']) this.$refs['sheet'].setData(data)
+      if (data.hirelings && this.$refs['hirelings-list']) {
+        console.log('##[app] load/hirelings', data.hirelings)
+        this.$store.dispatch('hirelingsSet', data.hirelings)
+        .then(() => {
+          this.$refs['hirelings-list'].refresh(data.hirelings)
+        })
+      }
       this.currentSlot = index
       this.$store.commit('historyAdd', {
         type: this.$t('Load'),
@@ -168,13 +187,18 @@ export default {
           }
         })
     },
-    slotName (context) {
-      return context.split('/')
+    slotName (index) {
+      const parts = this.slots[index].split('/')
+      let result = parts[0]
+      if (parts.length > 1) result += ' — ' + parts[1]
+      if (parts.length > 2) result += ' — ' + this.$t('Level') + ' ' + parts[2]
+      return result
     },
     save (index, data) {
       console.log('##[main] save slot', index, this.dataSignature(data), data)
       saveSlot(index, data, this.dataSignature(data))
       this.slots = listSlots() // Refresh slot list
+      this.currentSlot = index
       this.$store.commit('historyAdd', {
         type: this.$t('Save'),
         message: this.slots[index]
@@ -197,6 +221,7 @@ export default {
     serialize () {
       let data
       if (this.$refs['sheet']) data = this.$refs['sheet'].serialize()
+      if (this.$refs['hirelings-list']) data.hirelings = this.$refs['hirelings-list'].serialize()
       data.version = 1
       return data
     }

@@ -13,6 +13,10 @@ export const store = createStore({
   },
   getters: {
     hirelings: state => { return state.hirelings || [] },
+    hirelingByIndex: state => index => {
+      console.log('##hirelingByIndex', index, state.hirelings[index])
+      return state.hirelings[index] || {}
+    },
     history: state => { return state.history || [] },
     locale: state => { return state.locale },
     matrinames: state => { return state.matrinames || [] },
@@ -24,18 +28,26 @@ export const store = createStore({
     },
     hirelingCreate (state, hireling) {
       let result = {
+        inventory: []
+      }
+      result.sheet = { ...{
         maxDex: d6() + d6(),
         maxHP: d6(),
         maxStr: d6() + d6(),
         maxWil: d6() + d6(),
-        disposition: ''
-      }
-      result.currentDex = result.maxDex
-      result.currentHP = result.maxHP
-      result.currentStr = result.maxStr
-      result.currentWil = result.maxWil
-
+        desc: '',
+        name: '',
+        look: '',
+        xp: 0
+      }, ...hireling }
+      result.sheet.currentDex = result.sheet.maxDex
+      result.sheet.currentHP = result.sheet.maxHP
+      result.sheet.currentStr = result.sheet.maxStr
+      result.sheet.currentWil = result.sheet.maxWil
       state.hirelings.push({ ...result, ...hireling })
+    },
+    hirelingsSet (state, hirelings = []) {
+      state.hirelings = hirelings
     },
     historyAdd (state, { type, message, color='black', secondary = '' }) {
       state.history.unshift({ type, message, color, secondary, date: new Date() })
@@ -62,6 +74,9 @@ export const store = createStore({
     },
     historyClear (context) {
       context.commit('historyClear')
+    },
+    hirelingsSet (context, hirelings) {
+      context.commit('hirelingsSet', hirelings)
     }
   }
 })

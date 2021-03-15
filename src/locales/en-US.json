@@ -106,6 +106,6 @@
   "Manage your characters.": "Manage your characters.",
   "The sheet of “{dest}” will be overwritten by “{name}”. Do you confirm?": "The sheet of “{dest}” will be overwritten by “{name}”. Do you confirm?",
   "The current sheet will be overwritten by “{name}”. Do you confirm?": "The current sheet will be overwritten by “{name}”. Do you confirm?",
-  "Hirelings": "Hirelings",
-  "Summary of rules": "Summary of rules"
+  "Welcome": "Welcome",
+  "Hirelings": "Hirelings"
 }

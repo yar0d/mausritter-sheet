@@ -276,6 +276,7 @@ export default {
       this.maxWil = data.maxWil || 0
       this.pips = data.pips || 0
       this.swapAttributes = 0
+      this.xp = data.xp || 0
     },
     rollRandomMouse () {
       this.reset()
@@ -295,7 +296,9 @@ export default {
       this.$refs['coat-pattern'].setValue(d6((context, total) => this.$store.commit('historyAdd', { type: this.$t('Coat') + '/' + context, message: total} )))
       this.$refs['look'].setValue(d66((context, total) => this.$store.commit('historyAdd', { type: this.$t('Look') + '/' + context, message: total} )))
 
-      const b = getBackground(this.maxHP, this.pips)
+      console.log('## DEBUG!')
+      const b = getBackground(2, 3)
+      // const b = getBackground(this.maxHP, this.pips)
       this.background = this.$t(b.label)
       this.backgroundItems = []
 
