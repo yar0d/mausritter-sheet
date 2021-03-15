@@ -170,8 +170,8 @@ export default {
       this.current = { ...DEFAULT, ...data }
     },
     setData (data) {
+      this.reset(data.sheet)
       console.log('##[hireling] setData inventory:', data.inventory)
-      // this.reset(data.sheet)
       if (this.$refs['hireling-inventory']) this.$refs['hireling-inventory'].setData(data.inventory)
     },
     serialize () {
