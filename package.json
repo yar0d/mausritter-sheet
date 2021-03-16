@@ -1,6 +1,6 @@
 {
   "name": "mausritter",
-  "version": "0.1.4",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --port 8801",
@@ -19,7 +19,7 @@
     "vue-i18n": "^9.0.0",
     "vuedraggable": "^4.0.1",
     "vuex": "^4.0.0",
-    "wave-ui": "^2.14.0"
+    "wave-ui": "^2.14.1"
   },
   "devDependencies": {
     "@intlify/vue-i18n-loader": "^2.0.3",

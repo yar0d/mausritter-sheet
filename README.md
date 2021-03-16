@@ -3,7 +3,7 @@
 
 > Mausritter is about small-scale adventurers in a huge world. Mouse adventurers who take on big challanges and face down grave danger.
 
-Have a look at [Mausritter website](https://mausritter.com/).
+Have a look at [Mausritter website](https://mausritter.com/) and [Licence](./LICENSE.md).
 
 ## Features
 - Play your mouse
