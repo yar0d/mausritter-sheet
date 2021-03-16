@@ -1,6 +1,4 @@
 # TODO
-## Must have for 1.0
-- remove all debug message (tagged with ##).
 
 ## Others
 - import/export whole sheet (as UU64 ?).
