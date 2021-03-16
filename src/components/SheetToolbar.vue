@@ -27,7 +27,7 @@
     <slot name="actions-prepend" />
     <w-divider vertical />
     <div v-for="dice in DICE_FACES" :key="dice">
-      <dice :faces="dice" :advantage="diceAdvantage" size="xl" color="dice" @rolled="rollDice" />
+      <dice :faces="dice" :advantage="diceAdvantage" size="xl" color="dice" />
     </div>
     <w-menu v-model="showMenu" top>
       <template #activator="{ on }">
@@ -87,9 +87,6 @@ export default {
     }
   },
   methods: {
-    rollDice (args) {
-      console.log('##rollDice', args)
-    },
     displayDrawer (show = false) {
       this.showDrawer = show
     }

@@ -13,7 +13,7 @@
       </w-flex>
       <w-flex row justify-center>
         <div class="inventory-cell">
-          <draggable :list="items" group="items" item-key="id" class="h-max" @change="log" :move="move" @add="add">
+          <draggable :list="items" group="items" item-key="id" class="h-max" :move="move" @add="add">
             <template #item="{ element, index }">
               <items v-if="index === items.length - 1" size="lg" readonly :item="element" />
               <div v-else-if="index < 4" class="stack-slice" />
@@ -125,8 +125,6 @@ export default {
       return found
     },
     add (e) {
-      console.log('##[bank] add', e.item)
-      console.log('##[bank] add', e.newIndex)
       if (this.items.length > 0) {
         e.newIndex = 0 // Force top of stack
       }
@@ -146,10 +144,6 @@ export default {
     },
     setData (data) {
       this.reset(data)
-    },
-    log(e) {
-      console.log('##[bank] log', e)
-      return false
     }
   },
   created () {

@@ -195,10 +195,8 @@ export default {
     hireling: {
       immediate: true,
       deep: true,
-      handler (newVal, oldVal) {
-        console.log('##[watch] hireling', newVal, oldVal)
+      handler (newVal) {
         if (newVal) {
-          console.log('##[watch] hireling -> setData', newVal)
           this.setData(newVal)
         }
       }
@@ -213,7 +211,6 @@ export default {
     },
     setData (data) {
       this.reset(data.sheet)
-      console.log('##[hireling] setData inventory:', data.inventory)
       if (this.$refs['hireling-inventory']) this.$refs['hireling-inventory'].setData(data.inventory)
     },
     serialize () {

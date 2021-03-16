@@ -107,7 +107,6 @@ export default {
   },
   methods: {
     agree () {
-      console.log('##agree', this.choosenItem)
       this.resolve({
         swapAttributes: this.swapAttributes,
         choosenItem: this.chooseItems.length > 0 ? this.chooseItems[this.choosenItem].item : null,

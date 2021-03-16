@@ -14,7 +14,6 @@ export const store = createStore({
   getters: {
     hirelings: state => { return state.hirelings || [] },
     hirelingByIndex: state => index => {
-      console.log('##hirelingByIndex', index, state.hirelings[index])
       return state.hirelings[index] || {}
     },
     history: state => { return state.history || [] },

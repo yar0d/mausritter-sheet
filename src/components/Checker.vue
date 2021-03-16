@@ -65,7 +65,6 @@ export default {
   methods: {
     roll (advantage) {
       this.result = null
-      console.log('##[checker] roll', advantage, this.$props)
       let number = advantage ? 2 : 1
       let type = !advantage ? '' : (advantage === 'a' ? 'w' : 'b')
       this.result = rollCustom(`${type}${number}d${this.faces}`)

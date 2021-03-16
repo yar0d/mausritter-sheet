@@ -1,7 +1,7 @@
 <template>
   <w-flex row justify-center class="mx4 mt2">
     <div class="inventory-cell">
-      <draggable :list="mainPaw" group="items" item-key="id" class="h-max" @change="log" :move="move">
+      <draggable :list="mainPaw" group="items" item-key="id" class="h-max" :move="move">
         <template #header><span class="inventory-cell-label">{{ $t('Main paw') }}</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(mainPaw, element.id)" />
@@ -11,7 +11,7 @@
     </div>
 
     <div class="inventory-cell ml4">
-      <draggable :list="pack1" group="items" item-key="id" class="h-max" @change="log" :move="move">
+      <draggable :list="pack1" group="items" item-key="id" class="h-max" :move="move">
         <template #header><span class="inventory-cell-label">1</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(pack1, element.id)" />
@@ -21,7 +21,7 @@
     </div>
 
     <div class="inventory-cell">
-      <draggable :list="pack2" group="items" item-key="id" class="h-max" @change="log" :move="move">
+      <draggable :list="pack2" group="items" item-key="id" class="h-max" :move="move">
         <template #header><span class="inventory-cell-label">2</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(pack2, element.id)" />
@@ -33,7 +33,7 @@
 
   <w-flex row justify-center class="mx4">
     <div class="inventory-cell">
-      <draggable :list="offPaw" group="items" item-key="id" class="h-max" @change="log" :move="move">
+      <draggable :list="offPaw" group="items" item-key="id" class="h-max" :move="move">
         <template #header><span class="inventory-cell-label">{{ $t('Off paw') }}</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(offPaw, element.id)" />
@@ -43,7 +43,7 @@
     </div>
 
     <div class="inventory-cell ml4">
-      <draggable :list="pack3" group="items" item-key="id" class="h-max" @change="log" :move="move">
+      <draggable :list="pack3" group="items" item-key="id" class="h-max" :move="move">
         <template #header><span class="inventory-cell-label">3</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(pack3, element.id)" />
@@ -53,7 +53,7 @@
     </div>
 
     <div class="inventory-cell">
-      <draggable :list="pack4" group="items" item-key="id" class="h-max" @change="log" :move="move">
+      <draggable :list="pack4" group="items" item-key="id" class="h-max" :move="move">
         <template #header><span class="inventory-cell-label">4</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(pack4, element.id)" />
@@ -105,9 +105,6 @@ export default {
         i++
       }
 
-      console.log('##[inventory] canDrop element:', element)
-      console.log('##[inventory] canDrop list:', list.canDrop, list)
-      console.log('##[inventory] canDrop result:', abort ? 'REFUSED!' : 'accepted')
       if (abort) return false // same type of item is in target or a condition is already in target
       return true
     },
@@ -121,11 +118,9 @@ export default {
       let i = 0
       let found = false
       while (!found && i < list.length) {
-        console.log('##[inventory] existCondition', list[i], list[i].type === TYPE_CONDITION)
         if (list[i].type === TYPE_CONDITION) found = true
         i++
       }
-      console.log('##[inventory] existCondition', found, list)
       return found
     },
     getIndex(list, id) {
@@ -154,9 +149,6 @@ export default {
         i++
       }  return !abort
     },
-    log(e) {
-      console.log('##[hirelings-inventory]', e)
-    },
     reset (data = {}) {
       this.mainPaw = data.mainPaw || []
       this.offPaw = data.offPaw || []
@@ -176,7 +168,6 @@ export default {
       }
     },
     setData (data) {
-      console.log('##[hireling-inventory] setData', data)
       this.reset(data)
     },
     putItem (itemId, inventoryId, { customLabel, desc } = {}) {
@@ -191,7 +182,6 @@ export default {
       }
 
       if (!itemId || !inventoryId) return false
-      console.log('##[inventory] putItem:', itemId, inventoryId, customLabel, desc)
 
       const item = getItem(itemId)
       if (!INVENTORY_ID.includes(inventoryId)) {
@@ -209,7 +199,6 @@ export default {
 
       if (customLabel) item.customLabel = this.$t(customLabel)
       if (desc) item.desc = desc
-      console.log('##[inventory] add to:', inventoryId, item)
       this.$data[inventoryId].push({ ...item }) // Clone item in inventory
       return true
     }

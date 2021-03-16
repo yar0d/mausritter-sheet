@@ -11,7 +11,7 @@
       </w-flex>
       <w-flex row justify-center>
         <div class="w-max pt2">
-          <draggable :list="items" group="items" item-key="id" class="h-max" @change="log" :move="move">
+          <draggable :list="items" group="items" item-key="id" class="h-max" :move="move">
             <template #item="{ element }">
               <conditions v-if="element.type === TYPE_CONDITION" size="md" :condition="element" can-delete @delete="deleteItem(items, element.id)" class="inline-block mx2" />
             </template>
@@ -61,15 +61,12 @@ export default {
       // Rules:
       // - Only conditions are accepted
       // - No duplicated condition
-      console.log('##[grit] canDrop:', element.type)
-      console.log('##[grit] canDrop:', list.length, this.grit)
       let result = true
       if (element.type !== TYPE_CONDITION) result = false // item is refused
       if (list.length === this.grit) result = false // list is full
       for (let i = 0; i < list.length; i++) {
         if (list[i].id === element.id) result = false // Already in list
       }
-      console.log('##[grit] result:', result)
       return result
     },
     deleteItem(list, id) {
@@ -113,9 +110,6 @@ export default {
     },
     setData (data) {
       this.reset(data)
-    },
-    log(e) {
-      console.log('##[grit]', e)
     }
   },
   created () {

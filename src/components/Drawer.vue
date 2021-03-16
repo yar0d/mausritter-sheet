@@ -7,7 +7,7 @@
       </template>
       <template #item-content.1>
         <div class="bank-drawer-items">
-          <draggable v-model="itemsList" :group="{ name: 'items', pull: 'clone', put: false }" :sort="false" item-key="id" @change="log" :move="move" :clone="clone">
+          <draggable v-model="itemsList" :group="{ name: 'items', pull: 'clone', put: false }" :sort="false" item-key="id" :move="move" :clone="clone">
             <template #item="{ element }">
               <items :item="element" size="sm" class="ma1 draggable drawer" readonly show-damage></items>
             </template>
@@ -19,7 +19,7 @@
       </template>
       <template #item-content.2>
         <div class="bank-drawer-items">
-          <draggable v-model="conditionsList" :group="{ name: 'items', pull: 'clone', put: false }" :sort="false" item-key="id" @change="log" :move="move" :clone="clone">
+          <draggable v-model="conditionsList" :group="{ name: 'items', pull: 'clone', put: false }" :sort="false" item-key="id" :move="move" :clone="clone">
             <template #item="{ element }">
               <conditions :condition="element" class="ma1 draggable drawer" readonly size="lg" />
             </template>
@@ -50,9 +50,6 @@ export default {
   },
   methods: {
     canDrop (element, list) {
-      console.log('##[drawer] canDrop element:', element)
-      console.log('##[drawer] canDrop on list:', list)
-
       if (list && list.canDrop) {
         return list.canDrop(element, list)
       }
@@ -61,9 +58,6 @@ export default {
     },
     clone (o) {
       return { ...o }
-    },
-    log (e) {
-      console.log('##[drawer]', e)
     },
     move (e) {
       return this.canDrop(e.draggedContext.element, e.relatedContext.list)

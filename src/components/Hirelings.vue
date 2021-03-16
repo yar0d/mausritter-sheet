@@ -41,8 +41,6 @@
 <script>
 import { hirelingsList } from '@/services/hirelings'
 
-console.log('##hirelingsList', hirelingsList)
-
 import Hireling from './Hireling.vue'
 import Chips from './Chips.vue'
 import ConfirmDialog from './ConfirmDialog.vue'

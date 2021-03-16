@@ -72,7 +72,6 @@ export default {
         .then(confirmed => {
           if (confirmed) {
             deleteSlot(index)
-            console.log('##[main] deleteSheet', index)
             this.slots = listSlots() // Refresh slot list
           }
         })
@@ -82,10 +81,8 @@ export default {
     },
     async load (index) {
       const data = loadSlot(index)
-      console.log('## load:', data)
       if (this.mausritter.sheet) this.mausritter.sheet.setData(data)
       if (data.hirelings && this.mausritter.hirelings) {
-        console.log('##[app] load/hirelings', data.hirelings)
         this.$store.dispatch('hirelingsSet', data.hirelings)
         .then(() => {
           this.mausritter.hirelings.refresh(data.hirelings)
@@ -119,7 +116,6 @@ export default {
       return result
     },
     save (index, data) {
-      console.log('##[main] save slot', index, this.dataSignature(data), data)
       saveSlot(index, data, this.dataSignature(data))
       this.slots = listSlots() // Refresh slot list
       this.currentSlot = index

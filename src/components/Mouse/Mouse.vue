@@ -56,7 +56,7 @@
               {{ $t('STR') }}
             </div>
             <div class="w-50">
-              <checker :faces="20" :context="$t('STR save')" :score="currentStr" size="lg" @rolled="onCheck" />
+              <checker :faces="20" :context="$t('STR save')" :score="currentStr" size="lg" />
             </div>
             <div class="w-150 ml2">
               <w-input v-model.number="maxStr" class="title1" color="minor" />
@@ -75,7 +75,7 @@
               {{ $t('DEX') }}
             </div>
             <div class="w-50">
-              <checker :faces="20" :context="$t('DEX save')" :score="currentDex" size="lg" @rolled="onCheck" />
+              <checker :faces="20" :context="$t('DEX save')" :score="currentDex" size="lg" />
             </div>
             <div class="w-150 ml2">
               <w-input v-model.number="maxDex" class="title1" color="minor" />
@@ -94,7 +94,7 @@
               {{ $t('WIL') }}
             </div>
             <div class="w-50">
-              <checker :faces="20" :context="$t('WIL save')" :score="currentWil" size="lg" @rolled="onCheck" />
+              <checker :faces="20" :context="$t('WIL save')" :score="currentWil" size="lg" />
             </div>
             <div class="w-150 ml2">
               <w-input v-model.number="maxWil" class="title1" color="minor" />
@@ -250,9 +250,6 @@ export default {
           if (confirmed) this.rollRandomMouse()
         })
     },
-    onCheck (e) {
-      console.log('##onCheck:', e)
-    },
     reset (data = {}) {
       this.name = data.name || ''
       this.background = data.background || ''
@@ -346,7 +343,6 @@ export default {
 
       this.$refs['mouse-creation-dialog'].open(this.name)
         .then (options => {
-          console.log('## options:', options)
           switch (options.swapAttributes) {
             case SWAP_STR_DEX:
               [this.maxStr, this.maxDex] = [this.maxDex, this.maxStr]
@@ -365,7 +361,6 @@ export default {
           if (options.choosenWeapon) this.$refs['inventory'].putItem(options.choosenWeapon.id, 'body1', options.choosenWeapon)
 
           if (options.choosenItem) {
-            console.log('##[mouse] Add choosen item:', options.choosenItem)
             let location = options.choosenItem.geometry === '1x2' ? 'mainPaw' : 'offPaw'
             this.$refs['inventory'].putItem(options.choosenItem.id, location, options.choosenItem)
           }
