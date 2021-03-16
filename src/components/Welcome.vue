@@ -107,7 +107,6 @@ export default {
       if (!this.importData) return ''
       try {
         const data = decodeJson(this.importData)
-        console.log('##importSignature:', data)
         return this.dataSignature(data)
       } catch (error) {
         return error.message
