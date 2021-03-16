@@ -1,6 +1,6 @@
 <template>
   <!-- eslint-disable vue/valid-v-slot -->
-  <w-drawer :value="value" top no-overlay>
+  <w-drawer id="drawer" :value="value" top no-overlay>
     <w-tabs :items="2" fill-bar class="w-max drawer-background">
       <template #item-title.1>
         {{ $t('Items') }}

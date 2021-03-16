@@ -41,6 +41,8 @@ for (let i = 0; i < items.length; i++) {
   itemsList.push(items[i])
 }
 
+console.log(`[init] ${itemsList.length} items loaded.`)
+
 /**
  * Return items if they are from giden families.
  * @param {String|Array} families A single family or an array of family to filter items.
@@ -79,8 +81,6 @@ export function getItem (id, { customLabel, desc } = {}) {
 
   return found
 }
-
-console.log(`[init] ${itemsList.length} items loaded.`)
 
 export default {
   conditions,

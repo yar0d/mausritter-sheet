@@ -11,16 +11,6 @@
     </div>
 
     <div class="inventory-cell ml4">
-      <draggable :list="body1" group="items" item-key="id" class="h-max" @change="log" :move="move">
-        <template #header><span class="inventory-cell-label">{{ $t('Body') }}</span></template>
-        <template #item="{ element }">
-          <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(body1, element.id)" />
-          <items v-else-if="element.type === TYPE_ITEM" can-delete show-use show-damage :item="element" @delete="deleteItem(body1, element.id)" />
-        </template>
-      </draggable>
-    </div>
-
-    <div class="inventory-cell ml4">
       <draggable :list="pack1" group="items" item-key="id" class="h-max" @change="log" :move="move">
         <template #header><span class="inventory-cell-label">1</span></template>
         <template #item="{ element }">
@@ -29,21 +19,13 @@
         </template>
       </draggable>
     </div>
+
     <div class="inventory-cell">
       <draggable :list="pack2" group="items" item-key="id" class="h-max" @change="log" :move="move">
         <template #header><span class="inventory-cell-label">2</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(pack2, element.id)" />
           <items v-else-if="element.type === TYPE_ITEM" can-delete show-use show-damage :item="element" @delete="deleteItem(pack2, element.id)" />
-        </template>
-      </draggable>
-    </div>
-    <div class="inventory-cell">
-      <draggable :list="pack3" group="items" item-key="id" class="h-max" @change="log" :move="move">
-        <template #header><span class="inventory-cell-label">3</span></template>
-        <template #item="{ element }">
-          <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(pack3, element.id)" />
-          <items v-else-if="element.type === TYPE_ITEM" can-delete show-use show-damage :item="element" @delete="deleteItem(pack3, element.id)" />
         </template>
       </draggable>
     </div>
@@ -61,16 +43,16 @@
     </div>
 
     <div class="inventory-cell ml4">
-      <draggable :list="body2" group="items" item-key="id" class="h-max" @change="log" :move="move">
-        <template #header><span class="inventory-cell-label">{{ $t('Body') }}</span></template>
+      <draggable :list="pack3" group="items" item-key="id" class="h-max" @change="log" :move="move">
+        <template #header><span class="inventory-cell-label">3</span></template>
         <template #item="{ element }">
-          <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(body2, element.id)" />
-          <items v-else-if="element.type === TYPE_ITEM" can-delete show-use show-damage :item="element" @delete="deleteItem(body2, element.id)" />
+          <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(pack3, element.id)" />
+          <items v-else-if="element.type === TYPE_ITEM" can-delete show-use show-damage :item="element" @delete="deleteItem(pack3, element.id)" />
         </template>
       </draggable>
     </div>
 
-    <div class="inventory-cell ml4">
+    <div class="inventory-cell">
       <draggable :list="pack4" group="items" item-key="id" class="h-max" @change="log" :move="move">
         <template #header><span class="inventory-cell-label">4</span></template>
         <template #item="{ element }">
@@ -79,39 +61,16 @@
         </template>
       </draggable>
     </div>
-    <div class="inventory-cell">
-      <draggable :list="pack5" group="items" item-key="id" class="h-max" @change="log" :move="move">
-        <template #header><span class="inventory-cell-label">5</span></template>
-        <template #item="{ element }">
-          <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(pack5, element.id)" />
-          <items v-else-if="element.type === TYPE_ITEM" can-delete show-use show-damage :item="element" @delete="deleteItem(pack5, element.id)" />
-        </template>
-      </draggable>
-    </div>
-    <div class="inventory-cell">
-      <draggable :list="pack6" group="items" item-key="id" class="h-max" @change="log" :move="move">
-        <template #header><span class="inventory-cell-label">6</span></template>
-        <template #item="{ element }">
-          <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(pack6, element.id)" />
-          <items v-else-if="element.type === TYPE_ITEM" can-delete show-use show-damage :item="element" @delete="deleteItem(pack6, element.id)" />
-        </template>
-      </draggable>
-    </div>
-  </w-flex>
-  <w-flex row justify-center class="caption text-center mx4">
-    <div>{{ $t('Carried: Ready to use.') }}</div>
-    <div class="mx4">{{ $t('Worn: Quick to ready.') }}</div>
-    <div>{{ $t('Pack: Takes time to ready. During combat, requires an action to retrieve.') }}</div>
   </w-flex>
 </template>
 
 <script>
 import draggable from "vuedraggable"
 import { TYPE_CONDITION, TYPE_ITEM, getItem } from "@/services/items-conditions"
-import Conditions from "../Conditions.vue"
-import Items from "../Items.vue"
+import Conditions from "./Conditions.vue"
+import Items from "./Items.vue"
 
-const INVENTORY_ID = [ 'body1', 'body2', 'mainPaw', 'offPaw', 'pack1', 'pack2', 'pack3', 'pack4', 'pack5', 'pack6' ]
+const INVENTORY_ID = [ 'mainPaw', 'offPaw', 'pack1', 'pack2', 'pack3', 'pack4' ]
 
 export default {
   name: "Inventory",
@@ -120,16 +79,12 @@ export default {
     return {
       TYPE_CONDITION,
       TYPE_ITEM,
-      body1: [],
-      body2: [],
       mainPaw: [],
       offPaw: [],
       pack1: [],
       pack2: [],
       pack3: [],
-      pack4: [],
-      pack5: [],
-      pack6: []
+      pack4: []
     }
   },
   methods: {
@@ -200,35 +155,28 @@ export default {
       }  return !abort
     },
     log(e) {
-      console.log('##[inventory]', e)
+      console.log('##[hirelings-inventory]', e)
     },
     reset (data = {}) {
-      this.body1 = data.body1 || []
-      this.body2 = data.body2 || []
       this.mainPaw = data.mainPaw || []
       this.offPaw = data.offPaw || []
       this.pack1 = data.pack1 || []
       this.pack2 = data.pack2 || []
       this.pack3 = data.pack3 || []
       this.pack4 = data.pack4 || []
-      this.pack5 = data.pack5 || []
-      this.pack6 = data.pack6 || []
     },
     serialize () {
       return {
-        body1: this.body1,
-        body2: this.body2,
         mainPaw: this.mainPaw,
         offPaw: this.offPaw,
         pack1: this.pack1,
         pack2: this.pack2,
         pack3: this.pack3,
         pack4: this.pack4,
-        pack5: this.pack5,
-        pack6: this.pack6
       }
     },
     setData (data) {
+      console.log('##[hireling-inventory] setData', data)
       this.reset(data)
     },
     putItem (itemId, inventoryId, { customLabel, desc } = {}) {
@@ -236,14 +184,10 @@ export default {
         // Search for am empty slot
         if (this.pack1.length === 0) inventoryId = 'pack1'
         else if (this.pack2.length === 0) inventoryId = 'pack2'
-        else if (this.pack3.length === 0) inventoryId = 'pack3'
         else if (this.mainPaw.length === 0) inventoryId = 'mainPaw'
-        else if (this.body1.length === 0) inventoryId = 'body1'
+        else if (this.pack3.length === 0) inventoryId = 'pack3'
         else if (this.pack4.length === 0) inventoryId = 'pack4'
-        else if (this.pack5.length === 0) inventoryId = 'pack5'
-        else if (this.pack6.length === 0) inventoryId = 'pack6'
         else if (this.offPaw.length === 0) inventoryId = 'offPaw'
-        else if (this.body2.length === 0) inventoryId = 'body2'
       }
 
       if (!itemId || !inventoryId) return false

@@ -1,16 +1,18 @@
 import { createApp, h } from 'vue'
 import App from './App.vue'
 import WaveUI from 'wave-ui'
-// import 'wave-ui/dist/wave-ui.css'
 import '@mdi/font/css/materialdesignicons.min.css'
-import './assets/styles/wave-ui.css'
+import './assets/styles/wave-ui.css' // Mandatory to build this app. Copy of node_modules/wave-ui/dist/wave-ui.css
 import './assets/styles/fonts.css'
 import './assets/styles/common.css'
 import './assets/styles/items.css'
 
 import { store } from './store'
 
-import { createI18n } from 'vue-i18n/dist/vue-i18n.runtime.esm-browser.prod'
+let i18nModule
+if (process.env.NODE_ENV !== 'production') i18nModule = require('vue-i18n')
+else i18nModule = require('vue-i18n/dist/vue-i18n.runtime.esm-browser.prod')
+
 import en_US from './locales/en-US.json'
 import mouse_en_US from './locales/mouse.en-US.json'
 import items_en_US from './locales/items.en-US.json'
@@ -26,7 +28,7 @@ import hirelings_fr_FR from './locales/hirelings.fr-FR.json'
 import { datetimeFormats } from './services/locales.js'
 
 
-const i18n = createI18n({
+const i18n = i18nModule.createI18n({
   locale: 'en-US',
   messages: {
     'en-US': { ...en_US, ...mouse_en_US, ...items_en_US, ...conditions_en_US, ...hirelings_en_US, ...spells_en_US },
@@ -43,9 +45,16 @@ new WaveUI(app, {
     primary: '#000000',
     minor: '#cccccc',
     selected: '#ffe70f',
-    dice: '#4d9dda'
+    dice: '#4d9dda',
+    failed: '#bb2727'
   }
 })
 app.use(i18n).use(store)
+
+app.config.globalProperties.mausritter = {
+  hirelings: null,
+  sheet: null,
+  sheetToolbar: null
+}
 
 app.mount('#app')

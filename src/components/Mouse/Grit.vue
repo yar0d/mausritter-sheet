@@ -1,8 +1,8 @@
 <template>
-  <w-card v-show="grit" bg-color="white" class="mr4" :class="getWidth">
+  <w-card v-show="grit" bg-color="white" class="card-sheet mr4" :class="getWidth">
     <w-flex column>
       <w-flex row>
-        <div class="w-100 form-gray input-name body">
+        <div class="w-100 form-gray input-name">
           {{ $t('Grit') }}
         </div>
         <div class="mx2">
@@ -18,7 +18,6 @@
             <template #footer><div class="px4 caption">{{ $t('Ignore a number of conditions equal to your Grit.') }}</div></template>
           </draggable>
         </div>
-        {{ items }}
       </w-flex>
     </w-flex>
   </w-card>

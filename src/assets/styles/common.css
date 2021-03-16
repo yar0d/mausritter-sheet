@@ -5,7 +5,24 @@ body,
   background-image: url('../img/mouse-hole.png');
   background-repeat: no-repeat;
   margin: 0;
+}
+
+#sheet,
+#drawer aside,
+#bank aside {
   max-width: 800px;
+}
+
+#history aside,
+#hirelings aside {
+  width: 440px;
+  max-width: 440px;
+}
+
+blockquote {
+  border-left: 2px solid #ccc;
+  margin-left: 2px;
+  padding-left: 2px;
 }
 
 .debug-box {
@@ -27,6 +44,42 @@ body,
   padding: 0 0 3px 0;
   background-color: #ccc;
   box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.chip {
+  border-radius: 7px;
+  background-color: #2498d6;
+  color: #fff;
+}
+
+.chip-size-xs {
+  padding: 0 1px;
+  margin: 0 1px;
+  font-size: 60%;
+}
+
+.chip-size-sm {
+  padding: 0 2px;
+  margin: 0 2px;
+  font-size: 70%;
+}
+
+.chip-size-md {
+  padding: 0 4px;
+  margin: 0 4px;
+  font-size: 80%;
+}
+
+.chip-size-lg {
+  padding: 0 4px;
+  margin: 0 4px;
+  font-size: 100%;
+}
+
+.chip-size-xl {
+  padding: 0 4px;
+  margin: 0 4px;
+  font-size: 120%;
 }
 
 .mouse-sheet {
@@ -56,8 +109,8 @@ body,
   color: #8499a4;
 }
 
-.text-tiny {
-  font-size: 70%;
+.text-small {
+  font-size: 75%;
 }
 
 .clickable {
@@ -85,6 +138,27 @@ body,
   background-position: left;
 }
 
+.welcome-background {
+  background-image: url('../img/welcome.jpg');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
+}
+
+.hirelings-background {
+  background-image: url('../img/hirelings.jpg');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
+}
+
+.history-background {
+  background-image: url('../img/history.jpg');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
+}
+
 .mouse-creation-dialog-background {
   background-image: url('../img/mouse-creation.jpg');
 }
@@ -97,13 +171,19 @@ body,
   box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.75);
 }
 
-.w-card {
+.card-sheet {
   border-radius: 5px;
   border-width: 2px;
   border-color: #000;
 }
 
-.w-card__content {
+.card-sheet-white {
+  border-radius: 5px;
+  border-width: 2px;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.card-sheet .w-card__content {
   padding: 0
 }
 
@@ -138,6 +218,10 @@ textarea {
 .condition textarea {
   color: #6ec2f0 !important;
   font-family: unset;
+}
+
+.toolbar-pager {
+  max-height: 32px;
 }
 
 .w-25 {
@@ -287,8 +371,32 @@ textarea {
   border: 0;
 }
 
-.item-input {
+.background-black-25 {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.background-black-50 {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.background-black-75 {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.background-white-25 {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.background-white-50 {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.background-white-75 {
   background-color: rgba(255, 255, 255, 0.75);
+}
+
+.background-white-85 {
+  background-color: rgba(255, 255, 255, 0.85);
 }
 
 .item-damage,
@@ -402,11 +510,6 @@ textarea {
 .bank-drawer-items {
   overflow-y: auto;
   height: 300px;
-}
-
-.history-line {
-  display: block !important;
-  border-bottom: 1px solid #aaa;
 }
 
 .no-flex aside.w-drawer {

@@ -1,5 +1,5 @@
 <template>
-  <Mouse ref="sheet-mouse" />
+  <mouse ref="sheet-mouse" />
 </template>
 
 <script>
@@ -14,10 +14,12 @@ export default {
       if (this.$refs['sheet-mouse']) this.$refs['sheet-mouse'].createRandomSheet()
     },
     serialize () {
-      if (this.$refs['sheet-mouse']) return this.$refs['sheet-mouse'].serialize()
+      let result
+      if (this.$refs['sheet-mouse']) result = this.$refs['sheet-mouse'].serialize()
+      return result
     },
     setData (data) {
-      if (this.$refs['sheet-mouse']) return this.$refs['sheet-mouse'].setData(data)
+      if (data.type === 'mouse' && this.$refs['sheet-mouse']) this.$refs['sheet-mouse'].setData(data)
     }
   }
 }

@@ -1,131 +1,92 @@
 <template>
   <w-app id="app">
     <main class="grow">
-      <sheet ref="sheet"/>
-    </main>
-    <footer>
-      <sheet-toolbar ref="sheet-toolbar">
-        <template #actions-prepend>
-          <w-menu v-model="showSlotMenu" top align-left persistent>
-            <template #activator="{ on: menuOn }">
-              <w-tooltip transition="fade" bg-color="yellow-light2" color="black" top>
-                <template #activator="{ on: tooltipOn }">
-                  <w-icon v-on="{ ...menuOn, ...tooltipOn }" class="title1 clickable" :bg-color="showSlotMenu ? 'blue' : ''" :color="showSlotMenu ? 'white' : 'blue'">mdi mdi-rodent</w-icon>
-                </template>
-                {{ $t('Manage your characters.') }}
-              </w-tooltip>
-            </template>
-            <w-card content-class="px1">
-              <w-flex column v-for="(slot, index) in slots" :key="index" justify-center>
-                <w-flex row align-center justify-space-between class="py2">
-                  {{ index + 1 }}
-                  <div v-if="!slot" class="caption">
-                  {{ $t('Empty') }}
-                  </div>
-                  <w-button v-else :text="index !== currentSlot" @click="loadSheet(index)">
-                    {{ slotName(slot)[0] }}
-                    <div class="text-tiny">
-                      — {{ slotName(slot)[1] }}
-                    </div>
-                  </w-button>
-                  <div>
-                    <w-tooltip v-if="slot" transition="fade" bg-color="yellow-light2" color="black" left>
-                      <template #activator="{ on }">
-                        <w-button v-on="on" @click="deleteSheet(index, slot)" color="red" class="ml2" icon="mdi mdi-delete" />
-                      </template>
-                      {{ $t('Delete') }}
-                    </w-tooltip>
-                    <w-tooltip transition="fade" bg-color="yellow-light2" color="black" left>
-                      <template #activator="{ on }">
-                        <w-button v-on="on" @click="saveSheet(index)" color="blue" class="ml2" icon="mdi mdi-content-save" />
-                      </template>
-                      {{ $t('Save') }}
-                    </w-tooltip>
-                  </div>
-                </w-flex>
-                <w-divider />
-              </w-flex>
-              <w-button text @click="createRandomSheet" class="w-max">
-                <w-icon>mdi mdi-plus</w-icon>
-                {{ $t('Create a new character...') }}
-              </w-button>
-            </w-card>
-          </w-menu>
-        </template>
-      </sheet-toolbar>
-    </footer>
+      <w-flex basis-zero wrap class="h-max">
+        <w-flex row align-start justify-space-between>
+          <w-flex column justify-space-between>
+            <sheet id="sheet" ref="sheet"/>
+            <sheet-toolbar ref="sheet-toolbar" />
+          </w-flex>
 
-    <confirm-dialog ref="confirm-dialog" />
+
+          <w-flex column class="w-max h-max">
+            <w-toolbar no-border class="toolbar-pager">
+              <div class="title3">Mausritter Sheet</div>
+              <div class="spacer"></div>
+              <w-button lg class="px8" :text="!showWelcome" @click="showPanel({ home: true, history: false, hirelings: false })">
+                <w-icon class="mr1" xl>
+                  mdi mdi-rodent
+                </w-icon>
+                {{ $t('Welcome') }}
+              </w-button>
+
+              <w-button lg class="px8" :text="!showHistory" @click="showPanel({ home: false, history: true, hirelings: false })">
+                <w-icon class="mr1" xl>
+                  mdi mdi-history
+                </w-icon>
+                {{ $t('History') }}
+              </w-button>
+
+              <w-button lg class="px8" :text="!showHirelings" @click="showPanel({ home: false, history: false, hirelings: true })">
+                <w-icon class="mr1" xl>
+                  mdi mdi-donkey
+                </w-icon>
+                {{ $t('Hirelings') }}
+                <chips :value="hirelingsCount" />
+              </w-button>
+            </w-toolbar>
+
+            <div v-show="showHistory" class="history-background h-max">
+              <history />
+            </div>
+
+            <div v-show="showHirelings" class="hirelings-background h-max">
+              <hirelings ref="hirelings"/>
+            </div>
+
+            <div v-show="showWelcome" class="welcome-background h-max">
+              <welcome />
+            </div>
+          </w-flex>
+        </w-flex>
+      </w-flex>
+    </main>
   </w-app>
 </template>
 
 <script>
-import { deleteSlot, listSlots, loadSlot, saveSlot } from '@/services/storage'
 import Sheet from '@/components/Sheet.vue'
 import SheetToolbar from '@/components/SheetToolbar.vue'
-import ConfirmDialog from './components/ConfirmDialog.vue'
+import History from '@/components/History.vue'
+import Hirelings from '@/components/Hirelings.vue'
+import Welcome from './components/Welcome.vue'
+import Chips from './components/Chips.vue'
 
 export default {
   name: 'App',
-  components: { Sheet, SheetToolbar, ConfirmDialog },
+  components: { Sheet, SheetToolbar, History, Hirelings, Welcome, Chips },
   data () {
     return {
-      currentSlot: null,
-      showSlotMenu: false,
-      slots: []
+      tabs: [],
+      showWelcome: true,
+      showHistory: false,
+      showHirelings: false,
     }
   },
+  computed: {
+    hirelingsCount () { return this.$store.getters['hirelings'].length }
+  },
   methods: {
-    createRandomSheet () {
-      if (this.$refs['sheet-toolbar']) this.$refs['sheet-toolbar'].displayDrawer(false)
-      if (this.$refs['sheet']) this.$refs['sheet'].createRandomSheet()
-    },
-    deleteSheet (index, slotName) {
-      this.$refs['confirm-dialog'].open(this.$t('Delete'), this.$t('The sheet of “{name}” will be erased. Do you confirm?', { name: slotName } ))
-        .then(confirmed => {
-          if (confirmed) {
-            deleteSlot(index)
-            console.log('##[main] deleteSheet', index)
-            this.slots = listSlots() // Refresh slot list
-          }
-        })
-    },
-    loadSheet (index) {
-      const data = loadSlot(index)
-      if (this.$refs['sheet']) this.$refs['sheet'].setData(data)
-      this.currentSlot = index
-    },
-    slotName (context) {
-      return context.split('/')
-    },
-    save (index, data) {
-      console.log('##[main] save slot', index, data.mouse.name + '/' + data.mouse.background, data)
-      saveSlot(index, data, data.mouse.name + '/' + data.mouse.background)
-      this.slots = listSlots() // Refresh slot list
-    },
-    saveSheet (index) {
-      const data = this.serialize()
-      if (this.slots[index] === null || this.slots[index] === data.mouse.name + '/' + data.mouse.background) {
-        this.save(index, data)
-        return
-      }
-
-      this.$refs['confirm-dialog'].open(this.$t('Save'), this.$t('The sheet of “{dest}” will be overwritten by “{name}”. Do you confirm?', { dest: this.slots[index], name: data.mouse.name + '/' + data.mouse.background } ))
-        .then(confirmed => {
-          if (confirmed) {
-            this.save(index, data)
-          }
-        })
-    },
-    serialize () {
-      let data
-      if (this.$refs['sheet']) data = this.$refs['sheet'].serialize()
-      data.version = 1
-      return data
+    showPanel ({ home, history, hirelings }) {
+      this.showWelcome = home
+      this.showHistory = history
+      this.showHirelings = hirelings
     }
   },
   mounted () {
-    this.slots = listSlots()
+    this.mausritter.sheet = this.$refs['sheet']
+    this.mausritter.sheetToolbar = this.$refs['sheettoolbar']
+    this.mausritter.hirelings = this.$refs['hirelings']
   }
 }
 </script>

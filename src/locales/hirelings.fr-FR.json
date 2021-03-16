@@ -1,5 +1,14 @@
 {
   "Loyal beetle": "Scarabée loyal",
   "Drunken torchbearer": "Porteur de torche ivre",
-  "Pack rat": "Porteur rat"
+  "Pack rat": "Porteur rat",
+  "torchbearer": "Porteur de torche",
+  "Labourer": "Ouvrier",
+  "Tunnel digger": "Tunnelier",
+  "Armourer/blacksmith": "Forgeron",
+  "Local guide": "Guide local",
+  "Mouse-at-arms": "Soldat",
+  "Scholar": "Érudit",
+  "Knight": "Chevalier",
+  "Interpreter": "Interprète"
 }
