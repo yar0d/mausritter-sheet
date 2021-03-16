@@ -23,55 +23,107 @@
               {{ slotName(index) }}
             </w-button>
             <div>
-              <w-tooltip v-if="slot" transition="fade" bg-color="yellow-light2" color="black" left>
-                <template #activator="{ on }">
-                  <w-button v-on="on" @click="deleteSheet(index)" bg-color="red" color="white" class="ml2" icon="mdi mdi-delete" />
-                </template>
-                {{ $t('Delete') }}
-              </w-tooltip>
-              <w-tooltip transition="fade" bg-color="yellow-light2" color="black" left>
-                <template #activator="{ on }">
-                  <w-button v-on="on" @click="saveSheet(index)" bg-color="blue" color="white" class="ml2" icon="mdi mdi-content-save" />
-                </template>
-                {{ $t('Save') }}
-              </w-tooltip>
+              <span class="w-25">
+                <w-tooltip transition="fade" bg-color="yellow-light2" color="black" left>
+                  <template #activator="{ on }">
+                    <w-button :disabled="!slot" v-on="on" @click="deleteSheet(index)" bg-color="red" color="white" class="ml2" icon="mdi mdi-delete" />
+                  </template>
+                  {{ $t('Delete') }}
+                </w-tooltip>
+              </span>
+              <span class="w-25">
+                <w-tooltip transition="fade" bg-color="yellow-light2" color="black" left>
+                  <template #activator="{ on }">
+                    <w-button :disabled="!slot" v-on="on" @click="exportSheet(index)" bg-color="" color="white" class="ml2" icon="mdi mdi-application-export" />
+                  </template>
+                  {{ $t('Export') }}
+                </w-tooltip>
+              </span>
+              <span class="w-25">
+                <w-tooltip transition="fade" bg-color="yellow-light2" color="black" left>
+                  <template #activator="{ on }">
+                    <w-button v-on="on" @click="saveSheet(index)" bg-color="blue" color="white" class="ml2" icon="mdi mdi-content-save" />
+                  </template>
+                  {{ $t('Save') }}
+                </w-tooltip>
+              </span>
             </div>
           </w-flex>
           <w-divider />
         </w-flex>
 
-        <w-button xl @click="createRandomSheet" class="w-max mt4">
-          <w-icon>mdi mdi-plus</w-icon>
-          {{ $t('Create a new character...') }}
-        </w-button>
+        <w-flex row class="w-max mt4 px2" justify-space-between>
+          <div>
+            <w-button xl @click="createRandomSheet">
+              <w-icon>mdi mdi-plus</w-icon>
+              {{ $t('Create a new character...') }}
+            </w-button>
+          </div>
+
+          <div>
+            <w-button xl @click="importSheet(index)" bg-color="blue-grey" color="white" class="ml2">
+              {{ $t('Import') }}
+            </w-button>
+          </div>
+        </w-flex>
       </w-card>
     </w-flex>
     <confirm-dialog ref="confirm-dialog" />
+    <prompt-dialog ref="prompt-dialog" />
+    <prompt-dialog ref="prompt-import-dialog">
+      <template #content>
+        <w-textarea v-model="importData" :placeholder="$t('Paste your character here...')" />
+        <w-card class="mt2">
+          {{ importSignature }}
+        </w-card>
+      </template>
+    </prompt-dialog>
   </div>
 </template>
 
 <script>
 import { LOCALES, DEFAULT_LOCALE, loadLocale, saveLocale } from '@/services/locales'
-import { deleteSlot, listSlots, loadSlot, saveSlot } from '@/services/storage'
+import { deleteSlot, listSlots, loadSlot, saveSlot, decodeJson, encodeJson } from '@/services/storage'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
+import PromptDialog from './PromptDialog.vue'
 
 export default {
   name: 'Welcome',
-  components: { ConfirmDialog },
+  components: { ConfirmDialog, PromptDialog },
   propos: [ 'sheet' ],
   data () {
     return {
       currentSlot: null,
+      decodeJson,
       DEFAULT_LOCALE,
       LOCALES,
+      importData: null,
       locale: null,
       slots: []
     }
   },
-  // computed: {
-  //   locale () { return this.$store.getters['locale'] }
-  // },
+  computed: {
+    importSignature () {
+      if (!this.importData) return ''
+      try {
+        const data = decodeJson(this.importData)
+        console.log('##importSignature:', data)
+        return this.dataSignature(data)
+      } catch (error) {
+        return error.message
+      }
+     }
+  },
   methods: {
+    apply (data) {
+      if (this.mausritter.sheet) this.mausritter.sheet.setData(data)
+      if (data.hirelings && this.mausritter.hirelings) {
+        this.$store.dispatch('hirelingsSet', data.hirelings)
+        .then(() => {
+          this.mausritter.hirelings.refresh(data.hirelings)
+        })
+      }
+    },
     changeLocale (newLocale) {
       this.locale = newLocale || DEFAULT_LOCALE
       this.$i18n.locale = this.locale
@@ -95,15 +147,22 @@ export default {
     dataSignature (data) {
       return data.sheet.name + '|' + data.sheet.background + '|' + data.sheet.level + '|' + new Date(data.date).toLocaleString(this.locale)
     },
+    async exportSheet (index) {
+      const data = loadSlot(index)
+      await navigator.clipboard.writeText(encodeJson(data))
+      this.$refs['prompt-dialog'].open(this.$t('Export'), this.$t('“{name}” is now copied to clipboard.', { name: this.dataSignature(data) }), { data: encodeJson(data) })
+    },
+    async importSheet () {
+      this.$refs['prompt-import-dialog'].open(this.$t('Import'), '')
+        .then(() => {
+          if (this.importData) {
+            this.apply(decodeJson(this.importData))
+          }
+        })
+    },
     async load (index) {
       const data = loadSlot(index)
-      if (this.mausritter.sheet) this.mausritter.sheet.setData(data)
-      if (data.hirelings && this.mausritter.hirelings) {
-        this.$store.dispatch('hirelingsSet', data.hirelings)
-        .then(() => {
-          this.mausritter.hirelings.refresh(data.hirelings)
-        })
-      }
+      this.apply(data)
       this.currentSlot = index
       this.$store.commit('historyAdd', {
         type: this.$t('Load'),

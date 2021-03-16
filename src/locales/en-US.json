@@ -113,5 +113,10 @@
   "Recruit hireling...": "Recruit hireling...",
   "Wages/day": "Wages/day",
   "Dismiss": "Dismiss",
-  "The hireling of “{desc} {name}” will be dismissed. Do you confirm?": "The hireling of “{desc} {name}” will be dismissed. Do you confirm?"
+  "The hireling of “{desc} {name}” will be dismissed. Do you confirm?": "The hireling of “{desc} {name}” will be dismissed. Do you confirm?",
+  "Clear": "Clear",
+  "Export": "Export",
+  "“{name}” is now copied to clipboard.": "“{name}” is now copied to clipboard.",
+  "Import": "Import",
+  "Paste your character here...": "Paste your character here..."
 }

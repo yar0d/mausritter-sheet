@@ -113,5 +113,10 @@
   "Recruit hireling...": "Engager un employé…",
   "Wages/day": "Salaire / jour",
   "Dismiss": "Renvoyer",
-  "The hireling of “{desc} {name}” will be dismissed. Do you confirm?": "Confirmez le renvoi du « {desc} {name} » ?"
+  "The hireling of “{desc} {name}” will be dismissed. Do you confirm?": "Confirmez le renvoi du « {desc} {name} » ?",
+  "Clear": "Effacer",
+  "Export": "Exporter",
+  "“{name}” is now copied to clipboard.": "« {name} » a été copié dans le presse-papier.",
+  "Import": "Importer",
+  "Paste your character here...": "Coller le personnage ici…"
 }

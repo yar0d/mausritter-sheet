@@ -1,5 +1,4 @@
 # TODO
-- import/export whole sheet (as UU64 ?).
 - autosave ? after each update; each N minutes ?
 - save history in slots too.
 - manage draggable from bank panel to inventory slots.

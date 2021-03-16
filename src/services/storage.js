@@ -70,6 +70,14 @@ export function saveJson (key, data) {
   set(key, uuencode.encode(JSON.stringify(data)))
 }
 
+export function encodeJson (data) {
+  return uuencode.encode(JSON.stringify(data))
+}
+
+export function decodeJson (data) {
+  return JSON.parse(uuencode.decode(data))
+}
+
 const SLOT_KEY_ID = 'mausritter_sheet_'
 const SLOT_KEY_DATA = 'mausritter_sheet_data_'
 const MAX_SLOTS = 10
@@ -100,6 +108,8 @@ export default {
   del,
   get,
   set,
+  decodeJson,
+  encodeJson,
   loadJson,
   saveJson,
   deleteSlot,

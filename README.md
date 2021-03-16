@@ -15,7 +15,8 @@ Have a look at [Mausritter website](https://mausritter.com/) and [Licence](./LIC
 - Drag'n'drop in grit.
 - Drag'n'drop in bank, retrieving item from bank cost 1% of its price.
 - History of dices and other actions.
-- Save and load whole sheet from local storage. 10 slots are available.
+- Save and load whole character sheet from local storage. 10 slots are available.
+- Import / Export of character sheet.
 
 See [TODO.md](./src/TODO.md) for incomming features :-)
 
