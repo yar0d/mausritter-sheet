@@ -9,7 +9,7 @@ for (let i = 0; i < hirelings.length; i++) {
   hirelingsList.push(hirelings[i])
 }
 
-console.log(`[init] ${hirelingsList.length} conditions loaded.`)
+console.log(`[init] ${hirelingsList.length} hirelings loaded.`)
 
 export default {
   hirelings,

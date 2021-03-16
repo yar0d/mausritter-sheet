@@ -1,5 +1,11 @@
 <template>
   <div class="scrollable h-auto">
+    <w-toolbar class="background-white-50">
+      <w-button xl v-for="lang in LOCALES" :key="lang" :color="locale === lang ? '' : 'primary'" class="mx2" @click="changeLocale(lang)">
+        {{ $t(lang) }}
+      </w-button>
+    </w-toolbar>
+
     <w-flex column align-center justify-center class="mt4">
       <w-card content-class="px1 background-white-50">
         <template #title>
@@ -45,6 +51,7 @@
 </template>
 
 <script>
+import { LOCALES, DEFAULT_LOCALE, loadLocale, saveLocale } from '@/services/locales'
 import { deleteSlot, listSlots, loadSlot, saveSlot } from '@/services/storage'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
 
@@ -55,13 +62,22 @@ export default {
   data () {
     return {
       currentSlot: null,
+      DEFAULT_LOCALE,
+      LOCALES,
+      locale: null,
       slots: []
     }
   },
-  computed: {
-    locale () { return this.$store.getters['locale'] }
-  },
+  // computed: {
+  //   locale () { return this.$store.getters['locale'] }
+  // },
   methods: {
+    changeLocale (newLocale) {
+      this.locale = newLocale || DEFAULT_LOCALE
+      this.$i18n.locale = this.locale
+      this.$store.dispatch('changeLocale', this.locale)
+      saveLocale(this.locale)
+    },
     createRandomSheet () {
       if (this.mausritter.sheetToolbar) this.mausritter.sheetToolbar.displayDrawer(false)
       if (this.mausritter.sheet) this.mausritter.sheet.createRandomSheet()
@@ -146,6 +162,9 @@ export default {
       data.date = new Date().toISOString()
       return data
     }
+  },
+  created () {
+    this.changeLocale(loadLocale())
   },
   mounted () {
     this.slots = listSlots()

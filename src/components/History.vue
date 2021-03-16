@@ -1,6 +1,12 @@
 <template>
   <div class="scrollable h-max">
-    <w-flex column>
+    <w-toolbar class="background-white-50">
+      <w-button xl @click="clear">
+        {{ $t('Clear') }}
+      </w-button>
+    </w-toolbar>
+
+    <w-flex column align-center justify-center class="mt4">
       <w-flex row v-for="(h, index) in history" :key="index" class="w-max" justify-start>
         <w-divider class="white md1">{{ h.date.toLocaleTimeString(locale) }}</w-divider>
         <div class="background-white-25 w-max pa2">
