@@ -5,7 +5,7 @@
         <template #header><span class="inventory-cell-label">{{ $t('Main paw') }}</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(mainPaw, element.id)" />
-          <items v-else-if="element.type === TYPE_ITEM" can-delete show-use show-damage :item="element" @delete="deleteItem(mainPaw, element.id)" />
+          <items v-else-if="element.type === TYPE_ITEM && !existCondition(mainPaw)" can-delete show-use show-damage :item="element" @delete="deleteItem(mainPaw, element.id)" />
         </template>
       </draggable>
     </div>
@@ -25,7 +25,7 @@
         <template #header><span class="inventory-cell-label">2</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(pack2, element.id)" />
-          <items v-else-if="element.type === TYPE_ITEM" can-delete show-use show-damage :item="element" @delete="deleteItem(pack2, element.id)" />
+          <items v-else-if="element.type === TYPE_ITEM && !existCondition(pack2)" can-delete show-use show-damage :item="element" @delete="deleteItem(pack2, element.id)" />
         </template>
       </draggable>
     </div>
@@ -37,7 +37,7 @@
         <template #header><span class="inventory-cell-label">{{ $t('Off paw') }}</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(offPaw, element.id)" />
-          <items v-else-if="element.type === TYPE_ITEM" can-delete show-use show-damage :item="element" @delete="deleteItem(offPaw, element.id)" />
+          <items v-else-if="element.type === TYPE_ITEM && !existCondition(offPaw)" can-delete show-use show-damage :item="element" @delete="deleteItem(offPaw, element.id)" />
         </template>
       </draggable>
     </div>
@@ -47,7 +47,7 @@
         <template #header><span class="inventory-cell-label">3</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(pack3, element.id)" />
-          <items v-else-if="element.type === TYPE_ITEM" can-delete show-use show-damage :item="element" @delete="deleteItem(pack3, element.id)" />
+          <items v-else-if="element.type === TYPE_ITEM && !existCondition(pack3)" can-delete show-use show-damage :item="element" @delete="deleteItem(pack3, element.id)" />
         </template>
       </draggable>
     </div>
@@ -57,7 +57,7 @@
         <template #header><span class="inventory-cell-label">4</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(pack4, element.id)" />
-          <items v-else-if="element.type === TYPE_ITEM" can-delete show-use show-damage :item="element" @delete="deleteItem(pack4, element.id)" />
+          <items v-else-if="element.type === TYPE_ITEM && !existCondition(pack4)" can-delete show-use show-damage :item="element" @delete="deleteItem(pack4, element.id)" />
         </template>
       </draggable>
     </div>
