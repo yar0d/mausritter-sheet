@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](https://github.com/yar0d/mausritter-sheet/compare/v0.1.4...v0.1.5) (2021-03-16)
+
+
+### Features
+
+* First usable version ([36cb673](https://github.com/yar0d/mausritter-sheet/commit/36cb67378f20f863404b9360284642d80cfe3a6b))
+
+
+### Bug Fixes
+
+* condition display in inventory ([f95db69](https://github.com/yar0d/mausritter-sheet/commit/f95db697f6cb3ee7290039dd63f6636588dfd891))
+* remove console logs ([96b8e29](https://github.com/yar0d/mausritter-sheet/commit/96b8e2930c37f922882f90407097b9916f541afd))
+
 ### [0.1.4](https://github.com/yar0d/mausritter-sheet/compare/v0.1.3...v0.1.4) (2021-03-11)
 
 
