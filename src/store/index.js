@@ -35,9 +35,11 @@ export const store = createStore({
         maxHP: d6(),
         maxStr: d6() + d6(),
         maxWil: d6() + d6(),
-        desc: '',
+        desc: hireling.label || '',
         name: '',
         look: '',
+        wages: 0,
+        level: 1,
         xp: 0
       }, ...hireling }
       result.sheet.currentDex = result.sheet.maxDex
@@ -45,6 +47,11 @@ export const store = createStore({
       result.sheet.currentStr = result.sheet.maxStr
       result.sheet.currentWil = result.sheet.maxWil
       state.hirelings.push({ ...result, ...hireling })
+    },
+    hirelingDismiss (state, index) {
+      const tmp = [ ...state.hirelings ]
+      tmp.splice(index, 1)
+      state.hirelings = tmp
     },
     hirelingsSet (state, hirelings = []) {
       state.hirelings = hirelings

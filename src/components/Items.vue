@@ -38,7 +38,7 @@
             <span class="item-def">{{ $t('Def')}} {{ currentItem.def }}</span>
           </div>
           <div v-if="showPrice && currentItem.price !== null" class="text-right">
-            <span class="item-price"> {{ currentItem.price }} p</span>
+            <span class="item-price"> {{ $t('{price}p', { price: currentItem.price }) }} p</span>
           </div>
         </w-flex>
       </w-flex>

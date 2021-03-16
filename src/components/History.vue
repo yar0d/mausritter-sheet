@@ -1,16 +1,16 @@
 <template>
   <div class="scrollable h-max">
-    <w-flex v-for="(h, index) in history" :key="index" class="w-max pa2" column justify-space-between>
-      <w-divider class="text-small text-secondary">{{ h.date.toLocaleTimeString(locale) }}</w-divider>
-      <div>
-        <span v-if="h.type">{{ h.type }} : </span>
-        <span :class="h.color">{{ h.message }}</span>
-        <div v-if="h.secondary" class="text-secondary text-small">{{ h.secondary }}</div>
-      </div>
+    <w-flex column>
+      <w-flex row v-for="(h, index) in history" :key="index" class="w-max" justify-start>
+        <w-divider class="white md1">{{ h.date.toLocaleTimeString(locale) }}</w-divider>
+        <div class="background-white-25 w-max pa2">
+          <span v-if="h.type" class="white--bg">{{ h.type }} : </span>
+          <span :class="(h.color || 'white') + '--bg white pa1'">{{ h.message }}</span>
+          <span v-if="h.secondary" class="pl4 white text-small">{{ h.secondary }}</span>
+        </div>
+      </w-flex>
     </w-flex>
   </div>
-  <!-- <w-drawer id="history" :value="value" right class="no-flex" no-overlay persistent>
-  </w-drawer> -->
 </template>
 
 <script>

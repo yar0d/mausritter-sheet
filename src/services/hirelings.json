@@ -1,7 +1,8 @@
 [
   { "label": "Loyal beetle", "str": "2d6", "dex": "2d6", "wil": "2d6", "hp": "d6", "wages": 0 },
-  { "label": "Pack rat", "str": "2d6", "dex": "2d6", "wil": "2d6", "hp": "d6", "wages": 1 },
-  { "label": "Drunken torchbearer", "str": "2d6", "dex": "2d6", "wil": "2d6", "hp": "d6", "wages": 1 },
+  { "label": "Pack rat", "str": "2d6", "dex": "2d6", "wil": "2d6", "hp": "d6", "wages": 0 },
+  { "label": "Drunken torchbearer", "str": "2d6", "dex": "2d6", "wil": "2d6", "hp": "d6", "wages": 0 },
+  { "label": "torchbearer", "str": "2d6", "dex": "2d6", "wil": "2d6", "hp": "d6", "wages": 1 },
   { "label": "Labourer", "str": "2d6", "dex": "2d6", "wil": "2d6", "hp": "d6", "wages": 2 },
   { "label": "Tunnel digger", "str": "2d6", "dex": "2d6", "wil": "2d6", "hp": "d6", "wages": 5 },
   { "label": "Armourer/blacksmith", "str": "2d6", "dex": "2d6", "wil": "2d6", "hp": "d6", "wages": 8 },

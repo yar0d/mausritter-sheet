@@ -19,13 +19,13 @@
             <div>
               <w-tooltip v-if="slot" transition="fade" bg-color="yellow-light2" color="black" left>
                 <template #activator="{ on }">
-                  <w-button v-on="on" @click="deleteSheet(index)" color="red" class="ml2" icon="mdi mdi-delete" />
+                  <w-button v-on="on" @click="deleteSheet(index)" bg-color="red" color="white" class="ml2" icon="mdi mdi-delete" />
                 </template>
                 {{ $t('Delete') }}
               </w-tooltip>
               <w-tooltip transition="fade" bg-color="yellow-light2" color="black" left>
                 <template #activator="{ on }">
-                  <w-button v-on="on" @click="saveSheet(index)" color="blue" class="ml2" icon="mdi mdi-content-save" />
+                  <w-button v-on="on" @click="saveSheet(index)" bg-color="blue" color="white" class="ml2" icon="mdi mdi-content-save" />
                 </template>
                 {{ $t('Save') }}
               </w-tooltip>
@@ -65,6 +65,7 @@ export default {
     createRandomSheet () {
       if (this.mausritter.sheetToolbar) this.mausritter.sheetToolbar.displayDrawer(false)
       if (this.mausritter.sheet) this.mausritter.sheet.createRandomSheet()
+      this.currentSlot = null
     },
     deleteSheet (index) {
       this.$refs['confirm-dialog'].open(this.$t('Delete'), this.$t('The sheet of “{name}” will be erased. Do you confirm?', { name: this.slotName(index) } ))

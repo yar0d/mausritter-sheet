@@ -50,9 +50,36 @@ blockquote {
   border-radius: 7px;
   background-color: #2498d6;
   color: #fff;
+}
+
+.chip-size-xs {
+  padding: 0 1px;
+  margin: 0 1px;
+  font-size: 60%;
+}
+
+.chip-size-sm {
+  padding: 0 2px;
+  margin: 0 2px;
+  font-size: 70%;
+}
+
+.chip-size-md {
   padding: 0 4px;
   margin: 0 4px;
   font-size: 80%;
+}
+
+.chip-size-lg {
+  padding: 0 4px;
+  margin: 0 4px;
+  font-size: 100%;
+}
+
+.chip-size-xl {
+  padding: 0 4px;
+  margin: 0 4px;
+  font-size: 120%;
 }
 
 .mouse-sheet {
@@ -118,6 +145,20 @@ blockquote {
   background-size: cover;
 }
 
+.hirelings-background {
+  background-image: url('../img/hirelings.jpg');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
+}
+
+.history-background {
+  background-image: url('../img/history.jpg');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
+}
+
 .mouse-creation-dialog-background {
   background-image: url('../img/mouse-creation.jpg');
 }
@@ -134,6 +175,12 @@ blockquote {
   border-radius: 5px;
   border-width: 2px;
   border-color: #000;
+}
+
+.card-sheet-white {
+  border-radius: 5px;
+  border-width: 2px;
+  background-color: rgba(255, 255, 255, 0.25);
 }
 
 .card-sheet .w-card__content {
@@ -324,12 +371,32 @@ textarea {
   border: 0;
 }
 
+.background-black-25 {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.background-black-50 {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.background-black-75 {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.background-white-25 {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
 .background-white-50 {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
 .background-white-75 {
   background-color: rgba(255, 255, 255, 0.75);
+}
+
+.background-white-85 {
+  background-color: rgba(255, 255, 255, 0.85);
 }
 
 .item-damage,

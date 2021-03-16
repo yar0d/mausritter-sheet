@@ -3,6 +3,7 @@
   "en-US": "English US",
   "fr-FR": "Français",
   "Welcome to Mausrittes Sheet!": "Welcome to Mausrittes Sheet!",
+  "under licence": "under license",
   "Items": "Items",
   "Conditions": "Conditions",
   "Birthsign": "Birthsign",
@@ -25,6 +26,7 @@
   "STR ⇄ WIL": "STR ⇄ WIL",
   "DEX ⇄ WIL": "DEX ⇄ WIL",
   "No swap.": "No swap.",
+  "{price}p": "{price}p",
   "HP": "HP",
   "Max": "Max",
   "Current": "Current",
@@ -107,5 +109,9 @@
   "The sheet of “{dest}” will be overwritten by “{name}”. Do you confirm?": "The sheet of “{dest}” will be overwritten by “{name}”. Do you confirm?",
   "The current sheet will be overwritten by “{name}”. Do you confirm?": "The current sheet will be overwritten by “{name}”. Do you confirm?",
   "Welcome": "Welcome",
-  "Hirelings": "Hirelings"
+  "Hirelings": "Hirelings",
+  "Recruit hireling...": "Recruit hireling...",
+  "Wages/day": "Wages/day",
+  "Dismiss": "Dismiss",
+  "The hireling of “{desc} {name}” will be dismissed. Do you confirm?": "The hireling of “{desc} {name}” will be dismissed. Do you confirm?"
 }

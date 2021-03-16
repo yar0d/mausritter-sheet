@@ -36,11 +36,11 @@
               </w-button>
             </w-toolbar>
 
-            <div v-show="showHistory">
+            <div v-show="showHistory" class="history-background h-max">
               <history />
             </div>
 
-            <div v-show="showHirelings">
+            <div v-show="showHirelings" class="hirelings-background h-max">
               <hirelings ref="hirelings"/>
             </div>
 

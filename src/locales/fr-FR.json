@@ -3,6 +3,7 @@
   "en-US": "English US",
   "fr-FR": "Français",
   "Welcome to Mausrittes Sheet!": "Bienvenue sur la fiche de personnage Mausritter !",
+  "under licence": "sous licence",
   "Items": "Objets",
   "Conditions": "Conditions",
   "Birthsign": "Signe de naissance",
@@ -25,6 +26,7 @@
   "STR ⇄ WIL": "FOR ⇄ VOL",
   "DEX ⇄ WIL": "DEX ⇄ VOL",
   "No swap.": "Pas d'échange.",
+  "{price}p": "{price} p",
   "HP": "PV",
   "Max": "Max",
   "Current": "Courant",
@@ -107,5 +109,9 @@
   "The sheet of “{dest}” will be overwritten by “{name}”. Do you confirm?": "Confirmez-vous le remplacement de la fiche de « {dest} » par celle de « {name} » ?",
   "The current sheet will be overwritten by “{name}”. Do you confirm?": "Confirmez-vous le remplacement de la fiche en cours par “{name}” ?",
   "Welcome": "Bienvenue",
-  "Hirelings": "Employés"
+  "Hirelings": "Employés",
+  "Recruit hireling...": "Engager un employé…",
+  "Wages/day": "Salaire / jour",
+  "Dismiss": "Renvoyer",
+  "The hireling of “{desc} {name}” will be dismissed. Do you confirm?": "Confirmez le renvoi du « {desc} {name} » ?"
 }
