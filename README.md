@@ -30,7 +30,7 @@ To soon to have one ;-)
 This application is made with [Vue.js 3](https://v3.vuejs.org/) and [wave-ui](https://antoniandre.github.io/wave-ui/).
 
 ```
-npm install
+npm ci
 ```
 
 ### Compiles and hot-reloads for development
@@ -38,14 +38,25 @@ npm install
 npm run serve
 ```
 
+### Lints and fixes files
+```
+npm run lint
+```
+
 ### Compiles and minifies for production
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### Build and run a docker container
+If you use **docker-compose**:
 ```
-npm run lint
+docker-compose up --build
+```
+or, with **docker**:
+```
+npm run build:docker
+npm run serve:docker
 ```
 
 ### Customize configuration

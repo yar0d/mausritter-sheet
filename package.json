@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --port 8801",
+    "serve:docker": "docker run -it -p 8765:8765 mausritter-sheet",
     "build": "vue-cli-service build",
+    "build:docker": "docker build --tag mausritter-sheet .",
     "lint": "vue-cli-service lint",
     "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\"",
     "release": "echo \"Future version will be:\" ; npm run release:local -- --dry-run | grep \"tagging release\" | cut -d\" \" -f4 | cut -c2- ",
