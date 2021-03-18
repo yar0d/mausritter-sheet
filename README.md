@@ -15,8 +15,8 @@ Have a look at [Mausritter website](https://mausritter.com/) and [Licence](./LIC
 - Drag'n'drop in grit.
 - Drag'n'drop in bank, retrieving item from bank cost 1% of its price.
 - History of dices and other actions.
-- Save and load whole character sheet from local storage. 10 slots are available.
-- Import / Export of character sheet.
+- Save and load whole character sheet from local storage. 10 slots are available. All data is saved in your browser, no server is needed.
+- Import / Export of character sheet. Use this to load a character into another browser.
 
 See [TODO.md](./src/TODO.md) for incomming features :-)
 
@@ -24,7 +24,7 @@ See [TODO.md](./src/TODO.md) for incomming features :-)
 
 ## Installation
 
-To soon to have one ;-)
+At this time, if you want a standalone app, you can just build a docker container.
 
 ## For developpers
 This application is made with [Vue.js 3](https://v3.vuejs.org/) and [wave-ui](https://antoniandre.github.io/wave-ui/).

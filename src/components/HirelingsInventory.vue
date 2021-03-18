@@ -133,7 +133,7 @@ export default {
       return found
     },
     move(e) {
-      if (e.relatedContext.list && e.relatedContext.list.canDrop) this.canDrop(e.draggedContext.element, e.relatedContext.list)
+      if (e.relatedContext.list && e.relatedContext.list.canDrop) return this.canDrop(e.draggedContext.element, e.relatedContext.list)
 
       // Rules for internal moves:
       // Forbiden to drop anything if a condition already exists in target
@@ -156,6 +156,13 @@ export default {
       this.pack2 = data.pack2 || []
       this.pack3 = data.pack3 || []
       this.pack4 = data.pack4 || []
+      // Export drop testing method
+      this.mainPaw.canDrop = this.canDrop
+      this.offPaw.canDrop = this.canDrop
+      this.pack1.canDrop = this.canDrop
+      this.pack2.canDrop = this.canDrop
+      this.pack3.canDrop = this.canDrop
+      this.pack4.canDrop = this.canDrop
     },
     serialize () {
       return {
@@ -202,6 +209,9 @@ export default {
       this.$data[inventoryId].push({ ...item }) // Clone item in inventory
       return true
     }
+  },
+  created () {
+    this.reset()
   }
 }
 </script>

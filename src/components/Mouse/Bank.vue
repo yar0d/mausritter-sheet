@@ -60,7 +60,9 @@
       </w-flex>
       {{ $t('Your mouse must pay a fee of 1% of the value when retrieving the stored pips or items.') }}
       <div v-if="items" class="mt2 h-max w-max bank-drawer-items">
-        <items v-for="(item, index) in items" :key="index" :item="item" can-delete show-price class="mx2 mb1" @delete="retrieveItem(index, item)" />
+        <template v-for="(item, index) in items" :key="index">
+          <items v-if="item.type === TYPE_ITEM" :item="item" can-delete show-price class="mx2 mb1" @delete="retrieveItem(index, item)" />
+        </template>
       </div>
     </div>
 
@@ -133,8 +135,16 @@ export default {
       return this.canDrop(e.draggedContext.element, e.relatedContext.list)
     },
     reset (data = {}) {
-      this.items = data.items || []
-      this.pips = data.pips || []
+      this.pips = data.pips || 0
+      this.items = this.sanitize(data.items) || []
+      this.items.canDrop = this.canDrop // Export drop testing method
+    },
+    sanitize () {
+      const result = []
+      this.items.forEach(item => {
+        if (item.type === TYPE_ITEM) result.push(item)
+      })
+      return result
     },
     serialize () {
       return {
@@ -147,7 +157,7 @@ export default {
     }
   },
   created () {
-    this.items.canDrop = this.canDrop // Export drop testing method
+    this.reset()
   }
 }
 </script>

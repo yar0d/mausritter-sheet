@@ -133,8 +133,11 @@ export default {
     }
   },
   methods: {
+    selfList (list) {
+      return list === this.body1 || list === this.body2 || list === this.mainPaw || list === this.offPaw || list === this.pack1 || list === this.pack2 || list === this.pack3 || list === this.pack4 || list === this.pack5 || list === this.pack6
+    },
     canDrop (element, list) {
-      if (list && list.canDrop) {
+      if (list && list.canDrop && !this.selfList(list)) {
         return list.canDrop(element, list)
       }
 
@@ -149,7 +152,6 @@ export default {
         if (list[i].type === element.type) abort = true
         i++
       }
-
       if (abort) return false // same type of item is in target or a condition is already in target
       return true
     },
@@ -178,7 +180,7 @@ export default {
       return found
     },
     move(e) {
-      if (e.relatedContext.list && e.relatedContext.list.canDrop) this.canDrop(e.draggedContext.element, e.relatedContext.list)
+      if (e.relatedContext.list && e.relatedContext.list.canDrop) return this.canDrop(e.draggedContext.element, e.relatedContext.list)
 
       // Rules for internal moves:
       // Forbiden to drop anything if a condition already exists in target
@@ -205,6 +207,17 @@ export default {
       this.pack4 = data.pack4 || []
       this.pack5 = data.pack5 || []
       this.pack6 = data.pack6 || []
+      // Export drop testing method
+      this.mainPaw.canDrop = this.canDrop
+      this.offPaw.canDrop = this.canDrop
+      this.body1.canDrop = this.canDrop
+      this.body2.canDrop = this.canDrop
+      this.pack1.canDrop = this.canDrop
+      this.pack2.canDrop = this.canDrop
+      this.pack3.canDrop = this.canDrop
+      this.pack4.canDrop = this.canDrop
+      this.pack5.canDrop = this.canDrop
+      this.pack6.canDrop = this.canDrop
     },
     serialize () {
       return {
@@ -259,6 +272,9 @@ export default {
       this.$data[inventoryId].push({ ...item }) // Clone item in inventory
       return true
     }
+  },
+  created () {
+    this.reset()
   }
 }
 </script>

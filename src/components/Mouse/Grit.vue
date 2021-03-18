@@ -95,6 +95,7 @@ export default {
     },
     reset (data = {}) {
       this.items = data.items || []
+      this.items.canDrop = this.canDrop // Export drop testing method
     },
     serialize () {
       const tmp = []
@@ -113,7 +114,7 @@ export default {
     }
   },
   created () {
-    this.items.canDrop = this.canDrop // Export drop testing method
+    this.reset()
   }
 }
 </script>

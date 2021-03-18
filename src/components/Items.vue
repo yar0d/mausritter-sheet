@@ -22,7 +22,7 @@
           </w-flex>
           <div v-if="showUse && currentItem.use !== undefined && currentItem.use > 6">
             <span class="xs2">
-              <w-input class="title1 background-white-75 input-value" v-model.number="count" />
+              <w-input class="title1 background-white-75 input-value" v-model.number="currentItem.count" />
             </span>
             <span class="title1 primary">
               /{{ currentItem.use }}
@@ -67,7 +67,6 @@ export default {
     return {
       ITEM_FAMILY_CUSTOM,
       ITEM_FAMILY_SPELL,
-      count: 0,
       currentItem: {}
     }
   },

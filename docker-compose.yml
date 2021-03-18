@@ -12,10 +12,3 @@ services:
     restart: "no"
     working_dir: /app
     command: ["http-server", "./dist", "--port", "8765"]
-
-# networks:
-#   default:
-#     driver: bridge
-#     ipam:
-#       config:
-#         - subnet: 192.168.2.0/24

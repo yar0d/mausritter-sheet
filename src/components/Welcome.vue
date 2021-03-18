@@ -1,8 +1,12 @@
 <template>
   <div class="scrollable h-auto">
     <w-toolbar class="background-white-50">
-      <w-button xl v-for="lang in LOCALES" :key="lang" :color="locale === lang ? '' : 'primary'" class="mx2" @click="changeLocale(lang)">
+      <w-button xl v-for="lang in LOCALES" :key="lang" :color="locale === lang ? '' : 'primary'" class="mr2" @click="changeLocale(lang)">
         {{ $t(lang) }}
+      </w-button>
+      <div class="spacer" />
+      <w-button text @click="$refs['about-dialog'].show()">
+        {{ $t('About') }}
       </w-button>
     </w-toolbar>
 
@@ -79,6 +83,8 @@
       </template>
     </prompt-dialog>
   </div>
+
+  <about ref="about-dialog" />
 </template>
 
 <script>
@@ -86,10 +92,11 @@ import { LOCALES, DEFAULT_LOCALE, loadLocale, saveLocale } from '@/services/loca
 import { deleteSlot, listSlots, loadSlot, saveSlot, decodeJson, encodeJson } from '@/services/storage'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import PromptDialog from './PromptDialog.vue'
+import About from './About.vue'
 
 export default {
   name: 'Welcome',
-  components: { ConfirmDialog, PromptDialog },
+  components: { ConfirmDialog, PromptDialog, About },
   propos: [ 'sheet' ],
   data () {
     return {
