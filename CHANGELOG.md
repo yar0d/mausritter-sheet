@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/yar0d/mausritter-sheet/compare/v1.1.2...v1.2.0) (2021-03-18)
+
+
+### Features
+
+* Add favicon and application title ([ce12d30](https://github.com/yar0d/mausritter-sheet/commit/ce12d30468532cc8599fa16ad271685924193514))
+
 ### [1.1.2](https://github.com/yar0d/mausritter-sheet/compare/v1.1.1...v1.1.2) (2021-03-18)
 
 ### [1.1.1](https://github.com/yar0d/mausritter-sheet/compare/v1.1.0...v1.1.1) (2021-03-18)
