@@ -1,5 +1,5 @@
 <template>
-  <w-dialog v-model="show" :title="context || $t('Roll')" :bg-color="backgroundColor" color="yellow" width="300">
+  <w-dialog v-model="show" :title="context || ''" persistent :bg-color="backgroundColor" color="white" width="300">
     <slot name="content">
       <w-flex class="mt2" column justify-center>
         <div class="title1 white">{{ explainedResult }}</div>
