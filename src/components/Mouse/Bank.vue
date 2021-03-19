@@ -79,7 +79,7 @@ import ConfirmDialog from '../ConfirmDialog.vue'
 import PromptDialog from '../PromptDialog.vue'
 
 export default {
-  name: 'Grit',
+  name: 'Bank',
   components: { draggable, Items, ConfirmDialog, PromptDialog },
   props: {
     inventory: { required: true }

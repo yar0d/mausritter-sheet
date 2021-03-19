@@ -187,7 +187,7 @@
 
     <confirm-dialog ref="confirm-dialog" />
 
-    <mouse-creation-dialog ref="mouse-creation-dialog" :background="background" :background-items="backgroundItems" :choose-items="chooseItems" :max-dex="maxDex" :max-str="maxStr" :max-wil="maxWil" />
+    <mouse-creation-dialog ref="mouse-creation-dialog" :background="background" :background-items="backgroundItems" :hirelings="backgroundHirelings" :choose-items="chooseItems" :max-dex="maxDex" :max-str="maxStr" :max-wil="maxWil" />
   </w-card>
 </template>
 
@@ -218,6 +218,7 @@ export default {
       background: '',
       bankedPips: 0,
       birthsign: 0,
+      backgroundHirelings: [],
       backgroundItems: [],
       chooseItems: [],
       choosenItem: null,
@@ -293,7 +294,8 @@ export default {
       this.$refs['coat-pattern'].setValue(d6((context, total) => this.$store.commit('historyAdd', { type: this.$t('Coat') + '/' + context, message: total} )))
       this.$refs['look'].setValue(d66((context, total) => this.$store.commit('historyAdd', { type: this.$t('Look') + '/' + context, message: total} )))
 
-      const b = getBackground(this.maxHP, this.pips)
+      const b = getBackground(2, 3)
+      // const b = getBackground(this.maxHP, this.pips)
       this.background = this.$t(b.label)
       this.backgroundItems = []
 
@@ -318,13 +320,18 @@ export default {
       }
 
       this.$store.commit('hirelingClear')
+      this.backgroundHirelings = b.hirelings
       if (b.hirelings && b.hirelings.length > 0) {
         b.hirelings.forEach(hireling => {
           this.$store.commit('hirelingCreate', hireling)
         })
       }
 
-      // Rule: If your mouse’s highest attribute is 9 or less, roll on the Background table again and take either Item A or B. If your highest is 7 or less, take both.
+      /*
+      * Rule: If your mouse’s highest attribute is 9 or less,
+      * roll on the Background table again and take either Item A or B.
+      * If your highest is 7 or less, take both.
+      */
       if (this.maxStr <= 9 && this.maxDex <= 9 && this.currentWil <= 9) {
         const b1 = getBackground(d6(), d6())
         if (this.maxStr <= 7 && this.maxDex <= 7 && this.currentWil <= 7) {

@@ -23,25 +23,18 @@
       </w-list>
     </div>
   </w-menu>
-  <w-notification v-show="result" bg-color="yellow-light3" color="black" plain shadow transition="bounce" bottom left dismiss>
-    <template #default>
-      <div v-if="context" class="caption">{{ context }}</div>
-      <w-flex v-if="result" column justify-center>
-        <div class="title1">{{ success ? $t('SUCCESS') : $t('FAILED') }}</div>
-        <div class="caption">{{ $t('Need {score} or lower, roll {roll}.', { score, roll: result.total }) }}</div>
-        <div v-if="result && result.dices && result.dices.length > 1">D{{ faces }} : {{ result.dices.join(', ') }}</div>
-      </w-flex>
-    </template>
-  </w-notification>
+  <dice-result ref="dice-result" />
 </template>
 
 <script>
 import { rollCustom } from '@/services/dice-roller'
+import DiceResult from './DiceResult.vue'
 
 const DICES_FACES = [4, 6, 8, 10, 12, 20]
 
 export default {
   name: 'Checker',
+  components: { DiceResult },
   emits: [ 'rolled' ],
   props: {
     context: { type: String, required: true },
@@ -58,26 +51,27 @@ export default {
         { value: 'a', label: 'With advantage', icon: 'mdi mdi-thumb-up' },
         { value: 'd', label: 'With disadvantage', icon: 'mdi mdi-thumb-down' }
       ],
-      result: null,
-      showMenu: false
+      showMenu: false,
     }
   },
   methods: {
     roll (advantage) {
-      this.result = null
+      this.showNotification = false
       let number = advantage ? 2 : 1
       let type = !advantage ? '' : (advantage === 'a' ? 'w' : 'b')
-      this.result = rollCustom(`${type}${number}d${this.faces}`)
-      this.success = this.result.total <= this.score
+      const result = rollCustom(`${type}${number}d${this.faces}`)
+      const success = result.total <= this.score
 
       this.$store.commit('historyAdd', {
         type: `${type}${number}d${this.faces}`,
-        message: this.context + ' -> ' + (this.success ? this.$t('SUCCESS') : this.$t('FAILED')),
-        color: this.success ? 'success' : 'failed',
-        secondary: this.$t('Need {score} or lower, roll {roll}.', { score: this.score, roll: this.result.total }) +
-          (this.result.dices.length > 1 ? ' [' + this.result.dices.join(', ') + ']' : '') })
+        message: this.context + ' -> ' + (success ? this.$t('SUCCESS') : this.$t('FAILED')),
+        color: success ? 'success' : 'failed',
+        secondary: this.$t('Need {score} or lower, roll {roll}.', { score: this.score, roll: result.total }) +
+          (result.dices.length > 1 ? ' [' + result.dices.join(', ') + ']' : '') })
 
-      this.$emit('rolled', { roll: this.result, context: this.context, total: this.result.total, success: this.success, score: this.score })
+      this.$emit('rolled', { roll: result, context: this.context, total: result.total, success: success, score: this.score })
+
+      this.$refs['dice-result'].open({ context: this.context, roll: result, score: this.score, success, failed: !success })
     }
   }
 }

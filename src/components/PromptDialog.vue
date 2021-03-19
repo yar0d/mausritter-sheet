@@ -9,7 +9,7 @@
 
     <template #actions>
       <div class="spacer" />
-      <w-button @click="agree" bg-color="success">
+      <w-button @click="agree">
         {{ $t('OK') }}
       </w-button>
     </template>

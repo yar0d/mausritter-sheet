@@ -2,7 +2,7 @@
   <w-icon class="clickable" color="dice" :xs="size==='xs'" :sm="size==='sm'" :md="size==='md'" :lg="size==='lg'" :xl="size==='xl'" @click="roll">
     mdi mdi-dice-d10
   </w-icon>
-  <w-notification v-show="result" bg-color="yellow" color="black" success plain shadow transition="bounce" bottom left dismiss>
+  <w-notification v-show="result" bg-color="yellow" color="black" success plain shadow transition="bounce" top center dismiss>
     <template #default>
       <div v-if="context" class="caption">{{ context }}</div>
       <w-icon xl>mdi mdi-dice-d10</w-icon> <span class="title1">{{ result }}</span>

@@ -12,7 +12,7 @@
   </w-tooltip>
 
 
-  <w-notification v-show="result && result.total" bg-color="yellow-light3" color="black" plain shadow transition="bounce" bottom left dismiss>
+  <w-notification v-show="result && result.total" bg-color="yellow-light3" color="black" plain shadow transition="bounce" top center dismiss>
     <template #default>
       <div v-if="context" class="caption">{{ context }}</div>
       <w-flex row align-center>

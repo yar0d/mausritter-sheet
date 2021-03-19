@@ -161,6 +161,9 @@ blockquote {
 
 .mouse-creation-dialog-background {
   background-image: url('../img/mouse-creation.jpg');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
 }
 
 .bank-dialog-background {
