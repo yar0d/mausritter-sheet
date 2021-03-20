@@ -1,6 +1,8 @@
 <template>
   <w-app id="app">
     <main class="grow">
+      <div id="dice-canvas" class="dice3d-canvas" />
+
       <w-flex basis-zero wrap class="h-max">
         <w-flex row align-start justify-space-between>
           <w-flex column justify-space-between>
@@ -55,6 +57,7 @@
 </template>
 
 <script>
+import dices3D from '@/services/dice3d'
 import Sheet from '@/components/Sheet.vue'
 import SheetToolbar from '@/components/SheetToolbar.vue'
 import History from '@/components/History.vue'
@@ -87,6 +90,7 @@ export default {
     this.mausritter.sheet = this.$refs['sheet']
     this.mausritter.sheetToolbar = this.$refs['sheettoolbar']
     this.mausritter.hirelings = this.$refs['hirelings']
+    dices3D.initialize('dice-canvas')
   }
 }
 </script>

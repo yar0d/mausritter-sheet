@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/yar0d/mausritter-sheet/compare/v1.3.0...v1.3.1) (2021-03-20)
+
+## [1.3.0](https://github.com/yar0d/mausritter-sheet/compare/v1.2.2...v1.3.0) (2021-03-20)
+
+
+### Features
+
+* Pretty 3D dices ! ([cf112a8](https://github.com/yar0d/mausritter-sheet/commit/cf112a83deb1bbb635bbc7394a081cc82b9f9aa0))
+
 ### [1.2.2](https://github.com/yar0d/mausritter-sheet/compare/v1.2.1...v1.2.2) (2021-03-19)
 
 

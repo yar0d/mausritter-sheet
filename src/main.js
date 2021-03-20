@@ -7,6 +7,8 @@ import './assets/styles/fonts.css'
 import './assets/styles/common.css'
 import './assets/styles/items.css'
 
+import '../public/libs/dice3d/dice.css'
+
 import { store } from './store'
 
 let i18nModule
