@@ -294,8 +294,7 @@ export default {
       this.$refs['coat-pattern'].setValue(d6((context, total) => this.$store.commit('historyAdd', { type: this.$t('Coat') + '/' + context, message: total} )))
       this.$refs['look'].setValue(d66((context, total) => this.$store.commit('historyAdd', { type: this.$t('Look') + '/' + context, message: total} )))
 
-      const b = getBackground(2, 3)
-      // const b = getBackground(this.maxHP, this.pips)
+      const b = getBackground(this.maxHP, this.pips)
       this.background = this.$t(b.label)
       this.backgroundItems = []
 
