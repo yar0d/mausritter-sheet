@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.4](https://github.com/yar0d/mausritter-sheet/compare/v1.3.3...v1.3.4) (2021-03-20)
+
+
+### Bug Fixes
+
+* use all backqrounds ([b784735](https://github.com/yar0d/mausritter-sheet/commit/b784735aae85b7bc0071fbfd14fa35b5e869ad1c))
+
 ### [1.3.3](https://github.com/yar0d/mausritter-sheet/compare/v1.3.2...v1.3.3) (2021-03-20)
 
 
