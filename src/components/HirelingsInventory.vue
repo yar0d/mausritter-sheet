@@ -88,8 +88,11 @@ export default {
     }
   },
   methods: {
+    selfList (list) {
+      return list === this.mainPaw || list === this.offPaw || list === this.pack1 || list === this.pack2 || list === this.pack3 || list === this.pack4
+    },
     canDrop (element, list) {
-      if (list && list.canDrop) {
+      if (list && list.canDrop && !this.selfList(list)) {
         return list.canDrop(element, list)
       }
 

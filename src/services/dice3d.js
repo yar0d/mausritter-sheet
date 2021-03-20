@@ -5,13 +5,11 @@ let _diceBox = null
 const DICE_TIMEOUT = 3000
 
 export function initialize (canvasId) {
-  console.log('## [dice3d] initialize')
   if (_canvas !== null) return // Already initialized
 
   _canvas = $t.id(canvasId)
-  console.log('## [dice3d] canvas', _canvas)
-  _canvas.style.width = window.innerWidth - 1 + 'px'
-  _canvas.style.height = window.innerHeight - 1 + 'px'
+  _canvas.style.width = window.innerWidth - 8 + 'px'
+  _canvas.style.height = window.innerHeight - 16 + 'px'
 
   $t.dice.use_true_random = false
   $t.dice.use_shadows = false
@@ -19,7 +17,6 @@ export function initialize (canvasId) {
   $t.dice.label_color = '#ffffff'
 
   _diceBox = new $t.dice.dice_box(_canvas, { w: 500, h: 300 })
-  console.log('## $t.dice:', $t.dice)
   _diceBox.animate_selector = false
   _canvas.style.display = 'none'
 }
