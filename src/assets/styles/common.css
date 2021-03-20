@@ -518,3 +518,11 @@ textarea {
 .no-flex aside.w-drawer {
   display: block;
 }
+
+.dice3d-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2000; /* Above all */;
+  /* background-color: rgba(0, 0, 0, 0.25); */
+}

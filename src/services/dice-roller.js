@@ -169,10 +169,11 @@ export function rollFromTable (table) {
  * @param {Number} faces The number of caes for the dices.
  * @param {Number} keep The number of highest result to keep.
  * @returns {Object} The total and the array of dices.
- */export function rollExplode (number = 2, faces = 6, keep = 1, callback) {
+ */
+export function rollExplode (number = 2, faces = 6, keep = 1, callbackFn) {
   let roll = rollCustom(`${number}d${faces}`).dices
   roll.sort((a, b) => { return b - a })
-  if (callback) callback('explode', roll, sum(roll.slice(0, keep)))
+  if (callbackFn) callbackFn('explode', roll, sum(roll.slice(0, keep)))
   return { total: sum(roll.slice(0, keep)), dices: roll }
 }
 
@@ -183,11 +184,31 @@ export function rollFromTable (table) {
  * @param {Number} keep The number of lowest result to keep.
  * @returns {Object} The total and the array of dices.
  */
-export function rollImplode (number = 2, faces = 6, keep = 1, callback) {
+export function rollImplode (number = 2, faces = 6, keep = 1, callbackFn) {
   let roll = rollCustom(`${number}d${faces}`).dices
   roll = roll.sort((a, b) => { return a - b })
-  if (callback) callback('explode', roll, sum(roll.slice(0, keep)))
+  if (callbackFn) callbackFn('explode', roll, sum(roll.slice(0, keep)))
   return { total: sum(roll.slice(0, keep)), dices: roll }
+}
+
+/**
+ * Return the highest dice rolled
+ * @param {[Number]} dices Array of dice result
+ * @returns The highest dice value
+ */
+export function highestOfDices (dices) {
+  dices.sort((a, b) => { return b - a })
+  return dices[0]
+}
+
+/**
+ * Return the lowest dice rolled
+ * @param {[Number]} dices Array of dice result
+ * @returns The lowest dice value
+ */
+export function lowestOfDices (dices) {
+  dices.sort((a, b) => { return a - b })
+  return dices[0]
 }
 
 /*
@@ -214,6 +235,8 @@ export default {
   d30,
   d66,
   d100,
+  highestOfDices,
+  lowestOfDices,
   rollCustom,
   rollExplode,
   rollFromTable,
