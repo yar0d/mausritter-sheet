@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.3](https://github.com/yar0d/mausritter-sheet/compare/v1.3.2...v1.3.3) (2021-03-20)
+
+
+### Bug Fixes
+
+* dice canvas size ([a88c4eb](https://github.com/yar0d/mausritter-sheet/commit/a88c4eb9d8eea64d8a74d4d05f92af3d4af5c73e))
+
 ### [1.3.2](https://github.com/yar0d/mausritter-sheet/compare/v1.2.2...v1.3.2) (2021-03-20)
 
 
