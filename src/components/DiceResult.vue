@@ -11,7 +11,7 @@
 
     <template #actions>
       <div class="spacer" />
-      <w-button @click="agree">
+      <w-button :bg-color="backgroundColorButton" @click="agree">
         {{ $t('OK') }}
       </w-button>
     </template>
@@ -37,6 +37,7 @@ export default {
   },
   computed: {
     backgroundColor () { return this.success ? 'green' : (this.failed ? 'red-light1' : 'deep-purple-dark1') },
+    backgroundColorButton () { return this.success ? 'green-dark2' : (this.failed ? 'red-dar1' : 'deep-purple-dark3') },
     explainedResult () { return this.success ? this.$t('SUCCESS') : (this.failed ? this.$t('FAILED') : '') },
     icon () { return STANDARD_DICES.includes(this.faces) ? `mdi mdi-dice-d${this.faces}` : 'mdi mdi-dice-multiple' }
   },

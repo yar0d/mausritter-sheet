@@ -1,22 +1,26 @@
-/* global $t */
+/* global $diceCore */
 let _canvas = null
 let _diceBox = null
 
 const DICE_TIMEOUT = 3000
 
+export function setDiceColor (color) {
+  $diceCore.dice.dice_color = color
+  $diceCore.dice.label_color = '#ffffff'
+}
+
 export function initialize (canvasId) {
   if (_canvas !== null) return // Already initialized
 
-  _canvas = $t.id(canvasId)
+  _canvas = $diceCore.id(canvasId)
   _canvas.style.width = window.innerWidth - 8 + 'px'
   _canvas.style.height = window.innerHeight - 16 + 'px'
 
-  $t.dice.use_true_random = false
-  $t.dice.use_shadows = false
-  $t.dice.dice_color = '#000080'
-  $t.dice.label_color = '#ffffff'
+  $diceCore.dice.use_true_random = false
+  $diceCore.dice.use_shadows = false
+  setDiceColor('#000070')
 
-  _diceBox = new $t.dice.dice_box(_canvas, { w: 500, h: 300 })
+  _diceBox = new $diceCore.dice.dice_box(_canvas, { w: 500, h: 300 })
   _diceBox.animate_selector = false
   _canvas.style.display = 'none'
 }
@@ -28,7 +32,7 @@ export function roll({ formula = '2d6', timeout, callbackFn }) {
   }
 
   function notation_getter() {
-    return $t.dice.parse_notation(formula)
+    return $diceCore.dice.parse_notation(formula)
   }
 
   function after_roll(notation, result) {
@@ -48,5 +52,6 @@ export function roll({ formula = '2d6', timeout, callbackFn }) {
 
 export default {
   initialize,
-  roll
+  roll,
+  setDiceColor
 }
