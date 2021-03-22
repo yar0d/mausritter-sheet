@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.5](https://github.com/yar0d/mausritter-sheet/compare/v1.3.4...v1.3.5) (2021-03-22)
+
+
+### Bug Fixes
+
+* eslint errors from lib ([48e75f1](https://github.com/yar0d/mausritter-sheet/commit/48e75f125bf6db637c4d8310cf18a86b516c7082))
+
 ### [1.3.4](https://github.com/yar0d/mausritter-sheet/compare/v1.3.3...v1.3.4) (2021-03-20)
 
 
