@@ -16,7 +16,7 @@ body,
   max-width: 800px;
 }
 
-#feature-tabs > div {
+.fixed-tabs > div {
   width: 800px;
   max-width: 800px;
 }

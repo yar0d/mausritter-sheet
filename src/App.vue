@@ -10,7 +10,7 @@
             <sheet id="sheet" ref="sheet"/>
           </w-flex>
 
-          <w-flex id="feature-tabs" column class="h-max">
+          <w-flex column class="h-max" :class="isMobileDevice ? 'fixed-tabs' : ''">
             <w-toolbar no-border class="toolbar-pager">
               <w-button lg :class="isMobileDevice ? 'px2' : 'px8'" :text="!showWelcome" @click="showPanel({ home: true, history: false, hirelings: false })">
                 <w-icon class="mr1" xl>
