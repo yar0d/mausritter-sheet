@@ -12,6 +12,7 @@ diceCore.copyto = function(obj, res) {
       res[i] = $diceCore.copy(obj[i]);
   } else {
     for (i in obj) {
+      // eslint-disable-next-line no-prototype-builtins
       if (obj.hasOwnProperty(i))
         res[i] = $diceCore.copy(obj[i]);
     }
@@ -25,9 +26,9 @@ diceCore.copy = function(obj) {
 }
 
 diceCore.element = function(name, props, place, content) {
-  var dom = document.createElement(name);
+  let dom = document.createElement(name);
   if (props)
-    for (var i in props) dom.setAttribute(i, props[i]);
+    for (let i in props) dom.setAttribute(i, props[i]);
   if (place) place.appendChild(dom);
   if (content !== undefined) $diceCore.inner(content, dom);
   return dom;
@@ -43,20 +44,20 @@ diceCore.id = function(id) {
 }
 
 diceCore.set = function(sel, props) {
-  for (var i in props) sel.setAttribute(i, props[i]);
+  for (let i in props) sel.setAttribute(i, props[i]);
   return sel;
 }
 
 diceCore.clas = function(sel, oldclass, newclass) {
-  var oc = oldclass ? oldclass.split(/\s+/) : [],
+  let oc = oldclass ? oldclass.split(/\s+/) : [],
     nc = newclass ? newclass.split(/\s+/) : [],
     classes = (sel.getAttribute('class') || '').split(/\s+/);
   if (!classes[0]) classes = [];
-  for (var i in oc) {
-    var ind = classes.indexOf(oc[i]);
+  for (let i in oc) {
+    let ind = classes.indexOf(oc[i]);
     if (ind >= 0) classes.splice(ind, 1);
   }
-  for (var i in nc) {
+  for (let i in nc) {
     if (nc[i] && classes.indexOf(nc[i]) < 0) classes.push(nc[i]);
   }
   sel.setAttribute('class', classes.join(' '));
@@ -72,7 +73,7 @@ diceCore.remove = function(sel) {
   if (sel) {
     if (sel.parentNode) sel.parentNode.removeChild(sel);
     else
-      for (var i = sel.length - 1; i >= 0; --i)
+      for (let i = sel.length - 1; i >= 0; --i)
         sel[i].parentNode.removeChild(sel[i]);
   }
 }
@@ -80,7 +81,7 @@ diceCore.remove = function(sel) {
 diceCore.bind = function(sel, eventname, func, bubble) {
   if (!sel) return;
   if (eventname.constructor === Array) {
-    for (var i in eventname)
+    for (let i in eventname)
       sel.addEventListener(eventname[i], func, bubble ? bubble : false);
   } else
     sel.addEventListener(eventname, func, bubble ? bubble : false);
@@ -88,14 +89,14 @@ diceCore.bind = function(sel, eventname, func, bubble) {
 
 diceCore.unbind = function(sel, eventname, func, bubble) {
   if (eventname.constructor === Array) {
-    for (var i in eventname)
+    for (let i in eventname)
       sel.removeEventListener(eventname[i], func, bubble ? bubble : false);
   } else
     sel.removeEventListener(eventname, func, bubble ? bubble : false);
 }
 
 diceCore.one = function(sel, eventname, func, bubble) {
-  var one_func = function(e) {
+  let one_func = function(e) {
     func.call(this, e);
     diceCore.unbind(sel, eventname, one_func, bubble);
   };
@@ -103,14 +104,14 @@ diceCore.one = function(sel, eventname, func, bubble) {
 }
 
 diceCore.raise_event = function(sel, eventname, bubble, cancelable) {
-  var evt = document.createEvent('UIEvents');
+  let evt = document.createEvent('UIEvents');
   evt.initEvent(eventname, bubble == undefined ? true : bubble,
     cancelable == undefined ? true : cancelable);
   sel.dispatchEvent(evt);
 }
 
 diceCore.raise = function(sel, eventname, params, bubble, cancelable) {
-  var ev = document.createEvent("CustomEvent");
+  let ev = document.createEvent("CustomEvent");
   ev.initCustomEvent(eventname, bubble, cancelable, params);
   sel.dispatchEvent(ev);
 }
@@ -122,9 +123,9 @@ if (!document.getElementsByClassName) {
       cl = classes.split(/\s+/),
       result = [];
 
-    for (var i = list.length - 1; i >= 0; --i) {
-      for (var j = cl.length - 1; j >= 0; --j) {
-        var clas = list[i].getAttribute('class');
+    for (let i = list.length - 1; i >= 0; --i) {
+      for (let j = cl.length - 1; j >= 0; --j) {
+        let clas = list[i].getAttribute('class');
         if (clas && clas.search('\\b' + cl[j] + '\\b') != -1) {
           result.push(list[i]);
           break;
@@ -141,30 +142,30 @@ if (!document.getElementsByClassName) {
 
 diceCore.uuid = function() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    var r = Math.random() * 16 | 0,
+    let r = Math.random() * 16 | 0,
       v = c == 'x' ? r : (r & 0x3 | 0x8);
     return v.toString(16);
   });
 }
 
 diceCore.get_url_params = function() {
-  var params = window.location.search.substring(1).split("&");
-  var res = {};
-  for (var i in params) {
-    var keyvalue = params[i].split("=");
+  let params = window.location.search.substring(1).split("&");
+  let res = {};
+  for (let i in params) {
+    let keyvalue = params[i].split("=");
     res[keyvalue[0]] = decodeURI(keyvalue[1]);
   }
   return res;
 }
 
 diceCore.get_mouse_coords = function(ev) {
-  var touches = ev.changedTouches;
+  let touches = ev.changedTouches;
   if (touches) return { x: touches[0].clientX, y: touches[0].clientY };
   return { x: ev.clientX, y: ev.clientY };
 }
 
 diceCore.deferred = function() {
-  var solved = false,
+  let solved = false,
     callbacks = [],
     args = [];
 
@@ -177,10 +178,10 @@ diceCore.deferred = function() {
     promise: function() {
       return {
         then: function(callback) {
-          var deferred = diceCore.deferred(),
+          let deferred = diceCore.deferred(),
             promise = deferred.promise();
           callbacks.push(function() {
-            var res = callback.apply(this, arguments);
+            let res = callback.apply(this, arguments);
             if (res && 'done' in res) res.done(deferred.resolve);
             else deferred.resolve.apply(this, arguments);
           });
@@ -205,11 +206,11 @@ diceCore.deferred = function() {
 }
 
 diceCore.when = function(promises) {
-  var deferred = diceCore.deferred();
-  var count = promises.length,
+  let deferred = diceCore.deferred();
+  let count = promises.length,
     ind = 0;
   if (count == 0) deferred.resolve();
-  for (var i = 0; i < count; ++i) {
+  for (let i = 0; i < count; ++i) {
     promises[i].done(function() {
       if (++ind == count) deferred.resolve();
     });

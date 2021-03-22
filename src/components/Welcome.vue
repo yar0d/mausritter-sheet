@@ -26,7 +26,7 @@
               <span class="w-25">
                 <w-tooltip transition="fade" bg-color="yellow-light2" color="black" left>
                   <template #activator="{ on }">
-                    <w-button :disabled="!slot" v-on="on" @click="deleteSheet(index)" bg-color="red" color="white" class="ml2" icon="mdi mdi-delete" />
+                    <w-button :disabled="!slot" v-on="on" @click="deleteSheet(index)" bg-color="red" color="white" class="ml4" icon="mdi mdi-delete" />
                   </template>
                   {{ $t('Delete') }}
                 </w-tooltip>
@@ -34,7 +34,7 @@
               <span class="w-25">
                 <w-tooltip transition="fade" bg-color="yellow-light2" color="black" left>
                   <template #activator="{ on }">
-                    <w-button :disabled="!slot" v-on="on" @click="exportSheet(index)" bg-color="" color="white" class="ml2" icon="mdi mdi-application-export" />
+                    <w-button :disabled="!slot" v-on="on" @click="exportSheet(index)" bg-color="" color="white" class="ml4" icon="mdi mdi-application-export" />
                   </template>
                   {{ $t('Export') }}
                 </w-tooltip>
@@ -42,7 +42,7 @@
               <span class="w-25">
                 <w-tooltip transition="fade" bg-color="yellow-light2" color="black" left>
                   <template #activator="{ on }">
-                    <w-button v-on="on" @click="saveSheet(index)" bg-color="blue" color="white" class="ml2" icon="mdi mdi-content-save" />
+                    <w-button v-on="on" @click="saveSheet(index)" bg-color="blue" color="white" class="ml4" icon="mdi mdi-content-save" />
                   </template>
                   {{ $t('Save') }}
                 </w-tooltip>

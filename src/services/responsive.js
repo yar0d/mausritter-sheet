@@ -3,7 +3,7 @@ export function isMobileDevice () {
 }
 
 export function screenWidth () {
-  return window.screen.availWidth
+  return window.innerWidth
 }
 
 export default {

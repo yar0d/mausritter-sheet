@@ -13,22 +13,33 @@ export function initialize (canvasId) {
   if (_canvas !== null) return // Already initialized
 
   _canvas = $diceCore.id(canvasId)
-  _canvas.style.width = window.screen.availWidth - 8 + 'px'
-  _canvas.style.height = window.screen.availHeight - 16 + 'px'
+  _canvas.style.width = window.innerWidth - 8 + 'px'
+  _canvas.style.height = window.innerHeight - 16 + 'px'
 
   $diceCore.dice.use_true_random = false
   $diceCore.dice.use_shadows = false
   setDiceColor('#000070')
 
-  _diceBox = new $diceCore.dice.dice_box(_canvas, { w: 500, h: 300 })
+  _diceBox = new $diceCore.dice.dice_box(_canvas)
   _diceBox.animate_selector = false
   _canvas.style.display = 'none'
 
-  $diceCore.bind(window, 'resize', function() {
-    _canvas.style.width = window.screen.availWidth - 1 + 'px'
-    _canvas.style.height = window.screen.availHeight - 1 + 'px'
-    _diceBox.reinit(_canvas, { w: 500, h: 300 })
-  })
+  // does not work for mobile devices
+  // $diceCore.bind(window, 'resize', function() {
+  //   if (!_canvas) return
+  //   console.log('#resize')
+  //   _canvas.style.width = window.innerWidth - 8 + 'px'
+  //   _canvas.style.height = window.innerHeight - 8 + 'px'
+  //   _diceBox.reinit(_canvas)
+  // })
+
+  // $diceCore.bind(window, 'orientationChange', function() {
+  //   if (!_canvas) return
+  //   console.log('#orientationChange')
+  //   _canvas.style.width = window.innerWidth - 8 + 'px'
+  //   _canvas.style.height = window.innerHeight - 8 + 'px'
+  //   _diceBox.reinit(_canvas)
+  // })
 }
 
 export function roll({ formula = '2d6', timeout, callbackFn }) {
