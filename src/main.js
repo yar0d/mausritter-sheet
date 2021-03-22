@@ -62,7 +62,9 @@ new WaveUI(app, {
 app.use(i18n).use(store)
 
 app.config.globalProperties.mausritter = {
+  bank: null,
   hirelings: null,
+  inventory: null,
   sheet: null,
   sheetToolbar: null
 }

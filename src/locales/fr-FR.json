@@ -118,5 +118,6 @@
   "Export": "Exporter",
   "“{name}” is now copied to clipboard.": "« {name} » a été copié dans le presse-papier.",
   "Import": "Importer",
-  "Paste your character here...": "Coller le personnage ici…"
+  "Paste your character here...": "Coller le personnage ici…",
+  "Drop item here, in your bank.": "Déposer ici les objets à mettre en banque."
 }

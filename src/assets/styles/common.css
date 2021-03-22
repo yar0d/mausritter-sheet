@@ -174,8 +174,11 @@ blockquote {
   background-size: cover;
 }
 
-.bank-dialog-background {
+.bank-background {
   background-image: url('../img/bank.jpg');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
 }
 
 .shadow {
@@ -532,5 +535,8 @@ textarea {
   top: 0;
   left: 0;
   z-index: 2000; /* Above all */;
-  /* background-color: rgba(0, 0, 0, 0.25); */
+}
+
+.bank-items {
+  min-height: 64px;
 }

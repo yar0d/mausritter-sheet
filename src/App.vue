@@ -12,25 +12,32 @@
 
           <w-flex column class="h-max" :class="isMobileDevice ? 'fixed-tabs' : ''">
             <w-toolbar no-border class="toolbar-pager">
-              <w-button lg :class="isMobileDevice ? 'px2' : 'px8'" :text="!showWelcome" @click="showPanel({ home: true, history: false, hirelings: false })">
-                <w-icon class="mr1" xl>
+              <w-button lg :class="isMobileDevice ? 'px2' : 'px8'" :text="!show.welcome" @click="showPanel('welcome')">
+                <w-icon xl>
                   mdi mdi-rodent
                 </w-icon>
-                <span class="text-small">{{ $t('Welcome') }}</span>
+                <span class="ml1 text-small">{{ $t('Welcome') }}</span>
               </w-button>
 
-              <w-button lg :class="isMobileDevice ? 'px2' : 'px8'" :text="!showHistory" @click="showPanel({ home: false, history: true, hirelings: false })">
-                <w-icon class="mr1" xl>
+              <w-button lg :class="isMobileDevice ? 'px2' : 'px8'" :text="!show.history" @click="showPanel('history')">
+                <w-icon xl>
                   mdi mdi-history
                 </w-icon>
-                <span class="text-small">{{ $t('History') }}</span>
+                <span class="ml1 text-small">{{ $t('History') }}</span>
               </w-button>
 
-              <w-button lg :class="isMobileDevice ? 'px2' : 'px8'" :text="!showHirelings" @click="showPanel({ home: false, history: false, hirelings: true })">
-                <w-icon class="mr1" xl>
+              <w-button lg :class="isMobileDevice ? 'px2' : 'px8'" :text="!show.bank" @click="showPanel('bank')">
+                <w-icon xl>
+                  mdi mdi-bank
+                </w-icon>
+                <span class="ml1 text-small">{{ $t('Bank') }}</span>
+              </w-button>
+
+              <w-button lg :class="isMobileDevice ? 'px2' : 'px8'" :text="!show.hirelings" @click="showPanel('hirelings')">
+                <w-icon xl>
                   mdi mdi-donkey
                 </w-icon>
-                <span class="text-small">{{ $t('Hirelings') }}</span>
+                <span class="ml1 text-small">{{ $t('Hirelings') }}</span>
                 <chips :value="hirelingsCount" />
               </w-button>
 
@@ -38,15 +45,19 @@
               <img :src="require('@/assets/compatible-with-mausritter-88x32.png')" contain class="clickable" @click="$refs['about-dialog'].show()" />
             </w-toolbar>
 
-            <div v-show="showHistory" class="history-background h-max">
+            <div v-show="show.history" class="history-background h-max">
               <history />
             </div>
 
-            <div v-show="showHirelings" class="hirelings-background h-max">
+            <div v-show="show.bank" class="bank-background w-max h-max">
+              <bank ref="bank" />
+            </div>
+
+            <div v-show="show.hirelings" class="hirelings-background h-max">
               <hirelings ref="hirelings"/>
             </div>
 
-            <div v-show="showWelcome" class="welcome-background h-max">
+            <div v-show="show.welcome" class="welcome-background h-max">
               <welcome />
             </div>
           </w-flex>
@@ -67,16 +78,20 @@ import History from '@/components/History.vue'
 import Hirelings from '@/components/Hirelings.vue'
 import Welcome from './components/Welcome.vue'
 import Chips from './components/Chips.vue'
+import Bank from './components/Bank.vue'
 
 export default {
   name: 'App',
-  components: { About, Sheet, SheetToolbar, History, Hirelings, Welcome, Chips },
+  components: { About, Sheet, SheetToolbar, History, Hirelings, Welcome, Chips, Bank },
   data () {
     return {
       tabs: [],
-      showWelcome: true,
-      showHistory: false,
-      showHirelings: false,
+      show: {
+        bank: false,
+        hirelings: false,
+        history: false,
+        welcome: true
+      }
     }
   },
   computed: {
@@ -84,13 +99,14 @@ export default {
     isMobileDevice () { return isMobileDevice(this.$waveui.breakpoint.name) }
   },
   methods: {
-    showPanel ({ home, history, hirelings }) {
-      this.showWelcome = home
-      this.showHistory = history
-      this.showHirelings = hirelings
+    showPanel (panelId) {
+      Object.keys(this.show).forEach(id => {
+        this.show[id] = id === panelId
+      })
     }
   },
   mounted () {
+    this.mausritter.bank = this.$refs['bank']
     this.mausritter.sheet = this.$refs['sheet']
     this.mausritter.sheetToolbar = this.$refs['sheettoolbar']
     this.mausritter.hirelings = this.$refs['hirelings']

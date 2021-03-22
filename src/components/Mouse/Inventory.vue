@@ -218,6 +218,16 @@ export default {
       this.pack4.canDrop = this.canDrop
       this.pack5.canDrop = this.canDrop
       this.pack6.canDrop = this.canDrop
+      this.mainPaw.view = 'inventory'
+      this.offPaw.view = 'inventory'
+      this.body1.view = 'inventory'
+      this.body2.view = 'inventory'
+      this.pack1.view = 'inventory'
+      this.pack2.view = 'inventory'
+      this.pack3.view = 'inventory'
+      this.pack4.view = 'inventory'
+      this.pack5.view = 'inventory'
+      this.pack6.view = 'inventory'
     },
     serialize () {
       return {
