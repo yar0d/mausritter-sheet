@@ -10,6 +10,7 @@ Prepare for inventory extension (like for Hamster from https://sites.google.com/
 Create a version usable on tablets and smartphones.
 
 ## Misc
+- allow to roll a dice formula, like 2d6+3.
 - Add network to allow everyone with the same table identifier to see dice rolls and other mice name.
 - autosave ? after each update; each N minutes ?
 - save history in slots too.
