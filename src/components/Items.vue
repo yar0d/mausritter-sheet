@@ -1,5 +1,5 @@
 <template>
-  <div v-if="currentItem && currentItem.id" class="item item-background shadow draggable" :class="size ? `item-size-${size}` : `item-${currentItem.geometry}`">
+  <div v-if="currentItem && currentItem.id" class="item item-background shadow" :class="cls">
     <w-flex column align-start justify-start class="h-max" :class="className(currentItem.label)">
       <w-flex row class="h-max w-max">
         <w-flex column justify-end class="w-25 text-center">
@@ -38,7 +38,7 @@
             <span class="item-def">{{ $t('Def')}} {{ currentItem.def }}</span>
           </div>
           <div v-if="showPrice && currentItem.price !== null" class="text-right">
-            <span class="item-price"> {{ $t('{price}p', { price: currentItem.price }) }} p</span>
+            <span class="item-price"> {{ $t('{price}p', { price: currentItem.price }) }}</span>
           </div>
         </w-flex>
       </w-flex>
@@ -55,6 +55,7 @@ export default {
   name: 'Items',
   props: {
     canDelete: { type: Boolean, default: false },
+    notDraggable: { type: Boolean, default: false },
     item: { type: Object, required: true },
     readonly: { type: Boolean, default: false },
     showDamage: { type: Boolean, default: false },
@@ -79,6 +80,9 @@ export default {
     }
   },
   computed: {
+    cls () {
+      return (this.size ? `item-size-${this.size}` : `item-${this.currentItem.geometry}`) + (this.notDraggable ? '' : ' draggable')
+    },
     canInputCustomLabel () {
       return !this.readonly
     },

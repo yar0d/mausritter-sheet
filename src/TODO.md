@@ -1,3 +1,6 @@
+## BUGS
+- grits are not restored on loading a sheet.
+
 # TODO
 
 ## Extension for other races

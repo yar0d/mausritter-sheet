@@ -556,7 +556,7 @@
 
   let that = this;
 
-  this.dice_box = function(container, dimentions) {
+  this.dice_box = function(container, dimensions) {
     this.use_adapvite_timestep = true;
     this.animate_selector = true;
 
@@ -571,7 +571,7 @@
     // this.renderer.setClearColor(0xffffff, 1);
     this.renderer.setClearColor(0xffffff, 0); // white = transparent
 
-    this.reinit(container, dimentions);
+    this.reinit(container, dimensions);
 
     this.world.gravity.set(0, 0, -9.8 * 800);
     this.world.broadphase = new CANNON.NaiveBroadphase();
@@ -618,12 +618,12 @@
     this.renderer.render(this.scene, this.camera);
   }
 
-  this.dice_box.prototype.reinit = function(container, dimentions) {
+  this.dice_box.prototype.reinit = function(container, dimensions) {
     this.cw = container.clientWidth / 2;
     this.ch = container.clientHeight / 2;
-    if (dimentions) {
-      this.w = dimentions.w;
-      this.h = dimentions.h;
+    if (dimensions) {
+      this.w = dimensions.w;
+      this.h = dimensions.h;
     } else {
       this.w = this.cw;
       this.h = this.ch;

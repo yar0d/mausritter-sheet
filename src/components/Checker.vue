@@ -1,14 +1,9 @@
 <template>
   <w-menu v-model="showMenu" left>
     <template #activator="{ on: menuOn }">
-      <w-tooltip transition="fade" bg-color="yellow-light2" color="black" left>
-        <template #activator="{ on: tooltipOn }">
-          <w-icon v-on="{ ...menuOn, ...tooltipOn }" class="clickable dice" :xs="size==='xs'" :sm="size==='sm'" :md="size==='md'" :lg="size==='lg'" :xl="size==='xl'">
-            {{ DICES_FACES.includes(faces) ? 'mdi mdi-dice-d' + faces : 'mdi mdi-dice-multiple' }}
-          </w-icon>
-        </template>
-        {{ context }}
-      </w-tooltip>
+      <w-icon v-on="{ ...menuOn }" class="clickable dice" :xs="size==='xs'" :sm="size==='sm'" :md="size==='md'" :lg="size==='lg'" :xl="size==='xl'">
+        {{ DICES_FACES.includes(faces) ? 'mdi mdi-dice-d' + faces : 'mdi mdi-dice-multiple' }}
+      </w-icon>
     </template>
     <div class="text-center">
       <div v-if="context" class="py1">{{ context }}</div>

@@ -181,7 +181,6 @@
 
       <w-flex row justify-center class="mx4 mt2">
         <grit ref="grit" :level="level" />
-        <bank ref="bank" :inventory="inventoryComponent" />
       </w-flex>
     </w-flex>
 
@@ -204,11 +203,10 @@ import Inventory from './Inventory.vue'
 import Look from './Look.vue'
 import Grit from './Grit.vue'
 import ConfirmDialog from '../ConfirmDialog.vue'
-import Bank from './Bank.vue'
 import MouseCreationDialog from './MouseCreationDialog.vue'
 
 export default {
-  components: { Birthsign, CoatColor, CoatPattern, Inventory, Checker, Look, Grit, ConfirmDialog, Bank, MouseCreationDialog },
+  components: { Birthsign, CoatColor, CoatPattern, Inventory, Checker, Look, Grit, ConfirmDialog, MouseCreationDialog },
   data() {
     return {
       SWAP_NONE,
@@ -229,7 +227,6 @@ export default {
       currentHP: 0,
       currentStr: 0,
       currentWil: 0,
-      inventoryComponent: null,
       isNew: true,
       level: 1,
       look: 0,
@@ -298,7 +295,7 @@ export default {
       this.background = this.$t(b.label)
       this.backgroundItems = []
 
-      this.$refs['bank'].reset()
+      this.mausritter.bank.reset()
       this.$refs['grit'].reset()
       this.$refs['inventory'].reset()
       this.$refs['inventory'].putItem(TYPE_ITEM + '-torches', 'pack1')
@@ -394,14 +391,14 @@ export default {
           pips: this.pips,
           xp: this.xp
         },
-        bank: this.$refs['bank'].serialize(),
+        bank: this.mausritter.bank.serialize(),
         grit: this.$refs['grit'].serialize(),
         inventory: this.$refs['inventory'].serialize()
       }
     },
     setData (data) {
       this.reset(data.sheet)
-      this.$refs['bank'].setData(data.bank)
+      this.mausritter.bank.setData(data.bank)
       this.$refs['grit'].setData(data.grit)
       this.$refs['inventory'].setData(data.inventory)
       this.isNew = false
@@ -420,7 +417,7 @@ export default {
     }
   },
   mounted () {
-    this.inventoryComponent = this.$refs['inventory']
+    this.mausritter.inventory = this.$refs['inventory']
     this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausrittes Sheet!') })
   }
 }

@@ -3,7 +3,7 @@
   <w-drawer id="drawer" :value="value" top no-overlay>
     <w-tabs :items="2" fill-bar class="w-max drawer-background">
       <template #item-title.1>
-        {{ $t('Items') }}
+        <span class="white">{{ $t('Items') }}</span>
       </template>
       <template #item-content.1>
         <div class="bank-drawer-items">
@@ -15,7 +15,7 @@
         </div>
       </template>
       <template #item-title.2>
-        {{ $t('Conditions') }}
+        <span class="white">{{ $t('Conditions') }}</span>
       </template>
       <template #item-content.2>
         <div class="bank-drawer-items">
@@ -39,6 +39,7 @@ import Items from '@/components/Items.vue'
 export default {
   name: 'Drawer',
   components: { Conditions, draggable, Items },
+  emits: [ 'close' ],
   props: {
     value: { type: Boolean, default: false }
   },
@@ -58,6 +59,9 @@ export default {
     },
     clone (o) {
       return { ...o }
+    },
+    close () {
+      this.$emit('close')
     },
     move (e) {
       return this.canDrop(e.draggedContext.element, e.relatedContext.list)

@@ -4,10 +4,6 @@
       <w-button xl v-for="lang in LOCALES" :key="lang" :color="locale === lang ? '' : 'primary'" class="mr2" @click="changeLocale(lang)">
         {{ $t(lang) }}
       </w-button>
-      <div class="spacer" />
-      <w-button text @click="$refs['about-dialog'].show()">
-        {{ $t('About') }}
-      </w-button>
     </w-toolbar>
 
     <w-flex column align-center justify-center class="mt4">
@@ -30,7 +26,7 @@
               <span class="w-25">
                 <w-tooltip transition="fade" bg-color="yellow-light2" color="black" left>
                   <template #activator="{ on }">
-                    <w-button :disabled="!slot" v-on="on" @click="deleteSheet(index)" bg-color="red" color="white" class="ml2" icon="mdi mdi-delete" />
+                    <w-button :disabled="!slot" v-on="on" @click="deleteSheet(index)" bg-color="red" color="white" class="ml4" icon="mdi mdi-delete" />
                   </template>
                   {{ $t('Delete') }}
                 </w-tooltip>
@@ -38,7 +34,7 @@
               <span class="w-25">
                 <w-tooltip transition="fade" bg-color="yellow-light2" color="black" left>
                   <template #activator="{ on }">
-                    <w-button :disabled="!slot" v-on="on" @click="exportSheet(index)" bg-color="" color="white" class="ml2" icon="mdi mdi-application-export" />
+                    <w-button :disabled="!slot" v-on="on" @click="exportSheet(index)" bg-color="" color="white" class="ml4" icon="mdi mdi-application-export" />
                   </template>
                   {{ $t('Export') }}
                 </w-tooltip>
@@ -46,7 +42,7 @@
               <span class="w-25">
                 <w-tooltip transition="fade" bg-color="yellow-light2" color="black" left>
                   <template #activator="{ on }">
-                    <w-button v-on="on" @click="saveSheet(index)" bg-color="blue" color="white" class="ml2" icon="mdi mdi-content-save" />
+                    <w-button v-on="on" @click="saveSheet(index)" bg-color="blue" color="white" class="ml4" icon="mdi mdi-content-save" />
                   </template>
                   {{ $t('Save') }}
                 </w-tooltip>
@@ -72,6 +68,7 @@
         </w-flex>
       </w-card>
     </w-flex>
+
     <confirm-dialog ref="confirm-dialog" />
     <prompt-dialog ref="prompt-dialog" />
     <prompt-dialog ref="prompt-import-dialog">
@@ -83,8 +80,6 @@
       </template>
     </prompt-dialog>
   </div>
-
-  <about ref="about-dialog" />
 </template>
 
 <script>
@@ -92,11 +87,10 @@ import { LOCALES, DEFAULT_LOCALE, loadLocale, saveLocale } from '@/services/loca
 import { deleteSlot, listSlots, loadSlot, saveSlot, decodeJson, encodeJson } from '@/services/storage'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import PromptDialog from './PromptDialog.vue'
-import About from './About.vue'
 
 export default {
   name: 'Welcome',
-  components: { ConfirmDialog, PromptDialog, About },
+  components: { ConfirmDialog, PromptDialog },
   propos: [ 'sheet' ],
   data () {
     return {

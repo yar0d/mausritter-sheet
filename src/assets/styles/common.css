@@ -2,14 +2,25 @@ html,
 body,
 #app {
   font-family: 'brokenscript-bold' !important;
-  background-image: url('../img/mouse-hole.png');
-  background-repeat: no-repeat;
   margin: 0;
 }
 
-#sheet,
-#drawer aside,
-#bank aside {
+#sheet {
+  background-image: url('../img/mouse-hole.png');
+  background-repeat: no-repeat;
+}
+
+#sheet-container,
+#drawer aside {
+  max-width: 800px;
+}
+
+#drawer {
+  z-index: 6;
+}
+
+.fixed-tabs > div {
+  width: 800px;
   max-width: 800px;
 }
 
@@ -166,8 +177,11 @@ blockquote {
   background-size: cover;
 }
 
-.bank-dialog-background {
+.bank-background {
   background-image: url('../img/bank.jpg');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
 }
 
 .shadow {
@@ -224,7 +238,7 @@ textarea {
 }
 
 .toolbar-pager {
-  max-height: 32px;
+  max-height: 30px !important;
 }
 
 .w-25 {
@@ -524,5 +538,8 @@ textarea {
   top: 0;
   left: 0;
   z-index: 2000; /* Above all */;
-  /* background-color: rgba(0, 0, 0, 0.25); */
+}
+
+.bank-items {
+  min-height: 64px;
 }
