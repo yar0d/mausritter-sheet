@@ -11,9 +11,12 @@ body,
 }
 
 #sheet-container,
-#drawer aside,
-#bank aside {
+#drawer aside {
   max-width: 800px;
+}
+
+#drawer {
+  z-index: 6;
 }
 
 .fixed-tabs > div {
