@@ -28,17 +28,16 @@
       </div>
     </w-toolbar>
 
-    <w-flex column align-center class="pt4">
-      <div v-for="(h, index) in hirelings" :key="index" class="xs10">
-        <hireling :ref="'hireling-' + index" :hireling="h" :id="index" can-delete @delete="deleteHireling" />
-      </div>
-    </w-flex>
+    <div class="pt4 px4">
+      <hireling v-for="(h, index) in hirelings" :key="index" :ref="'hireling-' + index" :hireling="h" :id="index" can-delete @delete="deleteHireling" />
+    </div>
 
     <confirm-dialog ref="confirm-dialog" />
   </div>
 </template>
 
 <script>
+import { isMobileDevice } from '@/services/responsive'
 import { hirelingsList } from '@/services/hirelings'
 
 import Hireling from './Hireling.vue'
@@ -60,6 +59,7 @@ export default {
       let result = []
       for (let i=0; i < hirelingsList.length; i++) if (hirelingsList[i].wages > 0) result.push(hirelingsList[i])
       return result },
+    isMobileDevice () { return isMobileDevice(this.$waveui.breakpoint.name) },
     wages () {
       let result = 0
       for (let index = 0; index < this.hirelings.length; index++) {

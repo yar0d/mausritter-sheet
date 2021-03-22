@@ -49,6 +49,14 @@ new WaveUI(app, {
     selected: '#ffe70f',
     dice: '#4d9dda',
     failed: '#bb2727'
+  },
+  breakpoints: {
+    xs: 600,
+    sm: 900,
+    md: 1200,
+    lg: 1700
+    // Xl doesn't need to be overridden:
+    // it always starts from lg & goes to infinity.
   }
 })
 app.use(i18n).use(store)

@@ -1,5 +1,5 @@
 <template>
-  <w-tooltip transition="fade" bg-color="yellow-light2" color="black" top detach-to=".wrapper">
+  <w-tooltip transition="fade" bg-color="yellow-light2" color="black" detach-to=".wrapper">
     <template #activator="{ on }">
       <w-icon v-on="on" v-bind="$attrs" :color="color" class="clickable" :class="cls" :xs="size==='xs'" :sm="size==='sm'" :md="size==='md'" :lg="size==='lg'" :xl="size==='xl'" @click="rollDice">
         {{ icon }}

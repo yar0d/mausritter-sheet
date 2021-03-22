@@ -4,10 +4,6 @@
       <w-button xl v-for="lang in LOCALES" :key="lang" :color="locale === lang ? '' : 'primary'" class="mr2" @click="changeLocale(lang)">
         {{ $t(lang) }}
       </w-button>
-      <div class="spacer" />
-      <w-button text @click="$refs['about-dialog'].show()">
-        {{ $t('About') }}
-      </w-button>
     </w-toolbar>
 
     <w-flex column align-center justify-center class="mt4">
@@ -72,6 +68,7 @@
         </w-flex>
       </w-card>
     </w-flex>
+
     <confirm-dialog ref="confirm-dialog" />
     <prompt-dialog ref="prompt-dialog" />
     <prompt-dialog ref="prompt-import-dialog">
@@ -83,8 +80,6 @@
       </template>
     </prompt-dialog>
   </div>
-
-  <about ref="about-dialog" />
 </template>
 
 <script>
@@ -92,11 +87,10 @@ import { LOCALES, DEFAULT_LOCALE, loadLocale, saveLocale } from '@/services/loca
 import { deleteSlot, listSlots, loadSlot, saveSlot, decodeJson, encodeJson } from '@/services/storage'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import PromptDialog from './PromptDialog.vue'
-import About from './About.vue'
 
 export default {
   name: 'Welcome',
-  components: { ConfirmDialog, PromptDialog, About },
+  components: { ConfirmDialog, PromptDialog },
   propos: [ 'sheet' ],
   data () {
     return {

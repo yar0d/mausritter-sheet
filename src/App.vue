@@ -4,38 +4,38 @@
       <div id="dice-canvas" class="dice3d-canvas" />
 
       <w-flex basis-zero wrap class="h-max">
-        <w-flex row align-start justify-space-between>
-          <w-flex column justify-space-between>
-            <sheet id="sheet" ref="sheet"/>
+        <w-flex row align-start justify-start>
+          <w-flex id="sheet-container" column justify-start>
             <sheet-toolbar ref="sheet-toolbar" />
+            <sheet id="sheet" ref="sheet"/>
           </w-flex>
 
-
-          <w-flex column class="w-max h-max">
+          <w-flex id="feature-tabs" column class="h-max">
             <w-toolbar no-border class="toolbar-pager">
-              <div class="title3">Mausritter Sheet</div>
-              <div class="spacer"></div>
-              <w-button lg class="px8" :text="!showWelcome" @click="showPanel({ home: true, history: false, hirelings: false })">
+              <w-button lg :class="isMobileDevice ? 'px2' : 'px8'" :text="!showWelcome" @click="showPanel({ home: true, history: false, hirelings: false })">
                 <w-icon class="mr1" xl>
                   mdi mdi-rodent
                 </w-icon>
-                {{ $t('Welcome') }}
+                <span class="text-small">{{ $t('Welcome') }}</span>
               </w-button>
 
-              <w-button lg class="px8" :text="!showHistory" @click="showPanel({ home: false, history: true, hirelings: false })">
+              <w-button lg :class="isMobileDevice ? 'px2' : 'px8'" :text="!showHistory" @click="showPanel({ home: false, history: true, hirelings: false })">
                 <w-icon class="mr1" xl>
                   mdi mdi-history
                 </w-icon>
-                {{ $t('History') }}
+                <span class="text-small">{{ $t('History') }}</span>
               </w-button>
 
-              <w-button lg class="px8" :text="!showHirelings" @click="showPanel({ home: false, history: false, hirelings: true })">
+              <w-button lg :class="isMobileDevice ? 'px2' : 'px8'" :text="!showHirelings" @click="showPanel({ home: false, history: false, hirelings: true })">
                 <w-icon class="mr1" xl>
                   mdi mdi-donkey
                 </w-icon>
-                {{ $t('Hirelings') }}
+                <span class="text-small">{{ $t('Hirelings') }}</span>
                 <chips :value="hirelingsCount" />
               </w-button>
+
+              <div class="spacer" />
+              <img :src="require('@/assets/compatible-with-mausritter-88x32.png')" contain class="clickable" @click="$refs['about-dialog'].show()" />
             </w-toolbar>
 
             <div v-show="showHistory" class="history-background h-max">
@@ -53,11 +53,14 @@
         </w-flex>
       </w-flex>
     </main>
+    <about ref="about-dialog" />
   </w-app>
 </template>
 
 <script>
+import { isMobileDevice } from '@/services/responsive'
 import dices3D from '@/services/dice3d'
+import About from '@/components/About.vue'
 import Sheet from '@/components/Sheet.vue'
 import SheetToolbar from '@/components/SheetToolbar.vue'
 import History from '@/components/History.vue'
@@ -67,7 +70,7 @@ import Chips from './components/Chips.vue'
 
 export default {
   name: 'App',
-  components: { Sheet, SheetToolbar, History, Hirelings, Welcome, Chips },
+  components: { About, Sheet, SheetToolbar, History, Hirelings, Welcome, Chips },
   data () {
     return {
       tabs: [],
@@ -77,7 +80,8 @@ export default {
     }
   },
   computed: {
-    hirelingsCount () { return this.$store.getters['hirelings'].length }
+    hirelingsCount () { return this.$store.getters['hirelings'].length },
+    isMobileDevice () { return isMobileDevice(this.$waveui.breakpoint.name) }
   },
   methods: {
     showPanel ({ home, history, hirelings }) {

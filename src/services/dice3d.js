@@ -13,8 +13,8 @@ export function initialize (canvasId) {
   if (_canvas !== null) return // Already initialized
 
   _canvas = $diceCore.id(canvasId)
-  _canvas.style.width = window.innerWidth - 8 + 'px'
-  _canvas.style.height = window.innerHeight - 16 + 'px'
+  _canvas.style.width = window.screen.availWidth - 8 + 'px'
+  _canvas.style.height = window.screen.availHeight - 16 + 'px'
 
   $diceCore.dice.use_true_random = false
   $diceCore.dice.use_shadows = false
@@ -23,6 +23,12 @@ export function initialize (canvasId) {
   _diceBox = new $diceCore.dice.dice_box(_canvas, { w: 500, h: 300 })
   _diceBox.animate_selector = false
   _canvas.style.display = 'none'
+
+  $diceCore.bind(window, 'resize', function() {
+    _canvas.style.width = window.screen.availWidth - 1 + 'px'
+    _canvas.style.height = window.screen.availHeight - 1 + 'px'
+    _diceBox.reinit(_canvas, { w: 500, h: 300 })
+  })
 }
 
 export function roll({ formula = '2d6', timeout, callbackFn }) {
@@ -39,15 +45,14 @@ export function roll({ formula = '2d6', timeout, callbackFn }) {
     let total = 0
     for (let i = 0; i < result.length; i++) total += result[i]
     if (callbackFn) setTimeout(() => {
+      _canvas.style.display = 'none'
       callbackFn({ dices: result, total })
     }, 750)
+    else setTimeout(() => {   _canvas.style.display = 'none'}, timeout || DICE_TIMEOUT)
   }
 
   _canvas.style.display = ''
   _diceBox.start_throw(notation_getter, before_roll, after_roll)
-  setTimeout(() => {
-    _canvas.style.display = 'none'
-  }, timeout || DICE_TIMEOUT)
 }
 
 export default {

@@ -8,7 +8,7 @@
 
     <w-flex column align-center justify-center class="mt4">
       <w-flex row v-for="(h, index) in history" :key="index" class="w-max" justify-start>
-        <w-divider class="white md1">{{ h.date.toLocaleTimeString(locale) }}</w-divider>
+        <w-divider class="text-small white md1">{{ h.date.toLocaleTimeString(locale) }}</w-divider>
         <div class="background-white-25 w-max pa2">
           <span v-if="h.type" class="white--bg">{{ h.type }} : </span>
           <span :class="(h.color || 'white') + '--bg white pa1'">{{ h.message }}</span>
