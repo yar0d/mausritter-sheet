@@ -539,3 +539,7 @@ textarea {
 .bank-items {
   min-height: 64px;
 }
+
+.w-select__selection-slot {
+  z-index: auto;
+}
