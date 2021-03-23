@@ -61,13 +61,13 @@ export default {
       // Rules:
       // - Only conditions are accepted
       // - No duplicated condition
-      let result = true
-      if (element.type !== TYPE_CONDITION) result = false // item is refused
-      if (list.length === this.grit) result = false // list is full
+      let canDrop = true
+      if (element.type !== TYPE_CONDITION) canDrop = false // item is refused
+      if (list.length === this.grit) canDrop = false // list is full
       for (let i = 0; i < list.length; i++) {
-        if (list[i].id === element.id) result = false // Already in list
+        if (list[i].id === element.id) canDrop = false // Already in list
       }
-      return result
+      return canDrop
     },
     deleteItem(list, id) {
       const i = this.getIndex(list, id)
@@ -99,7 +99,7 @@ export default {
     },
     serialize () {
       const tmp = []
-      for (let i = 0; i < this.items; i++) {
+      for (let i = 0; i < this.items.length; i++) {
         if (this.canDrop(this.items[i], tmp)) {
           tmp.push({...this.items[i]})
         }

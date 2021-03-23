@@ -143,6 +143,7 @@ blockquote {
   background-image: url('../img/drawer.jpg');
   background-repeat: no-repeat;
   background-position: left;
+  background-size: cover;
 }
 
 .welcome-background {
@@ -347,6 +348,7 @@ textarea {
 .condition-title,
 .item-title {
   font-size: 16px;
+  height: 24px;
 }
 
 .condition-label,

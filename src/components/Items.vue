@@ -3,9 +3,7 @@
     <w-flex column align-start justify-start class="h-max" :class="className(currentItem.label)">
       <w-flex row class="h-max w-max">
         <w-flex column justify-end class="w-25 text-center">
-          <w-icon v-if="canDelete" class="clickable" color="red" md @click="onDelete">
-            mdi mdi-close-circle
-          </w-icon>
+          <w-button v-if="canDelete" sm icon="mdi mdi-close-circle" bg-color="white" color="red" md @click="onDelete" />
           <div class="spacer" />
           <div v-if="showUse && currentItem.use !== undefined && currentItem.use <= 6">
             <w-checkbox v-for="u in currentItem.use" :key="u" class="item-use" />
