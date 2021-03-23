@@ -6,7 +6,6 @@
       </template>
       <template #selection="{ item }">
         <span v-if="item" class="input-value">{{ $t(item.label) }}</span>
-        <span v-else class="caption">{{ $t('Choose...') }}</span>
       </template>
     </w-select>
     <d6 v-if="allowRandom" :context="$t('Coat pattern')" @rolled="roll" />

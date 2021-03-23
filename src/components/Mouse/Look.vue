@@ -6,7 +6,6 @@
       </template>
       <template #selection="{ item }">
         <span v-if="item" class="input-value">{{ item.label }}</span>
-        <span v-else class="caption">{{ $t('Choose...') }}</span>
       </template>
     </w-select>
   </w-flex>

@@ -15,10 +15,6 @@ body,
   max-width: 800px;
 }
 
-#drawer {
-  z-index: 6;
-}
-
 .fixed-tabs > div {
   width: 800px;
   max-width: 800px;

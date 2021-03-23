@@ -9,8 +9,8 @@
     </w-toolbar>
 
     <w-flex column align-center>
-      <w-card class="xs10 background-white-50 w-max h-auto my4" :title="$t('Items')">
-        <div>
+      <div class="pt4 px4 w-max h-auto">
+        <w-card class="background-white-50 w-max h-auto" :title="$t('Items')">
           <span v-if="items.length === 0">
             {{ $t('Drop item here, in your bank.') }}
           </span>
@@ -21,8 +21,8 @@
               </span>
             </template>
           </draggable>
-        </div>
-      </w-card>
+        </w-card>
+      </div>
     </w-flex>
 
     <confirm-dialog ref="confirm-retrieval" />
