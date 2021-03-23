@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.9](https://github.com/yar0d/mausritter-sheet/compare/v1.3.8...v1.3.9) (2021-03-23)
+
+
+### Bug Fixes
+
+* **grit:** save grit data with its sheet ([7274279](https://github.com/yar0d/mausritter-sheet/commit/7274279c1bcd610af1b4572b85f6f7ddd1a55775))
+* wave-ui z-index on select ([fbbd6a1](https://github.com/yar0d/mausritter-sheet/commit/fbbd6a1ee859f886516b5d76f9962a5eef9d97bb))
+
 ### [1.3.8](https://github.com/yar0d/mausritter-sheet/compare/v1.3.7...v1.3.8) (2021-03-23)
 
 
