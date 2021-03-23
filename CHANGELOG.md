@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.8](https://github.com/yar0d/mausritter-sheet/compare/v1.3.7...v1.3.8) (2021-03-23)
+
+
+### Bug Fixes
+
+* drop from drawer (z-index fault) ([d6add6c](https://github.com/yar0d/mausritter-sheet/commit/d6add6c078d151a88e48efb72609f264b6b5b4bd))
+
 ### [1.3.7](https://github.com/yar0d/mausritter-sheet/compare/v1.3.6...v1.3.7) (2021-03-22)
 
 ### [1.3.6](https://github.com/yar0d/mausritter-sheet/compare/v1.3.5...v1.3.6) (2021-03-22)
