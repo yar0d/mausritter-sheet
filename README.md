@@ -18,6 +18,8 @@ Have a look at [Mausritter website](https://mausritter.com/) and [Licence](./LIC
 - Save and load whole character sheet from local storage. 10 slots are available. All data is saved in your browser, no server is needed.
 - Import / Export of character sheet. Use this to load a character into another browser.
 
+![Version 1.3.9](/public/img/mausritter-sheet-fr-dices.png)
+
 See [TODO.md](./src/TODO.md) for incomming features :-)
 
 ![Exemple Sheet 0.1.1](./live.gif)
