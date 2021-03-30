@@ -2,7 +2,7 @@
 let _canvas = null
 let _diceBox = null
 
-const DICE_TIMEOUT = 3000
+const DICE_TIMEOUT = 300
 
 export function setDiceColor (color) {
   $diceCore.dice.dice_color = color
@@ -58,8 +58,8 @@ export function roll({ formula = '2d6', timeout, callbackFn }) {
     if (callbackFn) setTimeout(() => {
       _canvas.style.display = 'none'
       callbackFn({ dices: result, total })
-    }, 750)
-    else setTimeout(() => {   _canvas.style.display = 'none'}, timeout || DICE_TIMEOUT)
+    }, 500)
+    else setTimeout(() => { _canvas.style.display = 'none'}, timeout || DICE_TIMEOUT)
   }
 
   _canvas.style.display = ''

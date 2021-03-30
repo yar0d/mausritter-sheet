@@ -103,6 +103,7 @@
     <div class="mx4">{{ $t('Worn: Quick to ready.') }}</div>
     <div>{{ $t('Pack: Takes time to ready. During combat, requires an action to retrieve.') }}</div>
   </w-flex>
+  {{ pack2 }}
 </template>
 
 <script>
@@ -196,6 +197,29 @@ export default {
         i++
       }  return !abort
     },
+    // removeConditionFrom (list, conditionsClear) {
+    //   let i = 0
+    //   while (i < list.length) {
+    //     const remove = (list[i].type === TYPE_CONDITION && (!conditionsClear || conditionsClear.includes(list[i].clear)))
+    //     if (remove) {
+    //       console.log('## removeConditionFrom remove:', list[i])
+    //     }
+    //     if (remove) list.splice(list, i, 1)
+    //     i++
+    //   }
+    // },
+    // removeConditions (conditionsClear) {
+    //   this.removeConditionFrom(this.body1, conditionsClear)
+    //   this.removeConditionFrom(this.body2, conditionsClear)
+    //   this.removeConditionFrom(this.mainPaw, conditionsClear)
+    //   this.removeConditionFrom(this.offPaw, conditionsClear)
+    //   this.removeConditionFrom(this.pack1, conditionsClear)
+    //   this.removeConditionFrom(this.pack2, conditionsClear)
+    //   this.removeConditionFrom(this.pack3, conditionsClear)
+    //   this.removeConditionFrom(this.pack4, conditionsClear)
+    //   this.removeConditionFrom(this.pack5, conditionsClear)
+    //   this.removeConditionFrom(this.pack6, conditionsClear)
+    // },
     reset (data = {}) {
       this.body1 = data.body1 || []
       this.body2 = data.body2 || []

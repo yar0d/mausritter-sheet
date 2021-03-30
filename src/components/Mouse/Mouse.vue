@@ -187,26 +187,32 @@
     <confirm-dialog ref="confirm-dialog" />
 
     <mouse-creation-dialog ref="mouse-creation-dialog" :background="background" :background-items="backgroundItems" :hirelings="backgroundHirelings" :choose-items="chooseItems" :max-dex="maxDex" :max-str="maxStr" :max-wil="maxWil" />
+
+    <mouse-advancement-dialog ref="mouse-advancement-dialog" />
+    <dice-result ref="dice-result" />
   </w-card>
 </template>
 
 <script>
 import { SWAP_NONE, SWAP_STR_DEX, SWAP_STR_WIL, SWAP_DEX_WIL } from '@/services/mouse.js'
 import { d6, d66, rollFromTable, rollExplode } from '@/services/dice-roller'
+import { roll } from '@/services/dice3d'
 import { extract as getBackground } from '@/services/backgrounds'
 import { TYPE_ITEM, getItem } from '@/services/items-conditions'
 import Checker from '@/components/Checker.vue'
 import Birthsign from './Birthsign.vue'
 import CoatColor from './CoatColor.vue'
 import CoatPattern from './CoatPattern.vue'
+import DiceResult from '@/components/DiceResult.vue'
 import Inventory from './Inventory.vue'
 import Look from './Look.vue'
 import Grit from './Grit.vue'
 import ConfirmDialog from '../ConfirmDialog.vue'
 import MouseCreationDialog from './MouseCreationDialog.vue'
+import MouseAdvancementDialog from './MouseAdvancementDialog.vue'
 
 export default {
-  components: { Birthsign, CoatColor, CoatPattern, Inventory, Checker, Look, Grit, ConfirmDialog, MouseCreationDialog },
+  components: { Birthsign, CoatColor, CoatPattern, DiceResult, Inventory, Checker, Look, Grit, ConfirmDialog, MouseCreationDialog, MouseAdvancementDialog },
   data() {
     return {
       SWAP_NONE,
@@ -241,6 +247,13 @@ export default {
     }
   },
   methods: {
+    advancement () {
+      const newLevel = this.level + 1
+      this.$refs['mouse-advancement-dialog'].open(this.name)
+        .then(() => {
+          console.log('##', newLevel)
+        })
+    },
     createRandomSheet () {
       if (this.isNew) this.rollRandomMouse()
       else this.$refs['confirm-dialog'].open(this.$t('Create a new character...'), this.$t('The sheet of “{name}” will be erased. Do you confirm?', { name: this.name } ))
@@ -272,6 +285,75 @@ export default {
       this.pips = data.pips || 0
       this.swapAttributes = 0
       this.xp = data.xp || 0
+    },
+    restFull () {
+      this.$refs['confirm-dialog'].open(this.$t('Full rest...'), this.$t('A full rest is a week back in safety. It will cost you around 20 pips. Do you confirm?'))
+        .then(confirmed => {
+          if (confirmed) {
+            this.currentHP = this.maxHP
+            this.currentStr = this.maxStr
+            this.currentDex = this.maxDex
+            this.currentWil = this.maxWil
+            this.$store.commit('historyAdd', {
+              type: this.$t('Full rest'),
+              message: this.$t('Do not forget to remove the conditions corresponding to this rest.'),
+              secondary: this.$t('Restored all attributes.')
+            })
+            this.$refs['dice-result'].open({ context: this.$t('Full rest'), message: this.$t('Do not forget to remove the conditions corresponding to this rest.'), secondary: this.$t('Restored all attributes.') })
+          }
+        })
+    },
+    restLong () {
+      this.$refs['confirm-dialog'].open(this.$t('Long rest...'), this.$t('You need to eat and sleep for a watch to do a long rest. All HP restored. Restore d6 to each attributes if HP was at max. Do you confirm?'))
+        .then(confirmed => {
+          if (confirmed) {
+            if (this.currentHP === this.maxHP) {
+              // Restore attributes
+              roll({
+                formula: `3d6`,
+                callbackFn: ({ dices }) => {
+                  this.currentStr = Math.min(this.maxStr, this.currentStr + dices[0])
+                  this.currentDex = Math.min(this.maxDex, this.currentDex + dices[1])
+                  this.currentWil = Math.min(this.maxWil, this.currentWil + dices[2])
+                  this.$store.commit('historyAdd', {
+                    type: this.$t('Long rest'),
+                    message: this.$t('Do not forget to remove the conditions corresponding to this rest.'),
+                    secondary: this.$t('Current STR is {value}.', { value: this.currentStr }) + ' / ' + this.$t('Current DEX is {value}.', { value: this.currentDex }) + ' / ' + this.$t('Current WIL is {value}.', { value: this.currentWil }) + ' / ' + this.$t('Roll: ') + dices.join(', ')
+                  })
+                  this.$refs['dice-result'].open({ context: this.$t('Long rest'), message: this.$t('Do not forget to remove the conditions corresponding to this rest.'), secondary: this.$t('Restored some attributes.') })
+                }
+              })
+            } else {
+              this.currentHP = this.maxHP
+              this.$store.commit('historyAdd', {
+                type: this.$t('Long rest'),
+                message: this.$t('Do not forget to remove the conditions corresponding to this rest.'),
+                secondary: this.$t('Current HP is {value}.', { value: this.currentHP })
+              })
+              this.$refs['dice-result'].open({ context: this.$t('Long rest'), message: this.$t('Do not forget to remove the conditions corresponding to this rest.'), secondary: this.$t('Restored all HP.') })
+            }
+          }
+        })
+    },
+    restShort () {
+      this.$refs['confirm-dialog'].open(this.$t('Short rest...'), this.$t('A short rest lasts 1 turn and restore d6+1 HP. Do you confirm?'))
+        .then(confirmed => {
+          if (confirmed) {
+            roll({
+              formula: `d6`,
+              callbackFn: ({ dices, total }) => {
+                const result = total + 1
+                this.currentHP = Math.min(this.maxHP, this.currentHP + result)
+                this.$store.commit('historyAdd', {
+                  type: this.$t('Short rest'),
+                  message: this.$t('Do not forget to remove the conditions corresponding to this rest.'),
+                  secondary: result + ' / ' + this.$t('Current HP is {value}.', { value: this.currentHP }) + ' / ' + this.$t('Roll: ') + total + '+1'
+                })
+                this.$refs['dice-result'].open({ context: this.$t('Short rest'), message: this.$t('Do not forget to remove the conditions corresponding to this rest.'), faces: 6, dices, total: result, secondary: this.$t('Roll: ') + total + '+1' })
+              }
+            })
+          }
+        })
     },
     rollRandomMouse () {
       this.reset()
@@ -418,7 +500,6 @@ export default {
   },
   mounted () {
     this.mausritter.inventory = this.$refs['inventory']
-    this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausrittes Sheet!') })
   }
 }
 </script>

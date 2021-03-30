@@ -19,7 +19,7 @@
         <div v-if="currentCondition.family === CONDITION_FAMILY_CUSTOM" class="w-max text-center">
           <w-input v-model="currentCondition.clear" :readonly="readonly" />
         </div>
-        <div v-else>{{ $t(currentCondition.clear) }}</div>
+        <div v-else>{{ $t('CONDITION-CLEAR-' + currentCondition.clear) }}</div>
       </div>
     </w-flex>
   </div>

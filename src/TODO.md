@@ -13,13 +13,15 @@ Prepare for inventory extension (like for Hamster from https://sites.google.com/
 Create a version usable on tablets and smartphones.
 
 ## Misc
+- add level up routine.
+- add rest (short, long, fall) routines.
 - allow to roll a dice formula, like 2d6+3.
 - Add network to allow everyone with the same table identifier to see dice rolls and other mice name.
 - autosave ? after each update; each N minutes ?
 - save history in slots too.
 - manage draggable from bank panel to inventory slots.
 - manage retrieving pips from bank (cost 1% price).
-- add wonderful stuff from [Tales form Moonshore](https://sites.google.com/view/talesfrommoonshore/home)
+- add wonderful stuff from [Tales from Moonshore](https://sites.google.com/view/talesfrommoonshore/home)
 
 # IDEAS
 - Application for GM session sheet

@@ -1,8 +1,8 @@
 [
-  { "label": "Exhausted", "clear": "After long rest" },
-  { "label": "Frightened", "clear": "After short rest", "desc": "WIL save to approach source of fear." },
-  { "label": "Hungry", "clear": "After meal" },
-  { "label": "Injured", "clear": "After full rest", "desc": "Disadvantage on STR & DEX saves." },
-  { "label": "Mad", "clear": "After full rest", "desc": "Disadvantage on WIL saves." },
-  { "label": "condition", "clear": "How to clear", "desc": "Description", "family": "CU" }
+  { "label": "Exhausted", "clear": "LR" },
+  { "label": "Frightened", "clear": "SR", "desc": "WIL save to approach source of fear." },
+  { "label": "Hungry", "clear": "ME" },
+  { "label": "Injured", "clear": "FR", "desc": "Disadvantage on STR & DEX saves." },
+  { "label": "Mad", "clear": "FR", "desc": "Disadvantage on WIL saves." },
+  { "label": "condition", "clear": "", "desc": "Description", "family": "CU" }
 ]

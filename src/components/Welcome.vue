@@ -7,19 +7,22 @@
     </w-toolbar>
 
     <w-flex column align-center justify-center class="mt4">
-      <w-card content-class="px1 background-white-50">
+      <w-card content-class=" px0 background-white-50">
         <template #title>
           <w-toolbar>
             <div class="title3">{{ $t('Manage your characters.') }}</div>
           </w-toolbar>
         </template>
         <w-flex column v-for="(slot, index) in slots" :key="index" justify-center>
-          <w-flex row align-center justify-space-between class="py2">
-            {{ index + 1 }}
+          <w-flex row align-center justify-space-between class="pa2" :class="currentSlotIndex === index ? 'blue-dark4--bg white' : ''">
+            <div class="mr2">{{ index + 1 }}</div>
             <div v-if="!slot" class="caption">
-            {{ $t('Empty') }}
+            {{ $t('Empty') }} "{{currentSlotIndex}}"
             </div>
-            <w-button v-else :text="index !== currentSlot" :disabled="index === currentSlot" @click="loadSheet(index)">
+            <div v-else-if="index === currentSlotIndex">
+              {{ slotName(index) }}
+            </div>
+            <w-button v-else text @click="loadSheet(index)">
               {{ slotName(index) }}
             </w-button>
             <div>
@@ -54,17 +57,39 @@
 
         <w-flex row class="w-max mt4 px2" justify-space-between>
           <div>
-            <w-button xl @click="createRandomSheet">
-              <w-icon>mdi mdi-plus</w-icon>
+            <w-button lg @click="createRandomSheet">
+              <w-icon class="mr1">mdi mdi-plus</w-icon>
               {{ $t('Create a new character...') }}
             </w-button>
           </div>
 
           <div>
-            <w-button xl @click="importSheet(index)" bg-color="blue-grey" color="white" class="ml2">
-              {{ $t('Import') }}
+            <w-button lg @click="importSheet(index)" bg-color="blue-grey" color="white" class="ml2">
+              {{ $t('Import...') }}
             </w-button>
           </div>
+        </w-flex>
+
+        <w-flex v-if="currentSlotIndex > 0" row class="mt4 w-max px1" justify-space-between>
+          <w-button bg-color="brown-light2" color="white" class="ml1" @click="restShort">
+            <w-icon class="mr1">mdi mdi-cup-water</w-icon>
+            {{ $t('Short rest...') }}
+          </w-button>
+
+          <w-button bg-color="brown-light1" color="white" class="ml1" @click="restLong">
+            <w-icon class="mr1">mdi mdi-silverware</w-icon>
+            {{ $t('Long rest...') }}
+          </w-button>
+
+          <w-button bg-color="brown" color="white" class="ml1" @click="restFull">
+            <w-icon class="mr1">mdi mdi-bed</w-icon>
+            {{ $t('Full rest...') }}
+          </w-button>
+
+          <w-button lg bg-color="blue" color="white" class="ml4" @click="advancement">
+            <w-icon class="mr1">mdi mdi-stairs-up</w-icon>
+            {{ $t('Advancement...') }}
+          </w-button>
         </w-flex>
       </w-card>
     </w-flex>
@@ -94,7 +119,6 @@ export default {
   propos: [ 'sheet' ],
   data () {
     return {
-      currentSlot: null,
       decodeJson,
       DEFAULT_LOCALE,
       LOCALES,
@@ -104,6 +128,7 @@ export default {
     }
   },
   computed: {
+    currentSlotIndex () { return this.$store.getters['currentSlotIndex'] },
     importSignature () {
       if (!this.importData) return ''
       try {
@@ -115,6 +140,9 @@ export default {
      }
   },
   methods: {
+    advancement () {
+      if (this.mausritter.sheet) this.mausritter.sheet.advancement()
+    },
     apply (data) {
       if (this.mausritter.sheet) this.mausritter.sheet.setData(data)
       if (data.hirelings && this.mausritter.hirelings) {
@@ -133,7 +161,7 @@ export default {
     createRandomSheet () {
       if (this.mausritter.sheetToolbar) this.mausritter.sheetToolbar.displayDrawer(false)
       if (this.mausritter.sheet) this.mausritter.sheet.createRandomSheet()
-      this.currentSlot = null
+      this.$store.commit('setCurrentSlot', null)
     },
     deleteSheet (index) {
       this.$refs['confirm-dialog'].open(this.$t('Delete'), this.$t('The sheet of “{name}” will be erased. Do you confirm?', { name: this.slotName(index) } ))
@@ -163,14 +191,14 @@ export default {
     async load (index) {
       const data = loadSlot(index)
       this.apply(data)
-      this.currentSlot = index
+      this.$store.commit('setCurrentSlot', index)
       this.$store.commit('historyAdd', {
         type: this.$t('Load'),
         message: this.slots[index]
       })
     },
     loadSheet (index) {
-      if (!this.currentSlot) {
+      if (!this.Index) {
         this.load(index)
         return
       }
@@ -181,6 +209,15 @@ export default {
             this.load(index)
           }
         })
+    },
+    restFull () {
+      if (this.mausritter.sheet) this.mausritter.sheet.restFull()
+    },
+    restLong () {
+      if (this.mausritter.sheet) this.mausritter.sheet.restLong()
+    },
+    restShort () {
+      if (this.mausritter.sheet) this.mausritter.sheet.restShort()
     },
     slotName (index) {
       const parts = this.slots[index].split('|')
@@ -193,7 +230,7 @@ export default {
     save (index, data) {
       saveSlot(index, data, this.dataSignature(data))
       this.slots = listSlots() // Refresh slot list
-      this.currentSlot = index
+      this.$store.commit('setCurrentSlot', index)
       this.$store.commit('historyAdd', {
         type: this.$t('Save'),
         message: this.slots[index]
@@ -224,6 +261,7 @@ export default {
   },
   created () {
     this.changeLocale(loadLocale())
+    this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausrittes Sheet!') })
   },
   mounted () {
     this.slots = listSlots()

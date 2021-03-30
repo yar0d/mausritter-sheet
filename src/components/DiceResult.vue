@@ -5,7 +5,10 @@
         <div class="title1 white">{{ explainedResult }}</div>
         <div v-if="success !== undefined || failed !== undefined" class="mt2 black">{{ $t('Need {score} or lower, roll {roll}.', { score, roll: total }) }}</div>
         <div v-else class="title1"><w-icon xl>{{ icon }}</w-icon> {{ total }}</div>
-        <div v-if="dices && dices.length > 1">D{{ faces }} -> {{ dices.join(', ') }}</div>
+        <div v-if="message" class="mt2">{{ message }}</div>
+        <div v-if="faces && dices && dices.length > 1">D{{ faces }} -> {{ dices.join(', ') }}</div>
+        <div v-if="formula">{{ formula }}</div>
+        <div v-if="secondary" class="mt2 text-small">{{ secondary }}</div>
       </w-flex>
     </slot>
 
@@ -29,9 +32,12 @@ export default {
       failed: undefined,
       dices: {},
       faces: 0,
+      formula: null,
+      message: null,
       total: 0,
       show: false,
       score: null,
+      secondary: null,
       success: undefined
     }
   },
@@ -46,13 +52,16 @@ export default {
       this.resolve(true)
       this.show = false
     },
-    open ({ context, faces, dices, score, total, success, failed }) {
+    open ({ context, faces, formula, message, dices, score, total, secondary, success, failed }) {
       this.context = context
       this.faces = faces
       this.dices = dices
       this.failed = failed
+      this.formula = formula
+      this.message = message
       this.score = score
       this.total = total
+      this.secondary = secondary
       this.success = success
       this.show = true
       return new Promise((resolve, reject) => {
