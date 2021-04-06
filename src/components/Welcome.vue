@@ -86,7 +86,7 @@
             {{ $t('Full rest...') }}
           </w-button>
 
-          <w-button lg bg-color="blue" color="white" class="ml4" @click="advancement">
+          <w-button v-if="canLevelUp()" lg bg-color="blue" color="white" class="ml4" @click="advancement">
             <w-icon class="mr1">mdi mdi-stairs-up</w-icon>
             {{ $t('Advancement...') }}
           </w-button>
@@ -152,6 +152,7 @@ export default {
         })
       }
     },
+    canLevelUp () { return this.mausritter.sheet ? this.mausritter.sheet.canLevelUp() : false },
     changeLocale (newLocale) {
       this.locale = newLocale || DEFAULT_LOCALE
       this.$i18n.locale = this.locale
@@ -196,18 +197,21 @@ export default {
         type: this.$t('Load'),
         message: this.slots[index]
       })
+      this.canLevelUp()
     },
     loadSheet (index) {
-      if (!this.Index) {
+      if (this.currentSlotIndex < 0) {
         this.load(index)
         return
       }
 
-      this.$refs['confirm-dialog'].open(this.$t('Load'), this.$t('The current sheet will be overwritten by “{name}”. Do you confirm?', { name: this.slots[index] } ))
+      this.$refs['confirm-dialog'].open(this.$t('Load'), this.$t('Do you want to save the sheet of “{name}”?', { name: this.slots[this.currentSlotIndex] } ))
         .then(confirmed => {
           if (confirmed) {
-            this.load(index)
+            const data = this.serialize()
+            this.save(this.currentSlotIndex, data)
           }
+          this.load(index)
         })
     },
     restFull () {

@@ -17,6 +17,7 @@ Have a look at [Mausritter website](https://mausritter.com/) and [Licence](./LIC
 - History of dices and other actions.
 - Save and load whole character sheet from local storage. 10 slots are available. All data is saved in your browser, no server is needed.
 - Import / Export of character sheet. Use this to load a character into another browser.
+- Mouse can rest and advance in level, up to level 20.
 
 See [TODO.md](./src/TODO.md) for incomming features :-)
 

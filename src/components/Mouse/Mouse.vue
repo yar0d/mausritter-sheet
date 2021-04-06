@@ -149,7 +149,7 @@
               {{ $t('Level') }}
             </div>
             <div class="ml2 xs6">
-              <w-input v-model.number="level" class="title2" />
+              <w-input v-model.number="level" class="title2" readonly />
             </div>
             <div class="ml4">{{ $t('XP') }}</div>
             <div class="mx1 w-max text-right">
@@ -197,6 +197,7 @@
 import { SWAP_NONE, SWAP_STR_DEX, SWAP_STR_WIL, SWAP_DEX_WIL } from '@/services/mouse.js'
 import { d6, d66, rollFromTable, rollExplode } from '@/services/dice-roller'
 import { roll } from '@/services/dice3d'
+import { canLevelUp } from '@/services/advancement'
 import { extract as getBackground } from '@/services/backgrounds'
 import { TYPE_ITEM, getItem } from '@/services/items-conditions'
 import Checker from '@/components/Checker.vue'
@@ -248,12 +249,111 @@ export default {
   },
   methods: {
     advancement () {
-      const newLevel = this.level + 1
-      this.$refs['mouse-advancement-dialog'].open(this.name)
-        .then(() => {
-          console.log('##', newLevel)
+      this.$refs['mouse-advancement-dialog'].open(this.name, this.level, this.xp, {
+        maxDex: this.maxDex,
+        maxHP: this.maxHP,
+        maxStr: this.maxStr,
+        maxWil: this.maxWil
+      })
+        .then(nextLevel => {
+          if (nextLevel) {
+            this.level = nextLevel.level
+            let result = null
+            let upper = null
+            let message
+            // - - - - - - -
+            // Roll for STR
+            // - - - - - - -
+            roll({
+              formula: 'd20',
+              callbackFn: ({ total }) => {
+                result = null
+                upper = this.maxStr
+                if (total > this.maxStr) {
+                  result = this.maxStr + 1
+                }
+                message = result ? this.$t('Increase {attr} to {result}.', { attr: this.$t('STR'), result }) : this.$t('{attr} will not increase.', { attr: this.$t('STR') })
+                this.$store.commit('historyAdd', {
+                  type: this.$t('Level up'),
+                  message,
+                  secondary: this.$t('Roll {formula} is {roll}. Max {attr} is {value}.', { formula: 'd20', roll: total, attr: this.$t('STR'), value: result })
+                })
+                if (result) this.maxStr = result
+                this.$refs['dice-result'].open({ context: this.$t('Level up'), message, faces: 20, upper, success: result !== null, failed: result === null, total, secondary: this.$t('Roll: ') + total })
+                    .then(() => {
+                      // - - - - - - -
+                      // Roll for DEX
+                      // - - - - - - -
+                      roll({
+                        formula: 'd20',
+                        callbackFn: ({ total }) => {
+                        result = null
+                        upper = this.maxDex
+                        if (total > this.maxDex) {
+                          result = this.maxDex + 1
+                        }
+                        message = result ? this.$t('Increase {attr} to {result}.', { attr: this.$t('DEX'), result }) : this.$t('{attr} will not increase.', { attr: this.$t('DEX') })
+                        this.$store.commit('historyAdd', {
+                          type: this.$t('Level up'),
+                          message,
+                          secondary: this.$t('Roll {formula} is {roll}. Max {attr} is {value}.', { formula: 'd20', roll: total, attr: this.$t('DEX'), value: result })
+                        })
+                        if (result) this.maxDex = result
+                        this.$refs['dice-result'].open({ context: this.$t('Level up'), message, faces: 20, upper, success: result !== null, failed: result === null, total, secondary: this.$t('Roll: ') + total })
+                            .then(() => {
+                              // - - - - - - -
+                              // Roll for WIL
+                              // - - - - - - -
+                              roll({
+                                formula: 'd20',
+                                callbackFn: ({ total }) => {
+                                  result = null
+                                  upper = this.maxWil
+                                  if (total > this.maxWil) {
+                                    result = this.maxWil + 1
+                                  }
+                                  message = result ? this.$t('Increase {attr} to {result}.', { attr: this.$t('WIL'), result }) : this.$t('{attr} will not increase.', { attr: this.$t('WIL') })
+                                  this.$store.commit('historyAdd', {
+                                    type: this.$t('Level up'),
+                                    message,
+                                    secondary: this.$t('Roll {formula} is {roll}. Max {attr} is {value}.', { formula: 'd20', roll: total, attr: this.$t('WIL'), value: result })
+                                  })
+                                  if (result) this.maxWil = result
+                                  this.$refs['dice-result'].open({ context: this.$t('Level up'), message, faces: 20, upper, success: result !== null, failed: result === null, total, secondary: this.$t('Roll: ') + total })
+                                      .then(() => {
+                                        // - - - - - -
+                                        // Roll for HP
+                                        // - - - - - -
+                                        roll({
+                                          formula: nextLevel.hp,
+                                          callbackFn: ({ dices, total }) => {
+                                            this.level = nextLevel.level
+                                            let result = this.maxHP + 1
+                                            if (total > this.maxHP) {
+                                              result = total
+                                            }
+                                            this.$store.commit('historyAdd', {
+                                              type: this.$t('Level up'),
+                                              message: this.$t('Increase {attr} to {result}.', { attr: this.$t('HP'), result }),
+                                              secondary: this.$t('Roll {formula} is {roll}. Max {attr} is {value}.', { formula: nextLevel.hp, roll: dices.join(', '), hp: this.maxHP })
+                                            })
+                                            this.maxHP = result
+                                            this.$refs['dice-result'].open({ context: this.$t('Level up'), message: this.$t('Increase {attr} to {result}.', {attr: this.$t('HP'), result }), faces: 6, dices, total, secondary: this.$t('Roll: ') + total })
+                                          }
+                                        })
+                                      })
+                                }
+                              })
+                            })
+                        }
+                      })
+                    })
+              }
+            })
+          }
         })
     },
+    canLevelUp () { return canLevelUp(this.xp, this.level) },
     createRandomSheet () {
       if (this.isNew) this.rollRandomMouse()
       else this.$refs['confirm-dialog'].open(this.$t('Create a new character...'), this.$t('The sheet of “{name}” will be erased. Do you confirm?', { name: this.name } ))

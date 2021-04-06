@@ -4,7 +4,7 @@ import { d6 } from '@/services/dice-roller'
 export const store = createStore({
   state () {
     return {
-      currentSlotIndex: null,
+      currentSlotIndex: -1,
       hirelings: [],
       history: [],
       locale: null,

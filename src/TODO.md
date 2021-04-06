@@ -1,6 +1,3 @@
-## BUGS
-- grits are not restored on loading a sheet.
-
 # TODO
 
 ## Extension for other races
@@ -10,11 +7,9 @@ Prepare for inventory extension (like for Hamster from https://sites.google.com/
 - Add other races from **Player Species** by Gray Moth.
 
 ## Mobile
-Create a version usable on tablets and smartphones.
+- Create a version usable on tablets and smartphones.
 
 ## Misc
-- add level up routine.
-- add rest (short, long, fall) routines.
 - allow to roll a dice formula, like 2d6+3.
 - Add network to allow everyone with the same table identifier to see dice rolls and other mice name.
 - autosave ? after each update; each N minutes ?

@@ -13,6 +13,7 @@ export default {
     advancement () {
       if (this.$refs['sheet-mouse']) this.$refs['sheet-mouse'].advancement()
     },
+    canLevelUp () { return this.$refs['sheet-mouse'] ? this.$refs['sheet-mouse'].canLevelUp() : false },
     createRandomSheet () {
       if (this.$refs['sheet-mouse']) this.$refs['sheet-mouse'].createRandomSheet()
     },

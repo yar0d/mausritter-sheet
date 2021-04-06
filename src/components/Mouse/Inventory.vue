@@ -103,7 +103,6 @@
     <div class="mx4">{{ $t('Worn: Quick to ready.') }}</div>
     <div>{{ $t('Pack: Takes time to ready. During combat, requires an action to retrieve.') }}</div>
   </w-flex>
-  {{ pack2 }}
 </template>
 
 <script>

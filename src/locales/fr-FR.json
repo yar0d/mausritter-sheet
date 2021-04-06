@@ -49,6 +49,7 @@
   "With advantage": "Avec avantage",
   "With disadvantage": "Avec désadvantage",
   "Need {score} or lower, roll {roll}.": "Besoin de faire {score} ou moins, lancé {roll}.",
+  "Need upper than {upper}, roll {roll}.": "Besoin de dépasser {upper}, lancé {roll}.",
   "Create a new character...": "Créer un nouveau personnage…",
   "Load": "Charger",
   "Save": "Enregistrer",
@@ -108,7 +109,7 @@
   "History": "Historique",
   "Manage your characters.": "Gérer tes personnages.",
   "The sheet of “{dest}” will be overwritten by “{name}”. Do you confirm?": "Confirmes-tu le remplacement de la fiche de « {dest} » par celle de « {name} » ?",
-  "The current sheet will be overwritten by “{name}”. Do you confirm?": "Confirmes-tu le remplacement de la fiche en cours par “{name}” ?",
+  "Do you want to save the sheet of “{name}”?": "Voulez-vous enregistrer la fiche de « {name} » ?",
   "Welcome": "Bienvenue",
   "Hirelings": "Employés",
   "Recruit hireling...": "Engager un employé…",
@@ -122,7 +123,9 @@
   "Paste your character here...": "Coller le personnage ici…",
   "Drop item here, in your bank.": "Déposer ici les objets à mettre en banque.",
   "Advancement...": "Monter de niveau…",
+  "Level up": "Monter de niveau",
   "“{name}” prepares advancement...": "« {name} » se prépare à monter de niveau…",
+  "“{name}” will move from the {current} level to the {next} level.": "« {name} » passera du niveau {current} au niveau {next}.",
   "Short rest...": "Repos court…",
   "Short rest": "Repos court",
   "Long rest...": "Repos long…",
@@ -139,5 +142,10 @@
   "Current STR is {value}.": "FOR en cours : {value}.",
   "Current DEX is {value}.": "DEX en cours : {value}.",
   "Current WIL is {value}.": "VOL en cours : {value}.",
-  "Do not forget to remove the conditions corresponding to this rest.": "N'oublies pas de retirer les conditions correspondant à ce repos."
+  "Do not forget to remove the conditions corresponding to this rest.": "N'oublies pas de retirer les conditions correspondant à ce repos.",
+  "Increase in attributes if d20 is higher than the maximum of the latter.": "Augmentation des attributs si d20 est supérieur au maximum de celui-ci.",
+  "If {roll} is greater than your maximum HP, then your HP is the sum of the dice. Otherwise they increase by one.": "Si {roll} est supérieur au maximum de tes PV, alors tes PV sont la somme des dés. Sinon ils augmentent d'un point.",
+  "Roll {formula} is {roll}. Max {attr} is {value}.": "Tirage de {formula} donne {roll}. Le max des PV est {hp}.",
+  "Increase {attr} to {result}.": "Augmentation de {attr} à {result}.",
+  "{attr} will not increase.": "Pas d'augmentation de {attr}"
 }
