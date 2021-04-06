@@ -2,6 +2,10 @@ import conditions from './conditions.json'
 import items from './items.json'
 
 export const TYPE_CONDITION = 'C'
+export const CONDITION_CLEAR_SHORT_REST = 'SR'
+export const CONDITION_CLEAR_LONQ_REST = 'LR'
+export const CONDITION_CLEAR_FULL_REST = 'FR'
+export const CONDITION_CLEAR_MEAL = 'ME'
 export const CONDITION_FAMILY_BASE = 'BA'
 export const CONDITION_FAMILY_CUSTOM = 'CU'
 
@@ -83,6 +87,10 @@ export function getItem (id, { customLabel, desc } = {}) {
 }
 
 export default {
+  CONDITION_CLEAR_SHORT_REST,
+  CONDITION_CLEAR_LONQ_REST,
+  CONDITION_CLEAR_FULL_REST,
+  CONDITION_CLEAR_MEAL,
   conditions,
   conditionsList,
   getItem,

@@ -10,8 +10,21 @@ export default {
   components: { Mouse },
   data () { return {} },
   methods: {
+    advancement () {
+      if (this.$refs['sheet-mouse']) this.$refs['sheet-mouse'].advancement()
+    },
+    canLevelUp () { return this.$refs['sheet-mouse'] ? this.$refs['sheet-mouse'].canLevelUp() : false },
     createRandomSheet () {
       if (this.$refs['sheet-mouse']) this.$refs['sheet-mouse'].createRandomSheet()
+    },
+    restFull () {
+      if (this.$refs['sheet-mouse']) this.$refs['sheet-mouse'].restFull()
+    },
+    restLong () {
+      if (this.$refs['sheet-mouse']) this.$refs['sheet-mouse'].restLong()
+    },
+    restShort () {
+      if (this.$refs['sheet-mouse']) this.$refs['sheet-mouse'].restShort()
     },
     serialize () {
       let result

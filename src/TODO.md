@@ -1,6 +1,3 @@
-## BUGS
-- grits are not restored on loading a sheet.
-
 # TODO
 
 ## Extension for other races
@@ -10,7 +7,7 @@ Prepare for inventory extension (like for Hamster from https://sites.google.com/
 - Add other races from **Player Species** by Gray Moth.
 
 ## Mobile
-Create a version usable on tablets and smartphones.
+- Create a version usable on tablets and smartphones.
 
 ## Misc
 - allow to roll a dice formula, like 2d6+3.
@@ -19,7 +16,7 @@ Create a version usable on tablets and smartphones.
 - save history in slots too.
 - manage draggable from bank panel to inventory slots.
 - manage retrieving pips from bank (cost 1% price).
-- add wonderful stuff from [Tales form Moonshore](https://sites.google.com/view/talesfrommoonshore/home)
+- add wonderful stuff from [Tales from Moonshore](https://sites.google.com/view/talesfrommoonshore/home)
 
 # IDEAS
 - Application for GM session sheet

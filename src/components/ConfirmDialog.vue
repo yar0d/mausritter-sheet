@@ -1,5 +1,5 @@
 <template>
-  <w-dialog v-model="show" :title="title" persistent :width="550">
+  <w-dialog v-model="show" :title="title" persistent :width="600">
     <slot name="content">
       <p class="pa2">{{ message }}</p>
     </slot>
@@ -17,10 +17,13 @@
 </template>
 
 <script>
+import { isMobileDevice } from '@/services/responsive'
+
 export default {
   name: 'ConfirmDialog',
   data () {
     return {
+      isMobileDevice,
       resolve: null,
       reject: null,
       message: null,
