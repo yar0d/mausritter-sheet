@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.10](https://github.com/yar0d/mausritter-sheet/compare/v1.3.9...v1.3.10) (2021-04-06)
+
 ### [1.3.9](https://github.com/yar0d/mausritter-sheet/compare/v1.3.8...v1.3.9) (2021-03-23)
 
 
