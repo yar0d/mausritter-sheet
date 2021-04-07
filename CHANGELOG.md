@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/yar0d/mausritter-sheet/compare/v1.3.10...v1.4.0) (2021-04-07)
+
+
+### Features
+
+* Add encumbered alert in inventory ([d4dd8ff](https://github.com/yar0d/mausritter-sheet/commit/d4dd8ff783e30f30d85a7e9e09b6af21719d7d6d))
+
 ### [1.3.10](https://github.com/yar0d/mausritter-sheet/compare/v1.3.9...v1.3.10) (2021-04-06)
 
 ### [1.3.9](https://github.com/yar0d/mausritter-sheet/compare/v1.3.8...v1.3.9) (2021-03-23)
