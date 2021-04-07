@@ -65,6 +65,16 @@ export function getItemsForFamilies (families) {
   return result
 }
 
+export function getItemEncumbrance (item) {
+  switch (item.geometry) {
+    case '1x1': return 1
+    case '2x1':
+    case '1x2': return 2
+    case '2x2': return 4
+    default: return 1
+  }
+}
+
 /**
  * Return an item according to its id.
  * @param {String} Identifier of the item. See items.json for the list of items.
@@ -94,6 +104,7 @@ export default {
   conditions,
   conditionsList,
   getItem,
+  getItemEncumbrance,
   getItemsForFamilies,
   ITEM_FAMILY_ARMOR_HEAVY,
   ITEM_FAMILY_ARMOR_LIGHT,

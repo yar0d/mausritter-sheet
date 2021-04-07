@@ -147,5 +147,6 @@
   "If {roll} is greater than your maximum HP, then your HP is the sum of the dice. Otherwise they increase by one.": "If {roll} is greater than your maximum HP, then your HP is the sum of the dice. Otherwise they increase by one.",
   "Roll {formula} is {roll}. Max {attr} is {value}.": "Roll {formula} is {roll}. Max {attr} is {value}.",
   "Increase {attr} to {result}.": "Increase {attr} to {result}.",
-  "{attr} will not increase.": "{attr} will not increase."
+  "{attr} will not increase.": "{attr} will not increase.",
+  "You're encumbered. You cannot run, and makes all saves with disadvantage.": "You're encumbered. You cannot run, and makes all saves with disadvantage."
 }

@@ -147,5 +147,6 @@
   "If {roll} is greater than your maximum HP, then your HP is the sum of the dice. Otherwise they increase by one.": "Si {roll} est supérieur au maximum de tes PV, alors tes PV sont la somme des dés. Sinon ils augmentent d'un point.",
   "Roll {formula} is {roll}. Max {attr} is {value}.": "Tirage de {formula} donne {roll}. Le max des PV est {hp}.",
   "Increase {attr} to {result}.": "Augmentation de {attr} à {result}.",
-  "{attr} will not increase.": "Pas d'augmentation de {attr}"
+  "{attr} will not increase.": "Pas d'augmentation de {attr}",
+  "You're encumbered. You cannot run, and makes all saves with disadvantage.": "Tu es encombré, tu ne peux plus courir, et tu fais tous tes jets de sauvegarde avec un désavantage."
 }

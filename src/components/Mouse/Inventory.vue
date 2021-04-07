@@ -103,11 +103,14 @@
     <div class="mx4">{{ $t('Worn: Quick to ready.') }}</div>
     <div>{{ $t('Pack: Takes time to ready. During combat, requires an action to retrieve.') }}</div>
   </w-flex>
+  <w-alert v-if="isEncumbered" class="size--sm my0" error plain>
+    {{ $t('You\'re encumbered. You cannot run, and makes all saves with disadvantage.') }}
+  </w-alert>
 </template>
 
 <script>
 import draggable from "vuedraggable"
-import { TYPE_CONDITION, TYPE_ITEM, getItem } from "@/services/items-conditions"
+import { TYPE_CONDITION, TYPE_ITEM, getItemEncumbrance, getItem } from "@/services/items-conditions"
 import Conditions from "../Conditions.vue"
 import Items from "../Items.vue"
 
@@ -132,7 +135,20 @@ export default {
       pack6: []
     }
   },
+  computed: {
+    isEncumbered () {
+      const result = this.encumberance(this.body1) + this.encumberance(this.body2) + this.encumberance(this.mainPaw) + this.encumberance(this.offPaw) + this.encumberance(this.pack1) + this.encumberance(this.pack2) + this.encumberance(this.pack3) + this.encumberance(this.pack4) + this.encumberance(this.pack5) + this.encumberance(this.pack6)
+      return result > 10 // This is the number of lists
+    }
+  },
   methods: {
+    encumberance (list) {
+      let result = 0
+      list.forEach(item => {
+        result += getItemEncumbrance(item)
+      })
+      return result
+    },
     selfList (list) {
       return list === this.body1 || list === this.body2 || list === this.mainPaw || list === this.offPaw || list === this.pack1 || list === this.pack2 || list === this.pack3 || list === this.pack4 || list === this.pack5 || list === this.pack6
     },
