@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid'
 import conditions from './conditions.json'
 import items from './items.json'
 
@@ -59,7 +60,7 @@ export function getItemsForFamilies (families) {
 
   const result = []
   for (let i = 0; i < items.length; i++) {
-    if (f.includes(items[i].family)) result.push({ ...items[i] })
+    if (f.includes(items[i].family)) result.push({ ...items[i], used: 0, uuid: uuidv4() })
   }
 
   return result
@@ -85,7 +86,7 @@ export function getItem (id, { customLabel, desc } = {}) {
   let found
   let i = 0
   while (!found && i < itemsList.length) {
-    if (itemsList[i].id === id) found = { ...itemsList[i] }
+    if (itemsList[i].id === id) found = { ...itemsList[i], used: 0, uuid: uuidv4() }
     i++
   }
   if (found) {
