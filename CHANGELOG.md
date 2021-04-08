@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.2](https://github.com/yar0d/mausritter-sheet/compare/v1.4.1...v1.4.2) (2021-04-08)
+
+
+### Bug Fixes
+
+* create new mouse item use count ([4db0657](https://github.com/yar0d/mausritter-sheet/commit/4db06571e127f01f744dfaac8d0d7f8f555f256b))
+
 ### [1.4.1](https://github.com/yar0d/mausritter-sheet/compare/v1.4.0...v1.4.1) (2021-04-08)
 
 
