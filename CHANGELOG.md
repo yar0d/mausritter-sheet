@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/yar0d/mausritter-sheet/compare/v1.4.2...v1.5.0) (2021-04-08)
+
+
+### Features
+
+* on mobile use portrait ([471de95](https://github.com/yar0d/mausritter-sheet/commit/471de955aa9867ef25d7fcb307249cfcd8303257))
+
 ### [1.4.2](https://github.com/yar0d/mausritter-sheet/compare/v1.4.1...v1.4.2) (2021-04-08)
 
 
