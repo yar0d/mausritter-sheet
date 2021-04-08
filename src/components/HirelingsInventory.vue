@@ -5,7 +5,7 @@
         <template #header><span class="inventory-cell-label">{{ $t('Main paw') }}</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(mainPaw, element.id)" />
-          <items v-else-if="element.type === TYPE_ITEM && !existCondition(mainPaw)" can-delete show-use show-damage :item="element" @delete="deleteItem(mainPaw, element.id)" />
+          <items v-else-if="element.type === TYPE_ITEM && !existCondition(mainPaw)" can-delete show-use show-damage :item="element" @delete="deleteItem(mainPaw, element.id)" @toggle-used="toggleUsed" />
         </template>
       </draggable>
     </div>
@@ -15,7 +15,7 @@
         <template #header><span class="inventory-cell-label">1</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(pack1, element.id)" />
-          <items v-else-if="element.type === TYPE_ITEM && !existCondition(pack1)" can-delete show-use show-damage :item="element" @delete="deleteItem(pack1, element.id)" />
+          <items v-else-if="element.type === TYPE_ITEM && !existCondition(pack1)" can-delete show-use show-damage :item="element" @delete="deleteItem(pack1, element.id)" @toggle-used="toggleUsed" />
         </template>
       </draggable>
     </div>
@@ -25,7 +25,7 @@
         <template #header><span class="inventory-cell-label">2</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(pack2, element.id)" />
-          <items v-else-if="element.type === TYPE_ITEM && !existCondition(pack2)" can-delete show-use show-damage :item="element" @delete="deleteItem(pack2, element.id)" />
+          <items v-else-if="element.type === TYPE_ITEM && !existCondition(pack2)" can-delete show-use show-damage :item="element" @delete="deleteItem(pack2, element.id)" @toggle-used="toggleUsed" />
         </template>
       </draggable>
     </div>
@@ -37,7 +37,7 @@
         <template #header><span class="inventory-cell-label">{{ $t('Off paw') }}</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(offPaw, element.id)" />
-          <items v-else-if="element.type === TYPE_ITEM && !existCondition(offPaw)" can-delete show-use show-damage :item="element" @delete="deleteItem(offPaw, element.id)" />
+          <items v-else-if="element.type === TYPE_ITEM && !existCondition(offPaw)" can-delete show-use show-damage :item="element" @delete="deleteItem(offPaw, element.id)"  @toggle-used="toggleUsed"/>
         </template>
       </draggable>
     </div>
@@ -47,7 +47,7 @@
         <template #header><span class="inventory-cell-label">3</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(pack3, element.id)" />
-          <items v-else-if="element.type === TYPE_ITEM && !existCondition(pack3)" can-delete show-use show-damage :item="element" @delete="deleteItem(pack3, element.id)" />
+          <items v-else-if="element.type === TYPE_ITEM && !existCondition(pack3)" can-delete show-use show-damage :item="element" @delete="deleteItem(pack3, element.id)" @toggle-used="toggleUsed" />
         </template>
       </draggable>
     </div>
@@ -57,7 +57,7 @@
         <template #header><span class="inventory-cell-label">4</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(pack4, element.id)" />
-          <items v-else-if="element.type === TYPE_ITEM && !existCondition(pack4)" can-delete show-use show-damage :item="element" @delete="deleteItem(pack4, element.id)" />
+          <items v-else-if="element.type === TYPE_ITEM && !existCondition(pack4)" can-delete show-use show-damage :item="element" @delete="deleteItem(pack4, element.id)" @toggle-used="toggleUsed" />
         </template>
       </draggable>
     </div>
@@ -68,6 +68,7 @@
 </template>
 
 <script>
+import { v4 as uuidv4 } from 'uuid'
 import draggable from "vuedraggable"
 import { TYPE_CONDITION, TYPE_ITEM, getItemEncumbrance, getItem } from "@/services/items-conditions"
 import Conditions from "./Conditions.vue"
@@ -91,9 +92,10 @@ export default {
     }
   },
   computed: {
+    stacks () { return [ this.mainPaw, this.offPaw, this.pack1, this.pack2, this.pack3, this.pack4 ] },
     isEncumbered () {
       const result = this.encumberance(this.mainPaw) + this.encumberance(this.offPaw) + this.encumberance(this.pack1) + this.encumberance(this.pack2) + this.encumberance(this.pack3) + this.encumberance(this.pack4)
-      return result > 6 // This is the number of lists
+      return result > this.stacks.length
     }
   },
   methods: {
@@ -151,6 +153,24 @@ export default {
       }
       return found
     },
+    getItemByUuid(list, uuid) {
+      let i = 0
+      let found
+      while (!found && i < list.length) {
+        if (list[i].uuid === uuid) found = list[i]
+        i++
+      }
+      return found
+    },
+    findItemUuid (uuid) {
+      let s = 0
+      let found
+      while (!found && s < this.stacks.length) {
+        found = this.getItemByUuid(this.stacks[s], uuid)
+        s++
+      }
+      return found
+    },
     move(e) {
       if (e.relatedContext.list && e.relatedContext.list.canDrop) return this.canDrop(e.draggedContext.element, e.relatedContext.list)
 
@@ -167,34 +187,6 @@ export default {
         if (e.relatedContext.list[i].type === e.draggedContext.element.type || e.relatedContext.list.type === TYPE_CONDITION) abort = true
         i++
       }  return !abort
-    },
-    reset (data = {}) {
-      this.mainPaw = data.mainPaw || []
-      this.offPaw = data.offPaw || []
-      this.pack1 = data.pack1 || []
-      this.pack2 = data.pack2 || []
-      this.pack3 = data.pack3 || []
-      this.pack4 = data.pack4 || []
-      // Export drop testing method
-      this.mainPaw.canDrop = this.canDrop
-      this.offPaw.canDrop = this.canDrop
-      this.pack1.canDrop = this.canDrop
-      this.pack2.canDrop = this.canDrop
-      this.pack3.canDrop = this.canDrop
-      this.pack4.canDrop = this.canDrop
-    },
-    serialize () {
-      return {
-        mainPaw: this.mainPaw,
-        offPaw: this.offPaw,
-        pack1: this.pack1,
-        pack2: this.pack2,
-        pack3: this.pack3,
-        pack4: this.pack4,
-      }
-    },
-    setData (data) {
-      this.reset(data)
     },
     putItem (itemId, inventoryId, { customLabel, desc } = {}) {
       if (inventoryId === '?') {
@@ -227,6 +219,50 @@ export default {
       if (desc) item.desc = desc
       this.$data[inventoryId].push({ ...item }) // Clone item in inventory
       return true
+    },
+    reset (data = {}) {
+      this.mainPaw = this.sanitizeList(data.mainPaw || [])
+      this.offPaw = this.sanitizeList(data.offPaw || [])
+      this.pack1 = this.sanitizeList(data.pack1 || [])
+      this.pack2 = this.sanitizeList(data.pack2 || [])
+      this.pack3 = this.sanitizeList(data.pack3 || [])
+      this.pack4 = this.sanitizeList(data.pack4 || [])
+      // Export drop testing method
+      this.mainPaw.canDrop = this.canDrop
+      this.offPaw.canDrop = this.canDrop
+      this.pack1.canDrop = this.canDrop
+      this.pack2.canDrop = this.canDrop
+      this.pack3.canDrop = this.canDrop
+      this.pack4.canDrop = this.canDrop
+    },
+    sanitizeList (list) {
+      list.forEach(item => {
+        if (item.type === TYPE_ITEM) {
+          item.uuid = item.uuid || uuidv4()
+          item.used = item.used || 0
+        }
+      })
+      return list
+    },
+    serialize () {
+      return {
+        mainPaw: this.mainPaw,
+        offPaw: this.offPaw,
+        pack1: this.pack1,
+        pack2: this.pack2,
+        pack3: this.pack3,
+        pack4: this.pack4,
+      }
+    },
+    setData (data) {
+      this.reset(data)
+    },
+    toggleUsed ({ uuid, checked }) {
+      const item = this.findItemUuid(uuid)
+      if (item) {
+        if (checked) item.used++
+        else item.used--
+      }
     }
   },
   created () {

@@ -283,6 +283,16 @@ textarea {
   max-width: 350px;
 }
 
+.w-500 {
+  width: 500px;
+  max-width: 500px;
+}
+
+.w-700 {
+  width: 700px;
+  max-width: 700px;
+}
+
 .grit-1 {
   width: 118px;
   max-width: 118px;

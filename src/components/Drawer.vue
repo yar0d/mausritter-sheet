@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import { v4 as uuidv4 } from 'uuid'
 import draggable from 'vuedraggable'
 import { conditionsList, itemsList } from '@/services/items-conditions'
 import Conditions from '@/components/Conditions.vue'
@@ -58,7 +59,7 @@ export default {
       return true
     },
     clone (o) {
-      return { ...o }
+      return { ...o, uuid: uuidv4() }
     },
     close () {
       this.$emit('close')

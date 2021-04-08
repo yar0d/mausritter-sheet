@@ -6,7 +6,7 @@
           <w-button v-if="canDelete" sm icon="mdi mdi-close-circle" bg-color="white" color="red" md @click="onDelete" />
           <div class="spacer" />
           <div v-if="showUse && currentItem.use !== undefined && currentItem.use <= 6">
-            <w-checkbox v-for="u in currentItem.use" :key="u" class="item-use" />
+            <w-checkbox v-for="u in currentItem.use" v-model="currentUsed[u - 1]" :key="u" class="item-use" @input="toggleUsed" />
           </div>
         </w-flex>
         <w-flex column justify-space-between>
@@ -61,19 +61,27 @@ export default {
     showUse: { type: Boolean, default: false },
     size: { type: String, default: null }
   },
-  emits: [ 'delete' ],
+  emits: [ 'delete', 'toggle-used' ],
   data () {
     return {
       ITEM_FAMILY_CUSTOM,
       ITEM_FAMILY_SPELL,
-      currentItem: {}
+      currentItem: {},
+      currentUsed: []
     }
   },
   watch: {
     item: {
       immediate: true,
       handler (newVal, oldVal) {
-        if (newVal && !oldVal && newVal !== oldVal) this.currentItem = newVal // Just init label
+        if (newVal && !oldVal && newVal !== oldVal) {
+          // Create values for used checkboxes
+          this.currentUsed = []
+          for (let i = 0; i < newVal.use; i++) {
+            this.currentUsed.push(i < newVal.used)
+          }
+          this.currentItem = newVal
+        }
       }
     }
   },
@@ -100,7 +108,10 @@ export default {
       return 'item-' + label.replace(' ', '-').toLowerCase()
     },
     onDelete () {
-      this.$emit('delete', { id: this.id })
+      this.$emit('delete')
+    },
+    toggleUsed (checked) {
+      this.$emit('toggle-used', { uuid: this.item.uuid, checked })
     }
   }
 }
