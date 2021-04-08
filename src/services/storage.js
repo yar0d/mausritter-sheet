@@ -80,7 +80,7 @@ export function decodeJson (data) {
 
 const SLOT_KEY_ID = 'mausritter_sheet_'
 const SLOT_KEY_DATA = 'mausritter_sheet_data_'
-const MAX_SLOTS = 10
+const MAX_SLOTS = 12
 
 export function deleteSlot (slot) {
   del(SLOT_KEY_ID + slot)

@@ -13,8 +13,24 @@
             <div class="title3">{{ $t('Manage your characters.') }}</div>
           </w-toolbar>
         </template>
-        <w-flex column v-for="(slot, index) in slots" :key="index" justify-center>
-          <w-flex row align-center justify-space-between class="pa2" :class="currentSlotIndex === index ? 'blue-dark4--bg white' : ''">
+
+        <w-flex row class="w-max mb2 px2" justify-space-between>
+          <div>
+            <w-button lg @click="createRandomSheet">
+              <w-icon class="mr1">mdi mdi-plus</w-icon>
+              {{ $t('Create a new character...') }}
+            </w-button>
+          </div>
+
+          <div>
+            <w-button lg @click="importSheet(index)" bg-color="blue-grey" color="white" class="ml2">
+              {{ $t('Import...') }}
+            </w-button>
+          </div>
+        </w-flex>
+
+        <w-flex column v-for="(slot, index) in slots" :key="index" justify-center class="pb2">
+          <w-flex row align-center justify-space-between class="px2 pt2" :class="currentSlotIndex === index ? 'brown-dark2--bg white' : ''">
             <div class="mr2">{{ index + 1 }}</div>
             <div v-if="!slot" class="caption">
             {{ $t('Empty') }} "{{currentSlotIndex}}"
@@ -52,44 +68,29 @@
               </span>
             </div>
           </w-flex>
-          <w-divider />
-        </w-flex>
 
-        <w-flex row class="w-max mt4 px2" justify-space-between>
-          <div>
-            <w-button lg @click="createRandomSheet">
-              <w-icon class="mr1">mdi mdi-plus</w-icon>
-              {{ $t('Create a new character...') }}
+          <w-flex v-if="currentSlotIndex === index" row class="w-max pl4 pr2 py2 brown-dark2--bg white" justify-space-between>
+            <w-button sm bg-color="brown-light2" color="white" @click="restShort">
+              <w-icon class="mr1">mdi mdi-cup-water</w-icon>
+              {{ $t('Short rest...') }}
             </w-button>
-          </div>
 
-          <div>
-            <w-button lg @click="importSheet(index)" bg-color="blue-grey" color="white" class="ml2">
-              {{ $t('Import...') }}
+            <w-button sm bg-color="brown-light1" color="white" class="ml1" @click="restLong">
+              <w-icon class="mr1">mdi mdi-silverware</w-icon>
+              {{ $t('Long rest...') }}
             </w-button>
-          </div>
-        </w-flex>
 
-        <w-flex v-if="currentSlotIndex > 0" row class="mt4 w-max px1" justify-space-between>
-          <w-button bg-color="brown-light2" color="white" class="ml1" @click="restShort">
-            <w-icon class="mr1">mdi mdi-cup-water</w-icon>
-            {{ $t('Short rest...') }}
-          </w-button>
+            <w-button sm bg-color="brown" color="white" class="ml1" @click="restFull">
+              <w-icon class="mr1">mdi mdi-bed</w-icon>
+              {{ $t('Full rest...') }}
+            </w-button>
 
-          <w-button bg-color="brown-light1" color="white" class="ml1" @click="restLong">
-            <w-icon class="mr1">mdi mdi-silverware</w-icon>
-            {{ $t('Long rest...') }}
-          </w-button>
-
-          <w-button bg-color="brown" color="white" class="ml1" @click="restFull">
-            <w-icon class="mr1">mdi mdi-bed</w-icon>
-            {{ $t('Full rest...') }}
-          </w-button>
-
-          <w-button v-if="canLevelUp()" lg bg-color="blue" color="white" class="ml4" @click="advancement">
-            <w-icon class="mr1">mdi mdi-stairs-up</w-icon>
-            {{ $t('Advancement...') }}
-          </w-button>
+            <w-button v-if="canLevelUp()" lg bg-color="blue" color="white" class="ml1" @click="advancement">
+              <w-icon class="mr1">mdi mdi-stairs-up</w-icon>
+              {{ $t('Advancement...') }}
+            </w-button>
+          </w-flex>
+          <w-divider v-if="index + 1 < slots.length" />
         </w-flex>
       </w-card>
     </w-flex>

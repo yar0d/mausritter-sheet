@@ -5,6 +5,10 @@ body,
   margin: 0;
 }
 
+.debug {
+  border: 1px solid red;
+}
+
 #sheet {
   background-image: url('../img/mouse-hole.png');
   background-repeat: no-repeat;
@@ -495,6 +499,10 @@ textarea {
   max-height: 128px;
   max-width: 128px;
   font-size: 16px;
+}
+
+.drawer-top {
+  margin-top: 30px;
 }
 
 .drawer .condition-label,

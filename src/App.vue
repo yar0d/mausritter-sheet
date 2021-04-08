@@ -11,7 +11,7 @@
           </w-flex>
 
           <w-flex column class="h-max" :class="isMobileDevice ? 'fixed-tabs' : ''">
-            <w-toolbar no-border class="toolbar-pager">
+            <w-toolbar no-border class="toolbar-pager px0">
               <w-button lg :class="isMobileDevice ? 'px2' : 'px8'" :text="!show.welcome" @click="showPanel('welcome')">
                 <w-icon xl>
                   mdi mdi-rodent
@@ -45,19 +45,19 @@
               <img :src="require('@/assets/compatible-with-mausritter-88x32.png')" contain class="clickable" @click="$refs['about-dialog'].show()" />
             </w-toolbar>
 
-            <div v-show="show.history" class="history-background h-max">
+            <div v-show="show.history" class="history-background h-max card-bordered">
               <history />
             </div>
 
-            <div v-show="show.bank" class="bank-background w-max h-max">
+            <div v-show="show.bank" class="bank-background w-max h-max card-bordered">
               <bank ref="bank" />
             </div>
 
-            <div v-show="show.hirelings" class="hirelings-background h-max">
+            <div v-show="show.hirelings" class="hirelings-background h-max card-bordered">
               <hirelings ref="hirelings"/>
             </div>
 
-            <div v-show="show.welcome" class="welcome-background h-max">
+            <div v-show="show.welcome" class="welcome-background h-max card-bordered">
               <welcome />
             </div>
           </w-flex>

@@ -1,5 +1,5 @@
 <template>
-  <drawer v-model="showDrawer" @close="showDrawer = false" absolute top class="mt9" />
+  <drawer v-model="showDrawer" @close="showDrawer = false" absolute top class="drawer-top" />
   <w-flex row justify-space-between align-center class="pb1 px1">
     <div class="ml2">
       <w-tooltip transition="fade" bg-color="yellow-light2" color="black" right>
