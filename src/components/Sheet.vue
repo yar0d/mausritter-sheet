@@ -1,5 +1,7 @@
 <template>
-  <mouse ref="sheet-mouse" />
+  <w-card class="card-bordered character-sheet">
+    <mouse ref="sheet-mouse" />
+  </w-card>
 </template>
 
 <script>

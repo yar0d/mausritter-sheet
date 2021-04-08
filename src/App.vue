@@ -4,8 +4,8 @@
       <div id="dice-canvas" class="dice3d-canvas" />
 
       <w-flex basis-zero wrap class="h-max">
-        <w-flex row align-start justify-start>
-          <w-flex id="sheet-container" column justify-start>
+        <w-flex :row="!isMobileDevice" :column="isMobileDevice" align-start justify-start>
+          <w-flex id="sheet-container" :class="isMobileDevice ? 'mb1' : ''" column justify-start>
             <sheet-toolbar ref="sheet-toolbar" />
             <sheet id="sheet" ref="sheet"/>
           </w-flex>
