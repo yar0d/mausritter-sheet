@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/yar0d/mausritter-sheet/compare/v1.5.1...v1.6.0) (2021-04-09)
+
+
+### Features
+
+* attr current input support wheel and key. ([b65c903](https://github.com/yar0d/mausritter-sheet/commit/b65c90371fc804360625ce614e3494b86bcc63fb))
+
 ### [1.5.1](https://github.com/yar0d/mausritter-sheet/compare/v1.5.0...v1.5.1) (2021-04-08)
 
 ## [1.5.0](https://github.com/yar0d/mausritter-sheet/compare/v1.4.2...v1.5.0) (2021-04-08)
