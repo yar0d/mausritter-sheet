@@ -254,7 +254,6 @@ export default {
   },
   computed: {
     alert () {
-      console.log('##alert', this.currentStr, this.currentDex, this.currentWil)
       if (this.isNew) return null
       if (this.currentStr <= 0) return this.$t('Condolence, your mouse has passed away.')
       if (this.currentDex <= 0) return this.$t('Your mouse cannot move.')
