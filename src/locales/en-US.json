@@ -148,5 +148,8 @@
   "Roll {formula} is {roll}. Max {attr} is {value}.": "Roll {formula} is {roll}. Max {attr} is {value}.",
   "Increase {attr} to {result}.": "Increase {attr} to {result}.",
   "{attr} will not increase.": "{attr} will not increase.",
-  "You're encumbered. You cannot run, and makes all saves with disadvantage.": "You're encumbered. You cannot run, and makes all saves with disadvantage."
+  "You're encumbered. You cannot run, and makes all saves with disadvantage.": "You're encumbered. You cannot run, and makes all saves with disadvantage.",
+  "Condolence, your mouse has passed away.": "Condolence, your mouse has passed away.",
+  "Your mouse cannot move.": "Your mouse cannot move.",
+  "Your mouse is succumbing to madness.": "Your mouse is succumbing to madness."
 }

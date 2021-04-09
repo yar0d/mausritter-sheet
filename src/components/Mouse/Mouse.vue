@@ -19,6 +19,10 @@
               <w-input v-model="background" class="body input-value" />
             </div>
           </w-flex>
+
+          <w-alert v-show="alert" class="size--xl my0" error plain>
+            {{ alert }}
+          </w-alert>
         </w-card>
 
         <w-card bg-color="white" class="card-sheet xs4">
@@ -62,7 +66,7 @@
               <w-input v-model.number="maxStr" class="title1" color="minor" />
             </div>
             <div class="w-150 divider-v">
-              <w-input v-model.number="currentStr" class="title1 primary" />
+              <number-input v-model="currentStr" :max="maxStr" class="title1 primary" @input="setCurrentStr" />
             </div>
           </w-flex>
 
@@ -81,7 +85,7 @@
               <w-input v-model.number="maxDex" class="title1" color="minor" />
             </div>
             <div class="w-150 divider-v">
-              <w-input v-model.number="currentDex" class="title1 primary" />
+              <number-input v-model="currentDex" :max="maxDex" class="title1 primary" @input="setCurrentDex" />
             </div>
           </w-flex>
 
@@ -100,7 +104,7 @@
               <w-input v-model.number="maxWil" class="title1" color="minor" />
             </div>
             <div class="w-150 divider-v">
-              <w-input v-model.number="currentWil" class="title1 primary" />
+              <number-input v-model="currentWil" :max="maxWil" class="title1 primary" @input="setCurrentWil" />
             </div>
           </w-flex>
         </w-card>
@@ -116,7 +120,7 @@
               <w-input v-model.number="maxHP" class="title1" color="minor" />
             </div>
             <div class="w-150 divider-v">
-              <w-input v-model.number="currentHP" class="title1 primary" />
+              <number-input v-model="currentHP" :max="maxHP" class="title1 primary" @input="setCurrentHP" />
             </div>
             <div class="w-50" />
           </w-flex>
@@ -211,9 +215,10 @@ import Grit from './Grit.vue'
 import ConfirmDialog from '../ConfirmDialog.vue'
 import MouseCreationDialog from './MouseCreationDialog.vue'
 import MouseAdvancementDialog from './MouseAdvancementDialog.vue'
+import NumberInput from '../NumberInput.vue'
 
 export default {
-  components: { Birthsign, CoatColor, CoatPattern, DiceResult, Inventory, Checker, Look, Grit, ConfirmDialog, MouseCreationDialog, MouseAdvancementDialog },
+  components: { Birthsign, CoatColor, CoatPattern, DiceResult, Inventory, Checker, Look, Grit, ConfirmDialog, MouseCreationDialog, MouseAdvancementDialog, NumberInput },
   data() {
     return {
       SWAP_NONE,
@@ -245,6 +250,16 @@ export default {
       pips: 0,
       swapAttributes: 0,
       xp: 0
+    }
+  },
+  computed: {
+    alert () {
+      console.log('##alert', this.currentStr, this.currentDex, this.currentWil)
+      if (this.isNew) return null
+      if (this.currentStr <= 0) return this.$t('Condolence, your mouse has passed away.')
+      if (this.currentDex <= 0) return this.$t('Your mouse cannot move.')
+      if (this.currentWil <= 0) return this.$t('Your mouse is succumbing to madness.')
+      return null
     }
   },
   methods: {
@@ -593,6 +608,18 @@ export default {
     },
     setCoatPattern (value) {
       this.coatPattern = value
+    },
+    setCurrentDex (value) {
+      this.currentDex = value
+    },
+    setCurrentHP (value) {
+      this.currentHP = value
+    },
+    setCurrentStr (value) {
+      this.currentStr = value
+    },
+    setCurrentWil (value) {
+      this.currentWil = value
     },
     setLook (value) {
       this.look = value

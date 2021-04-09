@@ -6,7 +6,7 @@
       </w-button>
     </w-toolbar>
 
-    <w-flex column align-center justify-center class="mt4">
+    <w-flex column align-center justify-center class="mt4 mb2">
       <w-card content-class=" px0 background-white-50">
         <template #title>
           <w-toolbar>

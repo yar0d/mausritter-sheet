@@ -1,8 +1,13 @@
 # TODO
 
-## Extension for other races
+## Extensions
+### Items
+#### Add selectable extension of items
+- From Luis Gimeno : http://www.sinergiaderol.com/Rol/Ayudas/Mausritter/003ObjetosDeTrasfondo.rar
+- Lux : https://drive.google.com/drive/u/0/folders/1wTh4T4CXMPgtwYqfbbmDnU4G7tEmrZvH
+
+### Other races
 Prepare for inventory extension (like for Hamster from https://sites.google.com/view/talesfrommoonshore/home/hamsters). The goal is to free space under the inventory slots. This will allow to put there specific things like the 2 cheek slots of hamsters.
-- Move bank in a tab after welcome.
 - Put grit somewhere else...
 - Add other races from **Player Species** by Gray Moth.
 

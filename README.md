@@ -15,7 +15,7 @@ Have a look at [Mausritter website](https://mausritter.com/) and [Licence](./LIC
 - Drag'n'drop in grit.
 - Drag'n'drop in bank, retrieving item from bank cost 1% of its price.
 - History of dices and other actions.
-- Save and load whole character sheet from local storage. 10 slots are available. All data is saved in your browser, no server is needed.
+- Save and load whole character sheet from local storage. 12 slots are available. All data is saved in your browser, no server is needed.
 - Import / Export of character sheet. Use this to load a character into another browser.
 - Mouse can rest and advance in level, up to level 20.
 

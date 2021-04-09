@@ -148,5 +148,8 @@
   "Roll {formula} is {roll}. Max {attr} is {value}.": "Tirage de {formula} donne {roll}. Le max des PV est {hp}.",
   "Increase {attr} to {result}.": "Augmentation de {attr} à {result}.",
   "{attr} will not increase.": "Pas d'augmentation de {attr}",
-  "You're encumbered. You cannot run, and makes all saves with disadvantage.": "Tu es encombré, tu ne peux plus courir, et tu fais tous tes jets de sauvegarde avec un désavantage."
+  "You're encumbered. You cannot run, and makes all saves with disadvantage.": "Tu es encombré, tu ne peux plus courir, et tu fais tous tes jets de sauvegarde avec un désavantage.",
+  "Condolence, your mouse has passed away.": "Condoléance, ta souris est décédée.",
+  "Your mouse cannot move.": "Ta souris ne peut plus bouger.",
+  "Your mouse is succumbing to madness.": "Ta souris succombe à la folie."
 }
