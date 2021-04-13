@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.3](https://github.com/yar0d/mausritter-sheet/compare/v1.6.2...v1.6.3) (2021-04-13)
+
+
+### Bug Fixes
+
+* **mobile:** scaling and app manifest ([7e1c089](https://github.com/yar0d/mausritter-sheet/commit/7e1c089ded936118b0e071a7400892e015dc46c0))
+
 ### [1.6.2](https://github.com/yar0d/mausritter-sheet/compare/v1.6.1...v1.6.2) (2021-04-09)
 
 ### [1.6.1](https://github.com/yar0d/mausritter-sheet/compare/v1.6.0...v1.6.1) (2021-04-09)
