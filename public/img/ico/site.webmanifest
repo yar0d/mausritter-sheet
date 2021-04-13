@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "Mausritter Sheet",
+    "short_name": "msrttr-sheet",
     "icons": [
         {
             "src": "/img/ico/android-chrome-192x192.png",
