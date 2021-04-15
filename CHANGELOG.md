@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.7](https://github.com/yar0d/mausritter-sheet/compare/v1.6.6...v1.6.7) (2021-04-15)
+
+
+### Bug Fixes
+
+* Translation switcher ([49e9c5e](https://github.com/yar0d/mausritter-sheet/commit/49e9c5e2a49b9f298f240da0d61ba9b73df78755))
+
 ### [1.6.6](https://github.com/yar0d/mausritter-sheet/compare/v1.6.5...v1.6.6) (2021-04-15)
 
 ### [1.6.5](https://github.com/yar0d/mausritter-sheet/compare/v1.6.4...v1.6.5) (2021-04-15)
