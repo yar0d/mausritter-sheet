@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.5](https://github.com/yar0d/mausritter-sheet/compare/v1.6.4...v1.6.5) (2021-04-15)
+
+
+### Bug Fixes
+
+* prevent scroll if wheeling other attr input ([70d4460](https://github.com/yar0d/mausritter-sheet/commit/70d4460676e854caa61385a0c84cdea67e035d7d))
+
 ### [1.6.4](https://github.com/yar0d/mausritter-sheet/compare/v1.6.3...v1.6.4) (2021-04-15)
 
 
