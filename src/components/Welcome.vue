@@ -111,6 +111,7 @@
 <script>
 import { LOCALES, DEFAULT_LOCALE, loadLocale, saveLocale } from '@/services/locales'
 import { deleteSlot, listSlots, loadSlot, saveSlot, decodeJson, encodeJson } from '@/services/storage'
+import { copyToClipboard } from '@/services/clipboard'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import PromptDialog from './PromptDialog.vue'
 
@@ -179,7 +180,7 @@ export default {
     },
     async exportSheet (index) {
       const data = loadSlot(index)
-      await navigator.clipboard.writeText(encodeJson(data))
+      await copyToClipboard(encodeJson(data))
       this.$refs['prompt-dialog'].open(this.$t('Export'), this.$t('“{name}” is now copied to clipboard.', { name: this.dataSignature(data) }), { data: encodeJson(data) })
     },
     async importSheet () {

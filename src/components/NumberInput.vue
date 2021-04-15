@@ -1,5 +1,5 @@
 <template>
-  <w-input :value="innerValue" v-bind="$attrs" @input="$emit('update:modelValue', $event.target.value)" @wheel.stop="handleWheel" @keyup.up.stop="inc" @keyup.down.stop="dec" @keyup.home.stop="setMin" @keyup.end.stop="setMax" />
+  <w-input :value="innerValue" v-bind="$attrs" @input="inputChange" @wheel.stop="handleWheel" @keyup.up.stop="inc" @keyup.down.stop="dec" @keyup.home.stop="setMin" @keyup.end.stop="setMax" />
 </template>
 
 <script>
@@ -34,6 +34,9 @@ export default {
       if (this.innerValue >= this.max) return
       this.innerValue++
       this.$emit('input', this.innerValue)
+    },
+    inputChange (value) {
+      this.$emit('update:modelValue', parseInt(value))
     },
     setMax () {
       if (this.max === Infinity) return
