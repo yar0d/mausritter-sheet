@@ -1,6 +1,6 @@
 <template>
   <w-flex row align-center justify-center class="wrapper">
-    <w-select v-bind="$attrs" :items="items" :label="$t('Birthsign')" @input="updateValue">
+    <w-select v-bind="$attrs" :items="items" :label="$t('Birthsign')" static-label @input="updateValue">
       <template #item="{ item }">
         <w-flex justify-space-between align-center>
           <span>{{ $t(item.label) }}</span>

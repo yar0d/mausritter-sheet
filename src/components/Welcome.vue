@@ -4,6 +4,19 @@
       <w-button xl v-for="lang in LOCALES" :key="lang" :color="locale === lang ? '' : 'primary'" class="mr2" @click="changeLocale(lang)">
         {{ $t(lang) }}
       </w-button>
+
+      <div class="spacer" />
+
+      <w-menu v-model="showMenu">
+        <template #activator="{ on }">
+          <w-button text v-on="on" xl @click="showMenu = !showMenu">
+            <w-icon>mdi mdi-menu</w-icon>
+            {{ $t('Preferences...') }}
+          </w-button>
+        </template>
+
+        <preferences />
+      </w-menu>
     </w-toolbar>
 
     <w-flex column align-center justify-center class="mt4 mb2">
@@ -114,10 +127,11 @@ import { deleteSlot, listSlots, loadSlot, saveSlot, decodeJson, encodeJson } fro
 import { copyToClipboard } from '@/services/clipboard'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import PromptDialog from './PromptDialog.vue'
+import Preferences from './Preferences.vue'
 
 export default {
   name: 'Welcome',
-  components: { ConfirmDialog, PromptDialog },
+  components: { ConfirmDialog, PromptDialog, Preferences },
   propos: [ 'sheet' ],
   data () {
     return {
@@ -126,6 +140,7 @@ export default {
       LOCALES,
       importData: null,
       locale: null,
+      showMenu: false,
       slots: []
     }
   },
@@ -139,7 +154,7 @@ export default {
       } catch (error) {
         return error.message
       }
-     }
+    }
   },
   methods: {
     advancement () {

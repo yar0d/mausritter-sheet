@@ -98,7 +98,7 @@
           <div class="mt4">
             <w-card bg-color="white" class="xs10 card-sheet">
               <w-flex row align-center class="text-center">
-                <div class="w-max form-gray input-name title2">
+                <div class="w-max form-gray input-name title2 attribute-cell">
                   {{ $t('HP') }}
                 </div>
                 <div class="w-150 ml2">
@@ -128,7 +128,7 @@
           <div class="xs6 mt4">
             <w-card bg-color="white" class="card-sheet">
               <w-flex row align-center class="text-center">
-                <div class="w-100 form-gray input-name title2">
+                <div class="w-100 form-gray input-name title2 attribute-cell">
                   {{ $t('Level') }}
                 </div>
                 <div class="w-100 divider-v">
@@ -141,7 +141,7 @@
           <div class="xs6 mt4">
             <w-card bg-color="white" class="card-sheet">
               <w-flex row align-center class="text-center">
-                <div class="w-100 form-gray input-name title2">
+                <div class="w-100 form-gray input-name title2 attribute-cell">
                   {{ $t('XP') }}
                 </div>
                 <div class="w-150 divider-v">
