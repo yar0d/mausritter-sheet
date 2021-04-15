@@ -1,5 +1,5 @@
 <template>
-  <w-input :value="innerValue" v-bind="$attrs" @input="inputChange" @wheel.stop="handleWheel" @keyup.up.stop="inc" @keyup.down.stop="dec" @keyup.home.stop="setMin" @keyup.end.stop="setMax" />
+  <w-input :value="innerValue" v-bind="$attrs" @input="inputChange" @wheel.stop.prevent="handleWheel" @keyup.up.stop="inc" @keyup.down.stop="dec" @keyup.home.stop="setMin" @keyup.end.stop="setMax" />
 </template>
 
 <script>
