@@ -1,6 +1,6 @@
 <template>
   <w-flex row align-center justify-center class="w-max">
-    <w-select v-bind="$attrs" :items="items" @input="updateValue">
+    <w-select v-bind="$attrs" :items="items" :label="$t('Color')" static-label @input="updateValue">
       <template #item="{ item }">
         {{ $t(item.label) }}
       </template>

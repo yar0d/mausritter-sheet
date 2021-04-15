@@ -14,9 +14,10 @@ export function savePrefs (prefs) {
 }
 
 export function savePrefsKey (key, value) {
-  const p = loadPrefs
+  const p = loadPrefs()
   p[key] = value
-  return set(KEY_PREFS, p)
+  set(KEY_PREFS, p)
+  return p
 }
 
 export default {

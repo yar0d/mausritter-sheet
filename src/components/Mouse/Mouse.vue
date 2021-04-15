@@ -34,7 +34,7 @@
               <coat-pattern ref="coat-pattern" v-model="coatPattern" @input="setCoatPattern" />
             </w-flex>
           </w-flex>
-          <look v-model="look" ref="look" :label="$t('Look')" @input="setLook" class="pl1"/>
+          <look v-model="look" ref="look" @input="setLook" class="pl1"/>
         </w-card>
       </w-flex>
 

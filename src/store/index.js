@@ -24,7 +24,7 @@ export const store = createStore({
     locale: state => { return state.locale },
     matrinames: state => { return state.matrinames || [] },
     names: state => { return state.names || [] },
-    preferences: state => { return state.preferences || [] }
+    preferences: state => { return state.preferences || {} }
   },
   mutations: {
     hirelingClear (state) {

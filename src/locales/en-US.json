@@ -9,6 +9,8 @@
   "Birthsign": "Birthsign",
   "Coat color": "Coat color",
   "Coat pattern": "Coat pattern",
+  "Color": "Color",
+  "Pattern": "Pattern",
   "Main paw": "Main paw",
   "Body": "Body",
   "Off paw": "Off paw",
@@ -151,5 +153,9 @@
   "You're encumbered. You cannot run, and makes all saves with disadvantage.": "You're encumbered. You cannot run, and makes all saves with disadvantage.",
   "Condolence, your mouse has passed away.": "Condolence, your mouse has passed away.",
   "Your mouse cannot move.": "Your mouse cannot move.",
-  "Your mouse is succumbing to madness.": "Your mouse is succumbing to madness."
+  "Your mouse is succumbing to madness.": "Your mouse is succumbing to madness.",
+  "Preferences...": "Preferences...",
+  "Application font": "Application font",
+  "3D dices from Anton Natarov": "3D dices from Anton Natarov",
+  "Welcome, History and Hirelings background from": "Welcome, History and Hirelings background from"
 }

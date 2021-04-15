@@ -9,16 +9,13 @@
 
       <w-menu v-model="showMenu">
         <template #activator="{ on }">
-          <w-button v-on="on" xl @click="showMenu = !showMenu">
+          <w-button text v-on="on" xl @click="showMenu = !showMenu">
             <w-icon>mdi mdi-menu</w-icon>
             {{ $t('Preferences...') }}
           </w-button>
         </template>
 
-        <div class="text-center">
-           <w-checkbox v-model="useAltFont">{{ $t('Use alternate font') }}</w-checkbox>
-
-        </div>
+        <preferences />
       </w-menu>
     </w-toolbar>
 
@@ -130,10 +127,11 @@ import { deleteSlot, listSlots, loadSlot, saveSlot, decodeJson, encodeJson } fro
 import { copyToClipboard } from '@/services/clipboard'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import PromptDialog from './PromptDialog.vue'
+import Preferences from './Preferences.vue'
 
 export default {
   name: 'Welcome',
-  components: { ConfirmDialog, PromptDialog },
+  components: { ConfirmDialog, PromptDialog, Preferences },
   propos: [ 'sheet' ],
   data () {
     return {
@@ -155,14 +153,6 @@ export default {
         return this.dataSignature(data)
       } catch (error) {
         return error.message
-      }
-    },
-    useAltFont: {
-      get () {
-        return this.$store.dispatch('loadPreferences')['useAltFont']
-      },
-      set (value) {
-        this.$store.dispatch('savePreferences', { key: 'useAltFont', value })
       }
     }
   },

@@ -4,13 +4,24 @@ body,
   margin: 0;
 }
 
-.font-gothic {
+.font-0 {
   font-family: 'brokenscript-bold' !important;
 }
 
-.font-gothic-alt {
+.font-1 {
   font-family: 'GrenzeGotisch-Bold' !important;
   line-height: 16px;
+}
+
+.font-2 {
+  font-family: 'GrenzeGotisch-VariableFont_wght' !important;
+  line-height: 16px;
+}
+
+.font-3 {
+  font-family: 'Trickster-Reg' !important;
+  line-height: 16px;
+  letter-spacing: 0.05em;
 }
 
 .debug {
@@ -215,7 +226,7 @@ blockquote {
   border-radius: 7px;
 }
 
-.card-sheet .w-card__content, .character-sheet .w-card__content {
+.card-sheet .w-card__content, .character-sheet .w-card__content, .no-padding .w-card__content {
   padding: 0
 }
 

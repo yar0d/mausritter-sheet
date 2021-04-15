@@ -1,5 +1,5 @@
 <template>
-  <w-app id="app" :class="useAlternateFont ? 'font-gothic-alt' : 'font-gothic'">
+  <w-app id="app" :class="`font-${fontIndex}`">
     <main class="grow">
       <div id="dice-canvas" class="dice3d-canvas" />
 
@@ -97,8 +97,8 @@ export default {
   computed: {
     hirelingsCount () { return this.$store.getters['hirelings'].length },
     isMobileDevice () { return isMobileDevice(this.$waveui.breakpoint.name) },
-    prefs () { return this.$store.getters['prefrences'] || {} },
-    useAlternateFont () { return this.prefs.useAltFont }
+    prefs () { return this.$store.getters['preferences'] || {} },
+    fontIndex () { return this.prefs.fontIndex || 0 }
   },
   methods: {
     showPanel (panelId) {
