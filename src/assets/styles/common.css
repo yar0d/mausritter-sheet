@@ -1,8 +1,16 @@
 html,
 body,
 #app {
-  font-family: 'brokenscript-bold' !important;
   margin: 0;
+}
+
+.font-gothic {
+  font-family: 'brokenscript-bold' !important;
+}
+
+.font-gothic-alt {
+  font-family: 'GrenzeGotisch-Bold' !important;
+  line-height: 16px;
 }
 
 .debug {

@@ -7,3 +7,23 @@
   font-style: normal;
   font-display: block;
 }
+
+@font-face {
+  font-family: 'GrenzeGotisch-VariableFont_wght';
+  src: url('../fonts/GrenzeGotisch-VariableFont_wght.woff2') format('woff2'),
+       url('../fonts/GrenzeGotisch-VariableFont_wght.woff') format('woff'),
+       url('../fonts/GrenzeGotisch-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'GrenzeGotisch-Bold';
+  src: url('../fonts/GrenzeGotisch-Bold.woff2') format('woff2'),
+       url('../fonts/GrenzeGotisch-Bold.woff') format('woff'),
+       url('../fonts/GrenzeGotisch-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}

@@ -4,7 +4,7 @@
       <w-flex row justify-space-between align-start>
         <w-card bg-color="white" class="card-sheet">
           <w-flex row align-center>
-            <div class="title1 form-gray input-name pt2">
+            <div class="title1 input-name">
               {{ $t('Name') }}
             </div>
             <div class="grow ml2 py2">
@@ -113,7 +113,7 @@
       <w-flex row justify-end class="mt4">
         <w-card bg-color="white" class="card-sheet xs3">
           <w-flex row align-center class="text-center">
-            <div class="w-max form-gray input-name title2">
+            <div class="w-max form-gray input-name title2 attribute-cell">
               {{ $t('HP') }}
             </div>
             <div class="w-150 ml2">

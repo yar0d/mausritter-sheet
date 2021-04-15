@@ -4,6 +4,22 @@
       <w-button xl v-for="lang in LOCALES" :key="lang" :color="locale === lang ? '' : 'primary'" class="mr2" @click="changeLocale(lang)">
         {{ $t(lang) }}
       </w-button>
+
+      <div class="spacer" />
+
+      <w-menu v-model="showMenu">
+        <template #activator="{ on }">
+          <w-button v-on="on" xl @click="showMenu = !showMenu">
+            <w-icon>mdi mdi-menu</w-icon>
+            {{ $t('Preferences...') }}
+          </w-button>
+        </template>
+
+        <div class="text-center">
+           <w-checkbox v-model="useAltFont">{{ $t('Use alternate font') }}</w-checkbox>
+
+        </div>
+      </w-menu>
     </w-toolbar>
 
     <w-flex column align-center justify-center class="mt4 mb2">
@@ -126,6 +142,7 @@ export default {
       LOCALES,
       importData: null,
       locale: null,
+      showMenu: false,
       slots: []
     }
   },
@@ -139,7 +156,15 @@ export default {
       } catch (error) {
         return error.message
       }
-     }
+    },
+    useAltFont: {
+      get () {
+        return this.$store.dispatch('loadPreferences')['useAltFont']
+      },
+      set (value) {
+        this.$store.dispatch('savePreferences', { key: 'useAltFont', value })
+      }
+    }
   },
   methods: {
     advancement () {

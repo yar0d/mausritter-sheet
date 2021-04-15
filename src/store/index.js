@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import { d6 } from '@/services/dice-roller'
+import { loadPrefs, savePrefsKey } from '@/services/preferences'
 
 export const store = createStore({
   state () {
@@ -9,7 +10,8 @@ export const store = createStore({
       history: [],
       locale: null,
       matrinames: [],
-      names: []
+      names: [],
+      preferences: {}
     }
   },
   getters: {
@@ -21,7 +23,8 @@ export const store = createStore({
     history: state => { return state.history || [] },
     locale: state => { return state.locale },
     matrinames: state => { return state.matrinames || [] },
-    names: state => { return state.names || [] }
+    names: state => { return state.names || [] },
+    preferences: state => { return state.preferences || [] }
   },
   mutations: {
     hirelingClear (state) {
@@ -74,6 +77,9 @@ export const store = createStore({
     },
     setNames (state, names) {
       state.names = names
+    },
+    setPrefs (state, preferences) {
+      state.preferences = preferences
     }
   },
   actions: {
@@ -88,6 +94,12 @@ export const store = createStore({
     },
     hirelingsSet (context, hirelings) {
       context.commit('hirelingsSet', hirelings)
+    },
+    loadPreferences (context) {
+      context.commit('setPrefs', loadPrefs())
+    },
+    savePreferences (context, { key, value }) {
+      context.commit('setPrefs', savePrefsKey(key, value))
     }
   }
 })
