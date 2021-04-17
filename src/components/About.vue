@@ -1,6 +1,7 @@
 <template>
   <w-dialog v-model="showDialog" :width="500" transition="scale" :title="$t('About')" content-class="w-flex column align-start justify-center pa2">
     <div class="title2 orange-dark1 text-center w-max my4">
+      <w-icon v-if="isStandaloneApp" color="brown">mdi mdi-rodent</w-icon>
       Mausritter Sheet {{ version }}
     </div>
     <div class="mt4">
@@ -27,6 +28,9 @@ export default {
       showDialog: false,
       version
     }
+  },
+  computed: {
+    isStandaloneApp () { return this.$store.getters['standaloneApp'] }
   },
   methods: {
     show () {

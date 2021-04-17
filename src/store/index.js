@@ -11,7 +11,8 @@ export const store = createStore({
       locale: null,
       matrinames: [],
       names: [],
-      preferences: {}
+      preferences: {},
+      standaloneApp: false // This is true if this app is a computer application. By default this app is a web page
     }
   },
   getters: {
@@ -24,7 +25,8 @@ export const store = createStore({
     locale: state => { return state.locale },
     matrinames: state => { return state.matrinames || [] },
     names: state => { return state.names || [] },
-    preferences: state => { return state.preferences || {} }
+    preferences: state => { return state.preferences || {} },
+    standaloneApp: state => { return state.standaloneApp }
   },
   mutations: {
     hirelingClear (state) {
@@ -80,6 +82,9 @@ export const store = createStore({
     },
     setPrefs (state, preferences) {
       state.preferences = preferences
+    },
+    setStandaloneApp (state, standaloneApp) {
+      state.standaloneApp = standaloneApp
     }
   },
   actions: {

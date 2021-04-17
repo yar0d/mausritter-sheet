@@ -122,6 +122,8 @@
 </template>
 
 <script>
+// import * as fs from '@tauri-apps/api/dist/fs'
+// import * as dialog from '@tauri-apps/api/dist/dialog'
 import { LOCALES, DEFAULT_LOCALE, loadLocale, saveLocale } from '@/services/locales'
 import { deleteSlot, listSlots, loadSlot, saveSlot, decodeJson, encodeJson } from '@/services/storage'
 import { copyToClipboard } from '@/services/clipboard'
@@ -282,7 +284,6 @@ export default {
   },
   created () {
     this.changeLocale(loadLocale())
-    this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausrittes Sheet!') })
   },
   mounted () {
     this.slots = listSlots()
