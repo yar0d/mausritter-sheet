@@ -122,8 +122,8 @@
 </template>
 
 <script>
-// import * as fs from '@tauri-apps/api/dist/fs'
-// import * as dialog from '@tauri-apps/api/dist/dialog'
+// import * as fs from '@tauri-apps/api/fs'
+// import * as dialog from '@tauri-apps/api/dialog'
 import { LOCALES, DEFAULT_LOCALE, loadLocale, saveLocale } from '@/services/locales'
 import { deleteSlot, listSlots, loadSlot, saveSlot, decodeJson, encodeJson } from '@/services/storage'
 import { copyToClipboard } from '@/services/clipboard'

@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import * as app from '@tauri-apps/api/dist/app'
+import * as app from '@tauri-apps/api/app'
 import { isMobileDevice } from '@/services/responsive'
 import dices3D from '@/services/dice3d'
 import About from '@/components/About.vue'
