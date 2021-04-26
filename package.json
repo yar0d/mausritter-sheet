@@ -5,16 +5,21 @@
   "scripts": {
     "serve": "vue-cli-service serve --port 8801",
     "serve:docker": "docker run -it -p 8765:8765 mausritter-sheet",
+    "serve:tauri": "tauri dev",
     "build": "vue-cli-service build",
     "build:docker": "docker build --tag mausritter-sheet .",
+    "build:tauri": "vue-cli-service build && npm run tauri build",
     "lint": "vue-cli-service lint",
     "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\"",
     "release": "echo \"Future version will be:\" ; npm run release:local -- --dry-run | grep \"tagging release\" | cut -d\" \" -f4 | cut -c2- ",
     "release:local": "standard-version",
-    "release:publish": "npm run release:local && git push --follow-tags"
+    "release:publish": "npm run release:local && git push --follow-tags",
+    "tauri": "tauri"
   },
   "dependencies": {
     "@mdi/font": "^5.9.55",
+    "@tauri-apps/api": "*",
+    "@tauri-apps/cli": "*",
     "core-js": "^3.10.1",
     "uuencode": "0.0.4",
     "uuid": "^8.3.2",

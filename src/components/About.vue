@@ -2,6 +2,7 @@
   <w-dialog v-model="showDialog" :width="500" transition="scale" :title="$t('About')" content-class="w-flex column align-start justify-center pa2">
     <div class="title2 orange-dark1 text-center w-max my4">
       Mausritter Sheet {{ version }}
+      <span v-if="isStandaloneApp" color="brown">{{ $t('application') }}</span>
     </div>
     <div class="mt4">
       {{ $t('This application is an independent production by Daniel Coquette and is not affiliated with Losing Games. It is published under the Mausritter Third Party Licence.') }}
@@ -27,6 +28,9 @@ export default {
       showDialog: false,
       version
     }
+  },
+  computed: {
+    isStandaloneApp () { return this.$store.getters['standaloneApp'] }
   },
   methods: {
     show () {

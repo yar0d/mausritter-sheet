@@ -69,6 +69,7 @@
 </template>
 
 <script>
+import * as app from '@tauri-apps/api/dist/app'
 import { isMobileDevice } from '@/services/responsive'
 import dices3D from '@/services/dice3d'
 import About from '@/components/About.vue'
@@ -110,12 +111,21 @@ export default {
   created () {
     this.$store.dispatch('loadPreferences')
   },
-  mounted () {
+  async mounted () {
     this.mausritter.bank = this.$refs['bank']
     this.mausritter.sheet = this.$refs['sheet']
     this.mausritter.sheetToolbar = this.$refs['sheettoolbar']
     this.mausritter.hirelings = this.$refs['hirelings']
     dices3D.initialize('dice-canvas')
+
+    try {
+      const tauri = await app.getTauriVersion()
+      this.$store.commit('setStandaloneApp', true)
+      this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausrittes Sheet!'), secondary: '(tauri ' + tauri + ')' })
+    } catch (error) {
+      this.$store.commit('setStandaloneApp', false)
+      this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausrittes Sheet!') })
+    }
   }
 }
 </script>

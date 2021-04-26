@@ -27,10 +27,12 @@ See [TODO.md](./src/TODO.md) for incomming features :-)
 
 ## Installation
 
-At this time, if you want a standalone app, you can just build a docker container.
+Depending on what you want, you can build a docker container or a desktop application.
 
 ## For developpers
 This application is made with [Vue.js 3](https://v3.vuejs.org/) and [wave-ui](https://antoniandre.github.io/wave-ui/).
+
+For desktop application, I use [Tauri](https://tauri.studio/en/).
 
 ```
 npm ci
@@ -39,6 +41,11 @@ npm ci
 ### Compiles and hot-reloads for development
 ```
 npm run serve
+```
+
+### Compile and hot-reloads for desktop application
+```
+npm run serve:tauri
 ```
 
 ### Lints and fixes files
@@ -50,6 +57,12 @@ npm run lint
 ```
 npm run build
 ```
+
+### Build a desktop application
+```
+npm run build:tauri
+```
+This will build a native application for your computer.
 
 ### Build and run a docker container
 If you use **docker-compose**:

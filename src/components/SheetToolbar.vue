@@ -11,10 +11,6 @@
 
     <slot name="actions-prepend" />
 
-    <div v-for="dice in DICE_FACES" :key="dice">
-      <dice :faces="dice" :advantage="diceAdvantage" size="xl" color="dice" />
-    </div>
-
     <w-menu v-model="showMenu" bottom>
       <template #activator="{ on }">
         <w-button xs round outline v-on="on">
@@ -30,6 +26,10 @@
         </template>
       </w-list>
     </w-menu>
+
+    <div v-for="dice in DICE_FACES" :key="dice">
+      <dice :faces="dice" :advantage="diceAdvantage" size="xl" color="dice" />
+    </div>
 
     <slot name="actions-append" />
   </w-flex>
