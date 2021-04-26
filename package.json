@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@mdi/font": "^5.9.55",
+    "@tauri-apps/api": "^1.0.0-beta-rc",
     "core-js": "^3.10.1",
     "uuencode": "^0.0.4",
     "uuid": "^8.3.2",
@@ -29,7 +30,6 @@
   },
   "devDependencies": {
     "@intlify/vue-i18n-loader": "^2.1.0",
-    "@tauri-apps/api": "^1.0.0-beta-rc",
     "@tauri-apps/cli": "^1.0.0-beta-rc",
     "@vue/cli-plugin-babel": "^4.5.12",
     "@vue/cli-plugin-eslint": "^4.5.12",
