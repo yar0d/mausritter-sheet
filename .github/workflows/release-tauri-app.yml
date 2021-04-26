@@ -5,7 +5,7 @@ on:
     types: [started]
   push:
     branches:
-      - master
+      - main
     paths:
       - '**/package.json'
 
