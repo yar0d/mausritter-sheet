@@ -33,7 +33,7 @@ jobs:
     # If using the Vue CLI plugin, tauri:build will be run automatically by tauri-action
     # and you can remove `&& yarn build` from this command
       run: yarn && yarn build
-    - uses: tauri-apps/tauri-action@v0.0.10
+    - uses: tauri-apps/tauri-action@dev
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
