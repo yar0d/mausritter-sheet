@@ -35,32 +35,32 @@ This application is made with [Vue.js 3](https://v3.vuejs.org/) and [wave-ui](ht
 For desktop application, I use [Tauri](https://tauri.studio/en/).
 
 ```
-npm ci
+yarn
 ```
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+yarn serve
 ```
 
 ### Compile and hot-reloads for desktop application
 ```
-npm run serve:tauri
+yarn serve:tauri
 ```
 
 ### Lints and fixes files
 ```
-npm run lint
+yarn lint
 ```
 
 ### Compiles and minifies for production
 ```
-npm run build
+yarn build
 ```
 
 ### Build a desktop application
 ```
-npm run build:tauri
+yarn build:tauri
 ```
 This will build a native application for your computer.
 
@@ -71,8 +71,8 @@ docker-compose up --build
 ```
 or, with **docker**:
 ```
-npm run build:docker
-npm run serve:docker
+yarn build:docker
+yarn serve:docker
 ```
 
 ### Customize configuration
