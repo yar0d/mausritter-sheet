@@ -200,8 +200,11 @@ export default {
     },
     createRandomSheet () {
       if (this.mausritter.sheetToolbar) this.mausritter.sheetToolbar.displayDrawer(false)
-      if (this.mausritter.sheet) this.mausritter.sheet.createRandomSheet()
-      this.$store.commit('setCurrentSlot', null)
+      if (this.mausritter.sheet) {
+        this.mausritter.sheet.createRandomSheet()
+        this.currentKey = this.dataSignature(this.serialize())
+        this.saveSheet()
+      }
     },
     deleteSheet (key) {
       this.$refs['confirm-dialog'].open(this.$t('Delete'), this.$t('The sheet of “{name}” will be erased. Do you confirm?', { name: key } ))
