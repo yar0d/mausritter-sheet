@@ -58,7 +58,8 @@
             </div>
 
             <div v-show="show.welcome" class="welcome-background h-max card-bordered">
-              <welcome />
+              <welcome-app v-if="isStandaloneApp" ref="welcome-app" />
+              <welcome v-else ref="welcome" />
             </div>
           </w-flex>
         </w-flex>
@@ -78,12 +79,13 @@ import SheetToolbar from '@/components/SheetToolbar.vue'
 import History from '@/components/History.vue'
 import Hirelings from '@/components/Hirelings.vue'
 import Welcome from './components/Welcome.vue'
+import WelcomeApp from './components/WelcomeApp.vue'
 import Chips from './components/Chips.vue'
 import Bank from './components/Bank.vue'
 
 export default {
   name: 'App',
-  components: { About, Sheet, SheetToolbar, History, Hirelings, Welcome, Chips, Bank },
+  components: { About, Sheet, SheetToolbar, History, Hirelings, Welcome, WelcomeApp, Chips, Bank },
   data () {
     return {
       tabs: [],
@@ -98,6 +100,7 @@ export default {
   computed: {
     hirelingsCount () { return this.$store.getters['hirelings'].length },
     isMobileDevice () { return isMobileDevice(this.$waveui.breakpoint.name) },
+    isStandaloneApp () { return this.$store.getters['standaloneApp'] },
     prefs () { return this.$store.getters['preferences'] || {} },
     fontIndex () { return this.prefs.fontIndex || 0 }
   },
@@ -124,7 +127,15 @@ export default {
       this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausrittes Sheet!'), secondary: '(tauri ' + tauri + ')' })
     } catch (error) {
       this.$store.commit('setStandaloneApp', false)
+    }
+
+    if (this.isStandaloneApp) {
+      // this.$nextTick(() => {
+      //   this.$refs['welcome-app'].refresh()
+      // })
+    } else {
       this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausrittes Sheet!') })
+      // this.$refs['welcome'].refresh()
     }
   }
 }

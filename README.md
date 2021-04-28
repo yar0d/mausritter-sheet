@@ -27,7 +27,9 @@ See [TODO.md](./src/TODO.md) for incomming features :-)
 
 ## Installation
 
-Depending on what you want, you can build a docker container or a desktop application.
+Desktop application are available for Microsoft Windows, Apple Mac OS and GNU Linux. At this time, there is no mobile (Android or iOS) version.
+
+Get your application from https://mausritter-shhet.dco.ninja. Go to the welcome page and click on the button "Applications".
 
 ## For developpers
 This application is made with [Vue.js 3](https://v3.vuejs.org/) and [wave-ui](https://antoniandre.github.io/wave-ui/).

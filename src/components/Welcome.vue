@@ -7,9 +7,20 @@
 
       <div class="spacer" />
 
-      <w-menu v-model="showMenu">
+      <w-menu v-if="!isStandaloneApp" v-model="showAppMenu">
         <template #activator="{ on }">
-          <w-button text v-on="on" xl @click="showMenu = !showMenu">
+          <w-button text v-on="on" xl @click="showAppMenu = !showAppMenu">
+            <w-icon>mdi mdi-application</w-icon>
+            {{ $t('Applications...') }}
+          </w-button>
+        </template>
+
+        TODO
+      </w-menu>
+
+      <w-menu v-model="showPrefMenu">
+        <template #activator="{ on }">
+          <w-button text v-on="on" xl @click="showPrefMenu = !showPrefMenu">
             <w-icon>mdi mdi-menu</w-icon>
             {{ $t('Preferences...') }}
           </w-button>
@@ -122,8 +133,6 @@
 </template>
 
 <script>
-// import * as fs from '@tauri-apps/api/fs'
-// import * as dialog from '@tauri-apps/api/dialog'
 import { LOCALES, DEFAULT_LOCALE, loadLocale, saveLocale } from '@/services/locales'
 import { deleteSlot, listSlots, loadSlot, saveSlot, decodeJson, encodeJson } from '@/services/storage'
 import { copyToClipboard } from '@/services/clipboard'
@@ -142,7 +151,8 @@ export default {
       LOCALES,
       importData: null,
       locale: null,
-      showMenu: false,
+      showAppMenu: false,
+      showPrefMenu: false,
       slots: []
     }
   },
@@ -156,7 +166,8 @@ export default {
       } catch (error) {
         return error.message
       }
-    }
+    },
+    isStandaloneApp () { return this.$store.getters['standaloneApp'] }
   },
   methods: {
     advancement () {
@@ -233,6 +244,9 @@ export default {
           this.load(index)
         })
     },
+    async refresh () {
+      this.slots = listSlots()
+    },
     restFull () {
       if (this.mausritter.sheet) this.mausritter.sheet.restFull()
     },
@@ -287,6 +301,6 @@ export default {
   },
   mounted () {
     this.slots = listSlots()
-  },
+  }
 }
 </script>

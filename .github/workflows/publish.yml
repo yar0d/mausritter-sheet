@@ -2,7 +2,11 @@ name: "publish"
 on:
   push:
     branches:
+<<<<<<< HEAD
         - main
+=======
+      - main
+>>>>>>> 35d3103 (feat: Save/load sheets in user's doc folder)
   # Allow to trigger this action manually
   workflow_dispatch:
 
@@ -30,6 +34,11 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y webkit2gtk-4.0
     - name: install app dependencies and build it
+<<<<<<< HEAD
+=======
+      # If using the Vue CLI plugin, tauri:build will be run automatically by tauri-action
+      # and you can remove `&& yarn build` from this command
+>>>>>>> 35d3103 (feat: Save/load sheets in user's doc folder)
       run: yarn && yarn build
     - uses: tauri-apps/tauri-action@v0
       env:
