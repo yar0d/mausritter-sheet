@@ -16,8 +16,8 @@ export default {
       if (this.$refs['sheet-mouse']) this.$refs['sheet-mouse'].advancement()
     },
     canLevelUp () { return this.$refs['sheet-mouse'] ? this.$refs['sheet-mouse'].canLevelUp() : false },
-    createRandomSheet () {
-      if (this.$refs['sheet-mouse']) this.$refs['sheet-mouse'].createRandomSheet()
+    createRandomSheet (callbackFn) {
+      if (this.$refs['sheet-mouse']) this.$refs['sheet-mouse'].createRandomSheet(callbackFn)
     },
     restFull () {
       if (this.$refs['sheet-mouse']) this.$refs['sheet-mouse'].restFull()

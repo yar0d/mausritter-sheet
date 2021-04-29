@@ -2,7 +2,7 @@ name: "publish"
 on:
   push:
     branches:
-        - main
+      - main
   # Allow to trigger this action manually
   workflow_dispatch:
 
