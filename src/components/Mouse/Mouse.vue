@@ -368,11 +368,11 @@ export default {
         })
     },
     canLevelUp () { return canLevelUp(this.xp, this.level) },
-    createRandomSheet () {
-      if (this.isNew) this.rollRandomMouse()
+    createRandomSheet (callbackFn) {
+      if (this.isNew) this.rollRandomMouse(callbackFn)
       else this.$refs['confirm-dialog'].open(this.$t('Create a new character...'), this.$t('The sheet of “{name}” will be erased. Do you confirm?', { name: this.name } ))
         .then(confirmed => {
-          if (confirmed) this.rollRandomMouse()
+          if (confirmed) this.rollRandomMouse(callbackFn)
         })
     },
     reset (data = {}) {
@@ -469,7 +469,7 @@ export default {
           }
         })
     },
-    rollRandomMouse () {
+    rollRandomMouse (callbackFn) {
       this.reset()
       this.maxStr = rollExplode(3, 6, 2, (context, result, total) => this.$store.commit('historyAdd', { type: this.$t('STR') + '/' + context, message: result + ' -> ' + total} )).total // Keep two highest D6 from the rollingof 3d6.
       this.maxDex = rollExplode(3, 6, 2, (context, result, total) => this.$store.commit('historyAdd', { type: this.$t('DEX') + '/' + context, message: result + ' -> ' + total} )).total // Keep two highest D6 from the rollingof 3d6.
@@ -563,6 +563,8 @@ export default {
             let location = options.choosenItem.geometry === '1x2' ? 'mainPaw' : 'offPaw'
             this.$refs['inventory'].putItem(options.choosenItem.id, location, options.choosenItem)
           }
+
+          if (callbackFn) callbackFn()
         })
     },
     serialize () {

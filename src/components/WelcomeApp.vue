@@ -198,12 +198,13 @@ export default {
       this.$store.dispatch('changeLocale', this.locale)
       saveLocale(this.locale)
     },
-    createRandomSheet () {
+    async createRandomSheet () {
       if (this.mausritter.sheetToolbar) this.mausritter.sheetToolbar.displayDrawer(false)
       if (this.mausritter.sheet) {
-        this.mausritter.sheet.createRandomSheet()
-        this.currentKey = this.dataSignature(this.serialize())
-        this.saveSheet()
+        await this.mausritter.sheet.createRandomSheet(() => {
+          this.currentKey = this.dataSignature(this.serialize())
+          this.saveSheet()
+        })
       }
     },
     deleteSheet (key) {
