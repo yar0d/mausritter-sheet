@@ -8,12 +8,12 @@
     "serve:tauri": "tauri dev",
     "build": "vue-cli-service build",
     "build:docker": "docker build --tag mausritter-sheet .",
-    "build:tauri": "vue-cli-service build && npm run tauri build",
+    "build:tauri": "vue-cli-service build && yarn tauri build",
     "lint": "vue-cli-service lint",
     "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\"",
-    "release": "echo \"Future version will be:\" ; npm run release:local -- --dry-run | grep \"tagging release\" | cut -d\" \" -f4 | cut -c2- ",
+    "release": "echo \"Future version will be:\" ; yarn release:local -- --dry-run | grep \"tagging release\" | cut -d\" \" -f4 | cut -c2- ",
     "release:local": "standard-version",
-    "release:publish": "npm run release:local && git push --follow-tags",
+    "release:publish": "yarn release:local && git push --follow-tags",
     "tauri": "tauri"
   },
   "dependencies": {
