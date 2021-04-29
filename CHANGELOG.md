@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/yar0d/mausritter-sheet/compare/v1.7.0...v1.8.0) (2021-04-29)
+
+
+### Features
+
+* Add release branch ([5dd04cf](https://github.com/yar0d/mausritter-sheet/commit/5dd04cf58eb42c3831a2c8728ed9c0411904642b))
+
 ## [1.7.0](https://github.com/yar0d/mausritter-sheet/compare/v1.6.7...v1.7.0) (2021-04-29)
 
 

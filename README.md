@@ -79,3 +79,10 @@ yarn serve:docker
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Create a release
+A release will contains all binaries for MacOS, Windows and Linux.
+
+1) Increment application version with `yarn release:publish' on **main** branch.
+2) Create a **pull request** for base **release** to **main**
+3) Accept and merge the pull request. This will trigger build action. It taks about 15 minutes to complete end have a draft of the release in https://github.com/yar0d/mausritter-sheet/releases.
