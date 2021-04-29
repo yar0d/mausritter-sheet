@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/yar0d/mausritter-sheet/compare/v1.6.7...v1.7.0) (2021-04-29)
+
+
+### Features
+
+* Add publish ([2090624](https://github.com/yar0d/mausritter-sheet/commit/209062455d1e4997f0101f548d442fcb5810b38a))
+
+
+### Bug Fixes
+
+* add github action manual trigger ([f016898](https://github.com/yar0d/mausritter-sheet/commit/f016898ddcc84b6959fefa2dce7ebc4e28b9eaad))
+* add npm build ([ea5450d](https://github.com/yar0d/mausritter-sheet/commit/ea5450df6618966af95f9ae02fafefa86c509f0c))
+* application name without space ([be4d4d5](https://github.com/yar0d/mausritter-sheet/commit/be4d4d554bd94d777dab433dd454ca8fa0960a1f))
+* branch name master to main ([#11](https://github.com/yar0d/mausritter-sheet/issues/11)) ([43b854c](https://github.com/yar0d/mausritter-sheet/commit/43b854cec912fd5cd07fbf01c68018c6d39ece72))
+* dep package install ([c4e2514](https://github.com/yar0d/mausritter-sheet/commit/c4e25141696632547df14c3b074ec1eafd756a91))
+* file name for Windows build ([7e13eb7](https://github.com/yar0d/mausritter-sheet/commit/7e13eb7bc6727a5b09787eb095db11b8ebf7a920))
+* install tauri bundler ([3d1b7a9](https://github.com/yar0d/mausritter-sheet/commit/3d1b7a9bb29463cc6a7543a467501353c2006267))
+* remove tauri-bundler install step ([8c19cd3](https://github.com/yar0d/mausritter-sheet/commit/8c19cd301f222c5aaf61e08f01256c8e30a7acec))
+* switching to yarn ([c7834c4](https://github.com/yar0d/mausritter-sheet/commit/c7834c41830cc3b0539fec22bde1b6fa4cae7093))
+* tauri-action parameters ([c3dc155](https://github.com/yar0d/mausritter-sheet/commit/c3dc155b7feea968f411b3ddb2948e60ec1359a0))
+* trying tauri action next version ([3f77094](https://github.com/yar0d/mausritter-sheet/commit/3f77094265d8917f67e1dd55e042d5f62699bd4b))
+* trying tauri-action dev for building ([a3c743b](https://github.com/yar0d/mausritter-sheet/commit/a3c743b2adbd7ff4105580354b567d0e99cc213a))
+* typo in release name ([0775589](https://github.com/yar0d/mausritter-sheet/commit/0775589570de70fcb10eb94c1cd71fda6d37777d))
+* use latest tauri-action ([15d81fe](https://github.com/yar0d/mausritter-sheet/commit/15d81fe9515fec12665f84fb3295d44372c32ee6))
+* Use latest tauri-action@v0 ([91abe65](https://github.com/yar0d/mausritter-sheet/commit/91abe6517aa33d0cba9c791b8c29328a30d1a199))
+* Use npm instead of yarn ([06bc2ab](https://github.com/yar0d/mausritter-sheet/commit/06bc2ab41122d6332b9b773768c7a876358d6649))
+
 ### [1.6.7](https://github.com/yar0d/mausritter-sheet/compare/v1.6.6...v1.6.7) (2021-04-15)
 
 
