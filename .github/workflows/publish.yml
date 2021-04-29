@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+  # Allow to trigger this action manually
+  workflow_dispatch:
 
 jobs:
   publish-tauri:
