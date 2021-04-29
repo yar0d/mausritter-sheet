@@ -12,7 +12,7 @@ jobs:
       fail-fast: false
       matrix:
         # platform: [macos-latest, ubuntu-18.04, windows-latest]
-        platform: [ubuntu-18.04]
+        platform: [ubuntu-latest]
 
     runs-on: ${{ matrix.platform }}
     steps:
@@ -28,13 +28,13 @@ jobs:
     - name: install tauri bundler
       run: cargo install tauri-bundler --force
     - name: install webkit2gtk (ubuntu only)
-      if: matrix.platform == 'ubuntu-18.04'
+      if: matrix.platform == 'ubuntu-latest'
       run: |
         sudo apt-get update
         sudo apt-get install -y webkit2gtk-4.0
     - name: install app dependencies and build it
       run: yarn && yarn build
-    - uses: tauri-apps/tauri-action@v0
+    - uses: tauri-apps/tauri-action@dev
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
