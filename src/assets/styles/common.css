@@ -5,7 +5,7 @@ body,
 }
 
 .font-0 {
-  font-family: 'brokenscript-bold' !important;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .font-1 {
@@ -22,6 +22,10 @@ body,
   font-family: 'Trickster-Reg' !important;
   line-height: 16px;
   letter-spacing: 0.05em;
+}
+
+.font-4 {
+  font-family: 'brokenscript-bold' !important;
 }
 
 .debug {

@@ -23,10 +23,11 @@ export default {
   data () {
     return {
       fontList: [
-        { label: 'Broken Script', value: 0 },
+        { label: 'Monospace', value: 0 },
         { label: 'Grenze Gotisch', value: 1 },
         { label: 'Grenze Gotisch Variable', value: 2 },
-        { label: 'Trickster', value: 3 }
+        { label: 'Trickster', value: 3 },
+        { label: 'Broken Script', value: 4 },
       ]
     }
   },
