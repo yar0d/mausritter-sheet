@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/yar0d/mausritter-sheet/compare/v1.8.0...v1.9.0) (2021-05-03)
+
+
+### Features
+
+* **items:** Add large/tall custom objects ([#25](https://github.com/yar0d/mausritter-sheet/issues/25)) ([fbeaf5d](https://github.com/yar0d/mausritter-sheet/commit/fbeaf5d234f0e808b56774307eb4e199186cea6a))
+
+
+### Bug Fixes
+
+* **UX:** Mouse creation on mobile devices ([fbfb6b7](https://github.com/yar0d/mausritter-sheet/commit/fbfb6b7fa9df490a067fc7455ffc726b0129e522))
+* publish messages and doc. ([f5c1c39](https://github.com/yar0d/mausritter-sheet/commit/f5c1c397c3cf123a3c7b18e08e49375c3b3e8932))
+
 ## [1.8.0](https://github.com/yar0d/mausritter-sheet/compare/v1.7.0...v1.8.0) (2021-04-29)
 
 
