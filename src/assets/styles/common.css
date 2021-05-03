@@ -42,6 +42,10 @@ body,
   max-width: 800px;
 }
 
+#drawer .w-tabs__content {
+  padding: 0;
+}
+
 .fixed-tabs > div {
   width: 800px;
   max-width: 800px;
