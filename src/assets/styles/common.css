@@ -4,10 +4,6 @@ body,
   margin: 0;
 }
 
-.font-0 {
-  font-family: 'Courier New', Courier, monospace;
-}
-
 .font-1 {
   font-family: 'GrenzeGotisch-Bold' !important;
   line-height: 16px;
@@ -26,6 +22,10 @@ body,
 
 .font-4 {
   font-family: 'brokenscript-bold' !important;
+}
+
+.font-5 {
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .debug {

@@ -7,7 +7,7 @@
 
       <div class="spacer" />
 
-      <w-menu v-if="!isStandaloneApp" v-model="showAppMenu">
+      <!-- <w-menu v-if="!isStandaloneApp" v-model="showAppMenu">
         <template #activator="{ on }">
           <w-button text v-on="on" xl @click="showAppMenu = !showAppMenu">
             <w-icon>mdi mdi-application</w-icon>
@@ -16,7 +16,7 @@
         </template>
 
         TODO
-      </w-menu>
+      </w-menu> -->
 
       <w-menu v-model="showPrefMenu">
         <template #activator="{ on }">
