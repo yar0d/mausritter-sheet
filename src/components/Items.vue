@@ -2,7 +2,7 @@
   <div v-if="currentItem && currentItem.id" class="item item-background shadow" :class="cls">
     <w-flex column align-start justify-start class="h-max" :class="className(currentItem.label)">
       <w-flex row class="h-max w-max">
-        <w-flex column justify-end class="w-25 text-center">
+        <w-flex v-if="!readonly" column justify-end class="w-25 text-center">
           <w-button v-if="canDelete" sm icon="mdi mdi-close-circle" bg-color="white" color="red" md @click="onDelete" />
           <div class="spacer" />
           <div v-if="showUse && currentItem.use !== undefined && currentItem.use <= 6">
@@ -14,6 +14,9 @@
           <div class="h-max" v-if="(currentItem.family === ITEM_FAMILY_SPELL || currentItem.family === ITEM_FAMILY_CUSTOM)">
             <w-textarea v-if="canInputCustomLabel" class="background-white-75 item-custom-label input-value" v-model="currentItem.customLabel" rows="3" />
             <span v-else-if="currentItem.customLabel" class="item-desc">{{ currentItem.customLabel }}</span>
+            <p v-if="readonly" if="currentItem.desc" class="w-max item-desc mt2">
+              {{ $t(currentItem.desc) }}
+            </p>
           </div>
           <w-flex v-else-if="currentItem.desc" align-center justify-center class="w-max">
             <span class="item-desc mt4">{{ $t(currentItem.desc) }}</span>
