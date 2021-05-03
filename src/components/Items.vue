@@ -14,7 +14,7 @@
           <div class="h-max" v-if="(currentItem.family === ITEM_FAMILY_SPELL || currentItem.family === ITEM_FAMILY_CUSTOM)">
             <w-textarea v-if="canInputCustomLabel" class="background-white-75 item-custom-label input-value" v-model="currentItem.customLabel" rows="3" />
             <span v-else-if="currentItem.customLabel" class="item-desc">{{ currentItem.customLabel }}</span>
-            <p v-if="readonly" if="currentItem.desc" class="w-max item-desc mt2">
+            <p v-if="readonly && !hideDesc" if="currentItem.desc" class="w-max item-desc mt2">
               {{ $t(currentItem.desc) }}
             </p>
           </div>
@@ -57,6 +57,7 @@ export default {
   props: {
     canDelete: { type: Boolean, default: false },
     notDraggable: { type: Boolean, default: false },
+    hideDesc: { type: Boolean, default: false },
     item: { type: Object, required: true },
     readonly: { type: Boolean, default: false },
     showDamage: { type: Boolean, default: false },
