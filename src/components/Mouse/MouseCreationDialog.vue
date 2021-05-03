@@ -1,52 +1,55 @@
 <template>
-  <w-dialog ref="mouse-creation-dialog" v-model="show" :title="title" persistent :fullscreen="isMobileDevice">
+  <w-dialog ref="mouse-creation-dialog" v-model="show" :title="title" persistent :fullscreen="isMobileDevice" width="70%">
     <slot name="content">
       <div class="w-max h-max pa4 mouse-creation-dialog-background">
-        <w-flex row align-start justify-space-between class="background-white-25 pa2">
-          <div v-if="maxStr !== maxDex || maxStr !== maxWil" class="text-center mb2">
-            <div class="yellow title3 w-max">
-              {{ $t('You may swap any two attributes.') }}
-            </div>
-            <div class="w-max text-center title1 my1">
-              {{ $t("STR") }} {{ maxStr }} | {{ $t("DEX") }} {{ maxDex }} | {{ $t("WIL") }} {{ maxWil }}
-            </div>
-            <div class="mt2"><w-radio v-model="swapAttributes" :return-value="SWAP_NONE" class="mr2">
-              {{ $t("No swap.") }}
-            </w-radio></div>
-            <div class="mt2"><w-radio v-show="maxStr !== maxDex" v-model="swapAttributes" :return-value="SWAP_STR_DEX" class="mr2">
-              {{ $t("STR ⇄ DEX") }}
-            </w-radio></div>
-            <div class="mt2"><w-radio v-show="maxStr !== maxWil" v-model="swapAttributes" :return-value="SWAP_STR_WIL" class="mr2">
-              {{ $t("STR ⇄ WIL") }}
-            </w-radio></div>
-            <div class="mt2"><w-radio v-show="maxDex !== maxWil" v-model="swapAttributes" :return-value="SWAP_DEX_WIL">
-              {{ $t("DEX ⇄ WIL") }}
-            </w-radio></div>
+        <w-flex column align-start justify-space-between class="pa2">
+          <w-divider color="white" class="w-max title3">{{ $t('You may swap any two attributes.') }}</w-divider>
+          <div v-if="maxStr !== maxDex || maxStr !== maxWil" class="w-max text-center my2">
+            <w-flex row class="text-left title1 my1" align-center justify-center>
+              <div class="pa2 w-100 text-center" :class="swapAttributes === SWAP_STR_DEX || swapAttributes === SWAP_STR_WIL ? 'background-white-50' : ''">{{ $t("STR") }}
+                <div class="pt4">{{ maxStr }}</div>
+              </div>
+              <div class="pa2 w-100 text-center mx4" :class="swapAttributes === SWAP_STR_DEX || swapAttributes === SWAP_DEX_WIL ? 'background-white-50' : ''">{{ $t("DEX") }}
+                <div class="pt4">{{ maxDex }}</div>
+              </div>
+              <div class="pa2 w-100 text-center" :class="swapAttributes === SWAP_STR_WIL || swapAttributes === SWAP_DEX_WIL ? 'background-white-50' : ''">{{ $t("WIL") }}
+                <div class="pt4">{{ maxWil }}</div>
+              </div>
+            </w-flex>
+
+            <w-flex row align-center :justify-space-between="isMobileDevice">
+              <div><w-button @click="swapAttributes = SWAP_NONE" :outline="swapAttributes !== SWAP_NONE" xl>{{ $t("No swap.") }}</w-button></div>
+              <div><w-button v-show="maxStr !== maxDex" @click="swapAttributes = SWAP_STR_DEX" :outline="swapAttributes !== SWAP_STR_DEX" xl>{{ $t("STR ⇄ DEX") }}</w-button></div>
+              <div><w-button v-show="maxStr !== maxWil" @click="swapAttributes = SWAP_STR_WIL" :outline="swapAttributes !== SWAP_STR_WIL" xl>{{ $t("STR ⇄ WIL") }}</w-button></div>
+              <div><w-button v-show="maxDex !== maxWil" @click="swapAttributes = SWAP_DEX_WIL" :outline="swapAttributes !== SWAP_DEX_WIL" xl>{{ $t("DEX ⇄ WIL") }}</w-button></div>
+            </w-flex>
           </div>
 
-          <div v-if="backgroundItems">
-            <div class="yellow title3 mb2">
-              {{ $t('Item from inherited your background of “{background}”', { background }) }}
-            </div>
-            <items v-for="(item, index) in backgroundItems" :key="index" :item="item" readonly not-draggable class="mx4" size="md" />
-          </div>
+          <div v-if="backgroundItems" class="w-max">
+            <w-flex row justify-space-between>
+              <div>
+                <w-divider color="white" class="title3 mt4">{{ $t('Item from inherited your background of “{background}”', { background }) }}</w-divider>
+                <div class="mt2">
+                  <items v-for="(item, index) in backgroundItems" :key="index" :item="item" readonly hide-desc show-damage not-draggable class="mx4" size="lg" />
+                </div>
+              </div>
 
-          <div v-if="hirelings && hirelings.length">
-            <div class="yellow title3 mb2">
-              <w-icon xl color="white">mdi mdi-donkey</w-icon> {{ $t('Hirelings') }}
-            </div>
-            <div v-for="(hireling, index) in hirelings" :key="index" class="title3">
-              — {{ $t(hireling.desc) }}
-            </div>
+              <div v-if="hirelings && hirelings.length">
+                <w-divider color="white" class="title3 mt4">{{ $t('Hirelings') }}</w-divider>
+                <div v-for="(hireling, index) in hirelings" :key="index" class="background-white-25 title3">
+                  — {{ $t(hireling.desc) }}
+                </div>
+              </div>
+            </w-flex>
           </div>
         </w-flex>
 
         <w-flex row align-start justify-space-between class="mt4 back-ground-white-25 pa2">
           <div v-if="weaponsItems">
-            <w-divider color="white" class="title3">{{ $t('You may choose a weapon below:') }}</w-divider>
-            <w-radios v-model="choosenWeapon" :items="weaponsItems" inline class="mt2">
+            <w-divider color="white" class="title3 mt4">{{ $t('You may choose a weapon below:') }}</w-divider>
+            <w-radios v-model="choosenWeapon" :items="weaponsItems" inline class="mt2" >
               <template #item="{ item }">
-                <items :item="item.item" readonly not-draggable class="mr4 mb4" size="sm" />
+                <items :item="item.item" readonly not-draggable show-damage class="mr4 mb4" size="lg" />
               </template>
             </w-radios>
           </div>
@@ -55,7 +58,7 @@
             <w-divider color="white" class="title3">{{ $t('You can take one item below:') }}</w-divider>
             <w-radios v-model="choosenItem" :items="chooseItems" inline class="mt2">
               <template #item="{ item }">
-                <items :item="item.item" readonly not-draggable class="mr4 mb4" size="md" />
+                <items :item="item.item" readonly hide-desc not-draggable show-damage class="mr4 mb4" size="lg" />
               </template>
             </w-radios>
           </div>
