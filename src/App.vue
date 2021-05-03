@@ -71,6 +71,7 @@
 
 <script>
 import * as app from '@tauri-apps/api/app'
+import { PREF_FONT_DEFAULT } from '@/services/defines'
 import { isMobileDevice } from '@/services/responsive'
 import dices3D from '@/services/dice3d'
 import About from '@/components/About.vue'
@@ -102,7 +103,7 @@ export default {
     isMobileDevice () { return isMobileDevice(this.$waveui.breakpoint.name) },
     isStandaloneApp () { return this.$store.getters['standaloneApp'] },
     prefs () { return this.$store.getters['preferences'] || {} },
-    fontIndex () { return this.prefs.fontIndex || 0 }
+    fontIndex () { return this.prefs.fontIndex || PREF_FONT_DEFAULT }
   },
   methods: {
     showPanel (panelId) {

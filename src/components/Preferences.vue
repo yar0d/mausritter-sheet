@@ -16,17 +16,19 @@
 </template>
 
 <script>
-const PREF_FONT_INDEX = 'fontIndex'
+import { PREF_FONT_DEFAULT, PREF_FONT_INDEX } from '@/services/defines'
 
 export default {
   name: 'Preferences',
   data () {
     return {
       fontList: [
-        { label: 'Broken Script', value: 0 },
+        // { label: 'Broken Script', value: 0 }, // Does not work with Safari
         { label: 'Grenze Gotisch', value: 1 },
         { label: 'Grenze Gotisch Variable', value: 2 },
-        { label: 'Trickster', value: 3 }
+        { label: 'Trickster', value: 3 },
+        { label: 'Broken Script', value: 4 },
+        { label: 'Monospace', value: 5 }
       ]
     }
   },
@@ -34,7 +36,7 @@ export default {
     prefs () { return this.$store.getters['preferences'] || {} },
     fontIndex: {
       get () {
-        return this.prefs[PREF_FONT_INDEX] || 0
+        return this.prefs[PREF_FONT_INDEX] || PREF_FONT_DEFAULT
       },
       set (value) {
         this.$store.dispatch('savePreferences', { key: PREF_FONT_INDEX, value })

@@ -7,7 +7,7 @@
 
       <div class="spacer" />
 
-      <w-menu v-if="!isStandaloneApp" v-model="showAppMenu">
+      <!-- <w-menu v-if="!isStandaloneApp" v-model="showAppMenu">
         <template #activator="{ on }">
           <w-button text v-on="on" xl @click="showAppMenu = !showAppMenu">
             <w-icon>mdi mdi-application</w-icon>
@@ -16,7 +16,7 @@
         </template>
 
         TODO
-      </w-menu>
+      </w-menu> -->
 
       <w-menu v-model="showPrefMenu">
         <template #activator="{ on }">
@@ -288,24 +288,6 @@ export default {
         console.error(error)
       }
       this.$store.commit('historyAdd', { message: this.$t('Mausritter Sheet folder is {folder}', { folder: this.docDir }) })
-      // console.log('## [tauri] path.appDir', await path.appDir())
-      // console.log('## [tauri] path.audioDir', await path.audioDir())
-      // console.log('## [tauri] path.cacheDir', await path.cacheDir())
-      // console.log('## [tauri] path.configDir', await path.configDir())
-      // console.log('## [tauri] path.dataDir', await path.dataDir())
-      // console.log('## [tauri] path.desktopDir', await path.desktopDir())
-      // console.log('## [tauri] path.documentDir', await path.documentDir())
-      // console.log('## [tauri] path.downloadDir', await path.downloadDir())
-      // console.log('## [tauri] path.executableDir', await path.executableDir())
-      // console.log('## [tauri] path.fontDir', await path.fontDir())
-      // console.log('## [tauri] path.homeDir', await path.homeDir())
-      // console.log('## [tauri] path.localDataDir', await path.localDataDir())
-      // console.log('## [tauri] path.pictureDir', await path.pictureDir())
-      // console.log('## [tauri] path.publicDir', await path.publicDir())
-      // console.log('## [tauri] path.resourceDir', await path.resourceDir())
-      // console.log('## [tauri] path.runtimeDir', await path.runtimeDir())
-      // console.log('## [tauri] path.templateDir', await path.templateDir())
-      // console.log('## [tauri] path.videoDir', await path.videoDir())
       this.listSlots() // Refresh file list
     },
     restFull () {
