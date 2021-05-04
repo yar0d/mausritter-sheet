@@ -1,5 +1,5 @@
 # mausritter-sheet
-**Mausritter Character Sheet** is a web application for **Mausritter** mice character sheet.
+**Mausritter Character Sheet** is a web application for **Mausritter** mice character sheet. You can use it, freely, from https://mausritter-sheet.dco.ninja.
 
 > Mausritter is about small-scale adventurers in a huge world. Mouse adventurers who take on big challanges and face down grave danger.
 
@@ -29,7 +29,7 @@ See [TODO.md](./src/TODO.md) for incomming features :-)
 
 Desktop application are available for Microsoft Windows, Apple Mac OS and GNU Linux. At this time, there is no mobile (Android or iOS) version.
 
-Get your application from https://mausritter-shhet.dco.ninja. Go to the welcome page and click on the button "Applications".
+Get your application from https://mausritter-sheet.dco.ninja. Go to the welcome page and click on the button "Applications".
 
 ## For developpers
 This application is made with [Vue.js 3](https://v3.vuejs.org/) and [wave-ui](https://antoniandre.github.io/wave-ui/).
