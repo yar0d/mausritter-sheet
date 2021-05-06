@@ -25,20 +25,21 @@ See [TODO.md](./src/TODO.md) for incomming features :-)
 
 ![Exemple Sheet 0.1.1](./live.gif)
 
-## Installation
+## Companions
+**FUTURE** Another great Mausritter application *will be* [Mausritter-Colony](https://github.com/yar0d/mausritter-colony) for GM to manage their game session.
 
-Desktop application are available for Microsoft Windows, Apple Mac OS and GNU Linux. At this time, there is no mobile (Android or iOS) version.
+## Installation (beta)
 
-Get your application from https://mausritter-sheet.dco.ninja. Go to the welcome page and click on the button "Applications".
+The desktop applications are in beta and can be used just for testing. They still contain a lot of bugs! They are available for Microsoft Windows, Apple Mac OS and GNU Linux. At this time, there is no mobile (Android or iOS) version.
+
+To download, go to https://github.com/yar0d/mausritter-sheet/releases and search for the latest release named *Application release*.
 
 ## For developpers
 This application is made with [Vue.js 3](https://v3.vuejs.org/) and [wave-ui](https://antoniandre.github.io/wave-ui/).
 
 For desktop application, I use [Tauri](https://tauri.studio/en/).
 
-```
-yarn
-```
+Clone this repository and, install dependencies with `yarn`.
 
 ### Compiles and hot-reloads for development
 ```

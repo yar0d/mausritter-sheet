@@ -1,5 +1,9 @@
 # TODO
 
+## Strong demand
+- Application for GM session sheet
+- Add network to allow everyone with the same table identifier to see dice rolls and other mice name.
+
 ## Extensions
 ### Items
 #### Add selectable extension of items
@@ -16,14 +20,12 @@ Prepare for inventory extension (like for Hamster from https://sites.google.com/
 
 ## Misc
 - Allow to roll a dice formula, like 2d6+3.
-- Add network to allow everyone with the same table identifier to see dice rolls and other mice name.
 - Autosave ? after each update; each N minutes ?
 - Save history in slots too.
 - Manage retrieving pips from bank (cost 1% price).
 - Add wonderful stuff from [Tales from Moonshore](https://sites.google.com/view/talesfrommoonshore/home)
 
 # IDEAS
-- Application for GM session sheet
 - Application for GM colony
 - VTT on let's role
 
