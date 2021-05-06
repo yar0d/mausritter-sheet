@@ -3,7 +3,7 @@ export function dialogWidth (width) {
 }
 
 export function isMobileDevice () {
-  return screenWidth() < 1600
+  return screenWidth() < 1500
 }
 
 export function screenWidth () {

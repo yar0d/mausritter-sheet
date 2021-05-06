@@ -2,15 +2,16 @@
   <w-card class="mb1 card-sheet-white">
     <w-flex column>
       <w-divider class="title3 orange">{{ $t(current.desc) }}</w-divider>
-      <w-flex row class="background-white-75 px2 pt4">
+      <w-flex row class="background-white-25 px2 pt4">
         <div class="xs4">
-          <w-input v-model="current.name" :label="$t('Name')" class="title2 input-value" />
+          <w-input v-model="current.name" :label="$t('Name')" bg-color="white" class="title2 input-value" />
         </div>
-        <w-input v-model="current.look" :label="$t('Look')" class="title3 ml2"/>
+        <w-input v-model="current.look" :label="$t('Look')" bg-color="white" class="title3 ml2"/>
       </w-flex>
 
-      <w-flex row class="background-white-75 px2 pt2">
-        <w-input v-model.number="current.wages" :label="$t('Wages/day')" class="title3 xs2 ml2" />
+      <w-flex row class="background-white-25 px2 py2" align-center>
+        <w-input v-model.number="current.wages" :label="$t('Wages/day')" bg-color="white" class="w-50 title3 xs2 ml2" />
+        <div class="spacer" />
         <div v-if="canDelete">
           <w-tooltip transition="fade" bg-color="yellow-light2" color="black" left>
             <template #activator="{ on }">
@@ -22,9 +23,9 @@
       </w-flex>
     </w-flex>
 
-    <w-flex row class="mt1 w-700" justify-start>
-      <div class="xs5">
-        <w-flex column class="text-left" justify-start align-space-between>
+    <w-flex row class="mt1" justify-start>
+      <div class="w-200">
+        <w-flex column class="w-max text-left" justify-start align-space-between>
           <div>
             <w-flex row>
               <div class="w-100" />

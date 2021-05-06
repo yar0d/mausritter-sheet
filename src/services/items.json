@@ -24,5 +24,5 @@
   { "label": "Spell", "geometry": "1x1", "family": "SP", "desc": "", "use": 3, "price": 600 },
   { "label": "Item", "geometry": "1x1", "family": "CU", "desc": "A small custom item.", "use": 3, "price": 0 },
   { "label": "Item", "geometry": "1x2", "family": "CU", "desc": "A tall custom item.", "use": 3, "price": 0 },
-  { "label": "Item", "geometry": "2x1", "family": "CU", "desc": "A large custom item.", "use": 3, "price": 0 }
+  { "label": "Item", "geometry": "2x1", "family": "CU", "desc": "A wide custom item.", "use": 3, "price": 0 }
 ]
