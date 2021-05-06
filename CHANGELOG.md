@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.1](https://github.com/yar0d/mausritter-sheet/compare/v1.9.0...v1.9.1) (2021-05-06)
+
+
+### Bug Fixes
+
+* add cache for app build ([db94ac3](https://github.com/yar0d/mausritter-sheet/commit/db94ac3a002a5e415581ca717c0c680068ff9c89))
+* level can be modified ([ea26df7](https://github.com/yar0d/mausritter-sheet/commit/ea26df7b11b1a5872c65c1c476776eb585d96c17))
+* URL for the sheet. ([a9961b4](https://github.com/yar0d/mausritter-sheet/commit/a9961b40b5b714adb441ec08a1e158d1e588498b))
+
 ## [1.9.0](https://github.com/yar0d/mausritter-sheet/compare/v1.8.0...v1.9.0) (2021-05-03)
 
 
