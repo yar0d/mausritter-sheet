@@ -153,7 +153,7 @@
               {{ $t('Level') }}
             </div>
             <div class="ml2 xs6">
-              <w-input v-model.number="level" class="title2" readonly />
+              <w-input v-model.number="level" class="title2" />
             </div>
             <div class="ml4">{{ $t('XP') }}</div>
             <div class="mx1 w-max text-right">
