@@ -4,10 +4,6 @@ body,
   margin: 0;
 }
 
-.font-0 {
-  font-family: 'brokenscript-bold' !important;
-}
-
 .font-1 {
   font-family: 'GrenzeGotisch-Bold' !important;
   line-height: 16px;
@@ -24,6 +20,14 @@ body,
   letter-spacing: 0.05em;
 }
 
+.font-4 {
+  font-family: 'brokenscript-bold' !important;
+}
+
+.font-5 {
+  font-family: 'Courier New', Courier, monospace;
+}
+
 .debug {
   border: 1px solid red;
 }
@@ -36,6 +40,10 @@ body,
 #sheet-container,
 #drawer aside {
   max-width: 800px;
+}
+
+#drawer .w-tabs__content {
+  padding: 0;
 }
 
 .fixed-tabs > div {

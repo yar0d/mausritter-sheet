@@ -160,5 +160,8 @@
   "Welcome, History and Hirelings background from": "Fond de l'accueil, de l'historique et des employés par",
   "App": "App",
   "Mausritter Sheet folder is {folder}": "Le dossier Mausritter est {folder}",
-  "level {n}": "niveau {n}"
+  "level {n}": "niveau {n}",
+  "A small custom item.": "Un petit objet",
+  "A tall custom item.": "Un grand objet ",
+  "A large custom item.": "Un objet large"
 }

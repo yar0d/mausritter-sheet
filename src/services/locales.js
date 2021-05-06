@@ -1,12 +1,14 @@
 import { get, set } from '@/services/storage'
 
-export const DEFAULT_LOCALE = 'en-US'
-export const LOCALES = ['en-US', 'fr-FR']
+export const DEFAULT_LOCALE_ENGLISH = 'en-US'
+export const DEFAULT_LOCALE_FRENCH = 'fr-FR'
+export const DEFAULT_LOCALE = DEFAULT_LOCALE_ENGLISH
+export const LOCALES = [DEFAULT_LOCALE_ENGLISH, DEFAULT_LOCALE_FRENCH]
 
 const KEY_LOCALE = 'locale'
 
 export const datetimeFormats = {
-  'en-US': {
+  [DEFAULT_LOCALE_ENGLISH]: {
     short: {
       year: 'numeric', month: 'short', day: 'numeric'
     },
@@ -15,7 +17,7 @@ export const datetimeFormats = {
       weekday: 'short', hour: 'numeric', minute: 'numeric'
     }
   },
-  'fr-FR': {
+  [DEFAULT_LOCALE_FRENCH]: {
     short: {
       year: 'numeric', month: 'short', day: 'numeric'
     },
@@ -27,9 +29,13 @@ export const datetimeFormats = {
 }
 
 export function loadLocale () {
-  const locale = get(KEY_LOCALE, DEFAULT_LOCALE)
+  let defaultLocale = DEFAULT_LOCALE
+  if (/^en\b/.test(navigator.language)) defaultLocale = DEFAULT_LOCALE_ENGLISH
+  else if (/^fr\b/.test(navigator.language)) defaultLocale = DEFAULT_LOCALE_FRENCH
+
+  const locale = get(KEY_LOCALE, defaultLocale)
   // Use only our locales
-  return LOCALES.includes(locale) ? locale : DEFAULT_LOCALE
+  return LOCALES.includes(locale) ? locale : defaultLocale
 }
 
 export function saveLocale (locale) {
