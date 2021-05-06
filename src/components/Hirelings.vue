@@ -1,5 +1,5 @@
 <template>
-  <div class="scrollable h-max">
+  <div class="scrollable h-max pb4">
     <w-toolbar class="background-white-50">
       <w-menu v-model="showMenu">
         <template #activator="{ on }">
@@ -21,7 +21,7 @@
         </div>
       </w-menu>
 
-      <div class="spacer"></div>
+      <div class="spacer" />
 
       <div>
         <span v-if="wages" class="text-small">{{ $t('Wages/day') }}</span> <chips size="lg" :value="$t('{price}p', { price: wages })" />

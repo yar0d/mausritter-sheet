@@ -1,5 +1,5 @@
 <template>
-  <div class="scrollable h-auto">
+  <div class="scrollable h-auto pb4">
     <w-toolbar class="background-white-50">
       <w-button xl v-for="lang in LOCALES" :key="lang" :color="locale === lang ? '' : 'primary'" class="mr2" @click="changeLocale(lang)">
         {{ $t(lang) }}
@@ -30,7 +30,7 @@
       </w-menu>
     </w-toolbar>
 
-    <w-flex column align-center justify-center class="mt4 mb2">
+    <w-flex column align-center justify-center class="mt4">
       <w-card content-class=" px0 background-white-50">
         <template #title>
           <w-toolbar>

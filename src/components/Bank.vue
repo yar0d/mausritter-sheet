@@ -1,5 +1,5 @@
 <template>
-  <div class="w-max h-auto">
+  <div class="w-max h-max pb4">
     <w-toolbar class="background-white-50">
       <div>
         {{ $t('Your mouse must pay a fee of 1% of the value when retrieving the stored pips or items.') }}
