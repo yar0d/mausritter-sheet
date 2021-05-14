@@ -30,7 +30,7 @@ See [TODO.md](./src/TODO.md) for incomming features :-)
 
 ## Installation (beta)
 
-The desktop applications are in beta and can be used just for testing. They still contain a lot of bugs! They are available for Microsoft Windows, Apple Mac OS and GNU Linux. At this time, there is no mobile (Android or iOS) version.
+The desktop applications are in **beta** and should be used just for testing. They still contain bugs! They are available for Microsoft Windows, Apple Mac OS and GNU Linux. At this time, there is no mobile (Android or iOS) version.
 
 To download, go to https://github.com/yar0d/mausritter-sheet/releases and search for the latest release named *Application release*.
 
@@ -78,6 +78,11 @@ yarn build:docker
 yarn serve:docker
 ```
 
+### FTP deploy
+1. Publish a release with `yarn release:publish`
+2. Build with `yarn build`. We now have a **dist** folder.
+3. Send all content on the **dist** folder to you FTP server.
+
 ### Create a release
 A release will contains all binaries for MacOS, Windows and Linux.
 
@@ -89,9 +94,3 @@ A release will contains all binaries for MacOS, Windows and Linux.
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-### Create a release
-A release will contains all binaries for MacOS, Windows and Linux.
-
-1) Increment application version with `yarn release:publish' on **main** branch.
-2) Create a **pull request** for base **release** to **main**
-3) Accept and merge the pull request. This will trigger build action. It taks about 15 minutes to complete end have a draft of the release in https://github.com/yar0d/mausritter-sheet/releases.
