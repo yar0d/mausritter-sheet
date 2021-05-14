@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/yar0d/mausritter-sheet/compare/v1.9.1...v1.10.0) (2021-05-14)
+
+
+### Features
+
+* Save if dirty ([bd02a45](https://github.com/yar0d/mausritter-sheet/commit/bd02a4503f07b61a93fccaa732328d4dfbdd29ed))
+
+
+### Bug Fixes
+
+* smaller width needed ([4caa878](https://github.com/yar0d/mausritter-sheet/commit/4caa878b76c9c77c706e4379ed487eefc6aebbdf))
+
 ### [1.9.1](https://github.com/yar0d/mausritter-sheet/compare/v1.9.0...v1.9.1) (2021-05-06)
 
 
