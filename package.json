@@ -20,6 +20,7 @@
     "@mdi/font": "^5.9.55",
     "@tauri-apps/api": "^1.0.0-beta-rc.3",
     "core-js": "^3.10.1",
+    "hash.js": "^1.1.7",
     "uuencode": "^0.0.4",
     "uuid": "^8.3.2",
     "vue": "^3.0.11",

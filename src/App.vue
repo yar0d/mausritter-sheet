@@ -130,14 +130,31 @@ export default {
       this.$store.commit('setStandaloneApp', false)
     }
 
-    if (this.isStandaloneApp) {
-      // this.$nextTick(() => {
-      //   this.$refs['welcome-app'].refresh()
-      // })
-    } else {
+    if (!this.isStandaloneApp) {
+      // Web application
       this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausrittes Sheet!') })
-      // this.$refs['welcome'].refresh()
     }
+
+    // Prevent losing sheet if user clos the browser's tab
+    window.addEventListener("beforeunload", e => {
+      let isDirty = false
+      if (this.isStandaloneApp) {
+        isDirty = this.$refs['welcome-app'].isDirty()
+      } else {
+        // Web application
+        this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausrittes Sheet!') })
+        isDirty = this.$refs['welcome'].isDirty()
+      }
+
+      if (!isDirty) {
+          return undefined
+      }
+
+      let confirmationMessage = this.$t('If you leave before saving, your changes will be lost.')
+      let event = e || window.event
+      event.returnValue = confirmationMessage // Gecko + IE
+      return confirmationMessage // Gecko + Webkit, Safari, Chrome etc.
+    })
   }
 }
 </script>

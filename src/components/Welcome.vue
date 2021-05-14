@@ -133,6 +133,7 @@
 </template>
 
 <script>
+import sha256 from 'hash.js/lib/hash/sha/256'
 import { LOCALES, DEFAULT_LOCALE, loadLocale, saveLocale } from '@/services/locales'
 import { deleteSlot, listSlots, loadSlot, saveSlot, decodeJson, encodeJson } from '@/services/storage'
 import { copyToClipboard } from '@/services/clipboard'
@@ -146,7 +147,7 @@ export default {
   propos: [ 'sheet' ],
   data () {
     return {
-      decodeJson,
+      currentHash: null,
       DEFAULT_LOCALE,
       LOCALES,
       importData: null,
@@ -219,18 +220,20 @@ export default {
           }
         })
     },
+    isDirty () {
+      const newHash = sha256().update(this.serialize(true, false)).digest('hex')
+      return this.currentHash !== newHash
+    },
     async load (index) {
       const data = loadSlot(index)
       this.apply(data)
       this.$store.commit('setCurrentSlot', index)
-      this.$store.commit('historyAdd', {
-        type: this.$t('Load'),
-        message: this.slots[index]
-      })
+      this.$store.commit('historyAdd', { type: this.$t('Load'), message: this.slots[index] })
       this.canLevelUp()
+      this.currentHash = sha256().update(this.serialize(true, false)).digest('hex')
     },
     loadSheet (index) {
-      if (this.currentSlotIndex < 0) {
+      if (this.currentSlotIndex < 0 || !this.isDirty()) {
         this.load(index)
         return
       }
@@ -244,18 +247,10 @@ export default {
           this.load(index)
         })
     },
-    async refresh () {
-      this.slots = listSlots()
-    },
-    restFull () {
-      if (this.mausritter.sheet) this.mausritter.sheet.restFull()
-    },
-    restLong () {
-      if (this.mausritter.sheet) this.mausritter.sheet.restLong()
-    },
-    restShort () {
-      if (this.mausritter.sheet) this.mausritter.sheet.restShort()
-    },
+    async refresh () { this.slots = listSlots() },
+    restFull () { if (this.mausritter.sheet) this.mausritter.sheet.restFull() },
+    restLong () { if (this.mausritter.sheet) this.mausritter.sheet.restLong() },
+    restShort () { if (this.mausritter.sheet) this.mausritter.sheet.restShort() },
     slotName (index) {
       const parts = this.slots[index].split('|')
       let result = parts[0]
@@ -268,10 +263,8 @@ export default {
       saveSlot(index, data, this.dataSignature(data))
       this.slots = listSlots() // Refresh slot list
       this.$store.commit('setCurrentSlot', index)
-      this.$store.commit('historyAdd', {
-        type: this.$t('Save'),
-        message: this.slots[index]
-      })
+      this.$store.commit('historyAdd', { type: this.$t('Save'), message: this.slots[index] })
+      this.currentHash = sha256().update(this.serialize(true, false)).digest('hex')
     },
     saveSheet (index) {
       const data = this.serialize()
@@ -287,13 +280,13 @@ export default {
           }
         })
     },
-    serialize () {
+    serialize (encode, setDate = true) {
       let data
       if (this.mausritter.sheet) data = this.mausritter.sheet.serialize()
       if (this.mausritter.hirelings) data.hirelings = this.mausritter.hirelings.serialize()
       data.version = 1
-      data.date = new Date().toISOString()
-      return data
+      if (setDate) data.date = new Date().toISOString()
+      return encode ? encodeJson(data) : data
     }
   },
   created () {

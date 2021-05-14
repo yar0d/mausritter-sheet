@@ -136,6 +136,7 @@
 import * as fs from '@tauri-apps/api/fs'
 import * as path from '@tauri-apps/api/path'
 // import * as dialog from '@tauri-apps/api/dialog'
+import sha256 from 'hash.js/lib/hash/sha/256'
 import DEFINES from '@/services/defines'
 import { LOCALES, DEFAULT_LOCALE, loadLocale, saveLocale } from '@/services/locales'
 import { decodeJson, encodeJson } from '@/services/storage'
@@ -241,6 +242,10 @@ export default {
           }
         })
     },
+    isDirty () {
+      const newHash = sha256().update(this.serialize(true, false)).digest('hex')
+      return this.currentHash !== newHash
+    },
     async listSlots () {
       let slots = {}
       const files = await fs.readDir(this.docDir)
@@ -260,13 +265,14 @@ export default {
         this.apply(decodeJson(data))
         this.$store.commit('historyAdd', { type: this.$t('Load'), message: key, secondary: this.slots[key].path })
         this.canLevelUp()
+        this.currentHash = sha256().update(this.serialize(true, false)).digest('hex')
       } catch (error) {
         console.error(error)
         this.$store.commit('historyAdd', { message: error, secondary: this.slots[key].path, color: 'red' })
       }
     },
     loadSheet (key) {
-      if (!this.currentKey) {
+      if (!this.currentKey || !this.isDirty()) {
         this.load(key)
         return
       }
@@ -290,15 +296,9 @@ export default {
       this.$store.commit('historyAdd', { message: this.$t('Mausritter Sheet folder is {folder}', { folder: this.docDir }) })
       this.listSlots() // Refresh file list
     },
-    restFull () {
-      if (this.mausritter.sheet) this.mausritter.sheet.restFull()
-    },
-    restLong () {
-      if (this.mausritter.sheet) this.mausritter.sheet.restLong()
-    },
-    restShort () {
-      if (this.mausritter.sheet) this.mausritter.sheet.restShort()
-    },
+    restFull () { if (this.mausritter.sheet) this.mausritter.sheet.restFull() },
+    restLong () { if (this.mausritter.sheet) this.mausritter.sheet.restLong() },
+    restShort () { if (this.mausritter.sheet) this.mausritter.sheet.restShort() },
     async save (key, data) {
       try {
         let path
@@ -310,6 +310,7 @@ export default {
         await fs.writeFile({ contents: encodeJson(data), path }, {})
         this.listSlots() // Refresh slot list
         this.$store.commit('historyAdd', { type: this.$t('Save'), message: key })
+        this.currentHash = sha256().update(this.serialize(true, false)).digest('hex')
       } catch (error) {
         console.error(error)
         this.$store.commit('historyAdd', { message: error, secondary: path, color: 'red' })
@@ -318,20 +319,14 @@ export default {
     saveSheet () {
       const data = this.serialize()
       this.save(this.currentKey, data)
-      // this.$refs['confirm-dialog'].open(this.$t('Save'), this.$t('The sheet of “{dest}” will be overwritten by “{name}”. Do you confirm?', { dest: this.slots[index], name: this.dataSignature(data) } ))
-      //   .then(confirmed => {
-      //     if (confirmed) {
-      //       this.save(index, data)
-      //     }
-      //   })
     },
-    serialize () {
+    serialize (encode, setDate = true) {
       let data
       if (this.mausritter.sheet) data = this.mausritter.sheet.serialize()
       if (this.mausritter.hirelings) data.hirelings = this.mausritter.hirelings.serialize()
       data.version = 1
-      data.date = new Date().toISOString()
-      return data
+      if (setDate) data.date = new Date().toISOString()
+      return encode ? encodeJson(data) : data
     }
   },
   created () {

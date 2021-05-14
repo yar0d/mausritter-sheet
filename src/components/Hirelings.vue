@@ -88,7 +88,7 @@ export default {
     serialize () {
       let result = [] // We will return an array of hirelings
       for (let index = 0; index < this.hirelings.length; index++) {
-        result.push(this.$refs['hireling-' + index].serialize())
+        if (this.$refs['hireling-' + index]) result.push(this.$refs['hireling-' + index].serialize())
       }
       return result
     }

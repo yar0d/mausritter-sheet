@@ -163,5 +163,6 @@
   "level {n}": "level {n}",
   "A small custom item.": "A small custom item.",
   "A tall custom item.": "A tall custom item.",
-  "A wide custom item.": "A wide custom item."
+  "A wide custom item.": "A wide custom item.",
+  "If you leave before saving, your changes will be lost.": "If you leave before saving, your changes will be lost."
 }
