@@ -280,7 +280,7 @@ export default {
           }
         })
     },
-    serialize (encode, setDate = true) {
+    serialize (encode = false, setDate = true) {
       let data
       if (this.mausritter.sheet) data = this.mausritter.sheet.serialize()
       if (this.mausritter.hirelings) data.hirelings = this.mausritter.hirelings.serialize()

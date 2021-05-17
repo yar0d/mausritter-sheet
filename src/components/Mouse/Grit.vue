@@ -13,7 +13,7 @@
         <div class="w-max pt2">
           <draggable :list="items" group="items" item-key="id" class="h-max" :move="move">
             <template #item="{ element }">
-              <conditions v-if="element.type === TYPE_CONDITION" size="md" :condition="element" can-delete @delete="deleteItem(items, element.id)" class="inline-block mx2" />
+              <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(items, element.id)" class="inline-block mx2" />
             </template>
             <template #footer><div class="px4 caption">{{ $t('Ignore a number of conditions equal to your Grit.') }}</div></template>
           </draggable>
@@ -90,16 +90,7 @@ export default {
       this.items.canDrop = this.canDrop // Export drop testing method
     },
     serialize () {
-      const tmp = []
-      for (let i = 0; i < this.items.length; i++) {
-        if (this.canDrop(this.items[i], tmp)) {
-          tmp.push({...this.items[i]})
-        }
-      }
-      this.items = tmp
-      return {
-        items: this.items
-      }
+      return { items: this.items }
     },
     setData (data) {
       this.reset(data)
