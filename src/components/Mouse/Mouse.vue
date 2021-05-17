@@ -116,13 +116,13 @@
             <div class="w-max form-gray input-name title2 attribute-cell">
               {{ $t('HP') }}
             </div>
+            <div class="w-50" />
             <div class="w-150 ml2">
               <w-input v-model.number="maxHP" class="title1" color="minor" />
             </div>
             <div class="w-150 divider-v">
               <number-input v-model="currentHP" :max="maxHP" class="title1 primary" @input="setCurrentHP" />
             </div>
-            <div class="w-50" />
           </w-flex>
         </w-card>
       </w-flex>
