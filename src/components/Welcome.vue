@@ -57,7 +57,7 @@
           <w-flex row align-center justify-space-between class="px2 pt2" :class="currentSlotIndex === index ? 'brown-dark2--bg white' : ''">
             <div class="mr2">{{ index + 1 }}</div>
             <div v-if="!slot" class="caption">
-            {{ $t('Empty') }} "{{currentSlotIndex}}"
+            {{ $t('Empty') }}
             </div>
             <div v-else-if="index === currentSlotIndex">
               {{ slotName(index) }}
