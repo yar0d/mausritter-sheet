@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.10.1](https://github.com/yar0d/mausritter-sheet/compare/v1.10.0...v1.10.1) (2021-05-17)
+
+
+### Bug Fixes
+
+* empty slot text ([46de3fd](https://github.com/yar0d/mausritter-sheet/commit/46de3fdc5d2b69ceaf28422de7ade4400b22ff0e))
+* hirelings card UX ([c7db1e0](https://github.com/yar0d/mausritter-sheet/commit/c7db1e0fa6d0d5cc668e6d1533e9e595600565e7))
+* README ([901926c](https://github.com/yar0d/mausritter-sheet/commit/901926c308bdc6916012cdbdf912ffeff1ea9d9d))
+
 ## [1.10.0](https://github.com/yar0d/mausritter-sheet/compare/v1.9.1...v1.10.0) (2021-05-14)
 
 
