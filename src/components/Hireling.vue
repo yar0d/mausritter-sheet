@@ -138,32 +138,6 @@
               </w-flex>
             </div>
           </div>
-
-          <div class="xs8 mt4">
-            <w-card bg-color="white" class="card-sheet">
-              <w-flex row align-center>
-                <div class="w-100 form-gray input-name title2 attribute-cell">
-                  {{ $t('Level') }}
-                </div>
-                <div class="w-200 divider-v text-center">
-                  <w-input v-model.number="current.level" class="title1 primary" />
-                </div>
-              </w-flex>
-            </w-card>
-          </div>
-
-          <div class="xs8 mt4">
-            <w-card bg-color="white" class="card-sheet">
-              <w-flex row align-center>
-                <div class="w-100 form-gray input-name title2 attribute-cell">
-                  {{ $t('XP') }}
-                </div>
-                <div class="w-200 divider-v text-center">
-                  <w-input v-model.number="current.xp" class="title3 primary" />
-                </div>
-              </w-flex>
-            </w-card>
-          </div>
         </w-flex>
       </div>
 
