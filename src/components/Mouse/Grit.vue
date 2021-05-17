@@ -1,5 +1,5 @@
 <template>
-  <w-card v-show="grit" bg-color="white" class="card-sheet mr4" :class="getWidth">
+  <w-card v-show="grit" bg-color="white" class="card-sheet mr4">
     <w-flex column>
       <w-flex row>
         <div class="w-100 form-gray input-name">
@@ -41,14 +41,6 @@ export default {
     }
   },
   computed: {
-    getWidth () {
-      switch (this.grit) {
-        case 1: return 'grit-1'
-        case 2: return 'grit-2'
-        case 3: return 'grit-3'
-        default: return ''
-      }
-    },
     grit () {
       if (this.level <= 1) return 0
       if (this.level <= 2) return 1
