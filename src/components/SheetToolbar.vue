@@ -31,7 +31,13 @@
       <dice :faces="dice" :advantage="diceAdvantage" size="xl" color="dice" />
     </div>
 
-    <slot name="actions-append" />
+    <div v-if="currentSheet">
+      <w-flex row align-center class="text-center">
+        <w-divider vertical class="pr2" />
+        {{ $t('Table') }}
+        <w-input class="xs2 title3 primary" v-model="currentTable" :placeholder="$t('None')" />
+      </w-flex>
+    </div>
   </w-flex>
 </template>
 

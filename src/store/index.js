@@ -1,10 +1,13 @@
 import { createStore } from 'vuex'
+import config from '@/config'
 import { d6 } from '@/services/dice-roller'
 import { loadPrefs, savePrefsKey } from '@/services/preferences'
 
 export const store = createStore({
   state () {
     return {
+      config,
+      currentSheet: null,
       currentSlotIndex: -1,
       hirelings: [],
       history: [],
@@ -12,10 +15,12 @@ export const store = createStore({
       matrinames: [],
       names: [],
       preferences: {},
-      standaloneApp: false // This is true if this app is a computer application. By default this app is a web page
+      standaloneApp: false, // This is true if this app is a computer application. By default this app is a web page
+      tableId: null
     }
   },
   getters: {
+    currentSheet: state => { return state.currentSheet },
     currentSlotIndex: state => { return state.currentSlotIndex },
     hirelings: state => { return state.hirelings || [] },
     hirelingByIndex: state => index => {
@@ -26,9 +31,14 @@ export const store = createStore({
     matrinames: state => { return state.matrinames || [] },
     names: state => { return state.names || [] },
     preferences: state => { return state.preferences || {} },
-    standaloneApp: state => { return state.standaloneApp }
+    sheetSignature: state => { return state.sheet ? state.sheet.name + ` (state.sheet.background)`: null },
+    standaloneApp: state => { return state.standaloneApp },
+    tableId: state => { return state.tableId }
   },
   mutations: {
+    currentSheet (state, sheet) {
+      state.currentSheet = sheet
+    },
     hirelingClear (state) {
       state.hirelings = []
     },
@@ -85,9 +95,26 @@ export const store = createStore({
     },
     setStandaloneApp (state, standaloneApp) {
       state.standaloneApp = standaloneApp
+    },
+    setTableId (state, tableId) {
+      state.tableId = tableId
     }
   },
   actions: {
+    sendDiceResult ({ commit, state }, { tableId, sheetSignature, diceResult }) {
+      const options = {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(diceResult)
+      }
+      return fetch(`${state.config.SERVER_API_URL}/dices.php?vtable=${tableId}&sheet=${sheetSignature}`, options)
+        .then((response) => {
+          return response
+        })
+        .catch((error) => {
+          commit('API_FAILURE', error)
+        })
+    },
     changeLocale (context, locale) {
       context.commit('setLocale', locale)
       const module = require(`../locales/mouse-names.${locale}.js`)

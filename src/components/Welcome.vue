@@ -182,6 +182,7 @@ export default {
           this.mausritter.hirelings.refresh(data.hirelings)
         })
       }
+      this.$store.commit('currentSheet', data)
     },
     canLevelUp () { return this.mausritter.sheet ? this.mausritter.sheet.canLevelUp() : false },
     changeLocale (newLocale) {
