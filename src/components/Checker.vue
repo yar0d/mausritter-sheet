@@ -58,7 +58,7 @@ export default {
       roll({
         formula: `${number}d${this.faces}`,
         callbackFn: ({ dices, total }) => {
-          const roll = !advantage ? total : (advantage ? lowestOfDices(dices) : highestOfDices(dices))
+          const roll = !advantage ? total : (advantage === 'a' ? lowestOfDices(dices) : highestOfDices(dices))
           const success = roll <= this.score
 
           this.$store.commit('historyAdd', {
