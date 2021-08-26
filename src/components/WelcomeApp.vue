@@ -180,7 +180,8 @@ export default {
     advancement () {
       if (this.mausritter.sheet) this.mausritter.sheet.advancement()
     },
-    apply (data) {
+    async apply (data, serializedData) {
+      await this.$store.commit('setTableId', null) // Reset table ID
       if (this.mausritter.sheet) {
         this.mausritter.sheet.setData(data)
         this.currentKey = this.dataSignature(data)
@@ -191,6 +192,7 @@ export default {
           this.mausritter.hirelings.refresh(data.hirelings)
         })
       }
+      this.$store.commit('currentSheet', { json: data, raw: serializedData })
     },
     canLevelUp () { return this.mausritter.sheet ? this.mausritter.sheet.canLevelUp() : false },
     changeLocale (newLocale) {
@@ -228,7 +230,7 @@ export default {
       try {
         const data = await fs.readTextFile(this.slots[this.currentKey].path)
         await copyToClipboard(data)
-        this.$refs['prompt-dialog'].open(this.$t('Export'), this.$t('“{name}” is now copied to clipboard.', { name: this.dataSignature(decodeJson(data)) }), { data })
+        this.$refs['prompt-dialog'].open(this.$t('Export'), this.$t('{name} is now copied to clipboard.', { name: this.dataSignature(decodeJson(data)) }), { data })
       } catch (error) {
         console.error(error)
         this.$store.commit('historyAdd', { message: error, secondary: this.slots[this.currentKey].path, color: 'red' })
@@ -238,7 +240,7 @@ export default {
       this.$refs['prompt-import-dialog'].open(this.$t('Import'), '')
         .then(() => {
           if (this.importData) {
-            this.apply(decodeJson(this.importData))
+            this.apply(decodeJson(this.importData), this.importData)
           }
         })
     },
@@ -262,7 +264,7 @@ export default {
     async load (key) {
       try {
         const data = await fs.readTextFile(this.slots[key].path)
-        this.apply(decodeJson(data))
+        this.apply(decodeJson(data), data)
         this.$store.commit('historyAdd', { type: this.$t('Load'), message: key, secondary: this.slots[key].path })
         this.canLevelUp()
         this.currentHash = sha256().update(this.serialize(true, false)).digest('hex')
@@ -288,7 +290,7 @@ export default {
     },
     async initialize () {
       try {
-        this.docDir = await path.resolvePath(DEFINES.FOLDER_MAUSRITTER_SHEET, fs.BaseDirectory.Document)
+        this.docDir = await path.resolve(await path.documentDir(), DEFINES.FOLDER_MAUSRITTER_SHEET)
         await fs.createDir(this.docDir, { recursive: true })
       } catch (error) {
         console.error(error)

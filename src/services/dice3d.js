@@ -62,6 +62,10 @@ export function roll({ formula = '2d6', timeout, callbackFn }) {
     else setTimeout(() => { _canvas.style.display = 'none'}, timeout || DICE_TIMEOUT)
   }
 
+    // Resize canvas to fit app window
+    _canvas.style.width = window.innerWidth - 8 + 'px'
+    _canvas.style.height = window.innerHeight + 'px'
+
   _canvas.style.display = ''
   _diceBox.start_throw(notation_getter, before_roll, after_roll)
 }

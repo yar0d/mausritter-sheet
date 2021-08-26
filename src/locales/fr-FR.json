@@ -2,7 +2,7 @@
   "Languages": "Langues",
   "en-US": "English US",
   "fr-FR": "Français",
-  "Welcome to Mausrittes Sheet!": "Bienvenue sur la fiche de personnage Mausritter !",
+  "Welcome to Mausritter Sheet!": "Bienvenue sur la fiche de personnage Mausritter !",
   "under licence": "sous licence",
   "Items": "Objets",
   "Conditions": "Conditions",
@@ -120,7 +120,7 @@
   "The hireling of “{desc} {name}” will be dismissed. Do you confirm?": "Confirmes le renvoi du « {desc} {name} » ?",
   "Clear": "Effacer",
   "Export": "Exporter",
-  "“{name}” is now copied to clipboard.": "« {name} » a été copié dans le presse-papier.",
+  "{name} is now copied to clipboard.": "« {name} » a été copié dans le presse-papier.",
   "Import...": "Importer…",
   "Paste your character here...": "Coller le personnage ici…",
   "Drop item here, in your bank.": "Déposer ici les objets à mettre en banque.",
@@ -164,5 +164,8 @@
   "A small custom item.": "Un petit objet",
   "A tall custom item.": "Un grand objet ",
   "A wide custom item.": "Un objet large",
-  "If you leave before saving, your changes will be lost.": "Si vous quittez avant de sauvegarder, vos modifications seront perdues."
+  "If you leave before saving, your changes will be lost.": "Si vous quittez avant de sauvegarder, vos modifications seront perdues.",
+  "Table": "Table",
+  "None": "Aucun(e)",
+  "Damages": "Dégâts"
 }

@@ -60,7 +60,7 @@ export default {
       this.resolve(true)
       this.show = false
     },
-    open ({ context, faces, formula, message, dices, upper, score, total, secondary, success, failed }) {
+    open ({ context, faces, formula, message, dices, upper, score, total, secondary, success, failed, advantage }) {
       this.context = context
       this.faces = faces
       this.dices = dices
@@ -75,9 +75,7 @@ export default {
       // Send result if a table is giver
       if (this.$store.getters['tableId'] && this.$store.getters['sheetSignature']) {
         this.$store.dispatch('sendDiceResult', {
-          tableId: this.$store.getters['table'],
-          sheetSignature: this.$store.getters['sheetSignature'],
-          diceResult: { context, faces, formula, message, dices, upper, score, total, secondary, success, failed }
+          diceResult: { context, faces, formula, message, dices, upper, score, total, secondary, success, failed, advantage }
         })
       }
       this.show = true

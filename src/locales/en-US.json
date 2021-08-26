@@ -2,7 +2,7 @@
   "Languages": "Languages",
   "en-US": "English US",
   "fr-FR": "Français",
-  "Welcome to Mausrittes Sheet!": "Welcome to Mausrittes Sheet!",
+  "Welcome to Mausritter Sheet!": "Welcome to Mausritter Sheet!",
   "under licence": "under license",
   "Items": "Items",
   "Conditions": "Conditions",
@@ -120,7 +120,7 @@
   "The hireling of “{desc} {name}” will be dismissed. Do you confirm?": "The hireling of “{desc} {name}” will be dismissed. Do you confirm?",
   "Clear": "Clear",
   "Export": "Export",
-  "“{name}” is now copied to clipboard.": "“{name}” is now copied to clipboard.",
+  "{name} is now copied to clipboard.": "{name} is now copied to clipboard.",
   "Import...": "Import...",
   "Paste your character here...": "Paste your character here...",
   "Drop item here, in your bank.": "Drop item here, in your bank.",
@@ -164,5 +164,8 @@
   "A small custom item.": "A small custom item.",
   "A tall custom item.": "A tall custom item.",
   "A wide custom item.": "A wide custom item.",
-  "If you leave before saving, your changes will be lost.": "If you leave before saving, your changes will be lost."
+  "If you leave before saving, your changes will be lost.": "If you leave before saving, your changes will be lost.",
+  "Table": "Table",
+  "None": "None",
+  "Damages": "Damages"
 }

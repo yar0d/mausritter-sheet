@@ -1,13 +1,21 @@
 import { createStore } from 'vuex'
+import { version as uuidVersion } from 'uuid';
+import { validate as uuidValidate } from 'uuid';
+
 import config from '@/config'
 import { d6 } from '@/services/dice-roller'
 import { loadPrefs, savePrefsKey } from '@/services/preferences'
+
+function uuidValidateV5 (uuid) {
+  return uuidValidate(uuid) && uuidVersion(uuid) === 5;
+}
 
 export const store = createStore({
   state () {
     return {
       config,
       currentSheet: null,
+      currentSheetRaw: null,
       currentSlotIndex: -1,
       hirelings: [],
       history: [],
@@ -20,24 +28,29 @@ export const store = createStore({
     }
   },
   getters: {
-    currentSheet: state => { return state.currentSheet },
+    config: state => { return state.config || {} },
+    currentSheet: state => { return state.currentSheet || null },
+    currentSheetRaw: state => { return state.currentSheetRaw || null },
     currentSlotIndex: state => { return state.currentSlotIndex },
     hirelings: state => { return state.hirelings || [] },
-    hirelingByIndex: state => index => {
-      return state.hirelings[index] || {}
-    },
+    hirelingByIndex: state => index => { return state.hirelings[index] || {} },
     history: state => { return state.history || [] },
     locale: state => { return state.locale },
     matrinames: state => { return state.matrinames || [] },
     names: state => { return state.names || [] },
     preferences: state => { return state.preferences || {} },
-    sheetSignature: state => { return state.sheet ? state.sheet.name + ` (state.sheet.background)`: null },
+    sheetSignature: state => { return state.currentSheet.sheet ? state.currentSheet.sheet.name + ` (${state.currentSheet.sheet.background})`: null },
     standaloneApp: state => { return state.standaloneApp },
     tableId: state => { return state.tableId }
   },
   mutations: {
-    currentSheet (state, sheet) {
-      state.currentSheet = sheet
+    FAILURE (state, error) {
+      console.trace('[ERROR]', error)
+      throw error
+    },
+    currentSheet (state, { json, raw }) {
+      state.currentSheet = json
+      state.currentSheetRaw = raw
     },
     hirelingClear (state) {
       state.hirelings = []
@@ -101,19 +114,60 @@ export const store = createStore({
     }
   },
   actions: {
-    sendDiceResult ({ commit, state }, { tableId, sheetSignature, diceResult }) {
+    async sendDiceResult ({ getters, commit }, { diceResult }) {
+      if (!getters['tableId'] || !getters['sheetSignature'] || !diceResult) {
+        commit('FAILURE', 'Cannot send dice result to colony.')
+        return
+      }
+
       const options = {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(diceResult)
       }
-      return fetch(`${state.config.SERVER_API_URL}/dices.php?vtable=${tableId}&sheet=${sheetSignature}`, options)
+      return fetch(`${getters['config'].SERVER_API_URL}/dices.php?vtable=${getters['tableId']}&sheet=${getters['sheetSignature']}`, options)
         .then((response) => {
           return response
         })
         .catch((error) => {
-          commit('API_FAILURE', error)
+          commit('FAILURE', error)
         })
+    },
+    async sendCurrentSheet ({ getters, commit }) {
+      if (!getters['tableId'] || !getters['sheetSignature'] || !getters['currentSheet']) {
+        commit('FAILURE', 'Cannot send sheet to colony!')
+        return
+      }
+
+      const hirelings = []
+      if (getters['currentSheet'].hirelings.length) {
+        getters['currentSheet'].hirelings.forEach(h => {
+          hirelings.push({ name: h.sheet.name, desc: h.sheet.desc, str: h.sheet.currentStr, str_max: h.sheet.maxStr, dex: h.sheet.currentDex, dex_max: h.sheet.maxDex, wil: h.sheet.currentWil, wil_max: h.sheet.maxWil, hp: h.sheet.currentHP, hp_max: h.sheet.maxHP, level: h.sheet.level })
+        })
+      }
+      const options = {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          data: '',
+          hirelings
+        })
+      }
+      try {
+        const response = await fetch(`${getters['config'].SERVER_API_URL}/sheets.php?vtable=${getters['tableId']}&name=${getters['sheetSignature']}&str=${getters['currentSheet'].sheet.currentStr}&str_max=${getters['currentSheet'].sheet.maxStr}&dex=${getters['currentSheet'].sheet.currentDex}&dex_max=${getters['currentSheet'].sheet.maxDex}&wil=${getters['currentSheet'].sheet.currentWil}&wil_max=${getters['currentSheet'].sheet.maxWil}&hp=${getters['currentSheet'].sheet.currentHP}&hp_max=${getters['currentSheet'].sheet.maxHP}&level=${getters['currentSheet'].sheet.level}`, options)
+        console.log('## sendCurrentSheet response:', response.body)
+      } catch(error) {
+        commit('FAILURE', error)
+      }
+    },
+    setTableId ({ commit, state, dispatch }, tableId) {
+      commit('setTableId', tableId)
+      if (uuidValidateV5(tableId) && state.currentSheet) {
+        dispatch('sendCurrentSheet', tableId)
+          .catch ((error) => {
+            commit('FAILURE', error)
+          })
+      }
     },
     changeLocale (context, locale) {
       context.commit('setLocale', locale)

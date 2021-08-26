@@ -12,28 +12,28 @@
 
           <w-flex column class="h-max" :class="isMobileDevice ? 'fixed-tabs' : ''">
             <w-toolbar no-border class="toolbar-pager px0">
-              <w-button lg :class="isMobileDevice ? 'px2' : 'px8'" :text="!show.welcome" @click="showPanel('welcome')">
+              <w-button lg :class="isMobileDevice ? 'px2' : 'px6'" :text="!show.welcome" @click="showPanel('welcome')">
                 <w-icon xl>
                   mdi mdi-rodent
                 </w-icon>
                 <span class="ml1 text-small">{{ $t('Welcome') }}</span>
               </w-button>
 
-              <w-button lg :class="isMobileDevice ? 'px2' : 'px8'" :text="!show.history" @click="showPanel('history')">
+              <w-button lg :class="isMobileDevice ? 'px2' : 'px6'" :text="!show.history" @click="showPanel('history')">
                 <w-icon xl>
                   mdi mdi-history
                 </w-icon>
                 <span class="ml1 text-small">{{ $t('History') }}</span>
               </w-button>
 
-              <w-button lg :class="isMobileDevice ? 'px2' : 'px8'" :text="!show.bank" @click="showPanel('bank')">
+              <w-button lg :class="isMobileDevice ? 'px2' : 'px6'" :text="!show.bank" @click="showPanel('bank')">
                 <w-icon xl>
                   mdi mdi-bank
                 </w-icon>
                 <span class="ml1 text-small">{{ $t('Bank') }}</span>
               </w-button>
 
-              <w-button lg :class="isMobileDevice ? 'px2' : 'px8'" :text="!show.hirelings" @click="showPanel('hirelings')">
+              <w-button lg :class="isMobileDevice ? 'px2' : 'px6'" :text="!show.hirelings" @click="showPanel('hirelings')">
                 <w-icon xl>
                   mdi mdi-donkey
                 </w-icon>
@@ -125,14 +125,14 @@ export default {
     try {
       const tauri = await app.getTauriVersion()
       this.$store.commit('setStandaloneApp', true)
-      this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausrittes Sheet!'), secondary: '(tauri ' + tauri + ')' })
+      this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausritter Sheet!'), secondary: '(tauri ' + tauri + ')' })
     } catch (error) {
       this.$store.commit('setStandaloneApp', false)
     }
 
     if (!this.isStandaloneApp) {
       // Web application
-      this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausrittes Sheet!') })
+      this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausritter Sheet!') })
     }
 
     // Prevent losing sheet if user clos the browser's tab
@@ -142,7 +142,7 @@ export default {
         isDirty = this.$refs['welcome-app'].isDirty()
       } else {
         // Web application
-        this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausrittes Sheet!') })
+        this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausritter Sheet!') })
         isDirty = this.$refs['welcome'].isDirty()
       }
 

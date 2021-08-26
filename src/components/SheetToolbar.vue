@@ -34,8 +34,7 @@
     <div v-if="currentSheet">
       <w-flex row align-center class="text-center">
         <w-divider vertical class="pr2" />
-        {{ $t('Table') }}
-        <w-input class="xs2 title3 primary" v-model="currentTable" :placeholder="$t('None')" />
+        <w-input v-model="currentTable" :placeholder="$t('Table')" />
       </w-flex>
     </div>
   </w-flex>
@@ -65,6 +64,17 @@ export default {
     }
   },
   computed: {
+    currentSheet () { return this.$store.getters['currentSheet'] },
+    currentTable: {
+      get () { return this.$store.getters['tableId'] },
+      async set (value) {
+        try {
+          await this.$store.dispatch('setTableId', value || null)
+        } catch (error) {
+          console.error(error)
+        }
+      }
+    },
     diceAdvantageLabel () {
       let found
       this.diceAdvantages.forEach((type, i) => {

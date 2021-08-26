@@ -231,7 +231,7 @@ blockquote {
 .card-bordered {
   padding: 0;
   border: 1px solid rgba(0, 0, 0, 0.5);
-  border-radius: 7px;
+  border-radius: 0;
 }
 
 .card-sheet .w-card__content, .character-sheet .w-card__content, .no-padding .w-card__content {
@@ -272,7 +272,7 @@ textarea {
 }
 
 .toolbar-pager {
-  max-height: 30px !important;
+  max-height: 26px !important;
 }
 
 .w-25 {
