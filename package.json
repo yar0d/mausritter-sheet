@@ -56,6 +56,10 @@
     },
     "rules": {}
   },
+  "resolutions": {
+    "trim-newlines": "^3.0.1",
+    "glob-parent": "^5.1.2"
+  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
