@@ -19,7 +19,7 @@ Have a look at [Mausritter website](https://mausritter.com/) and [Licence](./LIC
 - Import / Export of character sheet. Use this to load a character into another browser.
 - Mouse can rest and advance in level, up to level 20.
 
-![Mausritter Sheet](/mausritter-sheet-01.jpg)
+![Mausritter Sheet](/mausritter-sheet-00.jpg)
 
 See [TODO.md](./src/TODO.md) for incoming features :-)
 
