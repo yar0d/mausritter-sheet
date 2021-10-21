@@ -19,7 +19,7 @@ Have a look at [Mausritter website](https://mausritter.com/) and [Licence](./LIC
 - Import / Export of character sheet. Use this to load a character into another browser.
 - Mouse can rest and advance in level, up to level 20.
 
-![Version 1.3.9](/public/img/mausritter-sheet-fr-dices.jpg)
+![Mausritter Sheet](/mausritter-sheet-01.jpg)
 
 See [TODO.md](./src/TODO.md) for incoming features :-)
 
@@ -27,6 +27,9 @@ See [TODO.md](./src/TODO.md) for incoming features :-)
 
 ## Companions
 **FUTURE** Another great Mausritter application *will be* [Mausritter-Colony](https://github.com/yar0d/mausritter-colony) for GM to manage their game session.
+
+## Help wanted
+Some help will be welcome to translate to other languages. Currently we have English and French only.
 
 ## Installation (beta)
 
