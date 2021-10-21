@@ -24,7 +24,8 @@ export const store = createStore({
       names: [],
       preferences: {},
       standaloneApp: false, // This is true if this app is a computer application. By default this app is a web page
-      tableId: null
+      tableId: null,
+      tableState: null
     }
   },
   getters: {
@@ -41,11 +42,13 @@ export const store = createStore({
     preferences: state => { return state.preferences || {} },
     sheetSignature: state => { return state.currentSheet.sheet ? state.currentSheet.sheet.name + ` (${state.currentSheet.sheet.background})`: null },
     standaloneApp: state => { return state.standaloneApp },
-    tableId: state => { return state.tableId }
+    tableId: state => { return state.tableId },
+    tableState: state => { return state.tableState }
   },
   mutations: {
     FAILURE (state, error) {
       console.trace('[ERROR]', error)
+      state.tableState = error
       throw error
     },
     currentSheet (state, { json, raw }) {
@@ -114,7 +117,7 @@ export const store = createStore({
     }
   },
   actions: {
-    async sendDiceResult ({ getters, commit }, { diceResult }) {
+    async sendDiceResult ({ state, getters, commit }, { diceResult }) {
       if (!getters['tableId'] || !getters['sheetSignature'] || !diceResult) {
         commit('FAILURE', 'Cannot send dice result to colony.')
         return
@@ -127,13 +130,14 @@ export const store = createStore({
       }
       return fetch(`${getters['config'].SERVER_API_URL}/dices.php?vtable=${getters['tableId']}&sheet=${getters['sheetSignature']}`, options)
         .then((response) => {
+          state.tableState = { status: response.status, statusText: JSON.stringify(response, undefined, 2) }
           return response
         })
         .catch((error) => {
           commit('FAILURE', error)
         })
     },
-    async sendCurrentSheet ({ getters, commit }) {
+    async sendCurrentSheet ({ state, getters, commit }) {
       if (!getters['tableId'] || !getters['sheetSignature'] || !getters['currentSheet']) {
         commit('FAILURE', 'Cannot send sheet to colony!')
         return
@@ -155,7 +159,34 @@ export const store = createStore({
       }
       try {
         const response = await fetch(`${getters['config'].SERVER_API_URL}/sheets.php?vtable=${getters['tableId']}&name=${getters['sheetSignature']}&str=${getters['currentSheet'].sheet.currentStr}&str_max=${getters['currentSheet'].sheet.maxStr}&dex=${getters['currentSheet'].sheet.currentDex}&dex_max=${getters['currentSheet'].sheet.maxDex}&wil=${getters['currentSheet'].sheet.currentWil}&wil_max=${getters['currentSheet'].sheet.maxWil}&hp=${getters['currentSheet'].sheet.currentHP}&hp_max=${getters['currentSheet'].sheet.maxHP}&level=${getters['currentSheet'].sheet.level}`, options)
-        console.log('## sendCurrentSheet response:', response.body)
+        state.tableState = { status: response.status, statusText: response.statusText }
+      } catch(error) {
+        commit('FAILURE', error)
+      }
+    },
+    async sendSheet ({ state, getters, commit }, data) {
+      if (!getters['tableId']) {
+        commit('FAILURE', 'Cannot send sheet to colony!')
+        return
+      }
+
+      const hirelings = []
+      if (data?.hirelings?.length) {
+        data.hirelings.forEach(h => {
+          hirelings.push({ name: h.sheet.name, desc: h.sheet.desc, str: h.sheet.currentStr, str_max: h.sheet.maxStr, dex: h.sheet.currentDex, dex_max: h.sheet.maxDex, wil: h.sheet.currentWil, wil_max: h.sheet.maxWil, hp: h.sheet.currentHP, hp_max: h.sheet.maxHP, level: h.sheet.level })
+        })
+      }
+      const options = {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          data: '',
+          hirelings
+        })
+      }
+      try {
+        const response = await fetch(`${getters['config'].SERVER_API_URL}/sheets.php?vtable=${getters['tableId']}&name=${getters['sheetSignature']}&str=${data.sheet.currentStr}&str_max=${data.sheet.maxStr}&dex=${data.sheet.currentDex}&dex_max=${data.sheet.maxDex}&wil=${data.sheet.currentWil}&wil_max=${data.sheet.maxWil}&hp=${data.sheet.currentHP}&hp_max=${data.sheet.maxHP}&level=${data.sheet.level}`, options)
+        state.tableState = { status: response.status, statusText: response.statusText }
       } catch(error) {
         commit('FAILURE', error)
       }

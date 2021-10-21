@@ -26,7 +26,7 @@
         </w-card>
 
         <w-card bg-color="white" class="card-sheet xs4">
-          <birthsign v-model="birthsign" ref="birthsign" @input="setBirthsign" class="pl1" />
+          <birthsign v-model="birthsign" ref="birthsign" @input="setBirthsign" class="pl1" show-label />
           <w-flex row align-center justify-center class="wrapper4">
             <div class="body pr1 pl2">{{ $t('Coat') }}</div>
             <w-flex column align-center justify-center class="wrapper">
@@ -34,7 +34,7 @@
               <coat-pattern ref="coat-pattern" v-model="coatPattern" @input="setCoatPattern" />
             </w-flex>
           </w-flex>
-          <look v-model="look" ref="look" @input="setLook" class="pl1"/>
+          <look v-model="look" ref="look" @input="setLook" class="pl1" show-label />
         </w-card>
       </w-flex>
 
@@ -603,27 +603,43 @@ export default {
     },
     setBirthsign (value) {
       this.birthsign = value
+      this.sendToTable()
     },
     setCoatColor (value) {
       this.coatColor = value
+      this.sendToTable()
     },
     setCoatPattern (value) {
       this.coatPattern = value
+      this.sendToTable()
     },
     setCurrentDex (value) {
       this.currentDex = value
+      this.sendToTable()
     },
     setCurrentHP (value) {
       this.currentHP = value
+      this.sendToTable()
     },
     setCurrentStr (value) {
       this.currentStr = value
+      this.sendToTable()
     },
     setCurrentWil (value) {
       this.currentWil = value
+      this.sendToTable()
     },
     setLook (value) {
       this.look = value
+      this.sendToTable()
+    },
+    async sendToTable () {
+      if (!this.$store.getters['tableId']) return
+      try {
+        await this.$store.dispatch('sendSheet', this.serialize())
+      } catch (error) {
+        console.error(error)
+      }
     }
   },
   mounted () {

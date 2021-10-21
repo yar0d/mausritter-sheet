@@ -1,7 +1,7 @@
 <template>
   <drawer v-model="showDrawer" @close="showDrawer = false" absolute top class="drawer-top" />
-  <w-flex row justify-space-between align-center class="px1">
-    <div class="ml2">
+  <w-flex row align-center>
+    <div class="mx4">
       <w-tooltip transition="fade" bg-color="yellow-light2" color="black" right>
         <template #activator="{ on }">
           <w-icon v-on="on" xl class="clickable" @click="showDrawer = !showDrawer" :bg-color="showDrawer ? 'blue' : ''" :color="showDrawer ? 'white' : 'blue'">mdi mdi-dots-grid</w-icon>
@@ -27,14 +27,20 @@
       </w-list>
     </w-menu>
 
-    <div v-for="dice in DICE_FACES" :key="dice">
+    <div v-for="dice in DICE_FACES" :key="dice" class="mx4">
       <dice :faces="dice" :advantage="diceAdvantage" size="xl" color="dice" />
     </div>
 
     <div v-if="currentSheet">
       <w-flex row align-center class="text-center">
         <w-divider vertical class="pr2" />
-        <w-input v-model="currentTable" :placeholder="$t('Table')" />
+        <span class="pr2">{{ $t('Table') }}</span>
+        <w-input v-model="currentTable" outline class="my1 w-250" />
+        <w-tooltip v-if="$store.getters['tableState']" transition="fade" :bg-color="tableStateColor" color="white" bottom>
+          <template #activator="{ on }">
+            <w-icon v-on="on" :color="tableStateColor">{{ tableStateIcon }}</w-icon>
+          </template>{{ tableStateText }}
+        </w-tooltip>
       </w-flex>
     </div>
   </w-flex>
@@ -81,6 +87,19 @@ export default {
         if (type.value === this.diceAdvantage) found = this.diceAdvantages[i].label
       })
       return this.$t(found) || '?'
+    },
+    tableStateColor () {
+      const status = this.$store.getters['tableState'].status
+      if (status > 0 && status < 400) return 'green'
+      return 'red'
+    },
+    tableStateIcon () {
+      const status = this.$store.getters['tableState'].status
+      if (status > 0 && status < 400) return 'mdi mdi-check'
+      return 'mdi mdi-alert-circle'
+    },
+    tableStateText () {
+      return this.$store.getters['tableState'] // ?.statusText
     }
   },
   methods: {
