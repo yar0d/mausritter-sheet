@@ -36,12 +36,15 @@
         <w-divider vertical class="pr2" />
         <span class="pr2">{{ $t('Table') }}</span>
         <w-input v-model="currentTable" outline class="my1 w-250" />
-        <w-tooltip v-if="$store.getters['tableState']" transition="fade" :bg-color="tableStateColor" color="white" bottom>
+        <w-tooltip v-if="$store.getters['tableState']" transition="fade" :bg-color="tableStateColor" detach-to="#sheet-container" color="white" bottom>
           <template #activator="{ on }">
             <w-icon v-on="on" :color="tableStateColor">{{ tableStateIcon }}</w-icon>
           </template>{{ tableStateText }}
         </w-tooltip>
       </w-flex>
+    </div>
+    <div v-else>
+      {{ $t('Please create or load your mouse.') }}
     </div>
   </w-flex>
 </template>
@@ -99,7 +102,8 @@ export default {
       return 'mdi mdi-alert-circle'
     },
     tableStateText () {
-      return this.$store.getters['tableState'] // ?.statusText
+      const status = this.$store.getters['tableState'] // ?.statusText
+      return `${status.status} ${status.statusText}`
     }
   },
   methods: {
