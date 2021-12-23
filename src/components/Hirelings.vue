@@ -82,13 +82,13 @@ export default {
     },
     refresh () {
       for (let index = 0; index < this.hirelings.length; index++) {
-        this.$refs['hireling-' + index].setData(this.hirelings[index])
+        if (this.$refs['hireling-' + index][0]) this.$refs['hireling-' + index][0].setData(this.hirelings[index])
       }
     },
     serialize () {
       let result = [] // We will return an array of hirelings
       for (let index = 0; index < this.hirelings.length; index++) {
-        if (this.$refs['hireling-' + index]) result.push(this.$refs['hireling-' + index].serialize())
+        if (this.$refs['hireling-' + index][0]) result.push(this.$refs['hireling-' + index][0].serialize())
       }
       return result
     }
