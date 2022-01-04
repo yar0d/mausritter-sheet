@@ -76,7 +76,7 @@ export default {
       this.attributes = { ...attributes }
       this.xp = xp
       this.computeNextLevel()
-      this.title = this.$t('“{name}” will move from the {current} level to the {next} level.', { name, current: currentLevel, next: this.newLevel })
+      this.title = this.$t('{name} will move from the {current} level to the {next} level.', { name, current: currentLevel, next: this.newLevel })
       this.show = true
       return new Promise((resolve, reject) => {
         this.resolve = resolve

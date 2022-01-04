@@ -139,12 +139,12 @@ export default {
   computed: {
     stacks () { return [ this.body1, this.body2, this.mainPaw, this.offPaw, this.pack1, this.pack2, this.pack3, this.pack4, this.pack5, this.pack6 ] },
     isEncumbered () {
-      const result = this.encumberance(this.body1) + this.encumberance(this.body2) + this.encumberance(this.mainPaw) + this.encumberance(this.offPaw) + this.encumberance(this.pack1) + this.encumberance(this.pack2) + this.encumberance(this.pack3) + this.encumberance(this.pack4) + this.encumberance(this.pack5) + this.encumberance(this.pack6)
+      const result = this.encumbrance(this.body1) + this.encumbrance(this.body2) + this.encumbrance(this.mainPaw) + this.encumbrance(this.offPaw) + this.encumbrance(this.pack1) + this.encumbrance(this.pack2) + this.encumbrance(this.pack3) + this.encumbrance(this.pack4) + this.encumbrance(this.pack5) + this.encumbrance(this.pack6)
       return result > this.stacks.length
     }
   },
   methods: {
-    encumberance (list) {
+    encumbrance (list) {
       let result = 0
       list.forEach(item => {
         result += getItemEncumbrance(item)
@@ -160,9 +160,9 @@ export default {
       }
 
       // Rules to disallow to drop from drawer:
-      // - Forbiden to drop anything if a condition already exists in target
-      // - Forbiden to drop a condition if target already contains one
-      // - Forbiden to drop an item if target already contains one
+      // - Forbidden to drop anything if a condition already exists in target
+      // - Forbidden to drop a condition if target already contains one
+      // - Forbidden to drop an item if target already contains one
       if (!list || !list.length) return true // empty list, we can drop
       let i = 0
       let abort = false
@@ -219,9 +219,9 @@ export default {
       if (e.relatedContext.list && e.relatedContext.list.canDrop) return this.canDrop(e.draggedContext.element, e.relatedContext.list)
 
       // Rules for internal moves:
-      // Forbiden to drop anything if a condition already exists in target
-      // Forbiden to drop a condition if target already contains one
-      // Forbiden to drop an item if target is not empty
+      // Forbidden to drop anything if a condition already exists in target
+      // Forbidden to drop a condition if target already contains one
+      // Forbidden to drop an item if target is not empty
       if (!e.relatedContext.list || !e.relatedContext.list.length) return true // empty list, we can drop
       if (e.draggedContext.element.type === TYPE_ITEM) return false // item can drop on empty location only
 

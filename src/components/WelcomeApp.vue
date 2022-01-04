@@ -209,7 +209,7 @@ export default {
       }
     },
     deleteSheet (key) {
-      this.$refs['confirm-dialog'].open(this.$t('Delete'), this.$t('The sheet of “{name}” will be erased. Do you confirm?', { name: key } ))
+      this.$refs['confirm-dialog'].open(this.$t('Delete'), this.$t('The sheet of {name} will be erased. Do you confirm?', { name: key } ))
         .then(async confirmed => {
           if (confirmed) {
             try {
@@ -228,7 +228,7 @@ export default {
       try {
         const data = await fs.readTextFile(this.slots[this.currentKey].path)
         await copyToClipboard(data)
-        this.$refs['prompt-dialog'].open(this.$t('Export'), this.$t('“{name}” is now copied to clipboard.', { name: this.dataSignature(decodeJson(data)) }), { data })
+        this.$refs['prompt-dialog'].open(this.$t('Export'), this.$t('{name} is now copied to clipboard.', { name: this.dataSignature(decodeJson(data)) }), { data })
       } catch (error) {
         console.error(error)
         this.$store.commit('historyAdd', { message: error, secondary: this.slots[this.currentKey].path, color: 'red' })
@@ -277,7 +277,7 @@ export default {
         return
       }
 
-      this.$refs['confirm-dialog'].open(this.$t('Load'), this.$t('Do you want to save the sheet of “{name}”?', { name: this.currentKey } ))
+      this.$refs['confirm-dialog'].open(this.$t('Load'), this.$t('Do you want to save the sheet of {name}?', { name: this.currentKey } ))
         .then(confirmed => {
           if (confirmed) {
             const data = this.serialize()

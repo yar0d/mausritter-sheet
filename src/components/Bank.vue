@@ -57,10 +57,10 @@ export default {
     retrieveItem(index, item) {
       const fee = Math.max(Math.round((item.price || 0) / 100), 1)
       if (this.pips < fee) {
-        this.$refs['prompt-retrieval'].open(this.$t('Bank'), this.$t('You do need to have {fee} pips to retrieve “{name}”!', { fee, name: this.$t(item.label) } ))
+        this.$refs['prompt-retrieval'].open(this.$t('Bank'), this.$t('You do need to have {fee} pips to retrieve {name}!', { fee, name: this.$t(item.label) } ))
         return
       }
-      this.$refs['confirm-retrieval'].open(this.$t('Bank'), this.$t('Retrieving “{name}” from your bank will cost you {fee} pips. Confirm?', { name: this.$t(item.label), fee } ))
+      this.$refs['confirm-retrieval'].open(this.$t('Bank'), this.$t('Retrieving {name} from your bank will cost you {fee} pips. Confirm?', { name: this.$t(item.label), fee } ))
       .then(confirmed => {
         if (confirmed) {
           this.pips -= fee
@@ -89,7 +89,7 @@ export default {
       if (e.relatedContext.list.view === 'inventory') {
         const fee = Math.max(Math.round((e.draggedContext.element.price || 0) / 100), 1)
         if (this.pips < fee) {
-          this.$refs['prompt-retrieval'].open(this.$t('Bank'), this.$t('You do need to have {fee} pips to retrieve “{name}”!', { fee, name: this.$t(e.draggedContext.element.label) } ))
+          this.$refs['prompt-retrieval'].open(this.$t('Bank'), this.$t('You do need to have {fee} pips to retrieve {name}!', { fee, name: this.$t(e.draggedContext.element.label) } ))
           return false
         } else {
           this.pips -= fee

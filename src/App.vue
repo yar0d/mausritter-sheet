@@ -125,14 +125,14 @@ export default {
     try {
       const tauri = await app.getTauriVersion()
       this.$store.commit('setStandaloneApp', true)
-      this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausrittes Sheet!'), secondary: '(tauri ' + tauri + ')' })
+      this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausritter Sheet!'), secondary: '(tauri ' + tauri + ')' })
     } catch (error) {
       this.$store.commit('setStandaloneApp', false)
     }
 
     if (!this.isStandaloneApp) {
       // Web application
-      this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausrittes Sheet!') })
+      this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausritter Sheet!') })
     }
 
     // Prevent losing sheet if user clos the browser's tab
@@ -142,7 +142,7 @@ export default {
         isDirty = this.$refs['welcome-app'].isDirty()
       } else {
         // Web application
-        this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausrittes Sheet!') })
+        this.$store.commit('historyAdd', { message: this.$t('Welcome to Mausritter Sheet!') })
         isDirty = this.$refs['welcome'].isDirty()
       }
 
