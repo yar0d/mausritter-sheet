@@ -10,7 +10,7 @@
         </template>
 
         <div class="text-center">
-          <w-list v-model="hirelingId" :items="hireables" item-value-key="id" @item-select="showMenu = false">
+          <w-list v-model="hirelingId" :items="hireable" item-value-key="id" @item-select="showMenu = false">
             <template #item="{ item }">
               <w-flex align-center justify-space-between @click="recruitHireling(item)">
                 {{ $t(item.label) }}
@@ -55,7 +55,7 @@ export default {
   },
   computed: {
     hirelings () { return this.$store.getters['hirelings'] },
-    hireables () {
+    hireable () {
       let result = []
       for (let i=0; i < hirelingsList.length; i++) if (hirelingsList[i].wages > 0) result.push(hirelingsList[i])
       return result },
@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     deleteHireling (id, hireling) {
-      this.$refs['confirm-dialog'].open(this.$t('Delete'), this.$t('The hireling of “{desc} {name}” will be dismissed. Do you confirm?', { desc: this.$t(hireling.desc), name: hireling.name} ))
+      this.$refs['confirm-dialog'].open(this.$t('Delete'), this.$t('The hireling of {desc} {name} will be dismissed. Do you confirm?', { desc: this.$t(hireling.desc), name: hireling.name} ))
         .then(confirmed => {
           if (confirmed) {
             this.$store.commit('hirelingDismiss', id)

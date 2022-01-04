@@ -28,7 +28,7 @@
           <div v-if="backgroundItems" class="w-max">
             <w-flex row justify-space-between>
               <div>
-                <w-divider color="white" class="title3 mt4">{{ $t('Item from inherited your background of “{background}”', { background }) }}</w-divider>
+                <w-divider color="white" class="title3 mt4">{{ $t('Item from inherited your background of «{background}»', { background }) }}</w-divider>
                 <div class="mt2">
                   <items v-for="(item, index) in backgroundItems" :key="index" :item="item" readonly hide-desc show-damage not-draggable class="mx4" size="lg" />
                 </div>
@@ -47,7 +47,7 @@
         <w-flex row align-start justify-space-between class="mt4 back-ground-white-25 pa2">
           <div v-if="weaponsItems">
             <w-divider color="white" class="title3 mt4">{{ $t('You may choose a weapon below:') }}</w-divider>
-            <w-radios v-model="choosenWeapon" :items="weaponsItems" inline class="mt2" >
+            <w-radios v-model="chosenWeapon" :items="weaponsItems" inline class="mt2" >
               <template #item="{ item }">
                 <items :item="item.item" readonly not-draggable show-damage class="mr4 mb4" size="lg" />
               </template>
@@ -56,7 +56,7 @@
 
           <div v-if="chooseItems.length" class="ml4">
             <w-divider color="white" class="title3">{{ $t('You can take one item below:') }}</w-divider>
-            <w-radios v-model="choosenItem" :items="chooseItems" inline class="mt2">
+            <w-radios v-model="chosenItem" :items="chooseItems" inline class="mt2">
               <template #item="{ item }">
                 <items :item="item.item" readonly hide-desc not-draggable show-damage class="mr4 mb4" size="lg" />
               </template>
@@ -99,8 +99,8 @@ export default {
       SWAP_STR_DEX,
       SWAP_STR_WIL,
       SWAP_DEX_WIL,
-      choosenItem: 0,
-      choosenWeapon: 0,
+      chosenItem: 0,
+      chosenWeapon: 0,
       reject: null,
       resolve: null,
       show: false,
@@ -122,14 +122,14 @@ export default {
     agree () {
       this.resolve({
         swapAttributes: this.swapAttributes,
-        choosenItem: this.chooseItems.length > 0 ? this.chooseItems[this.choosenItem].item : null,
-        choosenWeapon: this.weaponsItems[this.choosenWeapon].item
+        chosenItem: this.chooseItems.length > 0 ? this.chooseItems[this.chosenItem].item : null,
+        chosenWeapon: this.weaponsItems[this.chosenWeapon].item
       })
       this.show = false
     },
     open (name) {
       this.reset()
-      this.title = this.$t('“{name}” prepares for adventure...', { name })
+      this.title = this.$t('{name} prepares for adventure...', { name })
       this.show = true
       return new Promise((resolve, reject) => {
         this.resolve = resolve
@@ -137,8 +137,8 @@ export default {
       })
     },
     reset () {
-      this.choosenItem = 0
-      this.choosenWeapon = 0
+      this.chosenItem = 0
+      this.chosenWeapon = 0
       this.swapAttributes = SWAP_NONE
     }
   }

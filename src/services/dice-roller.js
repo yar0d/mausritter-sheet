@@ -156,7 +156,7 @@ export function d100 (callback) {
 /**
  * This method return one random item from the given array.
  * @param {Array} table The table to get one item from.
- * @returns {Mixed}  The item randomly choosen.
+ * @returns {Mixed}  The item randomly chosen.
  */
 export function rollFromTable (table) {
   const roll = Math.trunc(Math.random() * table.length)
