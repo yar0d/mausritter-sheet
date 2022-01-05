@@ -196,9 +196,10 @@ export default {
       if (this.mausritter.sheetToolbar) this.mausritter.sheetToolbar.displayDrawer(false)
       if (this.mausritter.sheet) this.mausritter.sheet.createRandomSheet()
       this.$store.commit('setCurrentSlot', null)
+      this.$store.commit('currentSheet', { json: this.serialize(), raw: this.serialize(true) })
     },
     deleteSheet (index) {
-      this.$refs['confirm-dialog'].open(this.$t('Delete'), this.$t('The sheet of “{name}” will be erased. Do you confirm?', { name: this.slotName(index) } ))
+      this.$refs['confirm-dialog'].open(this.$t('Delete'), this.$t('The sheet of {name} will be erased. Do you confirm?', { name: this.slotName(index) } ))
         .then(confirmed => {
           if (confirmed) {
             deleteSlot(index)
@@ -240,7 +241,7 @@ export default {
         return
       }
 
-      this.$refs['confirm-dialog'].open(this.$t('Load'), this.$t('Do you want to save the sheet of “{name}”?', { name: this.slots[this.currentSlotIndex] } ))
+      this.$refs['confirm-dialog'].open(this.$t('Load'), this.$t('Do you want to save the sheet of {name}?', { name: this.slots[this.currentSlotIndex] } ))
         .then(confirmed => {
           if (confirmed) {
             const data = this.serialize()
@@ -275,7 +276,7 @@ export default {
         return
       }
 
-      this.$refs['confirm-dialog'].open(this.$t('Save'), this.$t('The sheet of “{dest}” will be overwritten by “{name}”. Do you confirm?', { dest: this.slots[index], name: this.dataSignature(data) } ))
+      this.$refs['confirm-dialog'].open(this.$t('Save'), this.$t('The sheet of {dest} will be overwritten by {name}. Do you confirm?', { dest: this.slots[index], name: this.dataSignature(data) } ))
         .then(confirmed => {
           if (confirmed) {
             this.save(index, data)
