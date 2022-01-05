@@ -2,6 +2,7 @@
   "name": "mausritter-sheet",
   "version": "1.10.1",
   "private": true,
+  "license": "Mausritter Third Party Licence",
   "scripts": {
     "serve": "vue-cli-service serve --port 8801",
     "serve:docker": "docker run -it -p 8765:8765 mausritter-sheet",
@@ -60,5 +61,10 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "resolutions": {
+    "ansi-regex": "^5.0.1",
+    "glob-parent": ">=5.2.0",
+    "nth-check": "^2.0.1"
+  }
 }
