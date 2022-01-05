@@ -156,7 +156,7 @@ export function d100 (callback) {
 /**
  * This method return one random item from the given array.
  * @param {Array} table The table to get one item from.
- * @returns {Mixed}  The item randomly choosen.
+ * @returns {Mixed}  The item randomly chosen.
  */
 export function rollFromTable (table) {
   const roll = Math.trunc(Math.random() * table.length)
@@ -166,7 +166,7 @@ export function rollFromTable (table) {
 /**
  * Return the highest results for multiples dice rolls.
  * @param {Number} number The number of dices to roll.
- * @param {Number} faces The number of caes for the dices.
+ * @param {Number} faces The number of faces for the dices.
  * @param {Number} keep The number of highest result to keep.
  * @returns {Object} The total and the array of dices.
  */
@@ -180,7 +180,7 @@ export function rollExplode (number = 2, faces = 6, keep = 1, callbackFn) {
 /**
  * Return the lowest results for multiples dice rolls.
  * @param {Number} number The number of dices to roll.
- * @param {Number} faces The number of caes for the dices.
+ * @param {Number} faces The number of faces for the dices.
  * @param {Number} keep The number of lowest result to keep.
  * @returns {Object} The total and the array of dices.
  */

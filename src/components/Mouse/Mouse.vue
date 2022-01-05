@@ -231,8 +231,8 @@ export default {
       backgroundHirelings: [],
       backgroundItems: [],
       chooseItems: [],
-      choosenItem: null,
-      choosenWeapon: 0,
+      chosenItem: null,
+      chosenWeapon: 0,
       coatColor: 0,
       coatPattern: 0,
       currentDex: 0,
@@ -370,7 +370,7 @@ export default {
     canLevelUp () { return canLevelUp(this.xp, this.level) },
     createRandomSheet (callbackFn) {
       if (this.isNew) this.rollRandomMouse(callbackFn)
-      else this.$refs['confirm-dialog'].open(this.$t('Create a new character...'), this.$t('The sheet of “{name}” will be erased. Do you confirm?', { name: this.name } ))
+      else this.$refs['confirm-dialog'].open(this.$t('Create a new character...'), this.$t('The sheet of {name} will be erased. Do you confirm?', { name: this.name } ))
         .then(confirmed => {
           if (confirmed) this.rollRandomMouse(callbackFn)
         })
@@ -381,8 +381,8 @@ export default {
       this.bankedPips = data.bankedPips || 0
       this.birthsign = data.birthsign || 0
       this.chooseItems = []
-      this.choosenItem = -1
-      this.choosenWeapon = 0
+      this.chosenItem = -1
+      this.chosenWeapon = 0
       this.coatColor = data.coatColor || 0
       this.coatPattern = data.coatPattern || 0
       this.currentDex = data.currentDex || 0
@@ -471,9 +471,9 @@ export default {
     },
     rollRandomMouse (callbackFn) {
       this.reset()
-      this.maxStr = rollExplode(3, 6, 2, (context, result, total) => this.$store.commit('historyAdd', { type: this.$t('STR') + '/' + context, message: result + ' -> ' + total} )).total // Keep two highest D6 from the rollingof 3d6.
-      this.maxDex = rollExplode(3, 6, 2, (context, result, total) => this.$store.commit('historyAdd', { type: this.$t('DEX') + '/' + context, message: result + ' -> ' + total} )).total // Keep two highest D6 from the rollingof 3d6.
-      this.maxWil = rollExplode(3, 6, 2, (context, result, total) => this.$store.commit('historyAdd', { type: this.$t('WIL') + '/' + context, message: result + ' -> ' + total} )).total // Keep two highest D6 from the rollingof 3d6.
+      this.maxStr = rollExplode(3, 6, 2, (context, result, total) => this.$store.commit('historyAdd', { type: this.$t('STR') + '/' + context, message: result + ' -> ' + total} )).total // Keep two highest D6 from the rolling of 3d6.
+      this.maxDex = rollExplode(3, 6, 2, (context, result, total) => this.$store.commit('historyAdd', { type: this.$t('DEX') + '/' + context, message: result + ' -> ' + total} )).total // Keep two highest D6 from the rolling of 3d6.
+      this.maxWil = rollExplode(3, 6, 2, (context, result, total) => this.$store.commit('historyAdd', { type: this.$t('WIL') + '/' + context, message: result + ' -> ' + total} )).total // Keep two highest D6 from the rolling of 3d6.
       this.currentStr = this.maxStr
       this.currentDex = this.maxDex
       this.currentWil = this.maxWil
@@ -520,7 +520,7 @@ export default {
       }
 
       /*
-      * Rule: If your mouse’s highest attribute is 9 or less,
+      * Rule: If your mouse's highest attribute is 9 or less,
       * roll on the Background table again and take either Item A or B.
       * If your highest is 7 or less, take both.
       */
@@ -536,7 +536,7 @@ export default {
           for (let i = 0; i < b1.items.length; i++) {
             this.chooseItems.push({ id: i, item: getItem(b1.items[i].id, { customLabel: this.$t(b1.items[i].customLabel || ''), desc: b1.items[i].desc }) })
           }
-          this.choosenItem = 0
+          this.chosenItem = 0
         }
       }
 
@@ -557,11 +557,11 @@ export default {
           this.currentDex = this.maxDex
           this.currentWil = this.maxWil
 
-          if (options.choosenWeapon) this.$refs['inventory'].putItem(options.choosenWeapon.id, 'body1', options.choosenWeapon)
+          if (options.chosenWeapon) this.$refs['inventory'].putItem(options.chosenWeapon.id, 'body1', options.chosenWeapon)
 
-          if (options.choosenItem) {
-            let location = options.choosenItem.geometry === '1x2' ? 'mainPaw' : 'offPaw'
-            this.$refs['inventory'].putItem(options.choosenItem.id, location, options.choosenItem)
+          if (options.chosenItem) {
+            let location = options.chosenItem.geometry === '1x2' ? 'mainPaw' : 'offPaw'
+            this.$refs['inventory'].putItem(options.chosenItem.id, location, options.chosenItem)
           }
 
           if (callbackFn) callbackFn()

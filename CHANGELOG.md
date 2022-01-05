@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.10.6](https://github.com/yar0d/mausritter-sheet/compare/v1.10.5...v1.10.6) (2022-01-05)
+
+### [1.10.5](https://github.com/yar0d/mausritter-sheet/compare/v1.10.4...v1.10.5) (2022-01-05)
+
+### [1.10.4](https://github.com/yar0d/mausritter-sheet/compare/v1.10.3...v1.10.4) (2022-01-05)
+
+### [1.10.3](https://github.com/yar0d/mausritter-sheet/compare/v1.10.1...v1.10.3) (2022-01-05)
+
+
+### Bug Fixes
+
+* disadvantage roll ([7b99a4c](https://github.com/yar0d/mausritter-sheet/commit/7b99a4c0486c14244fedc5d9399622aee0f0ce01))
+* grit width ([7303ed8](https://github.com/yar0d/mausritter-sheet/commit/7303ed8c9b218d85e1f551cee7831477f9a6a733))
+* **grit:** serialize without sanitizing ([d696a5f](https://github.com/yar0d/mausritter-sheet/commit/d696a5f0765d55e0f579df3458a67dea690a95ab))
+* **hireling:** remove duplicate fields ([82822eb](https://github.com/yar0d/mausritter-sheet/commit/82822eb3b164265c02c2c4e0e59452fe33a1d107))
+
+### [1.10.2](https://github.com/yar0d/mausritter-sheet/compare/v1.10.1...v1.10.2) (2022-01-05)
+
+
+### Bug Fixes
+
+* disadvantage roll ([7b99a4c](https://github.com/yar0d/mausritter-sheet/commit/7b99a4c0486c14244fedc5d9399622aee0f0ce01))
+* grit width ([7303ed8](https://github.com/yar0d/mausritter-sheet/commit/7303ed8c9b218d85e1f551cee7831477f9a6a733))
+* **grit:** serialize without sanitizing ([d696a5f](https://github.com/yar0d/mausritter-sheet/commit/d696a5f0765d55e0f579df3458a67dea690a95ab))
+* **hireling:** remove duplicate fields ([82822eb](https://github.com/yar0d/mausritter-sheet/commit/82822eb3b164265c02c2c4e0e59452fe33a1d107))
+
 ### [1.10.1](https://github.com/yar0d/mausritter-sheet/compare/v1.10.0...v1.10.1) (2021-05-17)
 
 

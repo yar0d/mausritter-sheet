@@ -1,4 +1,7 @@
 # mausritter-sheet
+![Version](https://img.shields.io/badge/version-1.10.2-blue.svg?cacheSeconds=2592000)
+[![License Mausritter Third Party Licence](https://img.shields.io/badge/License-Mausritter%20Third%20Party%20Licence-yellow.svg)](https://mausritter.com/third-party-licence/)
+
 **Mausritter Character Sheet** is a web application for **Mausritter** mice character sheet. You can use it, freely, from https://mausritter-sheet.dco.ninja.
 
 > Mausritter is about small-scale adventurers in a huge world. Mouse adventurers who take on big challenges and face down grave danger.
