@@ -12,28 +12,28 @@
 
           <w-flex column class="h-max" :class="isMobileDevice ? 'fixed-tabs' : ''">
             <w-toolbar no-border class="toolbar-pager px0">
-              <w-button lg :class="isMobileDevice ? 'px2' : 'px8'" :text="!show.welcome" @click="showPanel('welcome')">
+              <w-button lg :class="isMobileDevice ? 'px2' : 'px6'" :text="!show.welcome" @click="showPanel('welcome')">
                 <w-icon xl>
                   mdi mdi-rodent
                 </w-icon>
                 <span class="ml1 text-small">{{ $t('Welcome') }}</span>
               </w-button>
 
-              <w-button lg :class="isMobileDevice ? 'px2' : 'px8'" :text="!show.history" @click="showPanel('history')">
+              <w-button lg :class="isMobileDevice ? 'px2' : 'px6'" :text="!show.history" @click="showPanel('history')">
                 <w-icon xl>
                   mdi mdi-history
                 </w-icon>
                 <span class="ml1 text-small">{{ $t('History') }}</span>
               </w-button>
 
-              <w-button lg :class="isMobileDevice ? 'px2' : 'px8'" :text="!show.bank" @click="showPanel('bank')">
+              <w-button lg :class="isMobileDevice ? 'px2' : 'px6'" :text="!show.bank" @click="showPanel('bank')">
                 <w-icon xl>
                   mdi mdi-bank
                 </w-icon>
                 <span class="ml1 text-small">{{ $t('Bank') }}</span>
               </w-button>
 
-              <w-button lg :class="isMobileDevice ? 'px2' : 'px8'" :text="!show.hirelings" @click="showPanel('hirelings')">
+              <w-button lg :class="isMobileDevice ? 'px2' : 'px6'" :text="!show.hirelings" @click="showPanel('hirelings')">
                 <w-icon xl>
                   mdi mdi-donkey
                 </w-icon>

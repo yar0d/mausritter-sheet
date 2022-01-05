@@ -164,5 +164,9 @@
   "A small custom item.": "Un petit objet",
   "A tall custom item.": "Un grand objet ",
   "A wide custom item.": "Un objet large",
-  "If you leave before saving, your changes will be lost.": "Si vous quittez avant de sauvegarder, vos modifications seront perdues."
+  "If you leave before saving, your changes will be lost.": "Si vous quittez avant de sauvegarder, vos modifications seront perdues.",
+  "Table": "Table",
+  "None": "Aucun(e)",
+  "Damages": "Dégâts",
+  "Please create or load your mouse.": "Créez ou chargez votre souris."
 }

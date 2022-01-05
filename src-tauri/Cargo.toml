@@ -1,23 +1,24 @@
 [package]
-name = "app"
-version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
-license = ""
-repository = ""
-default-run = "app"
+name = "mausritter_sheet"
+version = "1.11.0"
+description = "Mausritter Character Sheet"
+authors = [ "Daniel Coquette" ]
+license = "Mausritter Third Party Licence"
+repository = "https://github.com/yar0d/mausritter-sheet"
+default-run = "mausritter_sheet"
 edition = "2018"
 build = "src/build.rs"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [build-dependencies]
-tauri-build = { version = "1.0.0-beta-rc.0" }
+tauri-build = { version = "1.0.0-beta" }
 
 [dependencies]
 serde_json = "1.0"
-serde = { version = "1.0", features = ["derive"] }
-tauri = { version = "1.0.0-beta-rc.4", features =["api-all"]}
+serde = { version = "1.0", features = [ "derive" ] }
+
+[dependencies.tauri]
+version = "1.0.0-beta.8"
+features = ["api-all"]
 
 [features]
 default = [ "custom-protocol" ]

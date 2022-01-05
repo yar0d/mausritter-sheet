@@ -174,7 +174,8 @@ export default {
     advancement () {
       if (this.mausritter.sheet) this.mausritter.sheet.advancement()
     },
-    apply (data) {
+    async apply (data, serializedData) {
+      await this.$store.commit('setTableId', null) // Reset table ID
       if (this.mausritter.sheet) this.mausritter.sheet.setData(data)
       if (data.hirelings && this.mausritter.hirelings) {
         this.$store.dispatch('hirelingsSet', data.hirelings)
@@ -182,6 +183,7 @@ export default {
           this.mausritter.hirelings.refresh(data.hirelings)
         })
       }
+      this.$store.commit('currentSheet', { json: data, raw: serializedData })
     },
     canLevelUp () { return this.mausritter.sheet ? this.mausritter.sheet.canLevelUp() : false },
     changeLocale (newLocale) {
@@ -210,14 +212,14 @@ export default {
     },
     async exportSheet (index) {
       const data = loadSlot(index)
-      await copyToClipboard(encodeJson(data))
-      this.$refs['prompt-dialog'].open(this.$t('Export'), this.$t('{name} is now copied to clipboard.', { name: this.dataSignature(data) }), { data: encodeJson(data) })
+      await copyToClipboard(data.raw)
+      this.$refs['prompt-dialog'].open(this.$t('Export'), this.$t('{name} is now copied to clipboard.', { name: this.dataSignature(data.json) }), { data: data.raw })
     },
     async importSheet () {
       this.$refs['prompt-import-dialog'].open(this.$t('Import'), '')
         .then(() => {
           if (this.importData) {
-            this.apply(decodeJson(this.importData))
+            this.apply(decodeJson(this.importData), this.importData)
           }
         })
     },
@@ -227,7 +229,7 @@ export default {
     },
     async load (index) {
       const data = loadSlot(index)
-      this.apply(data)
+      this.apply(data.json, data.raw)
       this.$store.commit('setCurrentSlot', index)
       this.$store.commit('historyAdd', { type: this.$t('Load'), message: this.slots[index] })
       this.canLevelUp()

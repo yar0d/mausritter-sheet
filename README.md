@@ -4,7 +4,7 @@
 
 **Mausritter Character Sheet** is a web application for **Mausritter** mice character sheet. You can use it, freely, from https://mausritter-sheet.dco.ninja.
 
-> Mausritter is about small-scale adventurers in a huge world. Mouse adventurers who take on big challanges and face down grave danger.
+> Mausritter is about small-scale adventurers in a huge world. Mouse adventurers who take on big challenges and face down grave danger.
 
 Have a look at [Mausritter website](https://mausritter.com/) and [Licence](./LICENSE.md).
 
@@ -22,14 +22,17 @@ Have a look at [Mausritter website](https://mausritter.com/) and [Licence](./LIC
 - Import / Export of character sheet. Use this to load a character into another browser.
 - Mouse can rest and advance in level, up to level 20.
 
-![Version 1.3.9](/public/img/mausritter-sheet-fr-dices.jpg)
+![Mausritter Sheet](/mausritter-sheet-00.jpg)
 
-See [TODO.md](./src/TODO.md) for incomming features :-)
+See [TODO.md](./src/TODO.md) for incoming features :-)
 
 ![Exemple Sheet 0.1.1](./live.gif)
 
 ## Companions
 **FUTURE** Another great Mausritter application *will be* [Mausritter-Colony](https://github.com/yar0d/mausritter-colony) for GM to manage their game session.
+
+## Help wanted
+Some help will be welcome to translate to other languages. Currently we have English and French only.
 
 ## Installation (beta)
 
@@ -37,12 +40,18 @@ The desktop applications are in **beta** and should be used just for testing. Th
 
 To download, go to https://github.com/yar0d/mausritter-sheet/releases and search for the latest release named *Application release*.
 
-## For developpers
+## For developers
 This application is made with [Vue.js 3](https://v3.vuejs.org/) and [wave-ui](https://antoniandre.github.io/wave-ui/).
 
 For desktop application, I use [Tauri](https://tauri.studio/en/).
 
 Clone this repository and, install dependencies with `yarn`.
+
+### Update packages
+```
+yarn upgrade
+npx tauri deps update
+```
 
 ### Compiles and hot-reloads for development
 ```

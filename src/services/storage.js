@@ -58,9 +58,10 @@ export function store (key, value) {
 }
 
 export function loadJson (key) {
-  const data = uuencode.decode(get(key, ''))
+  const raw = get(key, '')
+  const data = uuencode.decode(raw)
   try {
-    return JSON.parse(data)
+    return { json: JSON.parse(data), raw }
   } catch (error) {
     console.error('[storage] loadJson error:', error)
   }

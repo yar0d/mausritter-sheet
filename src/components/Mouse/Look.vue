@@ -1,6 +1,7 @@
 <template>
   <w-flex row align-center justify-center class="w-max">
-    <w-select v-bind="$attrs" :label="$t('Look')" static-label :items="items" @input="updateValue">
+    <span v-if="showLabel" class="body pl1">{{ $t('Look') }}</span>
+    <w-select v-bind="$attrs" :label="showLabel ? '' : $t('Look')" static-label :items="items" @input="updateValue">
       <template #item="{ item }">
         {{ item.label }}
       </template>
@@ -18,6 +19,9 @@ import { looks } from '@/services/looks'
 export default {
   name: 'Look',
   emits: ['input', 'roll'],
+  props: {
+    showLabel: { type: Boolean, default: false }
+  },
   data () {
     return {
       currentValue: null,

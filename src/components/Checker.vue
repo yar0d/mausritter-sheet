@@ -70,7 +70,7 @@ export default {
 
           this.$emit('rolled', { roll: dices, context: this.context, total: roll, success: success, score: this.score })
 
-          this.$refs['dice-result'].open({ context: this.context, faces: this.faces, dices, score: this.score, total: roll, success, failed: !success })
+          this.$refs['dice-result'].open({ context: this.context, faces: this.faces, dices, score: this.score, total: roll, success, failed: !success, advantage })
         }
       })
     }
