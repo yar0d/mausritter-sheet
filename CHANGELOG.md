@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/yar0d/mausritter-sheet/compare/v1.10.6...v1.11.0) (2023-01-13)
+
+
+### Features
+
+* Add Español ([5ba804e](https://github.com/yar0d/mausritter-sheet/commit/5ba804eef051be26d5dcee288a6267d4759f8564))
+
 ### [1.10.6](https://github.com/yar0d/mausritter-sheet/compare/v1.10.5...v1.10.6) (2022-01-05)
 
 ### [1.10.5](https://github.com/yar0d/mausritter-sheet/compare/v1.10.4...v1.10.5) (2022-01-05)
