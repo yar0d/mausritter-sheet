@@ -1,8 +1,8 @@
 # TODO
 
 ## Strong demand
-- Application for GM session sheet
-- Add network to allow everyone with the same table identifier to see dice rolls and other mice name.
+- **[DONE]** Application for GM session sheet
+- **[DONE]** Add network to allow everyone with the same table identifier to see dice rolls and other mice name.
 
 ## Extensions
 ### Items

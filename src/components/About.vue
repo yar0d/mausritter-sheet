@@ -8,7 +8,12 @@
       {{ $t('This application is an independent production by Daniel Coquette and is not affiliated with Losing Games. It is published under the Mausritter Third Party Licence.') }}
     </div>
     <div class="mt4">{{ $t('Mausritter is copyright Losing Games.') }}</div>
-    <div class="mt4">{{ $t('This application is copyright Daniel Coquette.') }}</div>
+    <div class="mt4">{{ $t('This application is copyright Daniel Coquette.') }}
+      <div class="ml4 mt1"><w-icon sm color="grey">mdi mdi-translate</w-icon> {{ $t('en-US') }} <w-icon>mdi mdi-arrow-right</w-icon> Yar0d</div>
+      <div class="ml4"><w-icon sm color="grey">mdi mdi-translate</w-icon> {{ $t('es-ES') }} <w-icon>mdi mdi-arrow-right</w-icon> CoyoteBlur</div>
+      <div class="ml4"><w-icon sm color="grey">mdi mdi-translate</w-icon> {{ $t('fr-FR') }} <w-icon>mdi mdi-arrow-right</w-icon> Yar0d</div>
+    </div>
+
     <div class="mt4">{{ $t('3D dices from Anton Natarov') }} <a href="http://a.teall.info/mdice/">http://a.teall.info/mdice</a>.</div>
     <div class="mt4">{{ $t('Welcome, History and Hirelings background from') }} <a href="https://www.deviantart.com/irbeus">irbeus</a> {{ $t('under licence') }} <a href="https://creativecommons.org/licenses/by/3.0/">CC Attribution 3.0 License</a> and <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/">CC Attribution-Noncommercial-No Derivative Works 3.0 License</a>.</div>
     <!-- <div class="mt4">{{ $t('Additional rules from ') }} <a href="https://sites.google.com/view/talesfrommoonshore/">Tales from Moonshore</a>.</div> -->

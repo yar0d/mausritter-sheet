@@ -19,9 +19,10 @@
   },
   "dependencies": {
     "@mdi/font": "^5.9.55",
-    "@tauri-apps/api": "^1.0.0-beta.5",
+    "@tauri-apps/api": "1.1.x",
     "core-js": "^3.16.1",
     "hash.js": "^1.1.7",
+    "nth-check": "^2.0.1",
     "uuencode": "^0.0.4",
     "uuid": "^8.3.2",
     "vue": "^3.2.2",
@@ -32,7 +33,7 @@
   },
   "devDependencies": {
     "@intlify/vue-i18n-loader": "^2.1.2",
-    "@tauri-apps/cli": "^1.0.0-beta.6",
+    "@tauri-apps/cli": "1.1.x",
     "@vue/cli-plugin-babel": "^4.5.12",
     "@vue/cli-plugin-eslint": "^4.5.12",
     "@vue/cli-service": "^4.5.12",

@@ -11,7 +11,7 @@ Have a look at [Mausritter website](https://mausritter.com/) and [Licence](./LIC
 ## Features
 - Play your mouse
 - Create a random mouse (implement Mouse creation rules from Mausritter Rules book),
-- Translated in English and Français,
+- Translated in English, Español and Français,
 - Manage hirelings,
 - Roll dices with/without advantage or disadvantage,
 - Drag'n'drop items or conditions on inventory slots
@@ -29,16 +29,44 @@ See [TODO.md](./src/TODO.md) for incoming features :-)
 ![Exemple Sheet 0.1.1](./live.gif)
 
 ## Companions
-**FUTURE** Another great Mausritter application *will be* [Mausritter-Colony](https://github.com/yar0d/mausritter-colony) for GM to manage their game session.
+Another Mausritter application is [Mausritter-Colony](https://github.com/yar0d/mausritter-colony). It's a minimalist tool to help GM to manage their game table.
 
 ## Help wanted
-Some help will be welcome to translate to other languages. Currently we have English and French only.
+Some help will be welcome to translate to other languages. Currently we have:
+
+- English by myself
+- French by myself
+- Spanish by CoyoteBlur
 
 ## Installation (beta)
 
 The desktop applications are in **beta** and should be used just for testing. They still contain bugs! They are available for Microsoft Windows, Apple Mac OS and GNU Linux. At this time, there is no mobile (Android or iOS) version.
 
 To download, go to https://github.com/yar0d/mausritter-sheet/releases and search for the latest release named *Application release*.
+
+## For Translators
+The folder `/src/locales/` contains all messages files in a simple JSON format. To translate' you just have to copy a file by modifying its name with the language code you're targeting. By example, to translate to Spanish (Castilian), I copy `conditions.en-US.json` to `conditions.es-ES.json`, then `en-US.json` to `es-ES.json`, and so on.
+
+A [ISO Language Code Table](http://www.lingoes.net/en/translator/langcode.htm) exits to help you find the correct language code.
+
+Translations is easy. JSON files contains message formatted like that:
+```json
+  "original-message-in-english": "translation of the message in english"
+```
+
+You just have to translate the right part. Here is a short example, for French fr-FR:
+```json
+  "Languages": "Langues",
+  "Welcome to Mausritter Sheet!": "Bienvenue sur la fiche de personnage Mausritter !",
+```
+
+Note that the language name is translated into it's own language.
+
+### Exception for `mouse-names`
+You just create a new `mouse-names.??-??.json` as described above. Translations is simple, you can replace every string by yours.
+
+### How to put your translations in mausritter-sheet
+When all messages are translated, you can open an issue on the github with the label **i18n** and a title like *I've translated to <language>* ;-). You can also contact me on discord at `Yar0d#3470`.
 
 ## For developers
 This application is made with [Vue.js 3](https://v3.vuejs.org/) and [wave-ui](https://antoniandre.github.io/wave-ui/).

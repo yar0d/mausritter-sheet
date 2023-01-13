@@ -1,0 +1,18 @@
+{
+  "Exhausted": "Cansado",
+  "Frightened": "Asustado",
+  "Hungry": "Hambriento",
+  "Injured": "Herido",
+  "Mad": "Loco",
+  "CONDITION-CLEAR-SR": "Tras descanso corto",
+  "CONDITION-CLEAR-LR": "Tras descanso completo",
+  "CONDITION-CLEAR-FR": "After full rest",
+  "CONDITION-CLEAR-ME": "Tras una comida",
+  "Tras descanso corto": "Tras descanso corto",
+  "Tras descanso completo": "Tras descanso completo",
+  "After full rest": "After full rest",
+  "Tras una comida": "Tras una comida",
+  "WIL save to approach source of fear.": "Salvación de VOL para acercarse a la fuente del miedo.",
+  "Disadvantage on STR & DEX saves.": "Desventaja en salvaciones de FUE y DES.",
+  "Disadvantage on WIL saves.": "Desventaja en salvaciones de VOL."
+}
