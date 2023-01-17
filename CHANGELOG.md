@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.2](https://github.com/yar0d/mausritter-sheet/compare/v1.12.1...v1.12.2) (2023-01-17)
+
+
+### Bug Fixes
+
+* look selector translation live update ([5703b5b](https://github.com/yar0d/mausritter-sheet/commit/5703b5b2f6cba75b7acf8588b3f27eba330a938c))
+
 ### [1.12.1](https://github.com/yar0d/mausritter-sheet/compare/v1.12.0...v1.12.1) (2023-01-17)
 
 
