@@ -23,15 +23,21 @@ import conditions_es_ES from '@/locales/conditions.es-ES.json'
 import spells_es_ES from '@/locales/spells.es-ES.json'
 import hirelings_es_ES from '@/locales/hirelings.es-ES.json'
 
+import de_DE from '@/locales/de-DE.json'
+import mouse_de_DE from '@/locales/mouse.de-DE.json'
+import items_de_DE from '@/locales/items.de-DE.json'
+import conditions_de_DE from '@/locales/conditions.de-DE.json'
+import spells_de_DE from '@/locales/spells.de-DE.json'
+import hirelings_de_DE from '@/locales/hirelings.de-DE.json'
+
 export const DEFAULT_LOCALE_ENGLISH = 'en-US'
 export const DEFAULT_LOCALE_FRENCH = 'fr-FR'
+export const DEFAULT_LOCALE_GERMAN = 'de-DE'
 export const DEFAULT_LOCALE_SPANISH = 'es-ES'
 export const DEFAULT_LOCALE = DEFAULT_LOCALE_ENGLISH
-export const LOCALES = [DEFAULT_LOCALE_ENGLISH, DEFAULT_LOCALE_FRENCH, DEFAULT_LOCALE_SPANISH].sort()
+export const LOCALES = [DEFAULT_LOCALE_ENGLISH, DEFAULT_LOCALE_FRENCH, DEFAULT_LOCALE_GERMAN, DEFAULT_LOCALE_SPANISH].sort()
 
 const KEY_LOCALE = 'locale'
-
-console.log('[locales] Available languages:', Object.keys(languages).join(', '))
 
 export const datetimeFormats = {
   [DEFAULT_LOCALE_ENGLISH]: {
@@ -44,6 +50,15 @@ export const datetimeFormats = {
     }
   },
   [DEFAULT_LOCALE_FRENCH]: {
+    short: {
+      year: 'numeric', month: 'short', day: 'numeric'
+    },
+    long: {
+      year: 'numeric', month: 'short', day: 'numeric',
+      weekday: 'short', hour: 'numeric', minute: 'numeric'
+    }
+  },
+  [DEFAULT_LOCALE_GERMAN]: {
     short: {
       year: 'numeric', month: 'short', day: 'numeric'
     },
@@ -79,8 +94,9 @@ export function saveLocale (locale) {
 
 export const MESSAGES = {
   'en-US': { ...languages, ...en_US, ...mouse_en_US, ...items_en_US, ...conditions_en_US, ...hirelings_en_US, ...spells_en_US },
+  'es-ES': { ...languages, ...es_ES, ...mouse_es_ES, ...items_es_ES, ...conditions_es_ES, ...hirelings_es_ES, ...spells_es_ES },
   'fr-FR': { ...languages, ...fr_FR, ...mouse_fr_FR, ...items_fr_FR, ...conditions_fr_FR, ...hirelings_fr_FR, ...spells_fr_FR },
-  'es-ES': { ...languages, ...es_ES, ...mouse_es_ES, ...items_es_ES, ...conditions_es_ES, ...hirelings_es_ES, ...spells_es_ES }
+  'de-DE': { ...languages, ...de_DE, ...mouse_de_DE, ...items_de_DE, ...conditions_de_DE, ...hirelings_de_DE, ...spells_de_DE }
 }
 
 export default {
