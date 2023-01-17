@@ -11,7 +11,7 @@ Have a look at [Mausritter website](https://mausritter.com/) and [Licence](./LIC
 ## Features
 - Play your mouse
 - Create a random mouse (implement Mouse creation rules from Mausritter Rules book),
-- Translated in English, Español and Français,
+- Translated in English, Español, Deutsch and Français,
 - Manage hirelings,
 - Roll dices with/without advantage or disadvantage,
 - Drag'n'drop items or conditions on inventory slots
