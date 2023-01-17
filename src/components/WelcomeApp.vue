@@ -237,7 +237,7 @@ export default {
       }
     },
     async importSheet () {
-      this.$refs['prompt-import-dialog'].open(this.$t('Import'), '')
+      this.$refs['prompt-import-dialog'].open(this.$t('Import...'), '')
         .then(() => {
           if (this.importData) {
             this.apply(decodeJson(this.importData), this.importData)

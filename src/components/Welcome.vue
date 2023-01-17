@@ -216,7 +216,7 @@ export default {
       this.$refs['prompt-dialog'].open(this.$t('Export'), this.$t('{name} is now copied to clipboard.', { name: this.dataSignature(data.json) }), { data: data.raw })
     },
     async importSheet () {
-      this.$refs['prompt-import-dialog'].open(this.$t('Import'), '')
+      this.$refs['prompt-import-dialog'].open(this.$t('Import...'), '')
         .then(() => {
           if (this.importData) {
             this.apply(decodeJson(this.importData), this.importData)

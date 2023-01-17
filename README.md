@@ -37,6 +37,7 @@ Some help will be welcome to translate to other languages. Currently we have:
 - English by myself
 - French by myself
 - Spanish by CoyoteBlur
+- German by Keter150
 
 ## Installation (beta)
 
@@ -121,7 +122,7 @@ yarn serve:docker
 ### FTP deploy
 1. Publish a release with `yarn release:publish`
 2. Build with `yarn build`. We now have a **dist** folder.
-3. Send all content on the **dist** folder to you FTP server.
+3. Send all content on the **dist** folder to your FTP server.
 
 ### Create a release
 A release will contains all binaries for MacOS, Windows and Linux.

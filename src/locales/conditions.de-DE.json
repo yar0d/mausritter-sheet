@@ -1,0 +1,18 @@
+{
+  "Exhausted": "Erschöpft",
+  "Frightened": "Ängstlich",
+  "Hungry": "Hungrig",
+  "Injured": "Verletzt",
+  "Mad": "Entkräftet",
+  "CONDITION-CLEAR-SR": "Nach kurzer Rast",
+  "CONDITION-CLEAR-LR": "Nach langer Rast",
+  "CONDITION-CLEAR-FR": "Nach kompletter Rast",
+  "CONDITION-CLEAR-ME": "Nach Mahlzeit",
+  "After short rest": "Nach kurzer Rast",
+  "After long rest": "Nach langer Rast",
+  "After full rest": "Nach kompletter Rast",
+  "After meal": "Nach Mahlzeit",
+  "WIL save to approach source of fear.": "WIL-Probe zum Nähern der Angstquelle",
+  "Disadvantage on STR & DEX saves.": "Nachteil bei STÄ- & GES-Proben",
+  "Disadvantage on WIL saves.": "Nachteil bei WIL-Proben"
+}
