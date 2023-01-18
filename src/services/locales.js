@@ -80,8 +80,12 @@ export const datetimeFormats = {
 
 export function loadLocale () {
   let defaultLocale = DEFAULT_LOCALE
+
+  // Detect the language of the browser
   if (/^en\b/.test(navigator.language)) defaultLocale = DEFAULT_LOCALE_ENGLISH
   else if (/^fr\b/.test(navigator.language)) defaultLocale = DEFAULT_LOCALE_FRENCH
+  else if (/^de\b/.test(navigator.language)) defaultLocale = DEFAULT_LOCALE_GERMAN
+  else if (/^es\b/.test(navigator.language)) defaultLocale = DEFAULT_LOCALE_SPANISH
 
   const locale = get(KEY_LOCALE, defaultLocale)
   // Use only our locales
