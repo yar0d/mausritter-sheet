@@ -407,15 +407,32 @@ textarea {
 
 .condition-label,
 .item-label {
-  font-size: 100%;
+  font-size: 90%;
   color: #ffFF00;
 }
 
 .condition-desc,
 .item-desc {
-  font-size: 100%;
-  text-align: center;
-  color: #fff;
+  font-size: 90%;
+  text-align: left;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  color: #000000;
+}
+
+.item-summary {
+  font-size: 90%;
+  font-weight: bold;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  text-align: left;
+  color: #000000;
+}
+
+.item-specifics {
+  font-size: 90%;
+  font-style: italic;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  text-align: left;
+  color: #000000;
 }
 
 .condition-desc {
@@ -428,6 +445,7 @@ textarea {
 }
 
 .item-damage,
+.item-armour,
 .item-def,
 .item-use,
 .item-price {
@@ -470,11 +488,16 @@ textarea {
 }
 
 .item-damage,
+.item-armour,
 .item-def {
   font-size: 125%;
   color: #000;
   border: 1px solid;
   padding: 2px;
+}
+
+.item-def {
+  border-radius: 6px;
 }
 
 .item-price {
@@ -542,7 +565,7 @@ textarea {
 
 .drawer .condition-label,
 .drawer .item-label {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .drawer .item-damage, .drawer .item-def {

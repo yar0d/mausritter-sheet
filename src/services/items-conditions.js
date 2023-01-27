@@ -39,17 +39,27 @@ for (let i = 0; i < conditions.length; i++) {
 
 console.log(`[init] ${conditionsList.length} conditions loaded.`)
 
-export const itemsList = []
-for (let i = 0; i < items.length; i++) {
-  items[i].id = TYPE_ITEM + '-' + items[i].label.toLowerCase().replace(' ', '-')
-  items[i].type = TYPE_ITEM
-  itemsList.push(items[i])
+export function normalizeItem(item) {
+  return {
+    ...item,
+    id: TYPE_ITEM + '-' + item.label.toLowerCase().replace(' ', '-'),
+    type: TYPE_ITEM
+  }
+}
+export function normalizeItems(items) {
+  const itemsList = []
+  for (let i = 0; i < items.length; i++) {
+    itemsList.push(normalizeItem(items[i]))
+  }
+  return itemsList
 }
 
+export const itemsList = normalizeItems(items)
 console.log(`[init] ${itemsList.length} items loaded.`)
 
+
 /**
- * Return items if they are from giden families.
+ * Return items if they are from given families.
  * @param {String|Array} families A single family or an array of family to filter items.
  * @return {Array} a list a copy of items.
  */
@@ -125,6 +135,8 @@ export default {
   ITEM_FAMILY_WEAPONS,
   items,
   itemsList,
+  normalizeItem,
+  normalizeItems,
   TYPE_CONDITION,
   TYPE_ITEM
 }

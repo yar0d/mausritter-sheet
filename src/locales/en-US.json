@@ -166,5 +166,8 @@
   "Table": "Table",
   "None": "None",
   "Damages": "Damages",
-  "Please create or load your mouse.": "Please create or load your mouse."
+  "Please create or load your mouse.": "Please create or load your mouse.",
+  "Rules": "Rules",
+  "{count} cards imported.": "{count} cards imported.",
+  "Please select a JSON cards file!": "Please select a JSON cards file!"
 }

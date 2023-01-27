@@ -1,5 +1,8 @@
 const DEFAULT_DICE = { number: 1, faces: 6, modifier: 0, post: undefined }
 
+// Check if format is NdF+|-m. Example 2d6+2, D20, d12-1, etc.
+const DICE_CHECKER_REGEX = /(\d+)?d(\d+)([+-]\d+)?/ig
+
 function sum(dices) {
   let result = 0
   for (let i = 0; i < dices.length; i++) result += dices[i]
@@ -223,6 +226,10 @@ export function roll ({ number = 2, faces = 6, modifier = 0 } = {}, callback) {
   return result + modifier
 }
 
+export function isDiceNotation (notation) {
+  return DICE_CHECKER_REGEX.test(notation)
+}
+
 export default {
   d2,
   d3,
@@ -236,6 +243,7 @@ export default {
   d66,
   d100,
   highestOfDices,
+  isDiceNotation,
   lowestOfDices,
   rollCustom,
   rollExplode,

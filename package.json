@@ -22,6 +22,7 @@
     "@tauri-apps/api": "1.1.x",
     "core-js": "^3.16.1",
     "hash.js": "^1.1.7",
+    "lodash": "^4.17.21",
     "nth-check": "^2.0.1",
     "uuencode": "^0.0.4",
     "uuid": "^8.3.2",

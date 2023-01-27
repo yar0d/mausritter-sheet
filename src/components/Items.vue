@@ -9,8 +9,11 @@
             <w-checkbox v-for="u in currentItem.use" v-model="currentUsed[u - 1]" :key="u" class="item-use" @input="toggleUsed" />
           </div>
         </w-flex>
-        <w-flex column justify-space-between>
-          <div class="item-label">{{ $t(currentItem.label) }}</div>
+        <w-flex column justify-space-betw__een>
+          <div class="item-label">
+            <w-icon v-if="currentItem.star" color="primary-dark1">mdi mdi-star</w-icon>
+            {{ $t(currentItem.label) }}
+          </div>
           <div class="h-max" v-if="(currentItem.family === ITEM_FAMILY_SPELL || currentItem.family === ITEM_FAMILY_CUSTOM)">
             <w-textarea v-if="canInputCustomLabel" class="background-white-75 item-custom-label input-value" v-model="currentItem.customLabel" rows="3" />
             <span v-else-if="currentItem.customLabel" class="item-desc">{{ currentItem.customLabel }}</span>
@@ -18,19 +21,27 @@
               {{ $t(currentItem.desc) }}
             </p>
           </div>
-          <w-flex v-else-if="currentItem.desc" align-center justify-center class="w-max">
-            <span class="item-desc mt4">{{ $t(currentItem.desc) }}</span>
+          <w-flex v-if="currentItem.desc" align-end class="w-max">
+            <span class="item-desc mt2">{{ $t(currentItem.desc) }}</span>
           </w-flex>
+          <div class="h-max" />
+          <w-flex v-if="currentItem.summary" align-end class="w-max">
+            <span class="item-summary mb1">{{ $t(currentItem.summary) }}</span>
+          </w-flex>
+          <w-flex v-if="currentItem.specifics" align-end class="w-max">
+            <span class="item-specifics mb2">{{ $t(currentItem.specifics) }}</span>
+          </w-flex>
+
           <div v-if="showUse && currentItem.use !== undefined && currentItem.use > 6">
             <span class="xs2">
               <w-input class="title1 background-white-75 input-value" v-model.number="currentItem.count" />
             </span>
             <span class="title1 primary">
-              /{{ currentItem.use }}
+              {{ currentItem.use }}
             </span>
           </div>
           <div row v-if="showDamage && currentItem.damage" justify-end>
-            <span v-if="readonly" class="item-damage">{{ currentItem.damage }}</span>
+            <span v-if="readonly || !isDamageDices" class="item-damage">{{ currentItem.damage }}</span>
             <template v-else>
               <dice v-for="(faces, index) in damageDices" :key="index" :faces="faces" :context="$t('Damages')" :caption="captionDices(index)" color="black" cls="mx0 dice-huge item-damage-dice" />
             </template>
@@ -49,6 +60,7 @@
 
 <script>
 import { ITEM_FAMILY_CUSTOM, ITEM_FAMILY_SPELL } from '@/services/items-conditions'
+import { isDiceNotation } from '../services/dice-roller'
 import Dice from './Dice.vue'
 
 export default {
@@ -71,7 +83,8 @@ export default {
       ITEM_FAMILY_CUSTOM,
       ITEM_FAMILY_SPELL,
       currentItem: {},
-      currentUsed: []
+      currentUsed: [],
+      isDiceNotation
     }
   },
   watch: {
@@ -98,10 +111,22 @@ export default {
     },
     damageDices () {
       let result = this.currentItem.damage.split(',')
+      let count = 0
       result.forEach((dice, index) => {
-        result[index] = Number(dice.slice(1))
+        if (isDiceNotation(dice)) {
+          count++
+          result[index] = Number(dice.slice(1))
+        }
       });
-      return result
+      return count === result.length ? result : []
+    },
+    isDamageDices () {
+      let result = this.currentItem.damage.split(',')
+      let count = 0
+      result.forEach((dice) => {
+        if (isDiceNotation(dice)) count++
+      });
+      return count === result.length
     }
   },
   methods: {
