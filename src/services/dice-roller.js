@@ -1,7 +1,7 @@
 const DEFAULT_DICE = { number: 1, faces: 6, modifier: 0, post: undefined }
 
 // Check if format is NdF+|-m. Example 2d6+2, D20, d12-1, etc.
-const DICE_CHECKER_REGEX = /(\d+)?d(\d+)([+-]\d+)?/ig
+const DICE_CHECKER_REGEX = /(\d+)?d(\d+)([+-]\d+)?/i
 
 function sum(dices) {
   let result = 0

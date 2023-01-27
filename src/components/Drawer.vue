@@ -14,14 +14,12 @@
           </draggable>
         </div>
 
-        <w-button @click="decItemPage" :disabled="!itemsPage" class="mr2">«</w-button>
-        <w-button class="mr2" :bg-color="itemsPage === -1 ? 'info' : ''" @click="itemsPage = -1">
+        <w-button class="mx2" :bg-color="itemsPage === -1 ? 'info' : ''" @click="itemsPage = -1">
           {{ $t('Rules') }}
         </w-button>
         <w-button v-for="(page, index) in itemsListCustom" :key="`items-page-${index}`" class="mr2" :bg-color="itemsPage === index ? 'info' : ''" @click="itemsPage = index">
         {{ page.name }}
         </w-button>
-        <w-button @click="incItemPage">»</w-button>
 
         <input type="file" ref="fileElem" multiple accept="application/json" style="display:none" @change="handleFiles" />
         <w-button :disabled="itemsPage === -1" class="px6 ml4" @click="loadFiles">
@@ -107,12 +105,6 @@ export default {
       }
       return result
     },
-    decItemPage () {
-      if (this.itemsPage) this.itemsPage--
-    },
-    incItemPage () {
-      if (this.itemsListCustom[this.itemsPage + 1]) this.itemsPage++
-    },
     isValidJsonItem (json) {
     return json && json.name
     },
@@ -169,6 +161,16 @@ export default {
     },
     move (e) {
       return this.canDrop(e.draggedContext.element, e.relatedContext.list)
+    },
+    serialize () {
+      return {
+        conditions: this.conditionsListCustom,
+        items: this.itemsListCustom
+      }
+    },
+    setData (data) {
+      this.conditionsListCustom = [...data.conditions]
+      this.itemsListCustom = [...data.items]
     }
   }
 }

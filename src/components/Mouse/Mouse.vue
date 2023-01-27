@@ -534,7 +534,7 @@ export default {
         } else {
           // Choose one from
           for (let i = 0; i < b1.items.length; i++) {
-            this.chooseItems.push({ id: i, item: getItem(b1.items[i].id, { customLabel: this.$t(b1.items[i].customLabel || ''), desc: b1.items[i].desc }) })
+            this.chooseItems.push({ id: i, item: getItem(b1. items[i].id, { customLabel: this.$t(b1.items[i].customLabel || ''), desc: b1.items[i].desc }) })
           }
           this.chosenItem = 0
         }

@@ -377,7 +377,7 @@ textarea {
 }
 
 .dice-huge {
-  font-size: 32px !important;
+  font-size: 40px !important;
 }
 
 .condition,
@@ -407,20 +407,22 @@ textarea {
 
 .condition-label,
 .item-label {
-  font-size: 90%;
+  font-size: 100%;
+  font-weight: bold;
   color: #ffFF00;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .condition-desc,
 .item-desc {
-  font-size: 90%;
+  font-size: 100%;
   text-align: left;
   text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
   color: #000000;
 }
 
 .item-summary {
-  font-size: 90%;
+  font-size: 100%;
   font-weight: bold;
   text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
   text-align: left;
@@ -436,6 +438,10 @@ textarea {
 }
 
 .condition-desc {
+  font-size: 100%;
+}
+
+.item-use {
   font-size: 80%;
 }
 
@@ -506,7 +512,7 @@ textarea {
 }
 
 .condition-clear {
-  font-size: 80%;
+  font-size: 90%;
   color: #000;
 }
 

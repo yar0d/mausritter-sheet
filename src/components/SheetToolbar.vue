@@ -1,5 +1,5 @@
 <template>
-  <drawer v-model="showDrawer" @close="showDrawer = false" absolute top class="drawer-top" />
+  <drawer v-model="showDrawer" ref="global-drawer" @close="showDrawer = false" absolute top class="drawer-top" />
   <w-flex row align-center>
     <div class="mx4">
       <w-tooltip transition="fade" bg-color="yellow-light2" color="black" right>
@@ -109,6 +109,14 @@ export default {
   methods: {
     displayDrawer (show = false) {
       this.showDrawer = show
+    },
+    serialize () {
+      return {
+        drawer: this.$refs['global-drawer'].serialize()
+      }
+    },
+    setData (data) {
+      if (this.$refs['global-drawer']) this.$refs['global-drawer'].setData(data.drawer)
     }
   }
 }

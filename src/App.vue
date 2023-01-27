@@ -121,7 +121,7 @@ export default {
   async mounted () {
     this.mausritter.bank = this.$refs['bank']
     this.mausritter.sheet = this.$refs['sheet']
-    this.mausritter.sheetToolbar = this.$refs['sheettoolbar']
+    this.mausritter.sheetToolbar = this.$refs['sheet-toolbar']
     this.mausritter.hirelings = this.$refs['hirelings']
     dices3D.initialize('dice-canvas')
 

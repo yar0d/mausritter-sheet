@@ -202,6 +202,7 @@ export default {
           this.mausritter.hirelings.refresh(data.hirelings)
         })
       }
+      if (this.mausritter.sheetToolbar) this.mausritter.sheetToolbar.setData(data.toolbar)
       this.$store.commit('currentSheet', { json: data, raw: serializedData })
     },
     applyPreferences () {
@@ -310,7 +311,8 @@ export default {
       let data
       if (this.mausritter.sheet) data = this.mausritter.sheet.serialize()
       if (this.mausritter.hirelings) data.hirelings = this.mausritter.hirelings.serialize()
-      data.version = 1
+      if (this.mausritter.sheetToolbar) data.toolbar = this.mausritter.sheetToolbar.serialize()
+      data.version = 2
       if (setDate) data.date = new Date().toISOString()
       return encode ? encodeJson(data) : data
     },

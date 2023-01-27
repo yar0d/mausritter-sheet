@@ -4,7 +4,7 @@ import items from './items.json'
 
 export const TYPE_CONDITION = 'C'
 export const CONDITION_CLEAR_SHORT_REST = 'SR'
-export const CONDITION_CLEAR_LONQ_REST = 'LR'
+export const CONDITION_CLEAR_LONG_REST = 'LR'
 export const CONDITION_CLEAR_FULL_REST = 'FR'
 export const CONDITION_CLEAR_MEAL = 'ME'
 export const CONDITION_FAMILY_BASE = 'BA'
@@ -70,7 +70,7 @@ export function getItemsForFamilies (families) {
 
   const result = []
   for (let i = 0; i < items.length; i++) {
-    if (f.includes(items[i].family)) result.push({ ...items[i], used: 0, uuid: uuidv4() })
+    if (f.includes(items[i].family)) result.push(normalizeItem({ ...items[i], used: 0, uuid: uuidv4() }))
   }
 
   return result
@@ -96,7 +96,7 @@ export function getItem (id, { customLabel, desc } = {}) {
   let found
   let i = 0
   while (!found && i < itemsList.length) {
-    if (itemsList[i].id === id) found = { ...itemsList[i], used: 0, uuid: uuidv4() }
+    if (itemsList[i].id === id) found = normalizeItem({ ...itemsList[i], used: 0, uuid: uuidv4() })
     i++
   }
   if (found) {
@@ -109,7 +109,7 @@ export function getItem (id, { customLabel, desc } = {}) {
 
 export default {
   CONDITION_CLEAR_SHORT_REST,
-  CONDITION_CLEAR_LONQ_REST,
+  CONDITION_CLEAR_LONG_REST,
   CONDITION_CLEAR_FULL_REST,
   CONDITION_CLEAR_MEAL,
   conditions,

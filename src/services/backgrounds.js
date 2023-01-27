@@ -51,7 +51,7 @@ export const backgrounds = [
   {
     hp: 2, pips: 2, label: 'Beetleherd',
     items: [
-      { id: 'I-item', customLabel: 'Pole, 6"' }
+      { id: 'I-item-tall', customLabel: 'Pole, 6"' }
     ],
     hirelings: [
       { id: 'H-beetle', desc: 'Loyal beetle' }
@@ -141,7 +141,7 @@ export const backgrounds = [
   {
     hp: 4, pips: 2, label: 'Worm wrangler',
     items: [
-      { id: 'I-item', customLabel: 'Pole, 6"' },
+      { id: 'I-item-tall', customLabel: 'Pole, 6"' },
       { id: 'I-item', customLabel: 'Soap' }
     ]
   },

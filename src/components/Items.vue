@@ -3,16 +3,19 @@
     <w-flex column align-start justify-start class="h-max" :class="className(currentItem.label)">
       <w-flex row class="h-max w-max">
         <w-flex v-if="!readonly" column justify-end class="w-25 text-center">
-          <w-button v-if="canDelete" sm icon="mdi mdi-close-circle" bg-color="white" color="red" md @click="onDelete" />
+          <w-icon v-if="currentItem.star" color="primary-dark1">mdi mdi-star</w-icon>
           <div class="spacer" />
           <div v-if="showUse && currentItem.use !== undefined && currentItem.use <= 6">
             <w-checkbox v-for="u in currentItem.use" v-model="currentUsed[u - 1]" :key="u" class="item-use" @input="toggleUsed" />
           </div>
         </w-flex>
-        <w-flex column justify-space-betw__een>
+        <w-flex column>
           <div class="item-label">
-            <w-icon v-if="currentItem.star" color="primary-dark1">mdi mdi-star</w-icon>
-            {{ $t(currentItem.label) }}
+            <w-flex align-start>
+            <div>{{ $t(currentItem.label) }}</div>
+            <div class="spacer" />
+            <w-icon v-if="canDelete" md bg-color="white" color="red" class="ml1" @click="onDelete">mdi mdi-close-circle</w-icon>
+            </w-flex>
           </div>
           <div class="h-max" v-if="(currentItem.family === ITEM_FAMILY_SPELL || currentItem.family === ITEM_FAMILY_CUSTOM)">
             <w-textarea v-if="canInputCustomLabel" class="background-white-75 item-custom-label input-value" v-model="currentItem.customLabel" rows="3" />
@@ -21,7 +24,7 @@
               {{ $t(currentItem.desc) }}
             </p>
           </div>
-          <w-flex v-if="currentItem.desc" align-end class="w-max">
+          <w-flex v-if="currentItem.desc" align-start class="w-max">
             <span class="item-desc mt2">{{ $t(currentItem.desc) }}</span>
           </w-flex>
           <div class="h-max" />
@@ -46,9 +49,9 @@
               <dice v-for="(faces, index) in damageDices" :key="index" :faces="faces" :context="$t('Damages')" :caption="captionDices(index)" color="black" cls="mx0 dice-huge item-damage-dice" />
             </template>
           </div>
-          <div v-if="showDamage && currentItem.def">
-            <span class="item-def">{{ $t('Def')}} {{ currentItem.def }}</span>
-          </div>
+          <w-flex v-if="showDamage && currentItem.def" justify-end>
+            <span class="item-def mr1">{{ $t('Def')}} {{ currentItem.def }}</span>
+          </w-flex>
           <div v-if="showPrice && currentItem.price !== null" class="text-right">
             <span class="item-price"> {{ $t('{price}p', { price: currentItem.price }) }}</span>
           </div>
@@ -113,7 +116,7 @@ export default {
       let result = this.currentItem.damage.split(',')
       let count = 0
       result.forEach((dice, index) => {
-        if (isDiceNotation(dice)) {
+        if (this.isDiceNotation(dice)) {
           count++
           result[index] = Number(dice.slice(1))
         }
@@ -124,7 +127,9 @@ export default {
       let result = this.currentItem.damage.split(',')
       let count = 0
       result.forEach((dice) => {
-        if (isDiceNotation(dice)) count++
+        if (this.isDiceNotation(dice)) {
+          count++
+        }
       });
       return count === result.length
     }
