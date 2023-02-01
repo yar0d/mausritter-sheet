@@ -171,5 +171,7 @@
   "Please create or load your mouse.": "Créez ou chargez votre souris.",
   "Rules": "Règles",
   "{count} cards imported.": "{count} cartes importés.",
-  "Please select a JSON cards file!": "Choisissez un fichier cartes au format JSON !"
+  "Please select a JSON cards file!": "Choisissez un fichier cartes au format JSON !",
+  "Add items...": "Ajouter des objets…",
+  "Add conditions...": "Ajouter des conditions…"
 }

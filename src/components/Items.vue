@@ -10,15 +10,15 @@
           </div>
         </w-flex>
         <w-flex column>
-          <div class="item-label">
+          <div class="item-title">
             <w-flex align-start>
-            <div>{{ $t(currentItem.label) }}</div>
+            <div class="condition-label">{{ $t(currentItem.label) }}</div>
             <div class="spacer" />
-            <w-icon v-if="canDelete" md bg-color="white" color="red" class="ml1" @click="onDelete">mdi mdi-close-circle</w-icon>
+            <w-icon v-if="canDelete" md bg-color="white" color="red" class="clickable" @click="onDelete">mdi mdi-close-circle</w-icon>
             </w-flex>
           </div>
           <div class="h-max" v-if="(currentItem.family === ITEM_FAMILY_SPELL || currentItem.family === ITEM_FAMILY_CUSTOM)">
-            <w-textarea v-if="canInputCustomLabel" class="background-white-75 item-custom-label input-value" v-model="currentItem.customLabel" rows="3" />
+            <w-textarea v-if="canInputCustomLabel" class="background-white-75 item-custom-label" v-model="currentItem.customLabel" rows="3" />
             <span v-else-if="currentItem.customLabel" class="item-desc">{{ currentItem.customLabel }}</span>
             <p v-if="readonly && !hideDesc" if="currentItem.desc" class="w-max item-desc mt2">
               {{ $t(currentItem.desc) }}
@@ -142,7 +142,7 @@ export default {
       return 'item-' + label.replace(' ', '-').toLowerCase()
     },
     onDelete () {
-      this.$emit('delete')
+      this.$emit('delete', this.item)
     },
     toggleUsed (checked) {
       this.$emit('toggle-used', { uuid: this.item.uuid, checked })

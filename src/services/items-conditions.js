@@ -9,6 +9,7 @@ export const CONDITION_CLEAR_FULL_REST = 'FR'
 export const CONDITION_CLEAR_MEAL = 'ME'
 export const CONDITION_FAMILY_BASE = 'BA'
 export const CONDITION_FAMILY_CUSTOM = 'CU'
+export const CONDITION_FAMILY_MISCELLANEOUS = 'MI'
 
 export const TYPE_ITEM = 'I'
 export const ITEM_FAMILY_ARMOR_HEAVY = 'AH'
@@ -29,14 +30,23 @@ export const ITEM_FAMILY_WEAPON_MEDIUM = 'WM'
 
 export const ITEM_FAMILY_WEAPONS = [ITEM_FAMILY_WEAPON_HEAVY, ITEM_FAMILY_WEAPON_IMPROVISED, ITEM_FAMILY_WEAPON_LIGHT, ITEM_FAMILY_WEAPON_MEDIUM, ITEM_FAMILY_RANGED_LIGHT, ITEM_FAMILY_RANGED_HEAVY]
 
-export const conditionsList = []
-for (let i = 0; i < conditions.length; i++) {
-  conditions[i].id = TYPE_CONDITION + (i + 1)
-  conditions[i].type = TYPE_CONDITION
-  conditions[i].family = conditions[i].family || CONDITION_FAMILY_BASE
-  conditionsList.push(conditions[i])
+export function normalizeCondition (condition) {
+  return {
+    ...condition,
+    id: TYPE_CONDITION + '-' + condition.label.toLowerCase().replace(' ', '-'),
+    type: TYPE_CONDITION,
+    family: conditions.family || CONDITION_FAMILY_BASE,
+  }
+}
+export function normalizeConditions(conditions) {
+  const conditionsList = []
+  for (let i = 0; i < conditions.length; i++) {
+    conditionsList.push(normalizeCondition(conditions[i]))
+  }
+  return conditionsList
 }
 
+export const conditionsList = normalizeConditions(conditions)
 console.log(`[init] ${conditionsList.length} conditions loaded.`)
 
 export function normalizeItem(item) {
@@ -135,6 +145,8 @@ export default {
   ITEM_FAMILY_WEAPONS,
   items,
   itemsList,
+  normalizeCondition,
+  normalizeConditions,
   normalizeItem,
   normalizeItems,
   TYPE_CONDITION,

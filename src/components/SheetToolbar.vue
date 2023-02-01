@@ -115,7 +115,7 @@ export default {
         drawer: this.$refs['global-drawer'].serialize()
       }
     },
-    setData (data) {
+    setData (data = {}) {
       if (this.$refs['global-drawer']) this.$refs['global-drawer'].setData(data.drawer)
     }
   }

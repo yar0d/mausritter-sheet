@@ -2,11 +2,13 @@
   <div v-if="currentCondition && currentCondition.id" class="condition condition-background shadow draggable" :class="`item-size-${size}`">
     <w-flex column justify-space-between class="text-left h-max primary">
       <w-flex row class="condition-title" align-start justify-start>
-        <w-button v-if="canDelete" sm icon="mdi mdi-close-circle" bg-color="white" color="red" class="shrink" md @click="onDelete" />
+        <w-icon v-if="currentCondition.star" color="primary-dark1">mdi mdi-star</w-icon>
         <div v-if="currentCondition.family === CONDITION_FAMILY_CUSTOM" class="condition-label w-max text-center">
           <w-input v-model="currentCondition.label" :readonly="readonly" />
         </div>
         <div v-else class="condition-label w-max text-center">{{ $t(currentCondition.label) }}</div>
+        <div class="spacer" />
+        <w-icon v-if="canDelete" md bg-color="white" color="red" class="clickable" @click="onDelete">mdi mdi-close-circle</w-icon>
       </w-flex>
 
       <div v-if="currentCondition.family === CONDITION_FAMILY_CUSTOM" class="condition-desc w-max text-center">
@@ -19,7 +21,8 @@
         <div v-if="currentCondition.family === CONDITION_FAMILY_CUSTOM" class="w-max text-center">
           <w-input v-model="currentCondition.clear" :readonly="readonly" />
         </div>
-        <div v-else>{{ $t('CONDITION-CLEAR-' + currentCondition.clear) }}</div>
+        <div v-else-if="currentCondition.clear">{{ $t('CONDITION-CLEAR-' + currentCondition.clear) }}</div>
+        <div v-else>{{ currentCondition.specifics }}</div>
       </div>
     </w-flex>
   </div>
