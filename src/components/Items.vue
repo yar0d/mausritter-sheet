@@ -1,5 +1,5 @@
 <template>
-  <div v-if="currentItem && currentItem.id" class="item item-background shadow" :class="cls">
+  <div v-if="currentItem && currentItem.id" class="item item-background item-background-image shadow" :class="cls" :style="currentItem.imageBlob ? `background:url(${currentItem.imageBlob});` : ''">
     <w-flex column align-start justify-start class="h-max" :class="className(currentItem.label)">
       <w-flex row class="h-max w-max">
         <w-flex v-if="!readonly" column justify-end class="w-25 text-center">

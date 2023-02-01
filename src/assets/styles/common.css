@@ -399,6 +399,12 @@ textarea {
   height: 276px;
 }
 
+.item-background-image {
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  background-position: center !important;
+}
+
 .condition-title,
 .item-title {
   font-size: 16px;

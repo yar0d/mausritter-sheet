@@ -126,7 +126,6 @@ export default {
       } else {
         index = _.findIndex(this.itemsListCustom[this.itemsPage].cards, { label: item.label })
       }
-      console.log('## delete:', item, index)
       if (index >= 0) {
         if (item.type === TYPE_CONDITION) {
           this.conditionsListCustom[this.conditionsPage].cards.splice(index, 1)
@@ -161,6 +160,7 @@ export default {
                   specifics: content.detailSpecifics,
                   use: parseInt(content.usage) || 0,
                   price: parseFloat(content.price) || 0,
+                  imageBlob: content.imageBlob,
                   isCustom: true
                 })
                 const found = _.findIndex(this.itemsListCustom[this.itemsPage].cards, { label: item.label })
