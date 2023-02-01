@@ -13,17 +13,6 @@
 
       <div class="spacer" />
 
-      <!-- <w-menu v-if="!isStandaloneApp" v-model="showAppMenu">
-        <template #activator="{ on }">
-          <w-button text v-on="on" xl @click="showAppMenu = !showAppMenu">
-            <w-icon>mdi mdi-application</w-icon>
-            {{ $t('Applications...') }}
-          </w-button>
-        </template>
-
-        TODO
-      </w-menu> -->
-
       <w-menu v-model="showPrefMenu">
         <template #activator="{ on }">
           <w-button v-on="on" text @click="showPrefMenu = !showPrefMenu">
@@ -40,7 +29,7 @@
       <w-card content-class=" px0 background-white-50">
         <template #title>
           <w-toolbar>
-            <div class="title3">{{ $t('Manage your characters.') }}</div>
+            <div class="title2">{{ $t('Manage your characters.') }}</div>
           </w-toolbar>
         </template>
 
@@ -71,7 +60,11 @@
             <w-button v-else text @click="loadSheet(index)">
               {{ slotName(index) }}
             </w-button>
-            <div>
+
+            <div v-show="loading === index || saving === index">
+              <w-spinner class="toolbar-pager" xs />
+            </div>
+            <div v-show="loading < 0 || saving < 0">
               <span class="w-25">
                 <w-tooltip transition="fade" bg-color="yellow-light2" color="black" left>
                   <template #activator="{ on }">
@@ -159,7 +152,9 @@ export default {
       DEFAULT_LOCALE,
       LOCALES,
       importData: null,
+      loading: -1,
       locale: null,
+      saving: -1,
       showAppMenu: false,
       showPrefMenu: false,
       slots: []
@@ -252,12 +247,19 @@ export default {
       return this.currentHash !== newHash
     },
     async load (index) {
-      const data = loadSlot(index)
-      this.apply(data.json, data.raw)
-      this.$store.commit('setCurrentSlot', index)
-      this.$store.commit('historyAdd', { type: this.$t('Load'), message: this.slots[index] })
-      this.canLevelUp()
-      this.currentHash = sha256().update(this.serialize(true, false)).digest('hex')
+      this.loading = index
+      setTimeout(() => {
+        try {
+            const data = loadSlot(index)
+            this.apply(data.json, data.raw)
+            this.$store.commit('setCurrentSlot', index)
+            this.$store.commit('historyAdd', { type: this.$t('Load'), message: this.slots[index] })
+            this.canLevelUp()
+            this.currentHash = sha256().update(this.serialize(true, false)).digest('hex')
+        } finally {
+          setTimeout(() => this.loading = -1, 500)
+        }
+      }, 100)
     },
     loadSheet (index) {
       if (this.currentSlotIndex < 0 || !this.isDirty()) {
@@ -268,8 +270,11 @@ export default {
       this.$refs['confirm-dialog'].open(this.$t('Load'), this.$t('Do you want to save the sheet of {name}?', { name: this.slots[this.currentSlotIndex] } ))
         .then(confirmed => {
           if (confirmed) {
-            const data = this.serialize()
-            this.save(this.currentSlotIndex, data)
+            setTimeout(() => {
+              this.saving = this.currentSlotIndex
+              const data = this.serialize()
+              this.save(this.currentSlotIndex, data)
+            }, 100)
           }
           this.load(index)
         })
@@ -287,11 +292,16 @@ export default {
       return result
     },
     save (index, data) {
-      saveSlot(index, data, this.dataSignature(data))
-      this.slots = listSlots() // Refresh slot list
-      this.$store.commit('setCurrentSlot', index)
-      this.$store.commit('historyAdd', { type: this.$t('Save'), message: this.slots[index] })
-      this.currentHash = sha256().update(this.serialize(true, false)).digest('hex')
+      try {
+        this.saving = index
+        saveSlot(index, data, this.dataSignature(data))
+        this.slots = listSlots() // Refresh slot list
+        this.$store.commit('setCurrentSlot', index)
+        this.$store.commit('historyAdd', { type: this.$t('Save'), message: this.slots[index] })
+        this.currentHash = sha256().update(this.serialize(true, false)).digest('hex')
+      } finally {
+        setTimeout(() => this.saving = -1, 500)
+      }
     },
     saveSheet (index) {
       const data = this.serialize()
