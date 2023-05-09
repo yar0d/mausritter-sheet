@@ -3,6 +3,6 @@
   { "label": "Frightened", "clear": "SR", "desc": "WIL save to approach source of fear." },
   { "label": "Hungry", "clear": "ME" },
   { "label": "Injured", "clear": "FR", "desc": "Disadvantage on STR & DEX saves." },
-  { "label": "Mad", "clear": "FR", "desc": "Disadvantage on WIL saves." },
+  { "label": "Drained", "clear": "FR", "desc": "Disadvantage on WIL saves." },
   { "label": "condition", "clear": "", "desc": "Description", "family": "CU" }
 ]
