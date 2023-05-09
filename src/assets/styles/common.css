@@ -28,6 +28,11 @@ body,
   font-family: 'Courier New', Courier, monospace;
 }
 
+.font-6 {
+  font-family: 'OpenDyslexic-Regular' !important;
+  line-height: 24px;
+}
+
 .debug {
   border: 1px solid red;
 }
