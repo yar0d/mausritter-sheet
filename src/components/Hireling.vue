@@ -7,23 +7,25 @@
         <div class="xs4">
           <w-input v-model="current.name" :label="$t('Name')" class="title2 input-value" />
         </div>
-        <w-input v-model="current.look" :label="$t('Look')" class="title3 ml2"/>
+        <w-divider class="mx4" vertical />
+        <w-input v-model="current.look" :label="$t('Look')" class="title3"/>
       </w-flex>
 
       <w-flex row class="px2 py2" align-center>
         <div class="text-center">
-          {{ $t('Wages/day') }}
-          <w-input v-model.number="current.wages" class="title3 w-100 mt1" />
+          <w-input v-model.number="current.level" :label="$t('Level')" class="w-100 title2 mt1" />
         </div>
 
-        <div class="text-center ml2">
-          {{ $t('Level') }}
-          <w-input v-model.number="current.level" class="w-100 title2 mt1" />
+        <w-divider class="mx4" vertical />
+
+        <div class="text-center">
+          <w-input v-model.number="current.wages" :label="$t('Wages/day')" class="title3 w-100 mt1" />
         </div>
 
-        <div class="text-center ml2">
-          {{ $t('XP') }}
-          <w-input v-model.number="current.xp" class="w-100 title2 mt1" />
+        <w-divider class="mx4" vertical />
+
+        <div class="text-center">
+          <w-input v-model.number="current.xp" :label="$t('XP')" class="w-100 title2 mt1" />
         </div>
 
         <div class="spacer" />
@@ -69,7 +71,7 @@
                   <w-input v-model.number="current.maxStr" class="title1" color="minor" />
                 </div>
                 <div class="w-150 divider-v text-center">
-                  <w-input v-model.number="current.currentStr" class="title1 primary" />
+                  <w-input v-model.number="current.currentStr" class="title1" />
                 </div>
               </w-flex>
 

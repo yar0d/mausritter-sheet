@@ -35,7 +35,8 @@ app.use(WaveUI, {
       selected: '#ffe70f',
       dice: '#4d9dda',
       failed: '#bb2727',
-      link: '#27bb27'
+      link: '#27bb27',
+      label: '#777777'
     },
     light: {
       primary: '#000000',
@@ -43,7 +44,8 @@ app.use(WaveUI, {
       selected: '#ffe70f',
       dice: '#4d9dda',
       failed: '#bb2727',
-      link: '#2727bb'
+      link: '#2727bb',
+      label: '#999999'
     }
   },
   breakpoints: {

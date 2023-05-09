@@ -260,9 +260,12 @@ blockquote {
   padding: 4px;
 }
 
+label.w-input__label, .input-label {
+  color: var(--w-label-color) !important;
+}
+
 .input-value {
-  color: #2498d6;
-  /* color: #2c85b4; */
+  color: #2498d6 !important;
   font-weight: bold;
 }
 
@@ -400,7 +403,6 @@ textarea {
 }
 
 .item-background-image {
-  background-repeat: no-repeat !important;
   background-size: contain !important;
   background-position: center !important;
 }
@@ -531,8 +533,6 @@ textarea {
 
 .item-background {
   background-image: url('../img/item.png');
-  /* background-repeat: no-repeat; */
-  /* background-size: contain; */
   background-position: left;
 }
 

@@ -4,7 +4,7 @@
       <w-flex row justify-space-between align-start>
         <w-card class="card-sheet">
           <w-flex row align-center>
-            <div class="title1 input-name">
+            <div class="title1 input-name input-label">
               {{ $t('Name') }}
             </div>
             <div class="grow ml2 py2">
@@ -12,7 +12,7 @@
             </div>
           </w-flex>
           <w-flex row>
-            <div class="input-name body mr10">
+            <div class="input-name input-label body mr10">
               {{ $t('Background') }}
             </div>
             <div class="w-max">
@@ -28,7 +28,7 @@
         <w-card class="card-sheet xs4">
           <birthsign v-model="birthsign" ref="birthsign" @input="setBirthsign" class="pl1" show-label />
           <w-flex row align-center justify-center class="wrapper4">
-            <div class="body pr1 pl2">{{ $t('Coat') }}</div>
+            <div class="input-label body pr1 pl2">{{ $t('Coat') }}</div>
             <w-flex column align-center justify-center class="wrapper">
               <coat-color ref="coat-color" v-model="coatColor" @input="setCoatColor" />
               <coat-pattern ref="coat-pattern" v-model="coatPattern" @input="setCoatPattern" />
@@ -149,7 +149,7 @@
 
         <w-card class="card-sheet xs4 opacity-75">
           <w-flex row align-center>
-            <div class="input-name">
+            <div class="input-name input-label">
               {{ $t('Level') }}
             </div>
             <div class="ml2 xs6">
@@ -166,7 +166,7 @@
           <div class="ml6 opacity-75">
             <w-card class="card-sheet py0 pr2 pips opacity-100">
               <w-flex row justify-end align-center>
-                <div class="input-name">
+                <div class="input-name input-label">
                   {{ $t('Pips') }}
                 </div>
                 <div class="ml4 mr1 text-right">

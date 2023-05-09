@@ -1,12 +1,12 @@
 <template>
   <w-flex row align-center justify-center class="w-max">
-    <span v-if="showLabel" class="body pl1">{{ $t('Look') }}</span>
+    <span v-if="showLabel" class="input-label body pl1">{{ $t('Look') }}</span>
     <w-select v-bind="$attrs" :label="showLabel ? '' : $t('Look')" static-label :items="items" @input="updateValue">
       <template #item="{ item }">
         {{ $t(item.label) }}
       </template>
       <template #selection="{ item }">
-        <span v-if="item" class="input-value">{{ $t(item.label) }}</span>
+        <span v-if="item">{{ $t(item.label) }}</span>
       </template>
     </w-select>
   </w-flex>
