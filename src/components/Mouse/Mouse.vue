@@ -2,7 +2,7 @@
   <w-card class="mouse-sheet">
     <w-flex column justify-start class="mx1 my0">
       <w-flex row justify-space-between align-start>
-        <w-card bg-color="white" class="card-sheet">
+        <w-card class="card-sheet">
           <w-flex row align-center>
             <div class="title1 input-name">
               {{ $t('Name') }}
@@ -25,7 +25,7 @@
           </w-alert>
         </w-card>
 
-        <w-card bg-color="white" class="card-sheet xs4">
+        <w-card class="card-sheet xs4">
           <birthsign v-model="birthsign" ref="birthsign" @input="setBirthsign" class="pl1" show-label />
           <w-flex row align-center justify-center class="wrapper4">
             <div class="body pr1 pl2">{{ $t('Coat') }}</div>
@@ -54,7 +54,7 @@
       </w-flex>
 
       <w-flex row justify-end>
-        <w-card bg-color="white" class="card-sheet xs3">
+        <w-card class="card-sheet xs3">
           <w-flex row align-center class="text-center">
             <div class="w-max form-gray input-name title2 attribute-cell">
               {{ $t('STR') }}
@@ -111,7 +111,7 @@
       </w-flex>
 
       <w-flex row justify-end class="mt4">
-        <w-card bg-color="white" class="card-sheet xs3">
+        <w-card class="card-sheet xs3">
           <w-flex row align-center class="text-center">
             <div class="w-max form-gray input-name title2 attribute-cell">
               {{ $t('HP') }}
@@ -147,7 +147,7 @@
           {{ $t('Inventory') }}
         </div>
 
-        <w-card bg-color="white" class="card-sheet xs4 opacity-75">
+        <w-card class="card-sheet xs4 opacity-75">
           <w-flex row align-center>
             <div class="input-name">
               {{ $t('Level') }}
@@ -164,7 +164,7 @@
 
         <div class="w-250 pips-img">
           <div class="ml6 opacity-75">
-            <w-card bg-color="white" class="card-sheet py0 pr2 pips opacity-100">
+            <w-card class="card-sheet py0 pr2 pips opacity-100">
               <w-flex row justify-end align-center>
                 <div class="input-name">
                   {{ $t('Pips') }}
