@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.3](https://github.com/yar0d/mausritter-sheet/compare/v1.12.2...v1.12.3) (2023-05-09)
+
+
+### Bug Fixes
+
+* detect languages ES and DE from browser ([5d7f085](https://github.com/yar0d/mausritter-sheet/commit/5d7f0851d9f375a1b29940f1aa8fea905edff17c))
+
 ### [1.12.2](https://github.com/yar0d/mausritter-sheet/compare/v1.12.1...v1.12.2) (2023-01-17)
 
 
