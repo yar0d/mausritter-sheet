@@ -3,7 +3,6 @@ import App from './App.vue'
 import WaveUI from 'wave-ui'
 import 'wave-ui/dist/wave-ui.css'
 import '@mdi/font/css/materialdesignicons.min.css'
-// import './assets/styles/wave-ui.css' // Mandatory to build this app. Copy of node_modules/wave-ui/dist/wave-ui.css
 import './assets/styles/fonts.css'
 import './assets/styles/common.css'
 import './assets/styles/items.css'
