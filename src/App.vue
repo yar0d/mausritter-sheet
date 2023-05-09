@@ -1,5 +1,5 @@
 <template>
-  <w-app id="app" :class="`font-${fontIndex}`">
+  <div id="app" :class="`font-${fontIndex}`">
     <main class="grow">
       <div id="dice-canvas" class="dice3d-canvas" />
 
@@ -42,7 +42,7 @@
               </w-button>
 
               <div class="spacer" />
-              <img :src="require('@/assets/compatible-with-mausritter-88x32.png')" contain class="clickable" @click="$refs['about-dialog'].show()" />
+              <img :src="require(`@/assets/compatible-with-mausritter-88x32-${theme}.png`)" contain class="clickable" @click="$refs['about-dialog'].show()" />
             </w-toolbar>
 
             <div v-show="show.history" class="history-background h-max card-bordered">
@@ -66,12 +66,12 @@
       </w-flex>
     </main>
     <about ref="about-dialog" />
-  </w-app>
+  </div>
 </template>
 
 <script>
 import * as app from '@tauri-apps/api/app'
-import { PREF_FONT_DEFAULT } from '@/services/defines'
+import { PREF_FONT_DEFAULT, PREF_FONT_INDEX, PREF_THEME, PREF_THEME_DEFAULT } from '@/services/defines'
 import { isMobileDevice } from '@/services/responsive'
 import dices3D from '@/services/dice3d'
 import About from '@/components/About.vue'
@@ -99,11 +99,14 @@ export default {
     }
   },
   computed: {
+    fontIndex () { return this.prefs[PREF_FONT_INDEX] || PREF_FONT_DEFAULT },
     hirelingsCount () { return this.$store.getters['hirelings'].length },
     isMobileDevice () { return isMobileDevice(this.$waveui.breakpoint.name) },
     isStandaloneApp () { return this.$store.getters['standaloneApp'] },
     prefs () { return this.$store.getters['preferences'] || {} },
-    fontIndex () { return this.prefs.fontIndex || PREF_FONT_DEFAULT }
+    theme () {
+      return this.prefs[PREF_THEME] || PREF_THEME_DEFAULT
+    }
   },
   methods: {
     showPanel (panelId) {

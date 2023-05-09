@@ -1,28 +1,29 @@
 <template>
-  <w-card class="mb1 card-sheet-white">
+  <w-card class="mb1 background-white-50">
+    <w-card class="card-sheet" no-border>
     <w-flex column>
       <w-divider class="title3 orange">{{ $t(current.desc) }}</w-divider>
-      <w-flex row class="background-white-25 px2 pt4">
+      <w-flex row class="px2 pt4">
         <div class="xs4">
-          <w-input v-model="current.name" :label="$t('Name')" bg-color="white" class="title2 input-value" />
+          <w-input v-model="current.name" :label="$t('Name')" class="title2 input-value" />
         </div>
-        <w-input v-model="current.look" :label="$t('Look')" bg-color="white" class="title3 ml2"/>
+        <w-input v-model="current.look" :label="$t('Look')" class="title3 ml2"/>
       </w-flex>
 
-      <w-flex row class="background-white-25 px2 py2" align-center>
+      <w-flex row class="px2 py2" align-center>
         <div class="text-center">
           {{ $t('Wages/day') }}
-          <w-input v-model.number="current.wages" bg-color="white" class="title3 w-100 mt1" />
+          <w-input v-model.number="current.wages" class="title3 w-100 mt1" />
         </div>
 
         <div class="text-center ml2">
           {{ $t('Level') }}
-          <w-input v-model.number="current.level" bg-color="white" class="w-100 title2 mt1" />
+          <w-input v-model.number="current.level" class="w-100 title2 mt1" />
         </div>
 
         <div class="text-center ml2">
           {{ $t('XP') }}
-          <w-input v-model.number="current.xp" bg-color="white" class="w-100 title2 mt1" />
+          <w-input v-model.number="current.xp" class="w-100 title2 mt1" />
         </div>
 
         <div class="spacer" />
@@ -37,6 +38,7 @@
         </div>
       </w-flex>
     </w-flex>
+    </w-card>
 
     <w-flex row class="mt1" justify-start>
       <div class="w-200">
@@ -55,7 +57,7 @@
               </w-flex>
             </div>
 
-            <w-card bg-color="white" class="card-sheet">
+            <w-card class="card-sheet">
               <w-flex row align-center class="text-center">
                 <div class="w-max form-gray input-name title2 attribute-cell">
                   {{ $t('STR') }}
@@ -110,7 +112,7 @@
               </w-flex>
             </w-card>
 
-            <w-card bg-color="white" class="mt4 card-sheet">
+            <w-card class="mt4 card-sheet">
               <w-flex row align-center class="text-center">
                 <div class="w-max form-gray input-name title2 attribute-cell">
                   {{ $t('HP') }}

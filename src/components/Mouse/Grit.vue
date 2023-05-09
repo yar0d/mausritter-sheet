@@ -1,5 +1,5 @@
 <template>
-  <w-card v-show="grit" bg-color="white" class="card-sheet mr4">
+  <w-card v-show="grit" class="card-sheet mr4">
     <w-flex column>
       <w-flex row>
         <div class="w-100 form-gray input-name">

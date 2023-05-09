@@ -28,6 +28,11 @@ body,
   font-family: 'Courier New', Courier, monospace;
 }
 
+.font-6 {
+  font-family: 'OpenDyslexic-Regular' !important;
+  line-height: 24px;
+}
+
 .debug {
   border: 1px solid red;
 }
@@ -140,7 +145,8 @@ blockquote {
 
 .form-gray,
 .form-gray--bg {
-  background-color: #ccc;
+  background-color: rgba(var(--w-contrast-bg-color-rgb), 0.5);
+  color: rgb(var(--w-contrast-color-rgb));
 }
 
 .text-secondary {
@@ -213,24 +219,25 @@ blockquote {
 }
 
 .shadow {
-  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.75);
+  box-shadow: 2px 2px 5px 2px rgba(var(--w-base-color-rgb), 0.75);
 }
 
 .card-sheet {
   border-radius: 5px;
   border-width: 2px;
-  border-color: #000;
+  color: rgb(var(--w-base-color-rgb));
+  background-color: rgb(var(--w-base-bg-color-rgb));
 }
 
 .card-sheet-white {
   border-radius: 5px;
   border-width: 2px;
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(var(--w-base-bg-color-rgb), 0.5);
 }
 
 .card-bordered {
   padding: 0;
-  border: 1px solid rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(var(--w-base-color-rgb), 0.5);
   border-radius: 0;
 }
 
@@ -239,12 +246,12 @@ blockquote {
 }
 
 .divider-v {
-  border-left: 2px solid #000;
+  /* border-left: 2px solid #000; */
   width: 2px;
 }
 
 .divider-h {
-  border-top: 2px solid #000;
+  /* border-top: 2px solid #000; */
   height: 2px;
   width: 100%;
 }
@@ -259,11 +266,11 @@ blockquote {
   font-weight: bold;
 }
 
-input,
+/* input,
 textarea {
-  color: #2498d6 !important;
+  color: var(--w-input-color);
   font-family: unset;
-}
+} */
 
 .condition input,
 .condition textarea {
@@ -424,11 +431,11 @@ textarea {
 .item-def,
 .item-use,
 .item-price {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(var(--w-base-bg-color-rgb), 0.5);
 }
 
 .item-damage-dice {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(var(--w-base-bg-color-rgb), 0.5);
   border-radius: 0;
   border: 0;
 }
@@ -446,19 +453,20 @@ textarea {
 }
 
 .background-white-25 {
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(var(--w-base-bg-color-rgb), 0.25);
 }
 
 .background-white-50 {
-  background-color: rgba(255, 255, 255, 0.5);
+  /* background-color: rgba(var(--w-base-bg-color-rgb), 0.5); */
+  background-color: rgba(var(--w-base-bg-color-rgb), 0.5);
 }
 
 .background-white-75 {
-  background-color: rgba(255, 255, 255, 0.75);
+  background-color: rgba(var(--w-base-bg-color-rgb), 0.75);
 }
 
 .background-white-85 {
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(var(--w-base-bg-color-rgb), 0.85);
 }
 
 .item-damage,
@@ -595,4 +603,8 @@ textarea {
 
 .w-select__selection-slot {
   z-index: auto;
+}
+
+a {
+ color: var(--w-link-color); 
 }

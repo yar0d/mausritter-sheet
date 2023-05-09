@@ -9444,10 +9444,10 @@ watchpack@^1.7.4:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"
 
-wave-ui@^2.23.0:
-  version "2.48.0"
-  resolved "https://registry.yarnpkg.com/wave-ui/-/wave-ui-2.48.0.tgz#9a6fa5e635a126ffd3abd3c29a9f8e0368685a74"
-  integrity sha512-bNuIs9zCnhY1YPOlJw2e0rx8Rrj2hts1xQOy9fFNX2fpfkPR/S6+jvzFMdwt0V9UZ+iBhqeb/gFbL7Ya4vUsMQ==
+wave-ui@^3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/wave-ui/-/wave-ui-3.1.3.tgz#7d5052dcba354733bb174b45e148cd79e97d75e1"
+  integrity sha512-Lkge4AfDza/KuOEnZ6V8zoeYZ310J8m0MOBoUZKWKdueYKcdmYBPZjWojUmcKhSSjiN7TQoXWEHcOV4j4JRlAA==
 
 wbuf@^1.1.0, wbuf@^1.7.3:
   version "1.7.3"

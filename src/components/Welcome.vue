@@ -1,7 +1,13 @@
 <template>
   <div class="scrollable h-auto pb4">
     <w-toolbar class="background-white-50">
-      <w-button xl v-for="lang in LOCALES" :key="lang" :color="locale === lang ? '' : 'primary'" class="mr2" @click="changeLocale(lang)">
+      <w-icon lg class="clickable" @click="toggleTheme">
+        mdi mdi-theme-light-dark
+      </w-icon>
+      
+      <w-divider class="mx4" vertical />
+
+      <w-button v-for="lang in LOCALES" :key="lang" :color="locale === lang ? '' : 'primary'" class="mr2" @click="changeLocale(lang)">
         {{ $t(lang) }}
       </w-button>
 
@@ -20,7 +26,7 @@
 
       <w-menu v-model="showPrefMenu">
         <template #activator="{ on }">
-          <w-button text v-on="on" xl @click="showPrefMenu = !showPrefMenu">
+          <w-button v-on="on" text @click="showPrefMenu = !showPrefMenu">
             <w-icon>mdi mdi-menu</w-icon>
             {{ $t('Preferences...') }}
           </w-button>
@@ -141,6 +147,8 @@ import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import PromptDialog from './PromptDialog.vue'
 import Preferences from './Preferences.vue'
 
+import { PREF_THEME_DEFAULT, PREF_THEME, THEME_DARK, THEME_LIGHT } from '@/services/defines'
+
 export default {
   name: 'Welcome',
   components: { ConfirmDialog, PromptDialog, Preferences },
@@ -168,7 +176,18 @@ export default {
         return error.message
       }
     },
-    isStandaloneApp () { return this.$store.getters['standaloneApp'] }
+    isStandaloneApp () { return this.$store.getters['standaloneApp'] },
+    prefs () { return this.$store.getters['preferences'] || {} },
+    theme: {
+      get () {
+        return this.prefs[PREF_THEME] || PREF_THEME_DEFAULT
+      },
+      set (value) {
+        this.$waveui.switchTheme(value)
+        this.$store.dispatch('savePreferences', { key: PREF_THEME, value: value || PREF_THEME_DEFAULT })
+        this.$emit('theme-change')
+      }
+    }
   },
   methods: {
     advancement () {
@@ -184,6 +203,10 @@ export default {
         })
       }
       this.$store.commit('currentSheet', { json: data, raw: serializedData })
+    },
+    applyPreferences () {
+      this.$waveui.switchTheme(this.theme)
+      this.changeLocale(loadLocale())
     },
     canLevelUp () { return this.mausritter.sheet ? this.mausritter.sheet.canLevelUp() : false },
     changeLocale (newLocale) {
@@ -290,10 +313,14 @@ export default {
       data.version = 1
       if (setDate) data.date = new Date().toISOString()
       return encode ? encodeJson(data) : data
+    },
+    toggleTheme () {
+      if (this.theme === THEME_LIGHT) this.theme = THEME_DARK
+      else this.theme = THEME_LIGHT
     }
   },
   created () {
-    this.changeLocale(loadLocale())
+    this.applyPreferences()
   },
   mounted () {
     this.slots = listSlots()
