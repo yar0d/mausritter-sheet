@@ -76,6 +76,18 @@ For desktop application, I use [Tauri](https://tauri.studio/en/).
 
 Clone this repository and, install dependencies with `yarn`.
 
+### Development cycle
+
+1. Create a branch.
+2. Do the developer work :)
+3. Commit the stuff in branch.
+4. When it's ready, publish the branch `git push --set-upstream origin BRANCH`.
+5. Then create a public release the work with `yarn run release:publish` from the branch.
+6. faire une MR (pull request) de branche --> main
+7. En local, récupérer la branche main
+8. faire un yarn run build
+9. déployer (sftp)
+
 ### Update packages
 ```
 yarn upgrade
