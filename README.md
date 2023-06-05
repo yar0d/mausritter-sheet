@@ -83,10 +83,10 @@ Clone this repository and, install dependencies with `yarn`.
 3. Commit the stuff in branch.
 4. When it's ready, publish the branch `git push --set-upstream origin BRANCH`.
 5. Then create a public release the work with `yarn run release:publish` from the branch.
-6. faire une MR (pull request) de branche --> main
-7. En local, récupérer la branche main
-8. faire un yarn run build
-9. déployer (sftp)
+6. Create a **merge request**, on *github* it's a *pull request* with `base: main` <- `compare: BRANCH`. Then **merge** it.
+7. To deploy, get the main branch with `git checkout main ; git pull`
+8. Build with `yarn run build`.
+9. Deploy the directory `dist`.
 
 ### Update packages
 ```
