@@ -9,8 +9,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 * development cycle ([19a2dee](https://github.com/yar0d/mausritter-sheet/commit/19a2dee986a1773db93e68acd174d8aeaacf0278))
 
-### [1.12.7](https://github.com/yar0d/mausritter-sheet/compare/v1.12.6...v1.12.7) (2023-06-05)
-
 ### [1.12.6](https://github.com/yar0d/mausritter-sheet/compare/v1.12.5...v1.12.6) (2023-06-05)
 
 
@@ -272,7 +270,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* use all backqrounds ([b784735](https://github.com/yar0d/mausritter-sheet/commit/b784735aae85b7bc0071fbfd14fa35b5e869ad1c))
+* use all backgrounds ([b784735](https://github.com/yar0d/mausritter-sheet/commit/b784735aae85b7bc0071fbfd14fa35b5e869ad1c))
 
 ### [1.3.3](https://github.com/yar0d/mausritter-sheet/compare/v1.3.2...v1.3.3) (2021-03-20)
 
@@ -394,7 +392,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 * 1.0 goals ([71d51fb](https://github.com/yar0d/mausritter-sheet/commit/71d51fbcc8e55994c3f8aeb83c258d3c66791d5a))
 * Add items from background ([d9cb12d](https://github.com/yar0d/mausritter-sheet/commit/d9cb12d142b955034c260131a96fa9b54794e1a4))
-* TODO and REANDME are up-to-date. ([d2b63cb](https://github.com/yar0d/mausritter-sheet/commit/d2b63cb797c29e2b643a600b6f4b5c8e6f09c597))
+* TODO and README are up-to-date. ([d2b63cb](https://github.com/yar0d/mausritter-sheet/commit/d2b63cb797c29e2b643a600b6f4b5c8e6f09c597))
 * use all rules to create a mouse ([ad71794](https://github.com/yar0d/mausritter-sheet/commit/ad71794d5d91e31675ed6c66e5709ca17e12f505))
 * **todo:** markdown typo ([2173a2c](https://github.com/yar0d/mausritter-sheet/commit/2173a2c2b94917b50757288b89b62c3b42c5ce10))
 
