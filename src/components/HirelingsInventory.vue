@@ -12,7 +12,7 @@
 
     <div class="inventory-cell ml4">
       <draggable :list="pack1" group="items" item-key="id" class="h-max" :move="move">
-        <template #header><span class="inventory-cell-label">1</span></template>
+        <template #header><span class="inventory-cell-label">Body</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(pack1, element.id)" />
           <items v-else-if="element.type === TYPE_ITEM && !existCondition(pack1)" can-delete show-use show-damage :item="element" @delete="deleteItem(pack1, element.id)" @toggle-used="toggleUsed" />
@@ -20,9 +20,9 @@
       </draggable>
     </div>
 
-    <div class="inventory-cell">
+    <div class="inventory-cell ml4">
       <draggable :list="pack2" group="items" item-key="id" class="h-max" :move="move">
-        <template #header><span class="inventory-cell-label">2</span></template>
+        <template #header><span class="inventory-cell-label">1</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(pack2, element.id)" />
           <items v-else-if="element.type === TYPE_ITEM && !existCondition(pack2)" can-delete show-use show-damage :item="element" @delete="deleteItem(pack2, element.id)" @toggle-used="toggleUsed" />
@@ -44,7 +44,7 @@
 
     <div class="inventory-cell ml4">
       <draggable :list="pack3" group="items" item-key="id" class="h-max" :move="move">
-        <template #header><span class="inventory-cell-label">3</span></template>
+        <template #header><span class="inventory-cell-label">Body</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(pack3, element.id)" />
           <items v-else-if="element.type === TYPE_ITEM && !existCondition(pack3)" can-delete show-use show-damage :item="element" @delete="deleteItem(pack3, element.id)" @toggle-used="toggleUsed" />
@@ -52,9 +52,9 @@
       </draggable>
     </div>
 
-    <div class="inventory-cell">
+    <div class="inventory-cell ml4">
       <draggable :list="pack4" group="items" item-key="id" class="h-max" :move="move">
-        <template #header><span class="inventory-cell-label">4</span></template>
+        <template #header><span class="inventory-cell-label">2</span></template>
         <template #item="{ element }">
           <conditions v-if="element.type === TYPE_CONDITION" size="xl" :condition="element" can-delete @delete="deleteItem(pack4, element.id)" />
           <items v-else-if="element.type === TYPE_ITEM && !existCondition(pack4)" can-delete show-use show-damage :item="element" @delete="deleteItem(pack4, element.id)" @toggle-used="toggleUsed" />
