@@ -37,6 +37,7 @@ export default {
     },
     inputChange (value) {
       this.$emit('update:modelValue', parseInt(value))
+      this.$emit('input', parseInt(value))
     },
     setMax () {
       if (this.max === Infinity) return
