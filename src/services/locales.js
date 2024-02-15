@@ -30,12 +30,20 @@ import conditions_de_DE from '@/locales/conditions.de-DE.json'
 import spells_de_DE from '@/locales/spells.de-DE.json'
 import hirelings_de_DE from '@/locales/hirelings.de-DE.json'
 
-export const DEFAULT_LOCALE_ENGLISH = 'en-US'
-export const DEFAULT_LOCALE_FRENCH = 'fr-FR'
+import ru_RU from '@/locales/ru-RU.json'
+import mouse_ru_RU from '@/locales/mouse.ru-RU.json'
+import items_ru_RU from '@/locales/items.ru-RU.json'
+import conditions_ru_RU from '@/locales/conditions.ru-RU.json'
+import spells_ru_RU from '@/locales/spells.ru-RU.json'
+import hirelings_ru_RU from '@/locales/hirelings.ru-RU.json'
+
 export const DEFAULT_LOCALE_GERMAN = 'de-DE'
+export const DEFAULT_LOCALE_ENGLISH = 'en-US'
 export const DEFAULT_LOCALE_SPANISH = 'es-ES'
+export const DEFAULT_LOCALE_FRENCH = 'fr-FR'
+export const DEFAULT_LOCALE_RUSSIAN = 'ru-RU'
 export const DEFAULT_LOCALE = DEFAULT_LOCALE_ENGLISH
-export const LOCALES = [DEFAULT_LOCALE_ENGLISH, DEFAULT_LOCALE_FRENCH, DEFAULT_LOCALE_GERMAN, DEFAULT_LOCALE_SPANISH].sort()
+export const LOCALES = [DEFAULT_LOCALE_ENGLISH, DEFAULT_LOCALE_FRENCH, DEFAULT_LOCALE_GERMAN, DEFAULT_LOCALE_SPANISH, DEFAULT_LOCALE_RUSSIAN].sort()
 
 const KEY_LOCALE = 'locale'
 
@@ -75,6 +83,15 @@ export const datetimeFormats = {
       year: 'numeric', month: 'short', day: 'numeric',
       weekday: 'short', hour: 'numeric', minute: 'numeric'
     }
+  },
+  [DEFAULT_LOCALE_RUSSIAN]: {
+    short: {
+      year: 'numeric', month: 'short', day: 'numeric'
+    },
+    long: {
+      year: 'numeric', month: 'short', day: 'numeric',
+      weekday: 'short', hour: 'numeric', minute: 'numeric'
+    }
   }
 }
 
@@ -100,7 +117,8 @@ export const MESSAGES = {
   'en-US': { ...languages, ...en_US, ...mouse_en_US, ...items_en_US, ...conditions_en_US, ...hirelings_en_US, ...spells_en_US },
   'es-ES': { ...languages, ...es_ES, ...mouse_es_ES, ...items_es_ES, ...conditions_es_ES, ...hirelings_es_ES, ...spells_es_ES },
   'fr-FR': { ...languages, ...fr_FR, ...mouse_fr_FR, ...items_fr_FR, ...conditions_fr_FR, ...hirelings_fr_FR, ...spells_fr_FR },
-  'de-DE': { ...languages, ...de_DE, ...mouse_de_DE, ...items_de_DE, ...conditions_de_DE, ...hirelings_de_DE, ...spells_de_DE }
+  'de-DE': { ...languages, ...de_DE, ...mouse_de_DE, ...items_de_DE, ...conditions_de_DE, ...hirelings_de_DE, ...spells_de_DE },
+  'ru-RU': { ...languages, ...ru_RU, ...mouse_ru_RU, ...items_ru_RU, ...conditions_ru_RU, ...hirelings_ru_RU, ...spells_ru_RU }
 }
 
 export default {

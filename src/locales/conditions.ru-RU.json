@@ -1,0 +1,18 @@
+{
+  "Exhausted": "Изнурён",
+  "Frightened": "Испуган",
+  "Hungry": "Голоден",
+  "Injured": "Ранен",
+  "Drained": "Опустошён",
+  "CONDITION-CLEAR-SR": "передышка",
+  "CONDITION-CLEAR-LR": "длительный отдых",
+  "CONDITION-CLEAR-FR": "полный отдых",
+  "CONDITION-CLEAR-ME": "приём пищи",
+  "After short rest": "передышка",
+  "After long rest": "длительный отдых",
+  "After full rest": "полный отдых",
+  "After meal": "приём пищи",
+  "WIL save to approach source of fear.": "Спасбросок воли, когда персонаж приближается к источнику страха.",
+  "Disadvantage on STR & DEX saves.": "Помеха к спасброскам силы и ловкости.",
+  "Disadvantage on WIL saves.": "Помеха к спасброскам воли."
+}
