@@ -9,10 +9,11 @@
     </div>
     <div class="mt4">{{ $t('Mausritter is copyright Losing Games.') }}</div>
     <div class="mt4">{{ $t('This application is copyright Daniel Coquette.') }}
-      <div class="ml4 mt1"><w-icon sm bg-color="dice">mdi mdi-translate</w-icon> {{ $t('en-US') }} <w-icon>mdi mdi-arrow-right</w-icon> Yar0d</div>
-      <div class="ml4"><w-icon sm bg-color="dice">mdi mdi-translate</w-icon> {{ $t('es-ES') }} <w-icon>mdi mdi-arrow-right</w-icon> CoyoteBlur</div>
-      <div class="ml4"><w-icon sm bg-color="dice">mdi mdi-translate</w-icon> {{ $t('de-DE') }} <w-icon>mdi mdi-arrow-right</w-icon> Keter150</div>
-      <div class="ml4"><w-icon sm bg-color="dice">mdi mdi-translate</w-icon> {{ $t('fr-FR') }} <w-icon>mdi mdi-arrow-right</w-icon> Yar0d</div>
+      <div class="ml4 mt1"><w-icon bg-color="orange">mdi mdi-translate</w-icon> {{ $t('de-DE') }} <w-icon>mdi mdi-arrow-right</w-icon> Keter150</div>
+      <div class="ml4"><w-icon bg-color="orange">mdi mdi-translate</w-icon> {{ $t('en-US') }} <w-icon>mdi mdi-arrow-right</w-icon> Yar0d</div>
+      <div class="ml4"><w-icon bg-color="orange">mdi mdi-translate</w-icon> {{ $t('es-ES') }} <w-icon>mdi mdi-arrow-right</w-icon> CoyoteBlur</div>
+      <div class="ml4"><w-icon bg-color="orange">mdi mdi-translate</w-icon> {{ $t('fr-FR') }} <w-icon>mdi mdi-arrow-right</w-icon> Yar0d</div>
+      <div class="ml4"><w-icon bg-color="orange">mdi mdi-translate</w-icon> {{ $t('ru-RU') }} <w-icon>mdi mdi-arrow-right</w-icon> Sorinqi</div>
     </div>
 
     <div class="mt4">{{ $t('3D dices from Anton Natarov') }} <a href="http://a.teall.info/mdice/">http://a.teall.info/mdice</a>.</div>
