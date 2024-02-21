@@ -37,3 +37,11 @@
   font-style: normal;
   font-display: block;
 }
+
+@font-face {
+  font-family: 'Moyen-Age';
+  src: url('../fonts/Moyenage.woff2') format('woff2'), url('../fonts/Moyenage.woff') format('woff'), url('../fonts/Moyenage.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}

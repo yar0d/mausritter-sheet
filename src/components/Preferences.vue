@@ -28,7 +28,8 @@ export default {
         { label: 'Trickster', value: 3 },
         { label: 'Broken Script', value: 4 }, // Does not work well with Safari
         { label: 'Monospace', value: 5 },
-        { label: 'Open Dyslexic', value: 6 }
+        { label: 'Open Dyslexic', value: 6 },
+        { label: 'Moyen Age', value: 7 }
       ]
     }
   },
