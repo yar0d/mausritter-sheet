@@ -38,6 +38,7 @@ Some help will be welcome to translate to other languages. Currently we have:
 - French by myself
 - Spanish by CoyoteBlur
 - German by Keter150
+- Russian by Sorinqi
 
 ## Installation (beta)
 
@@ -146,4 +147,3 @@ A release will contains all binaries for MacOS, Windows and Linux.
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
-

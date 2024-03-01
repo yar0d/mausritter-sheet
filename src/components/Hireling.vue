@@ -1,5 +1,5 @@
 <template>
-  <w-card class="mb1 background-white-50">
+  <w-card class="mb1 background-white-25">
     <w-card class="card-sheet" no-border>
     <w-flex column>
       <w-divider class="title3 orange">{{ $t(current.desc) }}</w-divider>
