@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.0](https://github.com/yar0d/mausritter-sheet/compare/v1.12.9...v1.13.0) (2024-03-01)
+
+
+### Features
+
+* Add new font ([08b9691](https://github.com/yar0d/mausritter-sheet/commit/08b969133778f64262ff8351c85c71069fafbac7))
+* New language ([#52](https://github.com/yar0d/mausritter-sheet/issues/52)) ([5a86a1b](https://github.com/yar0d/mausritter-sheet/commit/5a86a1b77ca6a62a4fe32896ca142efb6e36ed94))
+
+
+### Bug Fixes
+
+* Translations ([62e16cd](https://github.com/yar0d/mausritter-sheet/commit/62e16cd2c615116838176194db58fd0dc77b99ff))
+
 ### [1.12.10](https://github.com/yar0d/mausritter-sheet/compare/v1.12.9...v1.12.10) (2023-08-16)
 
 
